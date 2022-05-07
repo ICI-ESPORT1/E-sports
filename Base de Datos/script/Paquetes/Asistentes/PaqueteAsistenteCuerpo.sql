@@ -1,5 +1,14 @@
 /*CUERPO PAQUETE GESTIONARASISTENTE*/
 create or replace package body gestionarAsistente as
+/*EXCEPCIONES PARA EL PAQUETE*/
+e_equipoNoExiste exception;
+pragma exception_init(e_equipoNoExiste,-20002);
+
+e_asisNoExiste exception;
+pragma exception_init(e_asisNoExiste,-20003);
+
+
+
 /*Declaro funciones*/
 function validar_equipo
 (p_equipo in number)
@@ -50,15 +59,18 @@ p_id_equipo equipo.cod_equipo%type,
 p_sueldo asistente.sueldo%type
 )
 is
+
 begin
   if validar_equipo(p_id_equipo)then
    insert into asistente
    (dni,nombre,telefono,direccion,sueldo) values
    (p_dni,p_nombre,p_telefono,p_direccion,p_sueldo);
   else
-    dbms_output.put_line ('El equipo no existe');
+    raise e_equipoNoExiste;   
   end if;
  exception
+    when e_equipoNoExiste then
+    dbms_output.put_line ('El equipo no existe');
    when others then
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END nuevo_asistente;  
@@ -79,9 +91,11 @@ begin
       dbms_output.put_line ('El equipo no existe');
     end if;
  else
-  dbms_output.put_line ('El asistente no existe');
+  raise e_asisNoExiste;
  end if;
  exception
+ when e_asisNoExiste then
+  dbms_output.put_line ('El asistente no existe');
    when others then
       dbms_output.put_line('HA OCURRIDO UN ERROR');
 end cambio_equipo;
@@ -97,10 +111,12 @@ begin
    where id_asistente = p_idAsistente;
    
    else
-        dbms_output.put_line ('El asistente no existe');
+      raise e_asisNoExiste;
   end if;
   exception
-   when others then
-     dbms_output.put_line('HA OCURRIDO UN ERROR');
+    when e_asisNoExiste then
+        dbms_output.put_line ('El asistente no existe');
+    when others then
+        dbms_output.put_line('HA OCURRIDO UN ERROR');
 END borrar_asistente;
 end gestionarAsistente;

@@ -1,6 +1,13 @@
 /*CUERPO PAQUETE GESTIONAR JUGADORES*/
 create or replace package body gestionarDueno as
-/*declaro las funciones que son comunes a todos los procedimientos*/
+/*Excepciones del paquete*/
+e_equipoNoExiste exception;
+pragma exception_init(e_equipoNoExiste,-20002);
+
+e_dueNoExiste exception;
+pragma exception_init(e_dueNoExiste,-20004);
+
+/******declaro las funciones que son comunes a todos los procedimientos*******/
     function validar_equipo
     (p_equipo in number)
     return boolean;
@@ -42,7 +49,7 @@ function validar_dueno
     
     
 /*EMPIEZAN LOS PROCEDIMIENTOS***********************************************/
-/*PROCEDIMIENTO PARA AÑADIR JUGADORES*/
+/*PROCEDIMIENTO PARA ANADIR DUENO*/
 procedure nuevo_dueno
 (
 p_dni dueno.dni%type,
@@ -59,15 +66,17 @@ begin
      (DNI, NOMBRE, TELEFONO, DIRECCION, ID_EQUIPO)
         values(p_dni,p_nombre,p_telefono,p_direccion,p_id_equipo);
   else
-    dbms_output.put_line ('El equipo no existe');
+    raise e_equipoNoExiste;
   end if;
   exception
+  when e_equipoNoExiste then
+    dbms_output.put_line ('El equipo no existe');
    when others then
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END nuevo_dueno;
 
 
-/*PROCEDIMIENTO PARA CAMBIAR EQUIPO*******************************************/
+/*PROCEDIMIENTO PARA CAMBIAR DE EQUIPO AL DUENO******************************/
 procedure cambio_equipo
 (
 p_idDueno dueno.id_dueno%type,
@@ -81,17 +90,18 @@ begin
       set id_equipo = p_idEquipoNuevo
       where id_dueno = p_idDueno;
     else
-      dbms_output.put_line ('El equipo no existe');
+      raise e_equipoNoExiste;
     end if;
  else
-  dbms_output.put_line ('El jugador no existe');
+  raise e_dueNoExiste;
  end if;
  exception
-   when others then
-      dbms_output.put_line('HA OCURRIDO UN ERROR');
+    when e_equipoNoExiste then
+        dbms_output.put_line ('El equipo no existe');
+    when e_dueNoExiste then
+         dbms_output.put_line ('El dueno no existe');
+    when others then
+        dbms_output.put_line('HA OCURRIDO UN ERROR');
 end cambio_equipo; 
-
-
-/*PROCEDIMIENTO PARA BORRAR JUGADOR*******************************************/
 
 end gestionarDueno;

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs = "http://www.w3.org/2001/XMLSchema">
+    <xs:element name="resumenResultados" type ="tresumen"/>
+    
+       <xs:complexType name="tresumen">
+            <xs:sequence>
+                  <xs:element name="jornada" type="tjornada" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        
+        <xs:complexType name="tjornada">
+            <xs:sequence>
+                    <xs:element name="partido" type="tpartido" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>  
+               <xs:attribute name="numJornada" type=" xs:int" use="required"/>
+        </xs:complexType>
+        
+        <xs:complexType name="tpartido">
+           <xs:sequence>
+                    <xs:element name="equipo" type="tequipo" minOccurs="2" maxOccurs="2"/>  
+           </xs:sequence> 
+               <xs:attribute name="idPartido" type=" xs:int" use="required"/>
+        </xs:complexType>
+        
+        <xs:complexType name="tequipo">
+            <xs:sequence>
+               <xs:element name="nombre" type="xs:string"/>
+               <xs:element name="resultado" type="tresultado"/>
+            </xs:sequence>
+        </xs:complexType>
+        
+        <xs:simpleType name="tresultado">
+           <xs:restriction base="xs:string">
+                <xs:enumeration value="G"/>
+                <xs:enumeration value="P"/>
+                <xs:enumeration value="E"/>
+           </xs:restriction> 
+        </xs:simpleType>
+        </xs:schema>
+        

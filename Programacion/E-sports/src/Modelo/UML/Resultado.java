@@ -156,4 +156,22 @@ public class Resultado {
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
+
+    /*METODOS DE LA CLASE RESULTADO*/
+
+    /**
+     * Metodo para obtener la clasificacion actual
+     * @param equipo
+     * @param resultado
+     */
+    public void obtenerClasificacion(Equipo equipo, String resultado){}
+
+    /**
+     * Metodo para ver el resultado del ultimo partido
+     * @param equipo
+     * @param idPartido
+     * @param resultado
+     */
+    public void ultimoPartido(Equipo equipo, int idPartido, String resultado){}
 }
+

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ultimaJorn 
+    SYSTEM "ultimaJorn.dtd"
+    >
+<ultimaJorn>
+<jornada numJornada="01">
+        <partido idPartido="01">
+            <equipo>
+               <nombre>uno</nombre>
+               <resultado>g</resultado>
+            </equipo>
+            <equipo>
+               <nombre>dos</nombre>
+               <resultado>p</resultado>
+            </equipo> 
+        </partido>
+        <partido idPartido="02">
+            <equipo>
+               <nombre>tres</nombre>
+               <resultado>g</resultado>
+            </equipo>
+            <equipo>
+               <nombre>cuatro</nombre>
+               <resultado>p</resultado>
+            </equipo> 
+        </partido>
+        <partido idPartido="03">
+            <equipo>
+               <nombre>uno</nombre>
+               <resultado>p</resultado>
+            </equipo>
+            <equipo>
+               <nombre>cinco</nombre>
+               <resultado>g</resultado>
+            </equipo> 
+        </partido>
+</jornada>
+</ultimaJorn>

@@ -16,7 +16,8 @@ open c_resultado for
 select equipo,count(resultado) as ganados
       from resultados_temporada 
       where upper(resultado)='G' 
-      group by equipo;
+      group by equipo
+      order by count(resultado) desc;
       
 exception
 when no_data_found then

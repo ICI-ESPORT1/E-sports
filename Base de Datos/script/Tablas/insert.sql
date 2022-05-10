@@ -163,13 +163,13 @@ values (to_date('27/05/2022','DD/MM/YYYY'),'21',1);
 
 /*INSERT PARTIDO*/
 DESC PARTIDO;
-insert into partido(hora,num_jornada) values(to_date('07/05/2022','DD/MM/YYYY'),1);
+insert into partido(turno,num_jornada) values('manana',1);
 
-insert into partido (hora,num_jornada) values (to_date('14/05/2022','DD/MM/YYYY'),2);
+insert into partido (turno,num_jornada) values ('tarde',2);
 
-insert into partido (hora,num_jornada) values (to_date('20/05/2022','DD/MM/YYYY'),3);
+insert into partido (turno,num_jornada) values ('manana',3);
 
-insert into partido (hora,num_jornada) values (to_date('27/05/2022','DD/MM/YYYY'),4);
+insert into partido (turno,num_jornada) values ('tarde',4);
 
 /*INSERT RESULTADO*/
 insert into resultado(id_equipo,id_partido, resultado) values(1,1,'G');

@@ -105,7 +105,7 @@ CONSTRAINT jor_num_fk FOREIGN KEY (id_calendario)
 
 CREATE TABLE partido(
 id_partido number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT part_id_pk PRIMARY KEY ,
-hora date,
+turno varchar2(20),
 num_jornada number(3),
 CONSTRAINT par_num_fk FOREIGN KEY (num_jornada)
         REFERENCES jornada(num_jornada) ON DELETE SET NULL

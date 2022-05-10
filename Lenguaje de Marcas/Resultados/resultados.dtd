@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT resumenResultados (jornada+)>
+    <!ELEMENT jornada (partido+)>
+    <!ELEMENT partido (equipo+)>
+    <!ELEMENT equipo (nombre,resultado)>
+    <!ELEMENT nombre (#PCDATA)>
+    <!ELEMENT resultado (#PCDATA)>
+    <!ATTLIST jornada numJornada CDATA #REQUIRED>
+    <!ATTLIST partido idPartido CDATA #REQUIRED>

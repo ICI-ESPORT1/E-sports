@@ -91,7 +91,8 @@ public class Administrador {
      * @param mail
      * @param localidad
      */
-    public void altaEquipo(int idEquipo, String dni, String nombre,String telefono, String mail, String localidad){}
+    public void altaEquipo(int idEquipo, String nombre, String nacionalidad,LocalDate fechaCreacion,
+                           String telefono, String mail,String escudo){}
 
     /**
      * Metodo para borrar equipos pasandole la clave primaria
@@ -123,35 +124,11 @@ public class Administrador {
     public void modificarEquipo(int idEquipo, String nombre, String nacionalidad, LocalDate FechaCreacion, String telefono, String mail, String escudo){}
 
     /**
-     * Metodo para cambiar el entrenador del equipo
-     * @param entrenador
-     */
-    public void modificarEquipo(Entrenador Entrenador){}
-
-    /**
-     * Metodo para modificar la lista de jugadores del equipo
-     * @param listaJugadores ArrayList de jugadores
-     */
-    public void modificarEquipo(ArrayList<Jugador> listaJugadores){}
-
-    /**
-     * Metodo para modificar el asistente del equipo
-     * @param Asistente objeto asistente
-     */
-    public void modificarEquipo(Asistente Asistente){}
-
-    /**
-     * Metodo para modificar el dueno del equipo
-     * @param Dueno Objeto Dueno
-     */
-    public void modificarEquipo(Dueno Dueno){}
-
-    /**
      * Metodo que devuelve los datos del equipo
-     * @param idPersona PrimaryKey de persona
+     * @param idEquipo PrimaryKey de persona
      * @return Equipo
      */
-    public Equipo visualizarDatosEquipo(int idPersona){
+    public Equipo visualizarDatosEquipo(int idEquipo){
         Equipo equipo = null;
         return equipo;
     }
@@ -165,7 +142,7 @@ public class Administrador {
      * @param rol Objeto tipo ROL
      */
     public void altaJugador(int idPersona,String dni, String nombre, String telefono, String mail,
-                            String localidad, String nickname, float sueldo, Rol rol, int idEquipo){}
+                            String localidad, String nickname, float sueldo, Rol rol, int idEquipo ){}
 
     /**
      * Metodo para borrar jugador por su idPersona
@@ -223,13 +200,19 @@ public class Administrador {
      * @param fecha de tipo LocalDate
      * @param numSemana numero de la semana de anyo
      */
-    public void generarJornadas(int numJornada, LocalDate fecha, String numSemana){}
+    public void generarJornadas(int numJornada, LocalDate fecha, String numSemana,ArrayList<Partido>listaPartidos){}
 
     /**
-     * Metodo para añadir los partidos a la jornada
-     * @param listaPartidos Array con los partidos de esa jornada
+     * Metodo para generar los partidos
+     * @param idPartido primaryKey
+     * @param fecha Localdate
+     * @param listaEquipos arrayList
+     * @return listaPartidos arrayList
      */
-    public void anadirPartidos(ArrayList<Partido> listaPartidos){}
+
+    public ArrayList<Partido> generarPartidos(int idPartido,LocalDate fecha, ArrayList<Equipo>listaEquipos){
+        return null;
+    }
 
     /**
      * Metodo para borrar jornada
@@ -246,12 +229,6 @@ public class Administrador {
     public void modificarJornada(int numJornada, LocalDate fecha, String numSemana){}
 
     /**
-     * Metodo para modificar la lista de partidos de la jornada
-     * @param listaPartidos Array con los partidos de esa jornada
-     */
-    public void modificarJornada(ArrayList<Partido> listaPartidos){}
-
-    /**
      * Metodo para visualizar los datos de la jornada
      * @param numJornada primaryKey de jornada
      * @return jornada
@@ -260,7 +237,21 @@ public class Administrador {
         Jornada jornada = null;
         return jornada;
     }
+/* ********************************METODOS QUE AFECTAN A LA CLASE RESULTADO ***********************************/
+    public void introducirResultado(int idPartido, String resultado, int idEquipo){}
 
+    public Resultado visualizarClasificacion(){
+        return null;
+    }
+    public Resultado visualizarResultados(){
+        return null;
+    }
+    public Resultado visualizarResultados(int idEquipo){
+        return null;
+    }
+    public Resultado visualizarResultados(String nombre){
+        return null;
+    }
     /* ****************************METODOS QUE AFECTAN A LA CLASE DUENO**********************************/
 
     /**
@@ -272,7 +263,7 @@ public class Administrador {
      * @param mail
      * @param localidad
      */
-    public void anadirDueno(int idPersona, String dni, String nombre, String telefono, String mail, String localidad,
+    public void altaDueno(int idPersona, String dni, String nombre, String telefono, String mail, String localidad,
                             Equipo equipo){}
 
     /**

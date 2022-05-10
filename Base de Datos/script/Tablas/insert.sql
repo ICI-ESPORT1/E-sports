@@ -56,63 +56,63 @@ values('56499147s','unter den linden','68822154','calle dato 59', 4, 1950);
 /*INSERT JUGADOR 4 EQUIPOS (1-4), MIN 2 JUGADORES, MAX 6*/
 desc jugador;
 /*JUGADORES EQUIPO ESPA�OL ID1*/
-insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo)
-values('14226872s','iker','654321987', 'calle gorbea, 7 5�d', 1, 1234);
+insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+values('14226872s','iker','654321987', 'calle gorbea, 7 5�d', 1, 1234,1);
 
-insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo)
-values('84494056Z','ana','789654123', 'calle reyes catolicos, 5 3�a', 1, 1234);
+insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+values('84494056Z','ana','789654123', 'calle reyes catolicos, 5 3�a', 1, 1234,1);
 
-insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo)
-values('95393136S','ivan','865412354', 'calle alcala, 2 4�c', 1, 1234);
+insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+values('95393136S','ivan','865412354', 'calle alcala, 2 4�c', 1, 1234,1);
 
-insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo)
-values('23971838L','i�igo','678854112', 'calle zaragoza, 12 1�d', 1, 1234);
+insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+values('23971838L','i�igo','678854112', 'calle zaragoza, 12 1�d', 1, 1234,1);
 
-insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo)
-values('32219983L','celia','633144887', 'calle salamanca, 1', 1, 1234);
+insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+values('32219983L','celia','633144887', 'calle salamanca, 1', 1, 1234,2);
 
-insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo)
-values('44108428V','alba','877412332', 'calle villareal, 12 a', 1, 1234); 
+insert into jugador (dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+values('44108428V','alba','877412332', 'calle villareal, 12 a', 1, 1234,1); 
 
 select * from jugador;
 
 /*JUGADORES EQUIPO FRANCES ID2*/
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo)
-VALUES ('50012708J',' tienne Pages','876091601','3 Chelmsford Close- Sutton',2,10291);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('50012708J',' tienne Pages','876091601','3 Chelmsford Close- Sutton',2,10291,1);
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('70603538R','Denis-Yves Camus','657137657','8 Oakes Close- Somercotes',2,10388);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('70603538R','Denis-Yves Camus','657137657','8 Oakes Close- Somercotes',2,10388,1);
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('77026329L','Bertrand Leroy','765473435','153 Mayors Walk- Peterborough',2,8256);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('77026329L','Bertrand Leroy','765473435','153 Mayors Walk- Peterborough',2,8256,2);
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('23731311A','Brigitte de la Mathieu','796453015','43 Granta Road- Sawston',2,3083);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol) 
+VALUES ('23731311A','Brigitte de la Mathieu','796453015','43 Granta Road- Sawston',2,3083,1);
 
 /*JUGADORES EQUIPO INGLES ID3*/
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('76848552D','Rachel Brown','830962107','14 York Road- Leamington Spa',3,19841);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('76848552D','Rachel Brown','830962107','14 York Road- Leamington Spa',3,19841,1);
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('85139209V','Ryan Joyce','664524665','19 Clarence Road- Southport',3,8772);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol) 
+VALUES ('85139209V','Ryan Joyce','664524665','19 Clarence Road- Southport',3,8772,1);
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('21710938L','Margaret Massey','724239824','16 Sence House- Welland Place- Market Harborough',3,9867);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('21710938L','Margaret Massey','724239824','16 Sence House- Welland Place- Market Harborough',3,9867,2);
 
 /*JUGADORES EQUIPO ALEMAN ID4*/
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('80846588R','Robert Labbe','846511423','96 Wellington Road- Tilbury',4,11823);
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('32956493T','Anastasie Bousquet','605706577','14 Grange Avenue- Huddersfield',4,2692);
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('21676980D','Klara Rose','611532859','6 Forest Road- Bordon',4,9217);
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('39021894W','Lukas Segebahn','640262731','Talyryn Stables- Cilycwm',4,17653);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol) 
+VALUES ('80846588R','Robert Labbe','846511423','96 Wellington Road- Tilbury',4,11823,1);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('32956493T','Anastasie Bousquet','605706577','14 Grange Avenue- Huddersfield',4,2692,2);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol) 
+VALUES ('21676980D','Klara Rose','611532859','6 Forest Road- Bordon',4,9217,1);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('39021894W','Lukas Segebahn','640262731','Talyryn Stables- Cilycwm',4,17653,1);
 
-INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo) 
-VALUES ('28403030P','Logan Miller','643454503','3 Carrs Close- Prudhoe',4,9863);
+INSERT INTO jugador(dni,nombre,telefono,direccion,id_equipo,sueldo,id_rol)
+VALUES ('28403030P','Logan Miller','643454503','3 Carrs Close- Prudhoe',4,9863,1);
 
 /*INSERT HECHO!*/
 
@@ -135,7 +135,10 @@ VALUES ('72670608S','Jeffrey Ortiz','890652188','75 Grange Valley- Haydock',4);
 
 
 /*INSERT ROL. Hay que cambiar las relaciones*/
-desc rol;
+insert into rol(nombre, descripcion) values('defensa','defiende');
+insert into rol(nombre, descripcion) values('portero','defiende porteria');
+select * from rol;
+
 /*CORREGIR FALLO*/
 
 /*INSERT CALENDARIO*/

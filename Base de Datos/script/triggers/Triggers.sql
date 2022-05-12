@@ -73,7 +73,7 @@ END;
  
 /**********************PARA LA TABLA EQUIPOS****************************** */
 create or replace trigger calCerradoEQ
-before insert or update or delete of cod_equipo,nombre,nacionalidad,fecha_creacion,telefono,mail,escudo,id_asistente on equipo
+before insert or update or delete on equipo
 for each row
 declare
   v_crud varchar2 (250);
@@ -93,7 +93,6 @@ begin
  raise_application_error(-20008,('ERROR: ' || v_crud));
  END IF;
 END;  
-
  
 
 /**********************Controlar min jugadores****************************** */

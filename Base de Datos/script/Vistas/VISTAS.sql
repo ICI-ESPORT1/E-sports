@@ -13,19 +13,6 @@ WHERE VIEW_NAME = RESULTADOS_TEMPORADA;
 
 DESC USER_VIEWS
 
-/*VISTA PARA DATOS JUGADORES*/
-create or replace view datosJugadores as
-select j.id_jugador ,j.nombre as nombreJugador,j.dni,j.telefono,j.direccion,j.id_equipo, 
-j.nickname as apodo,j.sueldo, e.nombre as nombreEquipo, r.nombre as rol
-from jugador j, equipo e, rol r
-where j.id_equipo= e.cod_equipo and j.id_rol=r.id_rol
-with read only;
-
-
-select * from equipo;
-select * from rol;
-
-
 
 
 

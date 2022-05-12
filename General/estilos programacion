@@ -1,0 +1,27 @@
+ESTILOS PROGRAMACION
+
+
+VARIABLES: minusculas (variable,variableDos)
+
+FUNCIONES: minsuculas (funcion,funcionDos); 
+            ejemplos: modificarEquipos();
+            altaEquipos();
+           
+COLORES (azul,negro,blanco)
+
+LETRA (arial)
+      Titulo (24)
+      
+Nombres ventanas: VentanaUno: Primera ventana que se abre al iniciar el programa, Login: Para logearse como administrador y dueño, 
+                  VentanaInscripcion: Ventana inscripcion de equipo, 
+
+                  VentanaUno: Componentes del menu: equipos ,
+                                                    calendario (Jornadas, partidos jugados, clasificacion),
+                                                    
+                                                    
+                                                    
+                                                    opciones adminsitrador (altas,bajas,modificar)
+                                                    
+                                                    inscripcion (para dueño y administrador)
+                                                    
+                                                    login (crear dueño)

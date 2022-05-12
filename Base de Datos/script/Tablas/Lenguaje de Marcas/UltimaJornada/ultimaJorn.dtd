@@ -1,8 +1,0 @@
-<!ELEMENT ultimaJorn (jornada)>
-    <!ELEMENT jornada (partido+)>
-    <!ELEMENT partido (equipo+)>
-    <!ELEMENT equipo (nombre,resultado)>
-    <!ELEMENT nombre (#PCDATA)>
-    <!ELEMENT resultado (#PCDATA)>
-    <!ATTLIST jornada numJornada CDATA #REQUIRED>
-    <!ATTLIST partido idPartido CDATA #REQUIRED>

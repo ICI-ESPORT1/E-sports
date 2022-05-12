@@ -32,6 +32,8 @@ telefono number(9) CONSTRAINT eq_tel_un UNIQUE,
 mail VARCHAR2(150) CONSTRAINT eq_mail_un UNIQUE,
 escudo varchar2(150),
 id_asistente number(3) NULL,
+ganados number (3) default 0,
+perdidos number (3) default 0,
 CONSTRAINT eq_ida_fk FOREIGN KEY (id_asistente)
 REFERENCES asistente(id_asistente) ON DELETE SET NULL
 );

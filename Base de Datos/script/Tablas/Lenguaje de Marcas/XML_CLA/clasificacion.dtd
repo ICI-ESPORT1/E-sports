@@ -1,6 +1,0 @@
-<!ELEMENT clasificacion (equipo)+>
-        <!ELEMENT equipo (nombre,puntos)>
-        <!ATTLIST equipo id CDATA #IMPLIED>
-        <!ELEMENT nombre (#PCDATA)>
-        <!ELEMENT puntos (#PCDATA)>
-  

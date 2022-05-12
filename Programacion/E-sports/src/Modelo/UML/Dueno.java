@@ -1,5 +1,7 @@
 package Modelo.UML;
 
+import java.util.ArrayList;
+
 public class Dueno extends Persona {
     /**
      @author Inigo Bruk
@@ -100,7 +102,7 @@ public class Dueno extends Persona {
         
     }
     /**
-     * @param equipo
+     * @param password
      */
     public void setPassword(String password) {
         this.password = password;

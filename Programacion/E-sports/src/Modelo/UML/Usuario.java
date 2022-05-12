@@ -20,7 +20,7 @@ public class Usuario {
         return null;
     }
 
-    public ArrayList<Resutlado> VisualizarResultados(String nombreEquipo){
+    public ArrayList<Resultado> VisualizarResultados(String nombreEquipo){
         return null;
     }
 

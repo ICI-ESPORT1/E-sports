@@ -104,4 +104,24 @@ begin
         dbms_output.put_line('HA OCURRIDO UN ERROR');
 end cambio_equipo_dueno; 
 
+procedure borrar_dueno
+(
+p_idDueno dueno.id_dueno%type
+)
+is
+begin
+  if validar_dueno(p_idDueno) then
+   delete from dueno
+   where id_dueno = p_idDueno;
+   
+   else
+      raise e_dueNoExiste;
+  end if;
+  exception
+    when e_dueNoExiste then
+        dbms_output.put_line ('El dueno no existe');
+    when others then
+        dbms_output.put_line('HA OCURRIDO UN ERROR');
+END borrar_dueno;
+
 end gestionarDueno;

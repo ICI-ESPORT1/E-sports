@@ -29,6 +29,7 @@ v_mensError := 'El equipo no existe';
 dbms_output.put_line('ERROR: '||v_codError || v_mensError );
 END;
 
+/*Metodo para mostrar todos los partidos de las jornadas*/
 procedure partidosJornada
 (
 c_partidos out tcursor

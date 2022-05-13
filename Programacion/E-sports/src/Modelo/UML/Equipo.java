@@ -136,7 +136,7 @@ public class Equipo {
      *
      * @return fechaCeracion
      */
-    public LocalDate getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 

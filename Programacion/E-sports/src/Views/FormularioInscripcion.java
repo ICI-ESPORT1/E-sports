@@ -80,6 +80,8 @@ public class FormularioInscripcion {
     private  LocalDate ldFecha;
     private String sEmailEquipo="";
     private boolean bEquipoValido = false;
+    private boolean bPersonaValida = false;
+
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("FormularioInscripcion");
@@ -95,9 +97,16 @@ public class FormularioInscripcion {
             @Override
             public void actionPerformed(ActionEvent e) {
                 bEquipoValido = validarDatosEquipo();
+                bPersonaValida = validarPersona();
                 /*ABRIR NUEVA VENTANA REGISTRAR JUGADORES*/
-                if(bEquipoValido){
+                if(bEquipoValido&&bPersonaValida){
+                    //Main.altaDueno()
+                    // Main.altaAsistente();
+                    //Main.altaEntrenador();
+                    // Main.altaEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfEmailEquipo.getText(),tfEscudo.getText(),); ->FALTA EL OBJETO ASISTENTE
+
                     Main.abrirInscripcionJugadores();
+
                 }
             }
         });
@@ -122,6 +131,7 @@ public class FormularioInscripcion {
             /* **************nombreEquipo********/
             bNombre = validarNombreEquipo();
 
+
             /* * *********nacionalidad*************/
             bNacionalidad = validarNacionalidad();
 
@@ -131,7 +141,9 @@ public class FormularioInscripcion {
             ldFecha = convertirAlocalDate();
 
             if(ldFecha.isBefore(fechaMin) && ldFecha.isAfter(LocalDate.now()) ){
+                tfFecha.setText(" ");
                throw new Exception("La fecha debe estar el 01/01/2000 y el dia de hoy");
+
             }else{
                 bFecha = true;
             }
@@ -143,7 +155,7 @@ public class FormularioInscripcion {
             sEmailEquipo = tfEmailEquipo.getText();
             bEmail = validarEmail(sEmailEquipo);
 
-            if(bNombre&&bEmail&&bFecha&&bNacionalidad&&bTelefono&&bEmail){
+            if(bNombre&&bEmail&&bFecha&&bNacionalidad&&bTelefono){
                 bequipoValido = true;
             }
 
@@ -151,7 +163,44 @@ public class FormularioInscripcion {
             System.out.println(e.getClass());
         }
         return bequipoValido;
+    }/*VALIDA BIEN*/
+    public boolean validarPersona(){
+        boolean nombreP =false;
+        boolean dni = false;
+        boolean telefono =false;
+        boolean email = false;
+        boolean localidad =false;
+        try{
+            nombreP = validarNombreP();
+
+        }catch (Exception e){System.out.println(e.getClass());}
+
+        return bPersonaValida;
     }
+    public boolean validarNombreP(){
+        boolean bNombreValido = false;
+        try{
+            if(tfNombreDueno.getText().isEmpty()){
+                throw new CampoVacio();
+            }
+            else{
+                Pattern patron = Pattern.compile("^[A-Z][a-z0-9]+$");
+                Matcher mat = patron.matcher(tfNombreDueno.getText());
+                if(mat.matches()){
+                    System.out.println("El patron del nombre coincide");
+                }
+                else{
+                    tfNombreDueno.setText("");
+                    System.out.println("El patron del nombre no coincide");
+                    throw new CampoIncorrecto();
+                }
+            }
+
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"EL NOMBRE DEBE EMPEZAR POR MAYUSCULA");
+            System.out.println(e.getClass());}
+        return bNombreValido;
+    } /*VALIDA*/
 
     public boolean validarEmail(String email){
         boolean bEmail = false;
@@ -161,10 +210,22 @@ public class FormularioInscripcion {
             }
             else {
                 Pattern patron = Pattern.compile("^[a-z](.+)@(.+)$");
-                //Matcher mat = patron.matcher();
+                Matcher mat = patron.matcher(tfEmailEquipo.getText());
+
+                if(mat.matches()){
+                    System.out.println("EL PATRON DEL EMAIL COINCIDE");
+                    bEmail = true;
+                }
+                else{
+                    System.out.println("EL PATRON DEL EMAIL NO COINCIDE");
+                    throw new CampoIncorrecto();
+                }
             }
 
-        }catch (Exception e){
+        }catch (CampoIncorrecto e){
+            JOptionPane.showMessageDialog(null,"EL NOMBRE NO ES CORRECTO");
+        }
+        catch (Exception e){
             JOptionPane.showMessageDialog(null,"EL EMAIL NO ES VALIDO");
             System.out.println(e.getClass());}
         return bEmail;
@@ -179,6 +240,7 @@ public class FormularioInscripcion {
         boolean bTelefono = false;
         try{
             if(telefono.isEmpty()){
+                System.out.println("EL CAMPO TELEFONO ESTA VACIO");
                 throw new CampoVacio();
             }
             else {
@@ -187,12 +249,15 @@ public class FormularioInscripcion {
 
                 if(mat.matches()){
                     bTelefono = true;
+                    System.out.println("EL PATRON DEL TELEFONO COINCIDE");
                 }
                 else{
+                    System.out.println("EL PATRON DEL TELEFONO NO COINCIDE");
                     throw new Exception("El telefono no es valido");
                 }
             }
         }catch (Exception e){
+            tfTelefonoEquipo.setText(" ");
             JOptionPane.showMessageDialog(null,"EL TELEFONO NO ES VALIDO");
 
             System.out.println(e.getClass());}
@@ -227,13 +292,18 @@ public class FormularioInscripcion {
                 Pattern patron = Pattern.compile("^[A-Z][a-z0-9]+$");
                 Matcher mat = patron.matcher(tfNombreEquipo.getText());
                 if(mat.matches()){
+                    System.out.println("El patron del nombre coincide");
                     /*FUNCION PARA COMPROBAR QUE EL NOMBRE DEL EQUIPO NO EXISTE EN LA BD*/
                     bNombre = Main.buscarNombreEquipo(tfNombreEquipo.getText());
                     if(bNombre){
+                        tfNombreEquipo.setText("");
+                        System.out.println("Se ha encontrado el nombre en la base de datos");
                         throw new EquipoRepetido();
                     }
                 }
                 else{
+                    tfNombreEquipo.setText("");
+                    System.out.println("El patron del nombre no coincide");
                     throw new CampoIncorrecto();
                 }
             }
@@ -260,28 +330,33 @@ public class FormularioInscripcion {
     boolean bNacionalidad = false;
     try{
         if(tfNombreEquipo.getText().isEmpty()){
+            System.out.println("el campo esta vacio");
             throw new CampoVacio();
+
         }else{
             Pattern patron = Pattern.compile("^[A-Z][a-z]+$");
             Matcher mat = patron.matcher(tfNacionalidad.getText());
             if(mat.matches()){
                 bNacionalidad = true;
+                System.out.println("El patron de nacionalidad coincide");
             }else {
+                tfNacionalidad.setText("");
+                System.out.println("Salta la excepcion campo Incorrecto");
                 throw new CampoIncorrecto();
             }
         }
     }catch (CampoIncorrecto a){
-        JOptionPane.showMessageDialog(null,"EL NOMBRE NO ES CORRECTO");
+        JOptionPane.showMessageDialog(null,"EL CAMPO NO ES CORRECTO");
 
     }
         catch (CampoVacio a){
-        JOptionPane.showMessageDialog(null,"El campo es obligatorio");
+        JOptionPane.showMessageDialog(null,"EL CAMPO ES OBLIGATORIO");
 
     }
     catch (Exception e) {
         System.out.println(e.getClass());
     }
     return bNacionalidad;
-    }
+    }/*NO VALIDA SI EL NOMBRE TIENE Ñ*/
 
 }

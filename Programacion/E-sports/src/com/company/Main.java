@@ -10,6 +10,7 @@ import Views.Login;
 import Views.VentanaPrincipal;
 
 import javax.swing.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,11 +31,9 @@ public class Main {
     public static void main(String[] args) {
         bd = new BaseDatos();
         bd.abrirConexion();
-        abrirVentanaPrincipal();
-        //abrirFormularioEquipo();
 
-        // abrirFormularioEquipo();
         abrirVentanaPrincipal();
+
     }
 
     public static void abrirVentanaPrincipal() {
@@ -83,7 +82,7 @@ public class Main {
     }
 
 
-}
+
 
 
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////
@@ -326,25 +325,24 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Equipo ////////////////////////////////////
+    public static void tenDatosEquipo(String n, String na, java.sql.Date f, String t, String m, String e){
+
+    }
 
     /**
      * Metodo que llama a altaEquipo para hacer un insert en la base de datos
-     * @param n
-     * @param na
-     * @param f
-     * @param t
-     * @param m
      * @param e
      * @param a
      * @throws Exception
      */
-    public static void altaEquipo(String n, String na, java.sql.Date f, String t, String m, String e, Asistente a)throws Exception{
-        equipo.setNombre(n);
-        equipo.setNacionalidad(na);
-        equipo.setFechaCreacion(f);
-        equipo.setTelefono(t);
-        equipo.setMail(m);
-        equipo.setEscudo(e);
+
+    public static void altaEquipo(Equipo e, Asistente a)throws Exception{
+        equipo.setNombre(e.getNombre());
+        equipo.setNacionalidad(e.getNacionalidad());
+        equipo.setFechaCreacion(e.getFechaCreacion());
+        equipo.setTelefono(e.getTelefono());
+        equipo.setMail(e.getMail());
+        equipo.setEscudo(e.getEscudo());
         equipo.setAsistente(a);
 
         EquipoDAO.altaEquipo(equipo);
@@ -474,7 +472,6 @@ public class Main {
 
 
         JugadorDAO.altaJugador(jugador);
-
 
     }
 

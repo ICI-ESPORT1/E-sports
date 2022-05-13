@@ -2,6 +2,7 @@ package com.company;
 
 import Modelo.BD.BaseDatos;
 import Views.FormularioInscripcion;
+import Views.Login;
 import Views.VentanaPrincipal;
 
 import javax.swing.*;
@@ -13,8 +14,21 @@ public class Main {
         bd = new BaseDatos();
         bd.abrirConexion();
 
-        abrirFormularioEquipo();
+        // abrirFormularioEquipo();
 
+        /**
+         * Llamamos ala ventanaPrincipal
+         * @param VentanaPrincipal
+         *
+         */
+        JFrame frame = new JFrame("Login");
+        frame.setContentPane(new Login().getContentPane());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void abrirVentanaPrincipal() {
         JFrame frame = new JFrame("VentanaPrincipal");
         frame.setContentPane(new VentanaPrincipal().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

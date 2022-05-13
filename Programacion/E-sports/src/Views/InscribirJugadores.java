@@ -1,6 +1,10 @@
 package Views;
 
+import com.company.Main;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class InscribirJugadores {
 
@@ -27,12 +31,26 @@ public class InscribirJugadores {
 
 
     public InscribirJugadores() {
+        bOtro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean datosValidos =false;
+                /*Pasarle los datos al main para que cree un objeto jugador*/
+                datosValidos = validarDatosJugador();
+                if(datosValidos){
+                    Main.crearListaJugadores();/*Hay que pasarle los datos del jugador ya validados*/
+                }
+
+            }
+        });
     }
 
     public JPanel getJpJugador() {
         return jpJugador;
     }
-
+    public static boolean validarDatosJugador(){
+        return false;
+    }
     public static void main(String[] args) {
         JFrame frame = new JFrame("InscribirJugadores");
         frame.setContentPane(new InscribirJugadores().jpPrincipal);

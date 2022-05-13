@@ -57,9 +57,6 @@ public class FormularioInscripcion {
     private JTextField tfLocAsis;
     private JTextField tfSueldoAsis;
     private JButton bAnadirJugador;
-    private JTextField textField13;
-    private JLabel tfUsuario;
-    private JTextField tfpass;
     private JLabel lNombreEn;
     private JLabel lDniEnt;
     private JLabel lTelefono;
@@ -72,6 +69,8 @@ public class FormularioInscripcion {
     private JLabel lEmailAsis;
     private JLabel lLocAsis;
     private JLabel lSueldoAsis;
+    private JPanel jpTitulo;
+    private JLabel lTituloPrincipal;
     private JButton bSiguiente;
     /* Variables para la validacion de datos*/
     private String sNombreEquipo = "";
@@ -80,6 +79,7 @@ public class FormularioInscripcion {
     private String sTelefonoEquipo="";
     private  LocalDate ldFecha;
     private String sEmailEquipo="";
+    private boolean bEquipoValido = false;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("FormularioInscripcion");
@@ -94,8 +94,11 @@ public class FormularioInscripcion {
         bAnadirJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                bEquipoValido = validarDatosEquipo();
                 /*ABRIR NUEVA VENTANA REGISTRAR JUGADORES*/
-                Main.abrirInscripcionJugadores();
+                if(bEquipoValido){
+                    Main.abrirInscripcionJugadores();
+                }
             }
         });
     }
@@ -108,7 +111,8 @@ public class FormularioInscripcion {
      * Este método llama a diferentes métodos para validar los diferentes datos que se introducen en el formulario
      * de equipos.
      */
-    public void validarDatosEquipo(){
+    public boolean validarDatosEquipo(){
+        boolean bequipoValido = false;
         boolean bNombre = false;
         boolean bNacionalidad = false;
         boolean bFecha = false;
@@ -139,10 +143,16 @@ public class FormularioInscripcion {
             sEmailEquipo = tfEmailEquipo.getText();
             bEmail = validarEmail(sEmailEquipo);
 
+            if(bNombre&&bEmail&&bFecha&&bNacionalidad&&bTelefono&&bEmail){
+                bequipoValido = true;
+            }
+
         }catch (Exception e){
             System.out.println(e.getClass());
         }
+        return bequipoValido;
     }
+
     public boolean validarEmail(String email){
         boolean bEmail = false;
         try{
@@ -154,7 +164,9 @@ public class FormularioInscripcion {
                 //Matcher mat = patron.matcher();
             }
 
-        }catch (Exception e){System.out.println(e.getClass());}
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"EL EMAIL NO ES VALIDO");
+            System.out.println(e.getClass());}
         return bEmail;
     }
     /**
@@ -180,7 +192,10 @@ public class FormularioInscripcion {
                     throw new Exception("El telefono no es valido");
                 }
             }
-        }catch (Exception e){System.out.println(e.getClass());}
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"EL TELEFONO NO ES VALIDO");
+
+            System.out.println(e.getClass());}
         return bTelefono;
     }
 
@@ -214,7 +229,7 @@ public class FormularioInscripcion {
                 if(mat.matches()){
                     /*FUNCION PARA COMPROBAR QUE EL NOMBRE DEL EQUIPO NO EXISTE EN LA BD*/
                     bNombre = Main.buscarNombreEquipo(tfNombreEquipo.getText());
-                    if(!bNombre){
+                    if(bNombre){
                         throw new EquipoRepetido();
                     }
                 }
@@ -224,10 +239,12 @@ public class FormularioInscripcion {
             }
 
         }catch (CampoIncorrecto a){
-            System.out.println("El equipo ya existe");
+            JOptionPane.showMessageDialog(null,"EL NOMBRE NO ES CORRECTO");
+
         }
         catch (CampoVacio a){
-            System.out.println("El campo es obligatorio");
+            JOptionPane.showMessageDialog(null,"El campo es obligatorio");
+
         }
         catch (Exception e) {
             System.out.println(e.getClass());
@@ -254,10 +271,12 @@ public class FormularioInscripcion {
             }
         }
     }catch (CampoIncorrecto a){
-        System.out.println("El equipo ya existe");
+        JOptionPane.showMessageDialog(null,"EL NOMBRE NO ES CORRECTO");
+
     }
-    catch (CampoVacio a){
-        System.out.println("El campo es obligatorio");
+        catch (CampoVacio a){
+        JOptionPane.showMessageDialog(null,"El campo es obligatorio");
+
     }
     catch (Exception e) {
         System.out.println(e.getClass());

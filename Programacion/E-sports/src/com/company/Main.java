@@ -1,11 +1,13 @@
 package com.company;
 
 import Modelo.BD.BaseDatos;
+import Modelo.UML.Jugador;
 import Views.FormularioInscripcion;
 import Views.InscribirJugadores;
 import Views.VentanaPrincipal;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
     private static BaseDatos bd;
@@ -13,12 +15,16 @@ public class Main {
     public static void main(String[] args) {
         bd = new BaseDatos();
         bd.abrirConexion();
-
-        abrirFormularioEquipo();
+        abrirVentanaPrincipal();
+        //abrirFormularioEquipo();
 
 
     }
 
+    public static ArrayList<Jugador>crearListaJugadores(){
+        /*Recibe los datos de un jugador y los mete en un arrayList*/
+        return null;
+    }
     public static void abrirFormularioEquipo() {
         JFrame frame = new JFrame("FormularioInscripcion");
         frame.setContentPane(new FormularioInscripcion().getJpPrincipal());

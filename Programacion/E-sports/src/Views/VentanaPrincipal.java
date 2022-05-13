@@ -1,5 +1,7 @@
 package Views;
 
+import com.company.Main;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,7 @@ public class VentanaPrincipal {
     private JMenu Menu5_5;
     private JPanel Ventana1;
     private JMenuItem Ins;
+    private JButton bInscripcion;
 
 
     public VentanaPrincipal() {
@@ -25,6 +28,13 @@ public class VentanaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+
+        bInscripcion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirFormularioEquipo();
             }
         });
     }

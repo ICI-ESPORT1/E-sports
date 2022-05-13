@@ -16,6 +16,7 @@ public class Main {
         bd.abrirConexion();
 
         // abrirFormularioEquipo();
+        abrirVentanaPrincipal();
     }
 
     public static void abrirVentanaPrincipal() {
@@ -58,13 +59,7 @@ public class Main {
         frame.setVisible(true);
     }
 
-    public static void abrirVentanaPrincipal(){
-        JFrame frame = new JFrame("VentanaPrincipal");
-        frame.setContentPane(new VentanaPrincipal().getVentana1());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
+
 }
 
 

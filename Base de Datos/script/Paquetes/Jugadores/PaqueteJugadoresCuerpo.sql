@@ -88,7 +88,7 @@ begin
  exception
    when others then
       dbms_output.put_line('HA OCURRIDO UN ERROR');
-end cambio_equipo;  
+end cambio_equipo_jugador;  
 /*PROCEDIMIENTO PARA BORRAR JUGADOR*******************************************/
 procedure borrar_jugador
 (

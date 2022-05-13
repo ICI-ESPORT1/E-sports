@@ -1,16 +1,24 @@
 package Views;
 
+import javax.swing.*;
+import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Login extends javax.swing.JDialog {
     private javax.swing.JPanel contentPane;
-    private javax.swing.JButton buttonOK;
+    private javax.swing.JButton bAceptar;
     private javax.swing.JButton buttonCancel;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JButton bInvitado;
 
     public Login() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(bAceptar);
 
-        buttonOK.addActionListener(new java.awt.event.ActionListener() {
+        bAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 onOK();
             }
@@ -31,20 +39,26 @@ public class Login extends javax.swing.JDialog {
         });
 
         // call onCancel() on ESCAPE
+
         contentPane.registerKeyboardAction(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 onCancel();
             }
         }, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0), javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        bInvitado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     private void onOK() {
-        // add your code here
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
+
         dispose();
     }
 

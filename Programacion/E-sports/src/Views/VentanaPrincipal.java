@@ -17,6 +17,7 @@ public class VentanaPrincipal {
     private JMenuBar MenuCalendario;
     private JMenu Menu5_5;
     private JPanel Ventana1;
+    private JMenuItem Ins;
 
 
     public VentanaPrincipal() {

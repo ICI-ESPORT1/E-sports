@@ -164,7 +164,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="108e3" class="javax.swing.JMenuItem">
+                  <component id="108e3" class="javax.swing.JMenuItem" binding="Ins">
                     <constraints/>
                     <properties>
                       <text value="IncribirEquipo"/>

@@ -1,4 +1,4 @@
-package MODELO.UML;
+package Modelo.UML;
 
 import java.time.LocalDate;
 

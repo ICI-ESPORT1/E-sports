@@ -1,4 +1,4 @@
-package MODELO.BD;
+package Modelo.BD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,9 +8,9 @@ import java.sql.DriverManager;
  * @version 1
  */
 public class BaseDatos {
-    private String usuario = "eqdaw02";
-    private String pass = "eqdaw02";
-    private String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
+    private static String usuario = "eqdaw02";
+    private static String pass = "eqdaw02";
+    private static String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
 
     private static Connection conexion;
 
@@ -29,7 +29,7 @@ public class BaseDatos {
     /**
      * Metodo para establecer la conexion con la base de datos
      */
-    public void abrirConexion(){
+    public static void abrirConexion(){
         try{
             System.out.println("He establecido la conexion");
             Class.forName("oracle.jdbc.OracleDriver");
@@ -44,7 +44,7 @@ public class BaseDatos {
     /**
      * Metodo para cerrar la conexion con la base de datos
      */
-    public void cerrarConexion(){
+    public static void cerrarConexion(){
         try{
             conexion.close();
             System.out.println("Cierro la conexion");

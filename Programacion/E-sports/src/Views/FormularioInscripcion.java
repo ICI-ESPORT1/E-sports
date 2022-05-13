@@ -5,10 +5,11 @@ package Views;
  * Esta clase es una vista en la que se van a recoger y validar los datos de los equipos y sus integrantes.
  */
 
-import MODELO.Excepciones.CampoIncorrecto;
-import MODELO.Excepciones.CampoVacio;
-import MODELO.Excepciones.EquipoRepetido;
-import com.company.Main;
+import Modelo.Excepciones.CampoIncorrecto;
+import Modelo.Excepciones.CampoVacio;
+import Modelo.Excepciones.EquipoRepetido;
+import com.company.*;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -139,7 +140,7 @@ public class FormularioInscripcion {
             }
             else {
                 Pattern patron = Pattern.compile("^[a-z](.+)@(.+)$");
-                Matcher mat = patron.matcher()
+                //Matcher mat = patron.matcher();
             }
 
         }catch (Exception e){System.out.println(e.getClass());}

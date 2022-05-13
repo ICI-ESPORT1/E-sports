@@ -1,12 +1,10 @@
 package Views;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaPrincipal {
-    public JPanel Ventana1;
     private JMenuBar MenuOpcion;
     private JMenu Menu1_1;
     private JMenuBar Menu_Incripcion;
@@ -18,7 +16,7 @@ public class VentanaPrincipal {
     private JMenu Menu4_4;
     private JMenuBar MenuCalendario;
     private JMenu Menu5_5;
-
+    private JPanel Ventana1;
 
 
     public VentanaPrincipal() {

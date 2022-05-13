@@ -1,4 +1,4 @@
-package MODELO.UML;
+package Modelo.UML;
 
 public class Entrenador extends Persona {
     /**

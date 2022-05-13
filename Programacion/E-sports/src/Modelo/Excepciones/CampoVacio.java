@@ -1,4 +1,4 @@
-package MODELO.Excepciones;
+package Modelo.Excepciones;
 
 public class CampoVacio extends Exception{
 }

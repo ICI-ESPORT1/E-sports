@@ -1,4 +1,4 @@
-package MODELO.UML;
+package Modelo.UML;
 
 public class GrupoUsuario {
     private int idRol;

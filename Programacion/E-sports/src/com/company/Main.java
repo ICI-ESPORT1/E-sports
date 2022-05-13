@@ -1,10 +1,8 @@
 package com.company;
-import Views.VentanaPrincipal;
-import javax.swing.*;
 
-import MODELO.BD.BaseDatos;
+import Modelo.BD.BaseDatos;
 import Views.FormularioInscripcion;
-//import com.sun.xml.internal.rngom.parse.host.Base;
+import Views.VentanaPrincipal;
 
 import javax.swing.*;
 
@@ -17,14 +15,11 @@ public class Main {
 
         abrirFormularioEquipo();
 
-   public static void main(String[] args) {
-	// write your code here
-
-       JFrame frame = new JFrame("VentanaPrincipal");
-       frame.setContentPane(new VentanaPrincipal().Ventana1);
-       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       frame.pack();
-       frame.setVisible(true);
+        JFrame frame = new JFrame("VentanaPrincipal");
+        frame.setContentPane(new VentanaPrincipal().getVentana1());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public static void abrirFormularioEquipo() {
@@ -51,4 +46,5 @@ public class Main {
         return nombreEncontrado;
     }
 }
+
 

@@ -1,6 +1,5 @@
 package Modelo.BD;
 
-import Modelo.UML.Asistente;
 import Modelo.UML.Entrenador;
 
 import java.sql.CallableStatement;

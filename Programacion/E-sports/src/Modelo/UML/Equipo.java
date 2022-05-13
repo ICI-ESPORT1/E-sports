@@ -1,5 +1,6 @@
-package MODELO.UML;
+package Modelo.UML;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -143,8 +144,8 @@ public class Equipo {
      *
      * @param fechaCreacion
      */
-    public void setFechaCreacion(LocalDate fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setFechaCreacion(Date fechaCreacion) {
+        //this.fechaCreacion = fechaCreacion;
     }
 
     /**

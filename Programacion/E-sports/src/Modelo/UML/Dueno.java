@@ -1,6 +1,4 @@
-package MODELO.UML;
-
-import java.util.ArrayList;
+package Modelo.UML;
 
 import java.util.ArrayList;
 

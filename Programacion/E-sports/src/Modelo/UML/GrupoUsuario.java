@@ -1,6 +1,4 @@
-package Modelo.UML;
-
-import java.util.ArrayList;
+package MODELO.UML;
 
 public class GrupoUsuario {
     private int idRol;

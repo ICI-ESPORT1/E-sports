@@ -1,4 +1,4 @@
-package Modelo.UML;
+package MODELO.UML;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -84,11 +84,9 @@ public class Administrador {
     /**
      * Metodo para añadir nuevos equipos
      * @param idEquipo
-     * @param dni
      * @param nombre
      * @param telefono
      * @param mail
-     * @param localidad
      */
     public void altaEquipo(int idEquipo, String nombre, String nacionalidad,LocalDate fechaCreacion,
                            String telefono, String mail,String escudo){}

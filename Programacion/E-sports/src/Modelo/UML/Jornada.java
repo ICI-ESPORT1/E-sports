@@ -1,7 +1,8 @@
-package Modelo.UML;
+package MODELO.UML;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 /**@author Celia Garcia
  * version 1
  * */

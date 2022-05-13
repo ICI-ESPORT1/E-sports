@@ -1,4 +1,4 @@
-package Modelo.Excepciones;
+package MODELO.Excepciones;
 
 public class EquipoRepetido extends Exception{
 }

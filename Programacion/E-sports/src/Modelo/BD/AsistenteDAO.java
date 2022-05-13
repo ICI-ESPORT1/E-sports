@@ -1,6 +1,8 @@
 package Modelo.BD;
 
 import Modelo.UML.*;
+
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -16,26 +18,26 @@ public class AsistenteDAO {
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
+    private static CallableStatement c;
 
     public static void altaAsistente(Asistente a)throws Exception{
         //Metodo para insertar un nuevo asistente en la tabla asistente
         BaseDatos.abrirConexion();
 
-        plantilla="insert into asistente values (?,?,?,?,?,?)";
-        sentenciaPre=BaseDatos.getConexion().preparedStatement(plantilla);
-        sentenciaPre=setString(1,a.getDni());
-        sentenciaPre=setString(2,a.getNombre());
-        sentenciaPre=setString(3,a.getTelefono());
-        sentenciaPre=setString(4,a.getMail());
-        sentenciaPre=setString(5,a.getLocalidad());
-        sentenciaPre=setFloat(6,a.getSueldo());
+        c=BaseDatos.getConexion().prepareCall("{call nuevo_asistente(?,?,?,?,?,?)}");
 
-        int n=sentenciaPre.executeUpdate();
+        c.setString(1,a.getDni());
+        c.setString(2,a.getNombre());
+        c.setString(3,a.getTelefono());
+        c.setString(4,a.getLocalidad());
+        c.setInt(5, a.getEquipo().getId_equipo());
+        c.setFloat(6, a.getSueldo());
+
+        c.execute();
+
+        c.close();
 
         BaseDatos.cerrarConexion();
-
-        if (n!=1)
-            throw new Exception("Fallo al insertar un asistente");
     }
 
 
@@ -43,39 +45,60 @@ public class AsistenteDAO {
         //metodo para borrar un asistente de la tabla asistente por id_asistente
         BaseDatos.abrirConexion();
 
-        plantilla="delete from asistente where id_asistente = ?";
-        sentenciaPre = BaseDatos.getConexion().preparedStatement(plantilla);
-        sentenciaPre = setInteger(1,a.getCodPersona());
+        c=BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
 
-        int n = sentenciaPre.executeUpdate();
-        if (n == 0)
-            throw new Exception();
+        c.setInt(1,a.getCodPersona());
 
-        System.out.println(n + " filas borradas");
+        c.execute();
+
+        c.close();
 
         BaseDatos.cerrarConexion();
     }
 
-    public static ArrayList<Asistente> consultarAsistente(String dni)throws Exception{
+    public static void cambioEquipoAsistente(int idAsistenteNuevo, int idEquipoNuevo)throws Exception{
+        //metodo para cambiar a un asistente de equipo
+        BaseDatos.abrirConexion();
+
+        c=BaseDatos.getConexion().prepareCall("{call cambio_equipo(?,?)}");
+
+        c.setInt(1,idAsistenteNuevo);
+        c.setInt(2,idEquipoNuevo);
+
+        c.execute();
+
+        c.close();
+
+        BaseDatos.cerrarConexion();
+
+    }
+
+    public static Asistente consultarAsistente(String dni)throws Exception{
         //Metodo para consultar un asistente por id_asistente a la base de datos
         BaseDatos.abrirConexion();
 
         plantilla="select * from asistente where dni = ?";
 
-        sentenciaPre = BaseDatos.getConexion().preparedStatement(plantilla);
+
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
 
         resultado = sentenciaPre.executeQuery();
-        ArrayList<Asistente> listaAsistentes = new ArrayList<>();
 
         crearObjeto();
-        listaAsistentes.add(asistente);
 
+        return asistente;
 
     }
 
     public static void crearObjeto()throws Exception{
 
-        asistente.setCodPersona(resultado.getString("id_asistente"));
+        asistente.setCodPersona(resultado.getInt("id_asistente"));
+        asistente.setDni(resultado.getString("dni"));
+        asistente.setNombre(resultado.getString("nombre"));
+        asistente.setTelefono(resultado.getString("telefono"));
+        asistente.setMail(resultado.getString("mail"));
+        asistente.setLocalidad(resultado.getString("localidad"));
+        asistente.setSueldo(resultado.getFloat("suledo"));
 
     }
 }

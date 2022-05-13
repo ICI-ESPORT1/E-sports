@@ -55,13 +55,13 @@ public class AsistenteDAO {
         BaseDatos.cerrarConexion();
     }
 
-    public static void cambioEquipoAsistente(int idAsistenteNuevo, int idEquipoNuevo)throws Exception{
+    public static void cambioEquipoAsistente(Asistente a, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un asistente de equipo
         BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call cambio_equipo(?,?)}");
 
-        c.setInt(1,idAsistenteNuevo);
+        c.setInt(1,a.getCodPersona());
         c.setInt(2,idEquipoNuevo);
 
         c.execute();
@@ -73,13 +73,13 @@ public class AsistenteDAO {
     }
 
     public static Asistente consultarAsistente(String dni)throws Exception{
-        //Metodo para consultar un asistente por id_asistente a la base de datos
+        //Metodo para consultar un asistente por dni a la base de datos
         BaseDatos.abrirConexion();
 
         plantilla="select * from asistente where dni = ?";
 
-
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,dni);
 
         resultado = sentenciaPre.executeQuery();
 

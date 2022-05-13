@@ -12,7 +12,7 @@ p_sueldo jugador.sueldo%type,
 p_id_rol jugador.id_rol%type
 );
 
-procedure cambio_equipo
+procedure cambio_equipo_jugador
 (
 p_idJugador jugador.id_jugador%type,
 p_idEquipoNuevo jugador.id_equipo%type

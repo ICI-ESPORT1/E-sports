@@ -9,10 +9,15 @@ p_direccion dueno.direccion%type,
 p_id_equipo dueno.id_equipo%type
 );
 
-procedure cambio_equipo
+procedure cambio_equipo_dueno
 (
 p_idDueno dueno.id_dueno%type,
 p_idEquipoNuevo dueno.id_equipo%type
+);
+
+procedure borrar_dueno
+(
+p_idDueno dueno.id_dueno%type
 );
 
 

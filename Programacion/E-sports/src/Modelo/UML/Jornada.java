@@ -10,6 +10,8 @@ public class Jornada {
     private int numJornada;
     private LocalDate fecha;
     private String numSemana;
+
+    private Calendario calendario;
     private ArrayList<Partido> listaPartidos;
 
     /**
@@ -18,12 +20,14 @@ public class Jornada {
      * @param fecha
      * @param numSemana
      * @param listaPartidos
+     * @param calendario
      */
-    public Jornada(int numJornada, LocalDate fecha, String numSemana, ArrayList<Partido> listaPartidos) {
+    public Jornada(int numJornada, LocalDate fecha, String numSemana, ArrayList<Partido> listaPartidos,Calendario calendario) {
         this.numJornada = numJornada;
         this.fecha = fecha;
         this.numSemana = numSemana;
         this.listaPartidos = listaPartidos;
+        this.calendario = calendario;
     }
 
     /**
@@ -106,6 +110,14 @@ public class Jornada {
      */
     public void setListaPartidos(ArrayList<Partido> listaPartidos) {
         this.listaPartidos = listaPartidos;
+    }
+
+    public Calendario getCalendario() {
+        return calendario;
+    }
+
+    public void setCalendario(Calendario calendario) {
+        this.calendario = calendario;
     }
 
     /**

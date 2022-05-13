@@ -55,13 +55,13 @@ public class EntrenadorDAO {
         BaseDatos.cerrarConexion();
     }
 
-    public static void cambioEquipoEntrenador(int idEntrenadorNUevo, int idEquipoNuevo)throws Exception{
+    public static void cambioEquipoEntrenador(Entrenador e, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un entrenador de equipo
         BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
 
-        c.setInt(1,idEntrenadorNUevo);
+        c.setInt(1,e.getCodPersona());
         c.setInt(2,idEquipoNuevo);
 
         c.execute();
@@ -73,13 +73,13 @@ public class EntrenadorDAO {
     }
 
     public static Entrenador consultarEntrenador(String dni)throws Exception{
-        //Metodo para consultar un entrenador por id_entrenador a la base de datos
+        //Metodo para consultar un entrenador por dni a la base de datos
         BaseDatos.abrirConexion();
 
         plantilla="select * from entrenador where dni = ?";
 
-
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,dni);
 
         resultado = sentenciaPre.executeQuery();
 

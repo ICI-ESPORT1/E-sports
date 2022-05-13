@@ -53,13 +53,13 @@ public class EquipoDAO {
         BaseDatos.cerrarConexion();
     }
 
-    public static void cambiarNombreEquipo(String nombre, String nombreNuevo)throws Exception{
+    public static void cambiarNombreEquipo(Equipo e, String nombreNuevo)throws Exception{
         //metodo para cambiar el nombre de un equipo
         BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call cambiar_nombre_equipo(?,?)}");
 
-        c.setString(1,nombre);
+        c.setString(1,e.getNombre());
         c.setString(2,nombreNuevo);
 
         c.execute();
@@ -70,14 +70,14 @@ public class EquipoDAO {
 
     }
 
-    public static Equipo consultarEquipo(String nombre)throws Exception{
+    public static Equipo consultarEquipo(String n)throws Exception{
         //Metodo para consultar un Equipo por nombre a la base de datos
         BaseDatos.abrirConexion();
 
         plantilla="select * from equipo where nombre = ?";
 
-
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,n);
 
         resultado = sentenciaPre.executeQuery();
 

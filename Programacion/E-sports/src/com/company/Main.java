@@ -2,6 +2,7 @@ package com.company;
 
 import Modelo.BD.BaseDatos;
 import Views.FormularioInscripcion;
+import Views.InscribirJugadores;
 import Views.VentanaPrincipal;
 
 import javax.swing.*;
@@ -15,11 +16,7 @@ public class Main {
 
         abrirFormularioEquipo();
 
-        JFrame frame = new JFrame("VentanaPrincipal");
-        frame.setContentPane(new VentanaPrincipal().getVentana1());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+
     }
 
     public static void abrirFormularioEquipo() {
@@ -44,6 +41,22 @@ public class Main {
             System.out.println(e.getClass());
         }
         return nombreEncontrado;
+    }
+
+    public static void abrirInscripcionJugadores(){
+        JFrame frame = new JFrame("InscribirJugadores");
+        frame.setContentPane(new InscribirJugadores().getJpJugador());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void abrirVentanaPrincipal(){
+        JFrame frame = new JFrame("VentanaPrincipal");
+        frame.setContentPane(new VentanaPrincipal().getVentana1());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 }
 

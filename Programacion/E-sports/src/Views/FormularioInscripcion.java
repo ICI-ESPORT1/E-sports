@@ -21,9 +21,6 @@ import java.util.regex.Pattern;
 
 public class FormularioInscripcion {
     private JPanel jpPrincipal;
-    private JPanel jpTitulo;
-    private JPanel lNuevoEquipo;
-    private JLabel lTitulo;
     private JPanel jpDatosEquipo;
     private JLabel lNombreEquipo;
     private JTextField tfNombreEquipo;
@@ -37,32 +34,45 @@ public class FormularioInscripcion {
     private JTextField tfEmailEquipo;
     private JLabel lEscudo;
     private JTextField tfEscudo;
-    private JPanel jpMiembros;
-    private JLabel lCargo;
-    private JComboBox cbCargo;
-    private JLabel lDni;
-    private JTextField tfDni;
-    private JLabel lNombre;
-    private JTextField tfNombre;
+    private JPanel jpDatosComponentes;
+    private JPanel jpDueno;
+    private JLabel lNombreDueno;
+    private JTextField tfNombreDueno;
+    private JTextField tfDNId;
+    private JTextField tfTelfd;
+    private JTextField tfEmaild;
+    private JTextField tfLocalidadD;
+    private JPanel jpEntrenador;
+    private JTextField tfNombreEntre;
+    private JTextField tfDniEn;
+    private JTextField tfTelfEnt;
+    private JTextField tfEmailEnt;
+    private JTextField tfLocEnt;
+    private JTextField tfSueldo;
+    private JPanel jpAsistente;
+    private JTextField tfNombreAsis;
+    private JTextField tfDniAsis;
+    private JTextField tfTelfAsis;
+    private JTextField tfEmailAsis;
+    private JTextField tfLocAsis;
+    private JTextField tfSueldoAsis;
+    private JButton bAnadirJugador;
+    private JTextField textField13;
+    private JLabel tfUsuario;
+    private JTextField tfpass;
+    private JLabel lNombreEn;
+    private JLabel lDniEnt;
     private JLabel lTelefono;
-    private JTextField tfTelefono;
-    private JLabel lMail;
-    private JTextField tfEmail;
+    private JLabel lEmailEnt;
     private JLabel lLocalidad;
     private JLabel lSueldo;
-    private JLabel lNickname;
-    private JLabel lRol;
-    private JLabel lSalario;
-    private JTextField tfLocalidad;
-    private JTextField tfSueldo;
-    private JTextField tfNick;
-    private JTextField tfRol;
-    private JTextField tfSalario;
-    private JPanel jpBotones;
-    private JButton cancelarButton;
-    private JButton bAnterior;
+    private JLabel lNombreAsis;
+    private JLabel lDniAsis;
+    private JLabel lTelfAsis;
+    private JLabel lEmailAsis;
+    private JLabel lLocAsis;
+    private JLabel lSueldoAsis;
     private JButton bSiguiente;
-    private JButton bAceptar;
     /* Variables para la validacion de datos*/
     private String sNombreEquipo = "";
     private String sNacionalidad = "";
@@ -81,10 +91,11 @@ public class FormularioInscripcion {
 
     public FormularioInscripcion() {
 
-        bSiguiente.addActionListener(new ActionListener() {
+        bAnadirJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                validarDatosEquipo();
+                /*ABRIR NUEVA VENTANA REGISTRAR JUGADORES*/
+                Main.abrirInscripcionJugadores();
             }
         });
     }

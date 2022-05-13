@@ -24,7 +24,7 @@ public class EquipoDAO {
 
         c.setString(1,e.getNombre());
         c.setString(2,e.getNacionalidad());
-        //c.setDate(3, Date.valueOf(e.getFechaCreacion()));
+        c.setDate(3, Date.valueOf(e.getFechaCreacion()));
         c.setString(4,e.getTelefono());
         c.setString(5, e.getMail());
         c.setString(6, e.getEscudo());

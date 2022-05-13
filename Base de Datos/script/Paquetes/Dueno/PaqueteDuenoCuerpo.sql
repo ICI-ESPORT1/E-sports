@@ -77,7 +77,7 @@ END nuevo_dueno;
 
 
 /*PROCEDIMIENTO PARA CAMBIAR DE EQUIPO AL DUENO******************************/
-procedure cambio_equipo
+procedure cambio_equipo_dueno
 (
 p_idDueno dueno.id_dueno%type,
 p_idEquipoNuevo dueno.id_equipo%type
@@ -102,6 +102,6 @@ begin
          dbms_output.put_line ('El dueno no existe');
     when others then
         dbms_output.put_line('HA OCURRIDO UN ERROR');
-end cambio_equipo; 
+end cambio_equipo_dueno; 
 
 end gestionarDueno;

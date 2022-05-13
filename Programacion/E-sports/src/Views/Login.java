@@ -16,7 +16,7 @@ public class Login extends javax.swing.JDialog {
     public Login() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(bAceptar);
+        getRootPane().setDefaultButton(buttonCancel);
 
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -28,6 +28,7 @@ public class Login extends javax.swing.JDialog {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 onCancel();
             }
+
         });
 
         // call onCancel() when cross is clicked
@@ -48,9 +49,14 @@ public class Login extends javax.swing.JDialog {
         bInvitado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JFrame frame = new JFrame("VentanaInvitado");
+                frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
+
     }
 
     private void onOK() {

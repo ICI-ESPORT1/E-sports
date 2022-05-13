@@ -47,7 +47,5 @@ public class VentanaPrincipal {
         frame.setVisible(true);
     }
 
-    public JPanel getVentana1() {
-        return Ventana1;
-    }
+    public JPanel getVentana1() {return Ventana1;}
 }

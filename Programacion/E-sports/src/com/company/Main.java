@@ -1,6 +1,7 @@
 package com.company;
 
 import Modelo.BD.BaseDatos;
+import Views.*;
 import Modelo.UML.Jugador;
 import Views.FormularioInscripcion;
 import Views.InscribirJugadores;
@@ -20,7 +21,12 @@ public class Main {
         //abrirFormularioEquipo();
 
         // abrirFormularioEquipo();
-        abrirVentanaPrincipal();
+        mostrarVentanaInvitado();
+
+        Login dialog = new Login();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
 
     public static void abrirVentanaPrincipal() {
@@ -28,8 +34,20 @@ public class Main {
         frame.setContentPane(new VentanaPrincipal().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(false);
     }
+
+    public static void mostrarVentanaInvitado()
+    {
+        JFrame frame = new JFrame("VentanaInvitado");
+        frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // vp.setSize(700,700);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(false);
+    }
+
     public static ArrayList<Jugador>crearListaJugadores(){
         return null;
         /*Recibe los datos de un jugador y los mete en un arrayList*/

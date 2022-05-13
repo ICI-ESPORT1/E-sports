@@ -28,6 +28,32 @@ v_mensError := 'El equipo no existe';
 
 dbms_output.put_line('ERROR: '||v_codError || v_mensError );
 END;
+
+procedure partidosJornada
+(
+c_partidos out tcursor
+)
+as
+v_codError number;
+v_mensError varchar2(300);
+e_quipoNoExiste exception;
+pragma exception_init(e_quipoNoExiste, -20010);
+begin 
+
+open c_partidos for
+select equipo, resultado, partido
+from resultados_temporada
+order by partido;
+
+exception
+when no_data_found then
+ raise e_quipoNoExiste ;
+when e_quipoNoExiste then
+v_codError := sqlcode;
+v_mensError := 'El equipo no existe';
+
+
+end;
 end gestionResultados;
 
 declare

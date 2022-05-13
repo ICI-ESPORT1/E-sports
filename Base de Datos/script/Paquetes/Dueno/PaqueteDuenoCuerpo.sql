@@ -104,6 +104,7 @@ begin
         dbms_output.put_line('HA OCURRIDO UN ERROR');
 end cambio_equipo_dueno; 
 
+/*PROCEDIMIENTO PARA BORRAR DE EQUIPO AL DUENO******************************/
 procedure borrar_dueno
 (
 p_idDueno dueno.id_dueno%type

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Views.VentanaPrincipal">
+  <grid id="27dc6" binding="Ventana1" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1402" height="3338"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="45af" layout-manager="GridLayoutManager" row-count="3" column-count="5" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-15901303"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="633c1" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-11052704"/>
+              <font name="Arial Black" size="24"/>
+              <foreground color="-196610"/>
+              <text value="ICI-SPORTS"/>
+            </properties>
+          </component>
+          <grid id="da48d" class="javax.swing.JMenuBar" binding="MenuOpcion" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <enabled value="true"/>
+              <foreground color="-16777216"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="73388" class="javax.swing.JMenu" binding="Menu1_1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <background color="-16777216"/>
+                  <foreground color="-15901303"/>
+                  <text value="Opcion"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="f39ad" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="ModificarEquipo"/>
+                    </properties>
+                  </component>
+                  <component id="a26c0" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="AltaEquipo"/>
+                    </properties>
+                  </component>
+                  <component id="6470" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="BajaEquipo"/>
+                    </properties>
+                  </component>
+                  <component id="ad84d" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="AltaJugador"/>
+                    </properties>
+                  </component>
+                  <component id="8ad51" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="BajaJugador"/>
+                    </properties>
+                  </component>
+                  <component id="df469" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="ModificarJugador"/>
+                    </properties>
+                  </component>
+                  <component id="3a9c3" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="GenerarJornadas"/>
+                    </properties>
+                  </component>
+                  <component id="effdc" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="ModificarJornadas"/>
+                    </properties>
+                  </component>
+                  <component id="62907" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="BorrarJornada"/>
+                    </properties>
+                  </component>
+                  <component id="7b66" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="AltaDueño"/>
+                    </properties>
+                  </component>
+                  <component id="2f5ae" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="BajaDueño"/>
+                    </properties>
+                  </component>
+                  <component id="c35f8" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="ModificarDueño"/>
+                    </properties>
+                  </component>
+                  <component id="5861" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="ObtenerDatosDueño"/>
+                    </properties>
+                  </component>
+                  <component id="4f5d9" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="DatosJugador"/>
+                    </properties>
+                  </component>
+                  <component id="1139e" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="DatosEquipo"/>
+                    </properties>
+                  </component>
+                  <component id="c1aa0" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="GenerarPartidos"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="2996" class="javax.swing.JMenuBar" binding="Menu_Incripcion" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <foreground color="-16777216"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="6abec" class="javax.swing.JMenu" binding="Menu2_2" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <foreground color="-15901303"/>
+                  <text value="Inscripcion"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="108e3" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="IncribirEquipo"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="2b6f8" class="javax.swing.JMenuBar" binding="MenuLogin" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <foreground color="-16777216"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="e9ec4" class="javax.swing.JMenu" binding="Menu3_3" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <foreground color="-15901303"/>
+                  <text value="Login"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+          <component id="56bd6" class="javax.swing.JButton" binding="Logo">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="true"/>
+              <icon value="Views/icono2.png"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <grid id="e69a4" class="javax.swing.JMenuBar" binding="MenuEquipo" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-16777216"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="dddaa" class="javax.swing.JMenu" binding="Menu4_4" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-15901303"/>
+                  <text value="Equipo"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+          <grid id="2611c" class="javax.swing.JMenuBar" binding="MenuCalendario" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-16777216"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="9a46f" class="javax.swing.JMenu" binding="Menu5_5" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <background color="-16777216"/>
+                  <foreground color="-15901303"/>
+                  <hideActionText value="true"/>
+                  <text value="Calendario"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="10548" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Jornadas"/>
+                    </properties>
+                  </component>
+                  <component id="625f8" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="PartidosJugados"/>
+                    </properties>
+                  </component>
+                  <component id="a18" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Clasificacion"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <hspacer id="18374">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="80082">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>

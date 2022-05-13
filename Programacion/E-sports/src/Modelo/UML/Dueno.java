@@ -2,6 +2,8 @@ package MODELO.UML;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class Dueno extends Persona {
     /**
      @author Inigo Bruk

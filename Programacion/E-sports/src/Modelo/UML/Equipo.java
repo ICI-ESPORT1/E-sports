@@ -59,8 +59,14 @@ public class Equipo {
     }
     /**
      * CONSTRUCTOR VACIO
+     * @param n
+     * @param na
+     * @param f
+     * @param t
+     * @param m
+     * @param e
      */
-    public Equipo() {
+    public Equipo(String n, String na, LocalDate f, String t, String m, String e) {
     }
 
     /**

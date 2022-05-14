@@ -5,16 +5,11 @@ import Modelo.UML.Jugador;
 import Modelo.BD.*;
 import Modelo.UML.*;
 import Views.FormularioInscripcion;
-import Views.InscribirJugadores;
-import Views.Login;
 import Views.VentanaPrincipal;
 
 import javax.swing.*;
-import java.sql.Date;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Main {
     private static BaseDatos bd;
@@ -26,7 +21,7 @@ public class Main {
     private static Dueno dueno;
     private static Equipo equipo;
     private static Jornada jornada;
-    private static Jugador jugador;
+    private static Jugador jugador = new Jugador();
     private static Resultado resultado;
 
     public static void main(String[] args) {
@@ -73,6 +68,7 @@ public class Main {
         }
         return nombreEncontrado;
     }
+
 
     public static void abrirInscripcionJugadores(){
         JFrame frame = new JFrame("InscribirJugadores");
@@ -165,11 +161,12 @@ public class Main {
 
     ////////////////////////////////////// Metodos para la tabla Entrenador ////////////////////////////////////
     public static void tenDatosEntrenador(String dni,String n,String l,String t, Float s){
-        entrenador.setDni(dni);
+        entrenador = new Entrenador(dni,n,l,t,s);
+        /*entrenador.setDni(dni);
         entrenador.setNombre(n);
         entrenador.setLocalidad(l);
         entrenador.setTelefono(t);
-        entrenador.setSueldo(s);
+        entrenador.setSueldo(s);*/
     }
     /**
      * Metodo que llama a altaEntrenador para hacer un insert en la base de datos
@@ -245,7 +242,7 @@ public class Main {
 
     ////////////////////////////////////// Metodos para la tabla Dueno ////////////////////////////////////
     public static void tenDatosDueno(String dni, String n, String l,String t){
-
+        System.out.println("metodo vacio");
     }
     /**
      * Metodo que llama a altaDueno para hacer un insert en la base de datos
@@ -321,12 +318,14 @@ public class Main {
     ////////////////////////////////////// Metodos para la tabla Equipo ////////////////////////////////////
     public static void tenDatosEquipo(String n, String na, LocalDate f, String t, String m, String e){
         /*Hay que crear un objeto equipo */
-        equipo.setNombre(n);
+        equipo = new Equipo(n,na, f, t, m, e);
+
+        /*equipo.setNombre(n);
         equipo.setNacionalidad(na);
         equipo.setFechaCreacion(f);
         equipo.setTelefono(t);
         equipo.setMail(m);
-        equipo.setEscudo(e);
+        equipo.setEscudo(e);*/
     }
 
     /**
@@ -355,7 +354,7 @@ public class Main {
      * @param a
      * @throws Exception
      */
-    public static void bajaEquipo(String n, String na, java.sql.Date f, String t, String m, String e, Asistente a)throws Exception{
+    public static void bajaEquipo(String n, String na, LocalDate f, String t, String m, String e, Asistente a)throws Exception{
         equipo.setNombre(n);
         equipo.setNacionalidad(na);
         equipo.setFechaCreacion(f);
@@ -380,7 +379,7 @@ public class Main {
      * @param nombreNuevo
      * @throws Exception
      */
-    public static void cambiarNombreEquipo(String n, String na, java.sql.Date f, String t, String m, String e, Asistente a, String nombreNuevo)throws Exception{
+    public static void cambiarNombreEquipo(String n, String na, LocalDate f, String t, String m, String e, Asistente a, String nombreNuevo)throws Exception{
         equipo.setNombre(n);
         equipo.setNacionalidad(na);
         equipo.setFechaCreacion(f);
@@ -390,7 +389,6 @@ public class Main {
         equipo.setAsistente(a);
 
         EquipoDAO.cambiarNombreEquipo(equipo,nombreNuevo);
-
     }
 
     /**

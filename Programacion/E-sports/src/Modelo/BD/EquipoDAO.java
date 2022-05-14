@@ -94,7 +94,8 @@ public class EquipoDAO {
         equipo.setNacionalidad(resultado.getString("nacionalidad"));
         equipo.setTelefono(resultado.getString("telefono"));
         equipo.setMail(resultado.getString("mail"));
-        equipo.setFechaCreacion(resultado.getDate("fecha_creacion"));
+
+       // equipo.setFechaCreacion(resultado.getDate("fecha_creacion"));
         equipo.setEscudo(resultado.getString("escudo"));
 
     }

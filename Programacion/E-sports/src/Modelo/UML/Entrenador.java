@@ -38,7 +38,7 @@ public class Entrenador extends Persona {
         this.sueldo = sueldo;
     }
 
-    public Entrenador() {
+    public Entrenador(String dni, String n, String l, String t, Float s) {
     }
 
     /**

@@ -13,7 +13,7 @@ public class BaseDatos {
     private static String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
 
     private static Connection conexion;
-
+    private static boolean casa = true;
 
     public BaseDatos() {
     }
@@ -31,9 +31,20 @@ public class BaseDatos {
      */
     public static void abrirConexion(){
         try{
-            System.out.println("He establecido la conexion");
-            Class.forName("oracle.jdbc.OracleDriver");
-            conexion = DriverManager.getConnection(url,usuario, pass);
+            if(!casa){
+                System.out.println("He establecido la conexion");
+                Class.forName("oracle.jdbc.OracleDriver");
+                conexion = DriverManager.getConnection(url,usuario, pass);
+            }
+            else{
+                url = "jdbc:oracle:thin:@192.168.1.192:1521:orcl";
+                usuario = "system";
+                pass = "oracle";
+                System.out.println("He establecido la conexion");
+                Class.forName("oracle.jdbc.OracleDriver");
+                conexion = DriverManager.getConnection(url,usuario, pass);
+            }
+
 
             if(conexion == null){
                 throw new Exception("Problemas con la conexion");

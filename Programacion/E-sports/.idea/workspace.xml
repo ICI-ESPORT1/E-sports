@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Base de Datos/script/Tablas/insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Base de Datos/script/Tablas/insert.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Entrenador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Entrenador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
@@ -128,5 +132,21 @@
     <ignored-roots>
       <path value="$USER_HOME$" />
     </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>325</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Views/FormularioInscripcion.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

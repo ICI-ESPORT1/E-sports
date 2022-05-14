@@ -71,8 +71,18 @@ public class FormularioInscripcion {
     private JLabel lEmailAsis;
     private JLabel lLocAsis;
     private JLabel lSueldoAsis;
-    private JPanel jpTitulo;
     private JLabel lTituloPrincipal;
+    private JPanel jpJugadores;
+    private JLabel lNombreJug;
+    private JTextField tfNombreJ;
+    private JLabel lDniJug;
+    private JTextField tfDniJ;
+    private JTextField tfTelfJug;
+    private JTextField tfEmailJug;
+    private JTextField tfLocJug;
+    private JTextField tfSueldoJ;
+    private JComboBox cbRol;
+    private JTextField tfNick;
     private JButton bSiguiente;
     /* Variables para la validacion de datos*/
     private String sNombreEquipo = "";
@@ -80,10 +90,12 @@ public class FormularioInscripcion {
     private String sFecha = "";
     private String sTelefonoEquipo="";
     private  LocalDate ldFecha;
+    private String rolJug ="";
     private String sEmailEquipo="";
     private boolean bEquipoValido = false;
     private boolean bDuenoValido = false;
     private boolean bAsisValido = false;
+    private boolean bJugadorValido = false;
     private boolean bEntrenadorValido =false;
     private float sueldo = 0;
 
@@ -98,15 +110,18 @@ public class FormularioInscripcion {
     }
 
     public FormularioInscripcion() {
+        llenarFormulario();
 
         bAnadirJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    bEquipoValido = validarDatosEquipo();
+                    bEquipoValido = validarDatosEquipo("especial");
                     if(bEquipoValido){
                         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                         Date dfecha = formato.parse(tfFecha.getText());
+                        java.sql.Date sqlFecha  = new java.sql.Date(dfecha.getTime());
+
                         Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText(),tfEscudo.getText());
                     }
 
@@ -122,14 +137,10 @@ public class FormularioInscripcion {
                     if(bAsisValido){
                         Main.tenDatosAsistente(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo);
                     }
+                    bJugadorValido = validarDatosJugador("especial");
 
-                    /*ABRIR NUEVA VENTANA REGISTRAR JUGADORES*/
-                    if(bEquipoValido&&bDuenoValido){
-
-                        Main.abrirInscripcionJugadores();
-
-                    }
-                }catch (Exception z){System.out.println(e.getClass());}
+                }
+                catch (Exception z){System.out.println(e.getClass());}
 
             }
         });
@@ -139,11 +150,43 @@ public class FormularioInscripcion {
         return jpPrincipal;
     }
 
+    public void llenarFormulario(){
+        tfNombreJ.setText("Celia");
+        tfNombreAsis.setText("Ana");
+        tfNombreEntre.setText("Fran");
+        tfNombreDueno.setText("Ivan");
+        tfNombreEquipo.setText("Equipo");
+        tfDniAsis.setText("72738006T");
+        tfDniEn.setText("72738006T");
+        tfDniJ.setText("72738006T");
+        tfDNId.setText("72738006T");
+        tfLocJug.setText("Vitoria");
+        tfLocAsis.setText("Vitoria");
+        tfLocEnt.setText("Vitoria");
+        tfLocalidadD.setText("Vitoria");
+        tfSueldoJ.setText("1439");
+        tfSueldoAsis.setText("1673");
+        tfSueldoE.setText("1876");
+        tfEmailJug.setText("ewe@fdas");
+        tfEmailAsis.setText("ewe@fdas");
+        tfEmaild.setText("ewe@fdas");
+        tfEmailEnt.setText("ewe@fdas");
+        tfEmailEquipo.setText("ewe@fdas");
+        tfTelfJug.setText("987987987");
+        tfTelfd.setText("987987987");
+        tfTelfAsis.setText("987987987");
+        tfTelfEnt.setText("987987987");
+        tfTelefonoEquipo.setText("987987987");
+        tfNacionalidad.setText("Francesa");
+        tfFecha.setText("12/07/2005");
+        tfEscudo.setText("este");
+        tfNick.setText("Ivantxo");
+    }
     /**
      * Este método llama a diferentes métodos para validar los diferentes datos que se introducen en el formulario
      * de equipos.
      */
-    public boolean validarDatosEquipo(){
+    public boolean validarDatosEquipo(String tipo){
         boolean bequipoValido = false;
         boolean bNombre = false;
         boolean bNacionalidad = false;
@@ -152,7 +195,7 @@ public class FormularioInscripcion {
         boolean bEmail = false;
         try {
             /* **************nombreEquipo********/
-            bNombre = validarNombre(tfNombreEquipo.getText(),"equipo");
+            bNombre = validarNombre(tfNombreEquipo.getText(),"especial");
             /* * *********nacionalidad*************/
             bNacionalidad = validarNombre(tfNacionalidad.getText(),"nacionalidad");
 
@@ -210,6 +253,9 @@ public class FormularioInscripcion {
             if(!blocalidad){
                 tfLocalidadD.setText("");
             }
+            if(bnombreP&&bemail&&blocalidad&&bdni&&btelefono){
+                bDuenoValido = true;
+            }
 
 
         }catch (Exception e){System.out.println(e.getClass());}
@@ -250,6 +296,9 @@ public class FormularioInscripcion {
             blocalidad = validarLocalidad(tfLocalidadD.getText());
             if(!blocalidad){
                 tfLocEnt.setText("");
+            }
+            if(bdniE&&blocalidad&&bemailE&&bnombreE&&bSueldo&&btelefonoE){
+                bEntrenador = true;
             }
 
         }catch (Exception e){
@@ -293,6 +342,9 @@ public class FormularioInscripcion {
             if(!blocalidad){
                 tfLocAsis.setText("");
             }
+            if(bDniA&&blocalidad&&bEmailA&&bNombreA&&bSueldo&&bTelefonoA){
+                bAsistente = true;
+            }
 
         }catch (Exception e){
             System.out.println(e.getClass());
@@ -300,8 +352,52 @@ public class FormularioInscripcion {
 
         return bAsistente;
     }
+    public boolean validarDatosJugador(String tipo){
+        boolean bJugador = false;
+        boolean bNombreJ = false;
+        boolean bDniJ =false;
+        boolean bTelefonoJ = false;
+        boolean bEmailJ =false;
+        boolean blocalidadJ = false;
+        boolean bSueldoJ = false;
+        boolean bNickName = false;
+        try{
+            bSueldoJ = validarSueldo();
+            if(!bSueldoJ){
+                tfSueldoJ.setText("");
+            }
+            bNombreJ = validarNombre(tfNombreJ.getText(),"jugador");
+            if(!bNombreJ){
+                tfNombreJ.setText("");
+            }
+            bNickName = validarNombre(tfNick.getText(),"especial");
+            if(!bNombreJ){
+                tfNick.setText("");
+            }
+            bDniJ = validarDni(tfDniJ.getText());
+            if(!bDniJ){
+                tfDniJ.setText("");
+            }
 
+            bTelefonoJ = validarTelefono(tfTelfJug.getText());
+            if(!bTelefonoJ){
+                tfTelfJug.setText("");
+            }
+            bEmailJ = validarEmail(tfEmailJug.getText());
+            if(!bEmailJ){
+                tfEmailJug.setText("");
+            }
+            blocalidadJ = validarLocalidad(tfLocJug.getText());
+            if(!blocalidadJ){
+                tfLocJug.setText("");
+            }
+            if(bDniJ&&blocalidadJ&&bEmailJ&&bNombreJ&&bSueldoJ&&bTelefonoJ){
+                bJugador = true;
+            }
 
+        }catch (Exception e){System.out.println(e.getClass());}
+        return bJugador;
+    }
 
 
     public boolean validarSueldo(){
@@ -311,10 +407,12 @@ public class FormularioInscripcion {
                 throw new Exception("EL CAMPO ES OBLIGATORIO");
             }
             else{
-             sueldo = Float.valueOf(tfSueldoE.getText());
-             if(sueldo < 1000){
-                 throw new Exception("SE DEBE RESPETAR EL SALARIO MINIMO");
-             }
+                sueldo = Float.parseFloat(tfSueldoE.getText());
+                    if(sueldo < 1000){
+                        throw new Exception("SE DEBE RESPETAR EL SALARIO MINIMO");
+                    }else{
+                        bSueldo = true;
+                    }
             }
         }catch (NumberFormatException a){
             System.out.println("EL SUELDO ES UN VALOR NUMERICO");
@@ -322,7 +420,7 @@ public class FormularioInscripcion {
         catch (Exception e){
             System.out.println(e.getClass());
         }
-        return false;
+        return bSueldo;
     }
 
     public boolean validarLocalidad(String loc){
@@ -336,6 +434,7 @@ public class FormularioInscripcion {
                 Matcher mat = patron.matcher(loc);
                 if (mat.matches()) {
                     System.out.println("El patron del nombre coincide");
+                    bLoc = true;
                 } else {
                     System.out.println("El patron del nombre no coincide");
                     throw new Exception("El nombre de la localidad debe empezar por mayusculas");
@@ -353,14 +452,18 @@ public class FormularioInscripcion {
         try{
             Pattern p = Pattern.compile("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$");
             Matcher m = p.matcher(sdni);
-            if (!m.matches())
+            if (!m.matches()){
                 throw new Exception("Formato de dni no correcto");
-
+            }
             char letras[] = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
             int dni = Integer.parseInt(sdni.substring(0,8));
             int resto = dni%23;
-            if (letras[resto] != sdni.charAt(8))
+            if (letras[resto] != sdni.charAt(8)){
                 throw new Exception("Letra incorrecta");
+            }else{
+                bDniValido =true;
+            }
+
         }catch (Exception e){System.out.println(e.getClass());}
         return bDniValido;
     }
@@ -463,6 +566,7 @@ public class FormularioInscripcion {
                 mat = patron.matcher(snombre);
                 if(mat.matches()){
                     System.out.println("El patron del nombre coincide");
+                    bNombre = true;
                     if(tipo.equalsIgnoreCase("equipo")){
                         /*FUNCION PARA COMPROBAR QUE EL NOMBRE DEL EQUIPO NO EXISTE EN LA BD*/
                         bNombre = Main.buscarNombreEquipo(tfNombreEquipo.getText());

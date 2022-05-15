@@ -3,8 +3,16 @@ package Views;
 import com.company.Main;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
+import java.io.File;
+import java.util.Locale;
 
+/**
+ * @author Celia
+ * Clase que muestra un formulario para inscribir equipos
+ */
 public class VentanaEscudos extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -22,6 +30,7 @@ public class VentanaEscudos extends JDialog {
     private JButton button10;
     private JButton button11;
     private JButton button12;
+    private JButton bSubir;
     private String ruta = "";
     private ImageIcon icono1 = new ImageIcon("./src/Views/Imagenes/escudos/escudoUno.png");
     private ImageIcon icono2 = new ImageIcon("./src/Views/Imagenes/escudos/escudoDos.png");
@@ -70,7 +79,7 @@ public class VentanaEscudos extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        
+
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -179,6 +188,23 @@ public class VentanaEscudos extends JDialog {
                 dispose();
             }
         });
+
+       /* bSubir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               JFileChooser fc = new JFileChooser();
+               FileFilter filtro = new FileNameExtensionFilter("Imagen PNG", "png");
+               fc.setFileFilter(filtro);
+                fc.showOpenDialog(jpEscudos);
+                File archivo = fc.getSelectedFile();
+                System.out.println(archivo.toString());
+                String archivoimagen = archivo.getName().toString();
+                ruta = "./src/Views/Imagenes/escudos/"+archivoimagen;
+                Main.tenEscudo(ruta);
+                System.out.println(ruta);
+
+            }
+        });*/ /*Preparado para un boton de subir imagen*/
     }
 
     private void onOK() {

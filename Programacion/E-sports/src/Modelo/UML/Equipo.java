@@ -82,6 +82,10 @@ public class Equipo {
         this.escudo = escudo;
     }
 
+    public Equipo(String n, String na, LocalDate f, String t, String m, String escudoEquipo, Entrenador entrenador, Asistente asistente) {
+
+    }
+
     /**
      *
      * @return idEquipo

@@ -7,6 +7,7 @@ import Modelo.UML.*;
 import Views.FormularioInscripcion;
 import Views.VentanaEscudos;
 import Views.VentanaPrincipal;
+import Views.VisualizarEquipos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,14 +29,29 @@ public class Main {
     private static Rol rol ;
     private static  String escudoEquipo;
     private static Frame Form;
+    private static ArrayList<Equipo>listaEquipos;
 
     public static void main(String[] args) {
         bd = new BaseDatos();
         bd.abrirConexion();
-
+        listaEquipos = new ArrayList<>();
         abrirVentanaPrincipal();
 
     }
+
+    /**
+     * Este método contiene el Main de la ventana VisualizarEquipos
+     * @throws Exception
+     */
+    public static void abrirVentanaVisualizarEquipos()throws Exception{
+        VisualizarEquipos dialog = new VisualizarEquipos();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    /**
+     * Este método contiene el Main de la ventana ElegirEscudos
+     * @throws Exception
+     */
     public static void abrirVentanaEscudos()throws Exception{
         VentanaEscudos dialog = new VentanaEscudos();
         dialog.pack();
@@ -320,9 +336,13 @@ public class Main {
     public static void tenEscudo(String escudo){
         escudoEquipo = escudo;
     }
+    public static String dameEscudo(){
+        return escudoEquipo;
+    }
     public static void tenDatosEquipo(String n, String na, LocalDate f, String t, String m){
         /*Hay que crear un objeto equipo */
-        equipo = new Equipo(n,na, f, t, m, escudoEquipo);
+        equipo = new Equipo(n,na, f, t, m, escudoEquipo,entrenador,asistente);
+        listaEquipos.add(equipo);
 
         /*equipo.setNombre(n);
         equipo.setNacionalidad(na);

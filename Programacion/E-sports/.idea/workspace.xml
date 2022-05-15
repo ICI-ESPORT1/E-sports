@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Views/VisualizarEquipos.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Views/VisualizarEquipos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaEscudos.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaEscudos.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaEscudos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaEscudos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaPrincipal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaPrincipal.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,8 +75,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>

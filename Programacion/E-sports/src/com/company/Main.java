@@ -5,9 +5,11 @@ import Modelo.UML.Jugador;
 import Modelo.BD.*;
 import Modelo.UML.*;
 import Views.FormularioInscripcion;
+import Views.VentanaEscudos;
 import Views.VentanaPrincipal;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
@@ -16,13 +18,16 @@ public class Main {
 
     private static ArrayList<Jugador> listaJugadores;
 
-    private static Asistente asistente;
+    private static Asistente asistente ;
     private static Entrenador entrenador;
-    private static Dueno dueno;
+    private static Dueno dueno ;
     private static Equipo equipo;
-    private static Jornada jornada;
-    private static Jugador jugador = new Jugador();
-    private static Resultado resultado;
+    private static Jornada jornada ;
+    private static Jugador jugador ;
+    private static Resultado resultado ;
+    private static Rol rol ;
+    private static  String escudoEquipo;
+    private static Frame Form;
 
     public static void main(String[] args) {
         bd = new BaseDatos();
@@ -31,7 +36,14 @@ public class Main {
         abrirVentanaPrincipal();
 
     }
-
+    public static void abrirVentanaEscudos()throws Exception{
+        VentanaEscudos dialog = new VentanaEscudos();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    /**
+     * Este método contiene el Main de la ventana Principal para poder abrirla
+     */
     public static void abrirVentanaPrincipal() {
         JFrame frame = new JFrame("VentanaPrincipal");
         frame.setContentPane(new VentanaPrincipal().getVentana1());
@@ -39,10 +51,10 @@ public class Main {
         frame.pack();
         frame.setVisible(true);
     }
-    public static ArrayList<Jugador>crearListaJugadores(){
-        return null;
-        /*Recibe los datos de un jugador y los mete en un arrayList*/
-    }
+
+    /**
+     * Este método contiene el Main de la ventana para inscribir jugadores
+     */
     public static void abrirFormularioEquipo() {
         JFrame frame = new JFrame("FormularioInscripcion");
         frame.setContentPane(new FormularioInscripcion().getJpPrincipal());
@@ -68,17 +80,6 @@ public class Main {
         }
         return nombreEncontrado;
     }
-
-
-    public static void abrirInscripcionJugadores(){
-        JFrame frame = new JFrame("InscribirJugadores");
-        frame.setContentPane(new InscribirJugadores().getJpJugador());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-
 
 
 
@@ -316,9 +317,12 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Equipo ////////////////////////////////////
-    public static void tenDatosEquipo(String n, String na, LocalDate f, String t, String m, String e){
+    public static void tenEscudo(String escudo){
+        escudoEquipo = escudo;
+    }
+    public static void tenDatosEquipo(String n, String na, LocalDate f, String t, String m){
         /*Hay que crear un objeto equipo */
-        equipo = new Equipo(n,na, f, t, m, e);
+        equipo = new Equipo(n,na, f, t, m, escudoEquipo);
 
         /*equipo.setNombre(n);
         equipo.setNacionalidad(na);
@@ -442,26 +446,45 @@ public class Main {
     ////////////////////////////////////// Metodos para la tabla Jugador ////////////////////////////////////
 
     /**
-     * Metodo que llama a altaJugador para hacer un insert en la base de datos
-     * @param d
-     * @param n
-     * @param t
-     * @param l
-     * @param e
-     * @param ni
-     * @param s
-     * @param r
+     * Recibe el nombre del rol del jugador y lo añade al objeto global rol
+     * @param sRol
      * @throws Exception
      */
-    public static void altaJugador(String d,String n,String t, String l, Equipo e, String ni, Float s, Rol r)throws Exception{
-        jugador.setDni(d);
+    public static void tenDatosRol(String sRol) throws Exception{
+        rol.setNombre(sRol);
+    }
+
+    /**
+     * Este método recibe ls datos de un jugador y crea el objeto jugador.
+     * Utiliza el objeto rol y el objeto equipo que son globales y ya están creados
+     * @param dni
+     * @param nombre
+     * @param telefono
+     * @param mail
+     * @param localidad
+     * @param nick
+     * @param su
+     * @throws Exception
+     */
+    public static void tenDatosJugador (String dni, String nombre, String telefono,String mail, String localidad, String nick,String su)throws Exception{
+        float sueldo = Float.parseFloat(su);
+        jugador = new Jugador(dni,nombre,telefono,mail,localidad,nick,sueldo,rol,equipo);
+        altaJugador(jugador);
+    }
+    /**
+     * Metodo que llama a altaJugador para hacer un insert en la base de datos
+     * @throws Exception
+     */
+    public static void altaJugador(Jugador jugador)throws Exception{
+
+       /* jugador.setDni(d);
         jugador.setNombre(n);
         jugador.setTelefono(t);
         jugador.setLocalidad(l);
         jugador.setEquipo(e);
         jugador.setNickname(ni);
         jugador.setSalario(s);
-        jugador.setRol(r);
+        jugador.setRol(r); */
 
 
         JugadorDAO.altaJugador(jugador);

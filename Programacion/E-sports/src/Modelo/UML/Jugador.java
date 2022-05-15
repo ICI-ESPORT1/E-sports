@@ -62,6 +62,11 @@ public class Jugador extends Persona {
 
     public Jugador() {
     }
+
+    public Jugador(String dni, String nombre, String telefono, String mail, String localidad, String nick, float sueldo, Rol rol,Equipo equipo) {
+
+    }
+
     /**
      * @retun equipo
      */

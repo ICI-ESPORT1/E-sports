@@ -1,6 +1,7 @@
 package Modelo.UML;
 
 public class Entrenador extends Persona {
+
     /**
      @author Inigo Bruk
      */
@@ -23,23 +24,15 @@ public class Entrenador extends Persona {
     }
     /**
      *
-     * @param codPersona
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
-     * @param equipo
-     * @param sueldo
      */
-    public Entrenador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, float sueldo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
-        this.equipo = equipo;
-        this.sueldo = sueldo;
-    }
+
 
     public Entrenador(String dni, String n, String l, String t, Float s) {
     }
+
+
+
+
 
     /**
      * @retun equipo

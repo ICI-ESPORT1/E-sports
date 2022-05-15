@@ -25,6 +25,9 @@ public class Rol {
         this.listaJugador = listaJugador;
     }
 
+    public Rol(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Rol() {
     }

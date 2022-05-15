@@ -71,15 +71,8 @@ public class Equipo {
 
     /**
      *
-     * @param idEquipo
-     * @param nombre
-     * @param nacionalidad
-     * @param fechaCreacion
-     * @param telefono
-     * @param mail
-     * @param escudo
      */
-    public Equipo(Integer idEquipo, String nombre, String nacionalidad, LocalDate fechaCreacion, String telefono, String mail, String escudo) {
+    public Equipo() {
         this.idEquipo = idEquipo;
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;

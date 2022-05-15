@@ -17,7 +17,10 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,8 +37,7 @@ public class FormularioInscripcion {
     private JTextField tfTelefonoEquipo;
     private JLabel lEmailEquipo;
     private JTextField tfEmailEquipo;
-    private JLabel lEscudo;
-    private JTextField tfEscudo;
+
     private JPanel jpDatosComponentes;
     private JPanel jpDueno;
     private JLabel lNombreDueno;
@@ -83,6 +85,10 @@ public class FormularioInscripcion {
     private JTextField tfSueldoJ;
     private JComboBox cbRol;
     private JTextField tfNick;
+    private JProgressBar pgCantJugadores;
+    private JButton añadirJug;
+    private JLabel lContador;
+    private JButton bEscudo;
     private JButton bSiguiente;
     /* Variables para la validacion de datos*/
     private String sNombreEquipo = "";
@@ -98,6 +104,8 @@ public class FormularioInscripcion {
     private boolean bJugadorValido = false;
     private boolean bEntrenadorValido =false;
     private float sueldo = 0;
+    private List<String[]> listaJugadores = new ArrayList<String[]>();
+    private ArrayList<String>listaDeRoles = new ArrayList<>();
 
 
 
@@ -110,6 +118,12 @@ public class FormularioInscripcion {
     }
 
     public FormularioInscripcion() {
+        lContador.setText("Jugador 1");
+        for(int i=0; i<cbRol.getItemCount() ; i++){
+            listaDeRoles.add(cbRol.getItemAt(i).toString());
+            System.out.println(listaDeRoles.get(i).toString());
+        }
+
         llenarFormulario();
 
         bAnadirJugador.addActionListener(new ActionListener() {
@@ -122,7 +136,7 @@ public class FormularioInscripcion {
                         Date dfecha = formato.parse(tfFecha.getText());
                         java.sql.Date sqlFecha  = new java.sql.Date(dfecha.getTime());
 
-                        Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText(),tfEscudo.getText());
+                       // Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText());
                     }
 
                     bDuenoValido = validarDatosDueno("dueno");
@@ -137,11 +151,44 @@ public class FormularioInscripcion {
                     if(bAsisValido){
                         Main.tenDatosAsistente(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo);
                     }
-                    bJugadorValido = validarDatosJugador("especial");
+
+                    for(String[] row : listaJugadores){
+                        String [] fila = new String[6];
+                        fila = row;
+                        Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5],fila[6]);
+                        System.out.println(row);
+                    }
 
                 }
                 catch (Exception z){System.out.println(e.getClass());}
 
+            }
+        });
+        añadirJug.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                llenarListaJugadores();
+                if(lContador.getText().equalsIgnoreCase("Jugador 7")){
+                    lContador.setText("Maximo alcanzado");
+
+                    tfDniJ.setEditable(false);
+                    tfNombreJ.setEditable(false);
+                    tfLocJug.setEditable(false);
+                    tfTelfJug.setEditable(false);
+                    tfSueldoJ.setEditable(false);
+                    tfEmailJug.setEditable(false);
+                    tfNick.setEditable(false);
+                }
+            }
+        });
+        bEscudo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    Main.abrirVentanaEscudos();
+                }catch (Exception o){
+                    System.out.println(e.getClass());
+                }
             }
         });
     }
@@ -150,6 +197,9 @@ public class FormularioInscripcion {
         return jpPrincipal;
     }
 
+    /**
+     * Metodo para llenar automaticamente el formulario para pruebas
+     */
     public void llenarFormulario(){
         tfNombreJ.setText("Celia");
         tfNombreAsis.setText("Ana");
@@ -179,8 +229,66 @@ public class FormularioInscripcion {
         tfTelefonoEquipo.setText("987987987");
         tfNacionalidad.setText("Francesa");
         tfFecha.setText("12/07/2005");
-        tfEscudo.setText("este");
         tfNick.setText("Ivantxo");
+    }
+
+    /**
+     * Metodo que crea una lista con los datos de todos los jugadores de un equipo para pasarle al Main
+     */
+    public void llenarListaJugadores(){
+        String dni ="";
+        String nombre ="";
+        String loc ="";
+        String telf ="";
+        String sueldo="";
+        String nick="";
+        String rol="";
+        String mail ="";
+        int tamanoLista = 0;
+
+        try{
+
+          if(validarDatosJugador("jugador") ) {
+              dni = tfDniJ.getText();
+              nombre =tfNombreJ.getText();
+              loc =tfLocJug.getText();
+              telf=tfTelfJug.getText();
+              sueldo=tfSueldoJ.getText();
+              mail =tfEmailJug.getText();
+              nick=tfNick.getText();
+              rol = "";
+
+              listaJugadores.add(new String[]{dni,nombre,telf,mail,loc,nick,sueldo});
+              for(String[] row : listaJugadores){
+                  String [] fila = new String[6];
+                  fila = row;
+                  System.out.println(Arrays.toString(row));
+              }
+              tamanoLista = listaJugadores.size()+1;
+
+              //limpiarCamposJugador();
+                int posicionRol = cbRol.getSelectedIndex();
+                rol = listaDeRoles.get(posicionRol);
+              lContador.setText("jugador " + String.valueOf(tamanoLista));
+              System.out.println(tamanoLista);
+              System.out.println(rol);
+          }
+
+        }catch (Exception e){System.out.println(e.getClass());}
+    }
+
+    /**
+     * Metodo que limpia los campos de datos de los jugadores
+     */
+    public void limpiarCamposJugador(){
+        tfDniJ.setText("");
+        tfNombreJ.setText("");
+        tfLocJug.setText("");
+        tfTelfJug.setText("");
+        tfSueldoJ.setText("");
+        tfEmailJug.setText("");
+        tfNick.setText("");
+
     }
     /**
      * Este método llama a diferentes métodos para validar los diferentes datos que se introducen en el formulario
@@ -224,6 +332,12 @@ public class FormularioInscripcion {
         }
         return bequipoValido;
     }/*VALIDA BIEN*/
+
+    /**
+     * Metodo para validar los datos de los dueños
+     * @param tipo Pasamo un tipo para poder usar el método validar nombre con equipo y persona
+     * @return
+     */
     public boolean validarDatosDueno(String tipo){
         boolean bnombreP =false;
         boolean bdni = false;
@@ -262,6 +376,11 @@ public class FormularioInscripcion {
 
         return bDuenoValido;
     }
+
+    /**
+     * Método para validar los datos del entrenador
+     * @return
+     */
     public boolean validarDatosEntrenador(){
         boolean bEntrenador=false;
         boolean bnombreE = false;
@@ -307,6 +426,12 @@ public class FormularioInscripcion {
 
         return bEntrenador;
     }
+
+    /**
+     * Metodo para validar los datos del asistente. Si el equipo no tiene asistente, al no introducir el dni, el campo
+     * de datos de asistente se deshabilita.
+     * @return
+     */
     public boolean validarDatosAsistente(){
         boolean bAsistente=false;
         boolean bNombreA = false;
@@ -316,35 +441,41 @@ public class FormularioInscripcion {
         boolean blocalidad = false;
         boolean bSueldo = false;
         try{
-            bSueldo = validarSueldo();
-            if(!bSueldo){
-                tfSueldoAsis.setText("");
+            if(tfDniAsis.getText().isEmpty()){
+                jpAsistente.setEnabled(false);
+            } else{
+                bSueldo = validarSueldo();
+                if(!bSueldo){
+                    tfSueldoAsis.setText("");
+                }
+
+                bNombreA = validarNombre(tfNombreAsis.getText(),"asistente");
+                if(!bNombreA){
+                    tfNombreAsis.setText("");
+                }
+                bDniA = validarDni(tfDniAsis.getText());
+                if(!bDniA){
+                    tfDniAsis.setText("");
+                }
+
+                bTelefonoA = validarTelefono(tfTelfAsis.getText());
+                if(!bTelefonoA){
+                    tfTelfAsis.setText("");
+                }
+                bEmailA = validarEmail(tfEmailAsis.getText());
+                if(!bEmailA){
+                    tfEmailAsis.setText("");
+                }
+                blocalidad = validarLocalidad(tfLocAsis.getText());
+                if(!blocalidad){
+                    tfLocAsis.setText("");
+                }
+                if(bDniA&&blocalidad&&bEmailA&&bNombreA&&bSueldo&&bTelefonoA){
+                    bAsistente = true;
+                }
+
             }
 
-            bNombreA = validarNombre(tfNombreAsis.getText(),"asistente");
-            if(!bNombreA){
-                tfNombreAsis.setText("");
-            }
-            bDniA = validarDni(tfDniAsis.getText());
-            if(!bDniA){
-                tfDniAsis.setText("");
-            }
-
-            bTelefonoA = validarTelefono(tfTelfAsis.getText());
-            if(!bTelefonoA){
-                tfTelfAsis.setText("");
-            }
-            bEmailA = validarEmail(tfEmailAsis.getText());
-            if(!bEmailA){
-                tfEmailAsis.setText("");
-            }
-            blocalidad = validarLocalidad(tfLocAsis.getText());
-            if(!blocalidad){
-                tfLocAsis.setText("");
-            }
-            if(bDniA&&blocalidad&&bEmailA&&bNombreA&&bSueldo&&bTelefonoA){
-                bAsistente = true;
-            }
 
         }catch (Exception e){
             System.out.println(e.getClass());
@@ -352,6 +483,12 @@ public class FormularioInscripcion {
 
         return bAsistente;
     }
+
+    /**
+     * Método para validar los datos de los jugadores
+     * @param tipo
+     * @return
+     */
     public boolean validarDatosJugador(String tipo){
         boolean bJugador = false;
         boolean bNombreJ = false;
@@ -399,7 +536,10 @@ public class FormularioInscripcion {
         return bJugador;
     }
 
-
+    /**
+     * Metodo para validar el sueldo
+     * @return
+     */
     public boolean validarSueldo(){
         boolean bSueldo = false;
         try{
@@ -423,6 +563,11 @@ public class FormularioInscripcion {
         return bSueldo;
     }
 
+    /**
+     * Metodo para validar la localidad
+     * @param loc
+     * @return
+     */
     public boolean validarLocalidad(String loc){
         boolean bLoc=false;
         try {
@@ -447,6 +592,12 @@ public class FormularioInscripcion {
         }
         return bLoc;
     }
+
+    /**
+     * Metodo para validar el dni.
+     * @param sdni
+     * @return
+     */
     public boolean validarDni(String sdni){
         boolean bDniValido = false;
         try{
@@ -468,7 +619,11 @@ public class FormularioInscripcion {
         return bDniValido;
     }
 
-
+    /**
+     * Metodo para validar el email
+     * @param email
+     * @return
+     */
     public boolean validarEmail(String email){
         boolean bEmail = false;
         try{
@@ -530,11 +685,10 @@ public class FormularioInscripcion {
             System.out.println(e.getClass());}
         return bTelefono;
     }
-
     /**
-     * Metodo para convertir la fecha a LocalDate
-     * @return La fecha convertida a LocalDate
-     */
+    * Metodo para convertir el string de la fecha en tipo LocalDate
+    */
+
     public LocalDate convertirAlocalDate(){
         LocalDate ldFecha = null;
         try{

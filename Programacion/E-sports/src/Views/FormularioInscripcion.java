@@ -12,6 +12,7 @@ import com.company.*;
 
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -89,6 +90,7 @@ public class FormularioInscripcion {
     private JButton añadirJug;
     private JLabel lContador;
     private JButton bEscudo;
+    private JButton button1;
     private JButton bSiguiente;
     /* Variables para la validacion de datos*/
     private String sNombreEquipo = "";
@@ -106,6 +108,7 @@ public class FormularioInscripcion {
     private float sueldo = 0;
     private List<String[]> listaJugadores = new ArrayList<String[]>();
     private ArrayList<String>listaDeRoles = new ArrayList<>();
+
 
 
 
@@ -184,13 +187,22 @@ public class FormularioInscripcion {
         bEscudo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 try{
                     Main.abrirVentanaEscudos();
+                    String rutaImagenPropia = Main.dameEscudo();
+                    System.out.println(rutaImagenPropia.toString());
+                    ImageIcon imagenPropia = new ImageIcon(rutaImagenPropia);
+                    button1.setIcon(imagenPropia);
                 }catch (Exception o){
                     System.out.println(e.getClass());
                 }
             }
         });
+
+
+
+
     }
 
     public JPanel getJpPrincipal() {

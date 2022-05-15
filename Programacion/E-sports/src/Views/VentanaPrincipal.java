@@ -1,5 +1,7 @@
 package Views;
 
+import com.company.Main;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,9 @@ public class VentanaPrincipal {
     private JMenuBar MenuCalendario;
     private JMenu Menu5_5;
     private JPanel Ventana1;
+    private JMenuItem Ins;
+    private JButton bInscripcion;
+    private JMenuItem jmiClasificacion;
 
 
     public VentanaPrincipal() {
@@ -24,6 +29,19 @@ public class VentanaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+
+        bInscripcion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirFormularioEquipo();
+            }
+        });
+        jmiClasificacion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirClasificacion();
             }
         });
     }

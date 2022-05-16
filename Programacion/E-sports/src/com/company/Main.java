@@ -144,12 +144,6 @@ public class Main {
         frame.pack();
         frame.setVisible(true);
     }
-    public static void abrirInscripcionJugadores(){
-        frame = new JFrame("InscribirJugadores");
-        frame.setContentPane(new InscribirJugadores().getJpJugador());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
 
 
 

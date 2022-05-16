@@ -164,7 +164,7 @@ public class Main {
      * @throws Exception
      */
     public static void altaAsistente(Asistente asistente, Equipo e)throws Exception{
-        asistente.setEquipo(e);
+       // asistente.setEquipo(e);
 
         AsistenteDAO.altaAsistente(asistente);
     }
@@ -350,7 +350,7 @@ public class Main {
     public static String dameEscudo(){
         return escudoEquipo;
     }
-    public static void tenDatosEquipo(String n, String na, LocalDate f, String t,String m){
+    public static void tenDatosEquipo(String n, String na, LocalDate f, String t,String m)throws Exception{
         /*Hay que crear un objeto equipo */
         escudoEquipo=dameEscudo();
         equipo = new Equipo(n,na, f, t, m, escudoEquipo);
@@ -362,6 +362,8 @@ public class Main {
         equipo.setTelefono(t);
         equipo.setMail(m);
         equipo.setEscudo(e);*/
+        altaEquipo(equipo,asistente);
+
     }
 
     /**
@@ -373,9 +375,14 @@ public class Main {
 
     public static void altaEquipo(Equipo e, Asistente a)throws Exception{
 
-        equipo.setAsistente(a);
-
+        Asistente asisConIdEquipo;
+        Equipo equipoConId;
+        asisConIdEquipo = AsistenteDAO.consultarAsistente(asistente.getDni());
+        equipo.setAsistente(asisConIdEquipo);
         EquipoDAO.altaEquipo(equipo);
+
+        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
+        asistente.setEquipo(equipo);
 
     }
 

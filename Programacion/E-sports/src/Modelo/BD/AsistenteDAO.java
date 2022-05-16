@@ -11,7 +11,7 @@ public class AsistenteDAO {
 
  /* Clase que contiene los metodos necesarios para trabajar con la tabla asistente*/
 
-    private static Asistente asistente;
+    private static Asistente asistente = new Asistente();
 
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
@@ -82,8 +82,10 @@ public class AsistenteDAO {
         sentenciaPre.setString(1,dni);
 
         resultado = sentenciaPre.executeQuery();
+        if(resultado.next()){
+            crearObjeto();
+        }
 
-        crearObjeto();
 
         return asistente;
 

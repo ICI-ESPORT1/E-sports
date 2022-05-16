@@ -20,7 +20,7 @@ public class EquipoDAO {
         //Metodo para insertar un nuevo equipo en la tabla equipo
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_equipo(?,?,?,?,?,?,?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.nuevo_equipo(?,?,?,?,?,?,?)}");
 
         c.setString(1,e.getNombre());
         c.setString(2,e.getNacionalidad());
@@ -28,6 +28,8 @@ public class EquipoDAO {
         c.setString(4,e.getTelefono());
         c.setString(5, e.getMail());
         c.setString(6, e.getEscudo());
+        /*Antes de añadir el asistente necesitamos el id del asistente que acabamos de insertar*/
+
         c.setInt(7, e.getAsistente().getCodPersona());
 
         c.execute();
@@ -80,8 +82,10 @@ public class EquipoDAO {
         sentenciaPre.setString(1,n);
 
         resultado = sentenciaPre.executeQuery();
+        while (resultado.next()){
+            crearObjeto();
+        }
 
-        crearObjeto();
 
         return equipo;
 

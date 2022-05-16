@@ -22,6 +22,13 @@ public class Asistente extends Persona {
         this.sueldo = sueldo;
     }
 
+    public Asistente() {
+    }
+
+    public Asistente(String dni, String nombre, String telefono, String direccion) {
+        super(dni, nombre, telefono, direccion);
+    }
+
     public Asistente(Equipo equipo, float sueldo) {
         this.equipo = equipo;
         this.sueldo = sueldo;

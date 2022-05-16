@@ -1,6 +1,7 @@
 package com.company;
 
 import Modelo.BD.BaseDatos;
+import Views.*;
 import Modelo.UML.Jugador;
 import Modelo.BD.*;
 import Modelo.UML.*;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Main {
+    static JFrame frame;
+    static JDialog dialog;
     private static BaseDatos bd;
 
     private static ArrayList<Jugador> listaJugadores;
@@ -37,11 +40,26 @@ public class Main {
     private static ArrayList<Equipo>listaEquipos;
 
     public static void main(String[] args) {
+
         bd = new BaseDatos();
         bd.abrirConexion();
+
+        //abrirVentanaPrincipal();
+        //abrirFormularioEquipo();
+        //mostrarVentanaInvitado();
         listaEquipos = new ArrayList<>();
         abrirVentanaPrincipal();
 
+        dialog = new Login();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    public static void CerrarVentana(){
+        dialog.dispose();
+    }
+    public static void OcultarVentana(){
+        dialog.setVisible(false);
     }
 
     /**
@@ -66,18 +84,38 @@ public class Main {
      * Este método contiene el Main de la ventana Principal para poder abrirla
      */
     public static void abrirVentanaPrincipal() {
-        JFrame frame = new JFrame("VentanaPrincipal");
+        frame = new JFrame("VentanaPrincipal");
         frame.setContentPane(new VentanaPrincipal().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(false);
+    }
+
+
+    public static void mostrarVentanaInvitado()
+    {
+        frame = new JFrame("VentanaInvitado");
+        frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(false);
+        CerrarVentana();
+
+    }
+
+
+
+    public static ArrayList<Jugador>crearListaJugadores(){
+        return null;
+        /*Recibe los datos de un jugador y los mete en un arrayList*/
     }
 
     /**
      * Este método contiene el Main de la ventana para inscribir jugadores
      */
     public static void abrirFormularioEquipo() {
-        JFrame frame = new JFrame("FormularioInscripcion");
+        frame = new JFrame("FormularioInscripcion");
         frame.setContentPane(new FormularioInscripcion().getJpPrincipal());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -102,6 +140,12 @@ public class Main {
         return nombreEncontrado;
     }
 
+    public static void abrirInscripcionJugadores(){
+        frame = new JFrame("InscribirJugadores");
+        frame.setContentPane(new InscribirJugadores().getJpJugador());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
 
 
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////

@@ -8,13 +8,12 @@ import Modelo.UML.*;
 import Views.Clasificacion;
 import Views.FormularioInscripcion;
 import Views.VentanaEscudos;
-import Views.VentanaPrincipal;
+import Views.VentanaAdmin;
 import Views.VisualizarEquipos;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.*;
-import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Main {
@@ -22,7 +21,7 @@ public class Main {
     static JDialog dialog;
     private static BaseDatos bd;
 
-    private static ArrayList<Jugador> listaJugadores;
+    private static ArrayList<Jugador> listaJugadores= new ArrayList<>();
 
     private static Asistente asistente ;
     private static Entrenador entrenador;
@@ -41,12 +40,16 @@ public class Main {
         bd = new BaseDatos();
         bd.abrirConexion();
 
+        ventanaLogin();
         //abrirVentanaPrincipal();
         //abrirFormularioEquipo();
         //mostrarVentanaInvitado();
         listaEquipos = new ArrayList<>();
-        abrirVentanaPrincipal();
+        //abrirVentanaPrincipal();
 
+
+    }
+    public static void ventanaLogin(){
         dialog = new Login();
         dialog.pack();
         dialog.setVisible(true);
@@ -82,10 +85,10 @@ public class Main {
      */
     public static void abrirVentanaPrincipal() {
         frame = new JFrame("VentanaPrincipal");
-        frame.setContentPane(new VentanaPrincipal().getVentana1());
+        frame.setContentPane(new VentanaAdmin().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(false);
+        frame.setVisible(true);
     }
 
 

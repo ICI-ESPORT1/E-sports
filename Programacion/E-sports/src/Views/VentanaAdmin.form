@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Views.VentanaPrincipal">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Views.VentanaAdmin">
   <grid id="27dc6" binding="Ventana1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
     <constraints>
       <xy x="166" y="414" width="709" height="684"/>

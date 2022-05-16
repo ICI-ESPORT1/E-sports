@@ -156,6 +156,8 @@ public class FormularioInscripcion {
                     }
 
 
+                    llenarListaJugadores();
+
                     for(String[] row : listaJugadores){
                         String [] fila = new String[6];
                         fila = row;

@@ -7,61 +7,80 @@ public class Jugador extends Persona {
     private String nickname;
     private Rol rol;
     private float salario;
+
     private Equipo equipo;
 
     /**
-     * @param codPersona
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
-     * @param nickname
-     * @param rol
-     * @param salario
-     */
-    public Jugador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
-        this.nickname = nickname;
-        this.rol = rol;
-        this.salario = salario;
-    }
-
-    /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
-     * @param mail
-     * @param localidad
-     */
-    public Jugador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
-
-    }
-    /**
-     * @param codPersona
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
+     * @param direccion
      * @param nickname
      * @param rol
      * @param salario
      * @param equipo
      */
-    public Jugador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario, Equipo equipo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Jugador(String dni, String nombre, String telefono, String direccion, String nickname, Rol rol, float salario, Equipo equipo) {
+        super(dni, nombre, telefono, direccion);
         this.nickname = nickname;
         this.rol = rol;
         this.salario = salario;
         this.equipo = equipo;
     }
 
+    public Jugador(String nickname, Rol rol, float salario, Equipo equipo) {
+        this.nickname = nickname;
+        this.rol = rol;
+        this.salario = salario;
+        this.equipo = equipo;
+    }
+
+    /**
+     *
+     * @param dni
+     * @param nombre
+     * @param telefono
+     * @param direccion
+     * @param nickname
+     */
+    public Jugador(String dni, String nombre, String telefono, String direccion, String nickname) {
+        super(dni, nombre, telefono, direccion);
+        this.nickname = nickname;
+    }
+
+    /**
+     *
+     * @param dni
+     * @param nombre
+     * @param telefono
+     * @param direccion
+     * @param nickname
+     * @param salario
+     */
+    public Jugador(String dni, String nombre, String telefono, String direccion, String nickname, float salario) {
+        super(dni, nombre, telefono, direccion);
+        this.nickname = nickname;
+        this.salario = salario;
+    }
+
+    /**
+     *
+     * @param nickname
+     * @param salario
+     */
+    public Jugador(String nickname, float salario) {
+        this.nickname = nickname;
+        this.salario = salario;
+    }
+
     public Jugador() {
     }
+
+    public Jugador(String dni, String nombre, String telefono, String mail, String localidad, String nick, float sueldo, Rol rol,Equipo equipo) {
+
+    }
+
     /**
      * @retun equipo
      */

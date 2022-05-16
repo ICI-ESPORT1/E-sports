@@ -6,65 +6,24 @@ public class Dueno extends Persona {
     /**
      @author Inigo Bruk
      */
-    private String nombreUsu;
-    private String password;
     private Equipo equipo;
 
-     /**
-     *
-     * @param codPersona
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
-     * @param equipo
-     * @param nombreUsu
-     * @param password
-     */
-    public Dueno(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, String nombreUsu, String password) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Dueno(String dni, String nombre, String telefono, String direccion, Equipo equipo) {
+        super(dni, nombre, telefono, direccion);
         this.equipo = equipo;
-        this.nombreUsu = nombreUsu;
-        this.password = password;
-
     }
-    
-    /**
-     *
-     * @param codPersona
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
-     * @param equipo
-     */
-    public Dueno(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
-        this.equipo = equipo;
 
+    public Dueno(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
+    public Dueno(String dni, String nombre, String telefono, String direccion) {
+        super(dni, nombre, telefono, direccion);
     }
 
     public Dueno() {
     }
-    /**
-     *
-     * @param codPersona
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
-     * @param nombreUsu
-     * @param password
-     */
-    public Dueno(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, String nombreUsu, String password) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
-        this.nombreUsu = nombreUsu;
-        this.password = password;
 
-    }
 
     /**
      * @retun equipo
@@ -79,35 +38,7 @@ public class Dueno extends Persona {
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
-    
-     /**
-     * @retun nombreUsu
-     */
-    public String getNombreUsu() {
-        return nombreUsu;
-        
-    }
-    /**
-     * @param nombreUsu
-     */
-    public void setNombreUsu(String nombreUsu) {
-        this.nombreUsu = nombreUsu;
-    }
-    
-     /**
-     * @retun password
-     */
-    public String getPassword() {
-        return password;
-        
-    }
-    /**
-     * @param password
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
+
     public ArrayList<Jugador> consultarJugador(){
     return null;
     }

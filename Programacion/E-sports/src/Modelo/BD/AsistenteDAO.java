@@ -23,14 +23,14 @@ public class AsistenteDAO {
         //Metodo para insertar un nuevo asistente en la tabla asistente
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_asistente(?,?,?,?,?,?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?)}");
+
 
         c.setString(1,a.getDni());
+        System.out.println(a.getDni());
         c.setString(2,a.getNombre());
         c.setString(3,a.getTelefono());
-        c.setString(4,a.getLocalidad());
-        c.setInt(5, a.getEquipo().getId_equipo());
-        c.setFloat(6, a.getSueldo());
+        c.setFloat(4, a.getSueldo());
 
         c.execute();
 
@@ -54,7 +54,7 @@ public class AsistenteDAO {
 
         BaseDatos.cerrarConexion();
     }
-
+/*
     public static void cambioEquipoAsistente(Asistente a, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un asistente de equipo
         BaseDatos.abrirConexion();
@@ -70,7 +70,7 @@ public class AsistenteDAO {
 
         BaseDatos.cerrarConexion();
 
-    }
+    }*/ //Esto esta comentado porque no tiene email
 
     public static Asistente consultarAsistente(String dni)throws Exception{
         //Metodo para consultar un asistente por dni a la base de datos
@@ -95,9 +95,8 @@ public class AsistenteDAO {
         asistente.setDni(resultado.getString("dni"));
         asistente.setNombre(resultado.getString("nombre"));
         asistente.setTelefono(resultado.getString("telefono"));
-        asistente.setMail(resultado.getString("mail"));
-        asistente.setLocalidad(resultado.getString("localidad"));
-        asistente.setSueldo(resultado.getFloat("suledo"));
+        asistente.setLocalidad(resultado.getString("direccion"));
+        asistente.setSueldo(resultado.getFloat("sueldo"));
 
     }
 }

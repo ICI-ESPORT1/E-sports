@@ -26,7 +26,7 @@ public class JugadorDAO {
         c.setString(1,j.getDni());
         c.setString(2,j.getNombre());
         c.setString(3, j.getTelefono());
-        c.setString(4,j.getLocalidad());
+        c.setString(4,j.getDireccion());
         c.setInt(5, j.getEquipo().getId_equipo());
         c.setString(6, j.getNickname());
         c.setFloat(7, j.getSalario());
@@ -117,7 +117,6 @@ public class JugadorDAO {
         jugador.setNombre(resultado.getString("nombre"));
         jugador.setTelefono(resultado.getString("telefono"));
         jugador.setLocalidad(resultado.getString("direccion"));
-        jugador.setMail(resultado.getString("mail"));
         jugador.setNickname(resultado.getString("nickname"));
         jugador.setDni(resultado.getString("dni"));
         jugador.setSalario(resultado.getFloat("sueldo"));

@@ -9,38 +9,34 @@ public class Asistente extends Persona {
 
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
-     * @param mail
-     * @param localidad
-     * @param sueldo
-     */
-    public Asistente(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, float sueldo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
-        this.sueldo = sueldo;
-
-    }
-
-    /**
-     *
-     * @param codPersona
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
+     * @parm direccion
      * @param equipo
      * @param sueldo
      */
-    public Asistente(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, float sueldo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Asistente( String dni, String nombre, String telefono, String direccion, Equipo equipo, float sueldo) {
+        super( dni, nombre, telefono, direccion);
         this.equipo = equipo;
         this.sueldo = sueldo;
     }
 
-    public Asistente() {
+    public Asistente(Equipo equipo, float sueldo) {
+        this.equipo = equipo;
+        this.sueldo = sueldo;
+    }
+
+    public Asistente(String dni, String nombre, String telefono, String direccion, float sueldo) {
+        super(dni, nombre, telefono, direccion);
+        this.sueldo = sueldo;
+    }
+
+    public Asistente(float sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    public Asistente(String dni, String n, String d, String t, String m, Equipo equipo, Float s) {
     }
     /**
      * @retun equipo

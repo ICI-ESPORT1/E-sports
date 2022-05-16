@@ -1,51 +1,121 @@
 package com.company;
 
 import Modelo.BD.BaseDatos;
+import Views.*;
 import Modelo.UML.Jugador;
 import Modelo.BD.*;
 import Modelo.UML.*;
 import Views.Clasificacion;
 import Views.FormularioInscripcion;
-import Views.VentanaPrincipal;
+import Views.VentanaEscudos;
+import Views.VentanaAdmin;
+import Views.VisualizarEquipos;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.awt.*;
 import java.time.LocalDate;
 
 public class Main {
+    static JFrame frame;
+    static JDialog dialog;
     private static BaseDatos bd;
 
-    private static ArrayList<Jugador> listaJugadores;
+    private static ArrayList<Jugador> listaJugadores= new ArrayList<>();
 
-    private static Asistente asistente;
+    private static Asistente asistente ;
     private static Entrenador entrenador;
-    private static Dueno dueno;
+    private static Dueno dueno ;
     private static Equipo equipo;
     private static Jornada jornada;
     private static Jugador jugador = new Jugador();
     private static Resultado resultado;
+    private static Rol rol ;
+    private static  String escudoEquipo;
+    private static Frame Form;
+    private static ArrayList<Equipo>listaEquipos;
 
     public static void main(String[] args) {
+
         bd = new BaseDatos();
         bd.abrirConexion();
 
-        abrirVentanaPrincipal();
+        ventanaLogin();
+        //abrirVentanaPrincipal();
+        //abrirFormularioEquipo();
+        //mostrarVentanaInvitado();
+        listaEquipos = new ArrayList<>();
+        //abrirVentanaPrincipal();
+
 
     }
+    public static void ventanaLogin(){
+        dialog = new Login();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
 
+    public static void CerrarVentana(){
+        dialog.dispose();
+    }
+    public static void OcultarVentana(){
+        dialog.setVisible(false);
+    }
+
+    /**
+     * Este método contiene el Main de la ventana VisualizarEquipos
+     * @throws Exception
+     */
+    public static void abrirVentanaVisualizarEquipos()throws Exception{
+        VisualizarEquipos dialog = new VisualizarEquipos();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    /**
+     * Este método contiene el Main de la ventana ElegirEscudos
+     * @throws Exception
+     */
+    public static void abrirVentanaEscudos()throws Exception{
+        VentanaEscudos dialog = new VentanaEscudos();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    /**
+     * Este método contiene el Main de la ventana Principal para poder abrirla
+     */
     public static void abrirVentanaPrincipal() {
-        JFrame frame = new JFrame("VentanaPrincipal");
-        frame.setContentPane(new VentanaPrincipal().getVentana1());
+        frame = new JFrame("VentanaPrincipal");
+        frame.setContentPane(new VentanaAdmin().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
+
+
+    public static void mostrarVentanaInvitado()
+    {
+        frame = new JFrame("VentanaInvitado");
+        frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(false);
+        CerrarVentana();
+
+    }
+
+
+
     public static ArrayList<Jugador>crearListaJugadores(){
         return null;
         /*Recibe los datos de un jugador y los mete en un arrayList*/
     }
+
+    /**
+     * Este método contiene el Main de la ventana para inscribir jugadores
+     */
     public static void abrirFormularioEquipo() {
-        JFrame frame = new JFrame("FormularioInscripcion");
+        frame = new JFrame("FormularioInscripcion");
         frame.setContentPane(new FormularioInscripcion().getJpPrincipal());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -70,36 +140,30 @@ public class Main {
         return nombreEncontrado;
     }
 
-
-    public static void abrirInscripcionJugadores(){
-        JFrame frame = new JFrame("InscribirJugadores");
-        frame.setContentPane(new InscribirJugadores().getJpJugador());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
     public static void abrirClasificacion(){
         JFrame frame = new JFrame("Clasificacion");
         frame.setContentPane(new Clasificacion().getpClasificacion());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(300,300);
-        Clasificacion.llenarTextArea();
+    }
+
+    public static void abrirJornada(){
+        JFrame frame = new JFrame("Jornadas");
+        frame.setContentPane(new Jornadas().getJpJornadas());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
 
 
-
-
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////
-    public static void tenDatosAsistente(String dni, String n, String l ,String t, Float s){
-        asistente.setDni(dni);
-        asistente.setNombre(n);
-        asistente.setLocalidad(l);
-        asistente.setTelefono(t);
-        asistente.setSueldo(s);
+    public static void tenDatosAsistente (String dni, String n, String d ,String t, Float s)throws Exception{
+        asistente = new Asistente(dni,n,d,t, equipo,s);
+        System.out.println(asistente.getNombre());
+      //  equipo.setAsistente(asistente);
+        altaAsistente(asistente,equipo);
     }
     /**
      * Metodo que llama a altaAsistente para hacer un insert en la base de datos
@@ -117,46 +181,27 @@ public class Main {
      * Metodo que llama a bajaAsistente para hacer un delete en la base de datos
      * @param dni
      * @param n
-     * @param l
      * @param e
      * @param t
      * @param s
      * @throws Exception
      */
-    public static void bajaAsistente(String dni, String n, String l, Equipo e,String t, Float s)throws Exception{
-        asistente.setDni(dni);
-        asistente.setNombre(n);
-        asistente.setLocalidad(l);
-        asistente.setEquipo(e);
-        asistente.setTelefono(t);
-        asistente.setSueldo(s);
+    public static void bajaAsistente(String dni, String n, Equipo e,String t,String d, Float s)throws Exception{
+        asistente = new Asistente(dni,n,t,d,equipo,s);
+        listaEquipos.add(equipo);
 
         AsistenteDAO.bajaAsistente(asistente);
 
     }
 
-    /**
-     * Metodo que llama a cambioEquipoAsistente para hacer un update en la base de datos
-     * @param dni
-     * @param n
-     * @param l
-     * @param e
-     * @param t
-     * @param s
-     * @param idNuevoEquipo
-     * @throws Exception
-     */
-    public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo)throws Exception{
-        asistente.setDni(dni);
-        asistente.setNombre(n);
-        asistente.setLocalidad(l);
-        asistente.setEquipo(e);
-        asistente.setTelefono(t);
-        asistente.setSueldo(s);
+
+  /*  public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo, String m)throws Exception{
+        asistente = new Asistente(dni,n,l,t,m, equipo,s);
+        listaEquipos.add(equipo);
 
         AsistenteDAO.cambioEquipoAsistente(asistente,idNuevoEquipo);
 
-    }
+    }*//*ESTO ESTA COMENTADO PORQUE EL ASISTENTE NO TIENE ID EQUIPO*/
 
     /**
      * Metodo que llama a consultarAsistente para hacer una select en la base de datos
@@ -171,13 +216,10 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Entrenador ////////////////////////////////////
-    public static void tenDatosEntrenador(String dni,String n,String l,String t, Float s){
-        entrenador = new Entrenador(dni,n,l,t,s);
-        /*entrenador.setDni(dni);
-        entrenador.setNombre(n);
-        entrenador.setLocalidad(l);
-        entrenador.setTelefono(t);
-        entrenador.setSueldo(s);*/
+    public static void tenDatosEntrenador(String dni,String n,String d,String t, Float s){
+        entrenador = new Entrenador(dni,n,d,t,equipo,s);
+        equipo.setEntrenador(entrenador);
+
     }
     /**
      * Metodo que llama a altaEntrenador para hacer un insert en la base de datos
@@ -197,19 +239,15 @@ public class Main {
      * Metodo que llama a bajaEntrenador para hacer un delete en la base de datos
      * @param dni
      * @param n
-     * @param l
+     * @param d
      * @param e
      * @param t
      * @param s
      * @throws Exception
      */
-    public static void bajaEntrenador(String dni, String n, String l, Equipo e,String t, Float s)throws Exception{
-        entrenador.setDni(dni);
-        entrenador.setNombre(n);
-        entrenador.setLocalidad(l);
-        entrenador.setEquipo(e);
-        entrenador.setTelefono(t);
-        entrenador.setSueldo(s);
+    public static void bajaEntrenador(String dni, String n, String d, Equipo e,String t, Float s)throws Exception{
+        entrenador = new Entrenador(dni,n,t,d,equipo,s);
+        listaEquipos.add(equipo);
 
         EntrenadorDAO.bajaEntrenador(entrenador);
 
@@ -219,20 +257,16 @@ public class Main {
      * Metodo que llama a cambioEquipoEntrenador para hacer un update en la base de datos
      * @param dni
      * @param n
-     * @param l
+     * @param d
      * @param e
      * @param t
      * @param s
      * @param idNuevoEquipo
      * @throws Exception
      */
-    public static void cambioEquipoEntrenador(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo)throws Exception{
-        entrenador.setDni(dni);
-        entrenador.setNombre(n);
-        entrenador.setLocalidad(l);
-        entrenador.setEquipo(e);
-        entrenador.setTelefono(t);
-        entrenador.setSueldo(s);
+    public static void cambioEquipoEntrenador(String dni, String n, String d, Equipo e,String t, Float s, int idNuevoEquipo)throws Exception{
+        entrenador = new Entrenador(dni,n,t,d,equipo,s);
+        listaEquipos.add(equipo);
 
         EntrenadorDAO.cambioEquipoEntrenador(entrenador,idNuevoEquipo);
 
@@ -252,21 +286,15 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Dueno ////////////////////////////////////
-    public static void tenDatosDueno(String dni, String n, String l,String t){
-        System.out.println("metodo vacio");
+    public static void tenDatosDueno(String dni, String n, String d, String t){
+        dueno = new Dueno(dni,n,t,d,equipo);
+        equipo.setDueno(dueno);
     }
     /**
      * Metodo que llama a altaDueno para hacer un insert en la base de datos
-     * @param d
-     * @param e
      * @throws Exception
      */
-    public static void altaDueno(Dueno d, Equipo e)throws Exception{
-        dueno.setDni(d.getDni());
-        dueno.setNombre(d.getNombre());
-        dueno.setLocalidad(d.getLocalidad());
-        dueno.setEquipo(d.getEquipo());
-        dueno.setTelefono(d.getTelefono());
+    public static void altaDueno()throws Exception{
 
         DuenoDAO.altaDueno(dueno);
 
@@ -276,17 +304,14 @@ public class Main {
      * Metodo que llama a bajaDueno para hacer un delete en la base de datos
      * @param dni
      * @param n
-     * @param l
+     * @param d
      * @param e
      * @param t
      * @throws Exception
      */
-    public static void bajaDueno(String dni, String n, String l, Equipo e,String t)throws Exception{
-        dueno.setDni(dni);
-        dueno.setNombre(n);
-        dueno.setLocalidad(l);
-        dueno.setEquipo(e);
-        dueno.setTelefono(t);
+    public static void bajaDueno(String dni, String n, String d, Equipo e,String t)throws Exception{
+        dueno = new Dueno(dni,n,t,d,equipo);
+        listaEquipos.add(equipo);
 
         DuenoDAO.bajaDueno(dueno);
 
@@ -296,16 +321,16 @@ public class Main {
      * Metodo que llama a cambioEquipoDueno para hacer un cambio de equipo
      * @param dni
      * @param n
-     * @param l
+     * @param d
      * @param e
      * @param t
      * @param idEquipoNuevo
      * @throws Exception
      */
-    public static void cambioEquipoDueno(String dni, String n, String l, Equipo e,String t, int idEquipoNuevo)throws Exception{
+    public static void cambioEquipoDueno(String dni, String n, String d, Equipo e,String t, int idEquipoNuevo)throws Exception{
         dueno.setDni(dni);
         dueno.setNombre(n);
-        dueno.setLocalidad(l);
+        dueno.setLocalidad(d);
         dueno.setEquipo(e);
         dueno.setTelefono(t);
 
@@ -327,9 +352,17 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Equipo ////////////////////////////////////
-    public static void tenDatosEquipo(String n, String na, LocalDate f, String t, String m, String e){
+    public static void tenEscudo(String escudo){
+        escudoEquipo = escudo;
+    }
+    public static String dameEscudo(){
+        return escudoEquipo;
+    }
+    public static void tenDatosEquipo(String n, String na, LocalDate f, String t,String m){
         /*Hay que crear un objeto equipo */
-        equipo = new Equipo(n,na, f, t, m, e);
+        escudoEquipo=dameEscudo();
+        equipo = new Equipo(n,na, f, t, m, escudoEquipo);
+        listaEquipos.add(equipo);
 
         /*equipo.setNombre(n);
         equipo.setNacionalidad(na);
@@ -453,26 +486,47 @@ public class Main {
     ////////////////////////////////////// Metodos para la tabla Jugador ////////////////////////////////////
 
     /**
-     * Metodo que llama a altaJugador para hacer un insert en la base de datos
-     * @param d
-     * @param n
-     * @param t
-     * @param l
-     * @param e
-     * @param ni
-     * @param s
-     * @param r
+     * Recibe el nombre del rol del jugador y lo añade al objeto global rol
+     * @param sRol
      * @throws Exception
      */
-    public static void altaJugador(String d,String n,String t, String l, Equipo e, String ni, Float s, Rol r)throws Exception{
-        jugador.setDni(d);
+    public static void tenDatosRol(String sRol) throws Exception{
+        rol.setNombre(sRol);
+    }
+
+    /**
+     * Este método recibe ls datos de un jugador y crea el objeto jugador.
+     * Utiliza el objeto rol y el objeto equipo que son globales y ya están creados
+     * @param dni
+     * @param nombre
+     * @param telefono
+     * @param mail
+     * @param localidad
+     * @param nick
+     * @param su
+     * @throws Exception
+     */
+    public static void tenDatosJugador (String dni, String nombre, String telefono,String mail, String localidad, String nick,String su)throws Exception{
+        float sueldo = Float.parseFloat(su);
+        jugador = new Jugador(dni,nombre,telefono,mail,localidad,nick,sueldo,rol,equipo);
+        listaJugadores.add(jugador);
+        altaJugador(jugador);
+
+    }
+    /**
+     * Metodo que llama a altaJugador para hacer un insert en la base de datos
+     * @throws Exception
+     */
+    public static void altaJugador(Jugador jugador)throws Exception{
+
+       /* jugador.setDni(d);
         jugador.setNombre(n);
         jugador.setTelefono(t);
         jugador.setLocalidad(l);
         jugador.setEquipo(e);
         jugador.setNickname(ni);
         jugador.setSalario(s);
-        jugador.setRol(r);
+        jugador.setRol(r); */
 
 
         JugadorDAO.altaJugador(jugador);
@@ -583,5 +637,8 @@ public class Main {
 
     }
 
+    public static Resultado obtenerPartidos()throws Exception{
+        return resultado=ResultadoDAO.obtenerPartidos();
+    }
 
 }

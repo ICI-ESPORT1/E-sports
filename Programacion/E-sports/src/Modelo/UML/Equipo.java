@@ -57,6 +57,25 @@ public class Equipo {
         this.listaJugadores = listaJugadores;
         this.listaPartidos = listaPartidos;
     }
+
+    /**
+     *
+     * @param nombre
+     * @param nacionalidad
+     * @param fechaCreacion
+     * @param telefono
+     * @param mail
+     * @param escudo
+     */
+    public Equipo(String nombre, String nacionalidad, LocalDate fechaCreacion, String telefono, String mail, String escudo) {
+        this.nombre = nombre;
+        this.nacionalidad = nacionalidad;
+        this.fechaCreacion = fechaCreacion;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.escudo = escudo;
+    }
+
     /**
      * CONSTRUCTOR VACIO
      * @param n
@@ -66,27 +85,18 @@ public class Equipo {
      * @param m
      * @param e
      */
-    public Equipo(String n, String na, LocalDate f, String t, String m, String e) {
-    }
 
-    /**
-     *
-     * @param idEquipo
-     * @param nombre
-     * @param nacionalidad
-     * @param fechaCreacion
-     * @param telefono
-     * @param mail
-     * @param escudo
-     */
-    public Equipo(Integer idEquipo, String nombre, String nacionalidad, LocalDate fechaCreacion, String telefono, String mail, String escudo) {
-        this.idEquipo = idEquipo;
+
+
+    public Equipo(String n, String na, LocalDate f, String t, String m, String escudoEquipo, Entrenador entrenador, Asistente asistente) {
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
         this.fechaCreacion = fechaCreacion;
         this.telefono = telefono;
         this.mail = mail;
         this.escudo = escudo;
+        this.entrenador=entrenador;
+        this.asistente=asistente;
     }
 
     /**

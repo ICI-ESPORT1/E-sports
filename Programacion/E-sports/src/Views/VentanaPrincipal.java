@@ -26,13 +26,14 @@ public class VentanaPrincipal {
 
 
     public VentanaPrincipal() {
+        /*
         Menu3_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
-        });
-
+        });*/
+/*
         bInscripcion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,7 +62,7 @@ public class VentanaPrincipal {
                     System.out.println(z.getClass());
                 }
             }
-        });
+        });*/
     }
 
     public static void main(String[] args) {

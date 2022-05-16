@@ -4,12 +4,14 @@ import Modelo.BD.BaseDatos;
 import Modelo.UML.Jugador;
 import Modelo.BD.*;
 import Modelo.UML.*;
+import Views.Clasificacion;
 import Views.FormularioInscripcion;
 import Views.VentanaEscudos;
 import Views.VentanaPrincipal;
 import Views.VisualizarEquipos;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.awt.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -23,6 +25,9 @@ public class Main {
     private static Entrenador entrenador;
     private static Dueno dueno ;
     private static Equipo equipo;
+    private static Jornada jornada;
+    private static Jugador jugador = new Jugador();
+    private static Resultado resultado;
     private static Jornada jornada ;
     private static Jugador jugador ;
     private static Resultado resultado ;

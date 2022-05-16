@@ -209,6 +209,38 @@ public class FormularioInscripcion {
         return jpPrincipal;
     }
 
+    public void llenarFormulario(){
+        tfNombreJ.setText("Celia");
+        tfNombreAsis.setText("Ana");
+        tfNombreEntre.setText("Fran");
+        tfNombreDueno.setText("Ivan");
+        tfNombreEquipo.setText("Equipo");
+        tfDniAsis.setText("72738006T");
+        tfDniEn.setText("72738006T");
+        tfDniJ.setText("72738006T");
+        tfDNId.setText("72738006T");
+        tfLocJug.setText("Vitoria");
+        tfLocAsis.setText("Vitoria");
+        tfLocEnt.setText("Vitoria");
+        tfLocalidadD.setText("Vitoria");
+        tfSueldoJ.setText("1439");
+        tfSueldoAsis.setText("1673");
+        tfSueldoE.setText("1876");
+        tfEmailJug.setText("ewe@fdas");
+        tfEmailAsis.setText("ewe@fdas");
+        tfEmaild.setText("ewe@fdas");
+        tfEmailEnt.setText("ewe@fdas");
+        tfEmailEquipo.setText("ewe@fdas");
+        tfTelfJug.setText("987987987");
+        tfTelfd.setText("987987987");
+        tfTelfAsis.setText("987987987");
+        tfTelfEnt.setText("987987987");
+        tfTelefonoEquipo.setText("987987987");
+        tfNacionalidad.setText("Francesa");
+        tfFecha.setText("12/07/2005");
+        tfEscudo.setText("este");
+        tfNick.setText("Ivantxo");
+    }
     /**
      * Metodo para llenar automaticamente el formulario para pruebas
      */

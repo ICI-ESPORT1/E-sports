@@ -21,6 +21,9 @@ public class VentanaPrincipal {
     private JPanel Ventana1;
     private JMenuItem Ins;
     private JButton bInscripcion;
+    private JMenuItem jmiClasificacion;
+    private JMenuItem Ins;
+    private JButton bInscripcion;
     private JButton equiposButton;
 
 
@@ -29,6 +32,19 @@ public class VentanaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+
+        bInscripcion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirFormularioEquipo();
+            }
+        });
+        jmiClasificacion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirClasificacion();
             }
         });
 

@@ -260,7 +260,7 @@
                       <text value="PartidosJugados"/>
                     </properties>
                   </component>
-                  <component id="a18" class="javax.swing.JMenuItem">
+                  <component id="a18" class="javax.swing.JMenuItem" binding="jmiClasificacion">
                     <constraints/>
                     <properties>
                       <text value="Clasificacion"/>

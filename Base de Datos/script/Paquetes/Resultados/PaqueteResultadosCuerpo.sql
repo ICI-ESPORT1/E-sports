@@ -56,7 +56,7 @@ v_mensError := 'El equipo no existe';
 
 end;
 end gestionResultados;
-
+/*
 declare
 sc_cursor  gestionResultados.tcursor;
 --reg_c sc_cursor%rowtype;
@@ -68,7 +68,7 @@ gestionResultados.obtenerClasificacion(sc_cursor);
 /*for reg in sc_cursor loop
  dbms_output.put_line ('EQUIPO: '||reg.equipo || 'GANADOS: '|| reg.ganados);
 end loop;*/
-
+/*
 
  loop
  fetch sc_cursor into v_eq,v_con;
@@ -76,6 +76,5 @@ dbms_output.put_line ('resultado: '|| v_eq ||' '|| v_con);
 exit when sc_cursor%notfound;
 end loop;
 
-end;
+end;*/
 
-set SERVEROUTPUT ON;

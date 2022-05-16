@@ -133,6 +133,11 @@ public class FormularioInscripcion {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    bAsisValido = validarDatosAsistente();
+                    if(bAsisValido){
+                        Main.tenDatosAsistente(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo,tfEmailAsis.getText());
+                    }
+
                     bEquipoValido = validarDatosEquipo("especial");
                     if(bEquipoValido){
                         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -142,20 +147,16 @@ public class FormularioInscripcion {
                         Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText());
                     }
 
-                    bDuenoValido = validarDatosDueno("dueno");
-                    if(bDuenoValido){
-                        Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(),tfLocalidadD.getText(),tfTelfd.getText(), tfEmaild.getText());
-                    }
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
                         Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo,tfEmailEnt.getText());
                     }
-                    bAsisValido = validarDatosAsistente();
-                    if(bAsisValido){
-                        Main.tenDatosAsistente(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo,tfEmailAsis.getText());
+
+                    bDuenoValido = validarDatosDueno("dueno");
+                    if(bDuenoValido){
+                        Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(),tfLocalidadD.getText(),tfTelfd.getText(), tfEmaild.getText());
                     }
-
-
+                    /*PARA JUGADORES*/
                     llenarListaJugadores();
 
                     for(String[] row : listaJugadores){

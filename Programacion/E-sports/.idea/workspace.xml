@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Base de Datos/script/Paquetes/Resultados/PaqueteResultadosCuerpo.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Base de Datos/script/Paquetes/Resultados/PaqueteResultadosCuerpo.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Base de Datos/script/Tablas/Creacion_tablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Base de Datos/script/Tablas/Creacion_tablas.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Base de Datos/script/triggers/Triggers.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Base de Datos/script/triggers/Triggers.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaPrincipal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaAdmin.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-sports.iml" beforeDir="false" afterPath="$PROJECT_DIR$/E-sports.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/AsistenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/AsistenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="220" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="269" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/ojdbc6.jar" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -132,9 +136,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Views/FormularioInscripcion.java</url>
-          <line>158</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/src/Modelo/BD/JugadorDAO.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>156</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

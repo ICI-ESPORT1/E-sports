@@ -23,14 +23,14 @@ public class AsistenteDAO {
         //Metodo para insertar un nuevo asistente en la tabla asistente
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_asistente(?,?,?,?,?,?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?)}");
+
 
         c.setString(1,a.getDni());
+        System.out.println(a.getDni());
         c.setString(2,a.getNombre());
         c.setString(3,a.getTelefono());
-        c.setString(4,a.getLocalidad());
-        c.setInt(5, a.getEquipo().getId_equipo());
-        c.setFloat(6, a.getSueldo());
+        c.setFloat(4, a.getSueldo());
 
         c.execute();
 

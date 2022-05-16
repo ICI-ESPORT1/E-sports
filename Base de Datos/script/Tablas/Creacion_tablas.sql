@@ -137,7 +137,7 @@ CONSTRAINT fic_num_fk FOREIGN KEY (id_calendario)
 
 
 CREATE TABLE grupo_usuario(
-id_rol number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT gru_id_pk PRIMARY KEY,
+id_rol number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT grup_id_pk PRIMARY KEY,
 descripcion varchar2(150)
 );
 

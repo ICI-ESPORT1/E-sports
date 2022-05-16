@@ -37,12 +37,9 @@ public class BaseDatos {
                 conexion = DriverManager.getConnection(url,usuario, pass);
             }
             else{
-                url = "jdbc:oracle:thin:@192.168.1.192:1521:orcl";
-                usuario = "system";
-                pass = "oracle";
                 System.out.println("He establecido la conexion");
-                Class.forName("oracle.jdbc.OracleDriver");
-                conexion = DriverManager.getConnection(url,usuario, pass);
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conexion = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.192:1521/orcl","system", "oracle");
             }
 
 

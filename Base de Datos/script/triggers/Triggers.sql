@@ -44,8 +44,7 @@ end equipoCompleto;
 
 /*2. Controlar que una vez generado el calendario no se pueden modificar,
 ni equipos, ni jugadores*/
-desc calendario;
-select * from calendario;
+
 /**********************PARA LA TABLA JUGADORES****************************** */
 create or replace trigger calCerradoJU
 before insert or update or delete on jugador
@@ -69,7 +68,7 @@ begin
  END IF;
 END; 
  
- alter  trigger calCerrado disable; 
+
  
 /**********************PARA LA TABLA EQUIPOS****************************** */
 create or replace trigger calCerradoEQ
@@ -148,7 +147,7 @@ end loop;
     END BEFORE STATEMENT;
 end;
 
-alter trigger jugMin disable;
+
       
 
 /**********************Controlar el insert de calendario****************************** */
@@ -172,7 +171,7 @@ WHEN e_calendario_cerrado THEN
 RAISE_APPLICATION_ERROR(-20201,'ERROR: EL CALENDARIO ESTA CERRADO');
 end;
 
-alter trigger calCerrado disable;
+
 
 
 /**********************Controlar solo un asistente************************************/
@@ -231,7 +230,7 @@ end loop;
     END BEFORE STATEMENT;
 end;
 
-alter trigger asistentes disable;
+
 
 
 /**********************Controlar solo un entrenador************************************/
@@ -289,7 +288,7 @@ end loop;
     END BEFORE STATEMENT;
 end;
 
-alter trigger entrenadores disable;
+
 /**********************Controlar equipos pares ************************************/
 
 create or replace trigger equiposPares
@@ -314,14 +313,7 @@ create or replace trigger equiposPares
   
 END;
 
-update calendario
-set cerrado='S'
 
-select * from equipo;
-
-insert into equipo (nombre, nacionalidad, fecha_creacion, telefono, mail, escudo,id_asistente)
-values('allifaadsgance', 'francesa', to_date('23/04/2022', 'DD/MM/YYYY'),6925125, 
-        'alnfasce@gmail.com', 'no_tiene',2);
 
 /**********************Controlar salario minimo************************************/
 
@@ -373,4 +365,4 @@ RAISE_APPLICATION_ERROR(-20101, ' Estás introduciendo un salario menor al salar
 
 end BEFORE STATEMENT;
 END;
-alter trigger SalarioMinimo disable;
+

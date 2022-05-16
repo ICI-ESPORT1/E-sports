@@ -151,9 +151,10 @@ public class Main {
 
 
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////
-    public static void tenDatosAsistente(String dni, String n, String l ,String t, Float s, String m){
+    public static void tenDatosAsistente (String dni, String n, String l ,String t, Float s, String m)throws Exception{
         asistente = new Asistente(dni,n,l,t,m, equipo,s);
-        equipo.setAsistente(asistente);
+      //  equipo.setAsistente(asistente);
+        altaAsistente(asistente,equipo);
     }
     /**
      * Metodo que llama a altaAsistente para hacer un insert en la base de datos

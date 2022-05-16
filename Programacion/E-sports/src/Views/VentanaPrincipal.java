@@ -11,7 +11,6 @@ public class VentanaPrincipal {
     private JMenu Menu1_1;
     private JMenuBar Menu_Incripcion;
     private JMenu Menu2_2;
-    private JMenuBar MenuLogin;
     private JMenu Menu3_3;
     private JButton Logo;
     private JMenuBar MenuEquipo;
@@ -22,6 +21,8 @@ public class VentanaPrincipal {
     private JMenuItem Ins;
     private JButton bInscripcion;
     private JMenuItem jmiClasificacion;
+
+    private JButton equiposButton;
 
 
     public VentanaPrincipal() {
@@ -44,6 +45,23 @@ public class VentanaPrincipal {
                 Main.abrirClasificacion();
             }
         });
+
+        bInscripcion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirFormularioEquipo();
+            }
+        });
+        equiposButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Main.abrirVentanaVisualizarEquipos();
+                } catch (Exception z) {
+                    System.out.println(z.getClass());
+                }
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -54,7 +72,5 @@ public class VentanaPrincipal {
         frame.setVisible(true);
     }
 
-    public JPanel getVentana1() {
-        return Ventana1;
-    }
+    public JPanel getVentana1() {return Ventana1;}
 }

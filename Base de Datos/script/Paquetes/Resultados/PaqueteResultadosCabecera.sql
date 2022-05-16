@@ -4,6 +4,11 @@ procedure obtenerClasificacion
 (
 c_resultado out tcursor
 );
+
+procedure partidosJornada
+(
+c_partidos out tcursor
+);
 end gestionResultados;
 
 /*cursor c_resultados is

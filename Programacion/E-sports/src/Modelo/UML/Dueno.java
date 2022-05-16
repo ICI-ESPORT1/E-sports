@@ -12,7 +12,6 @@ public class Dueno extends Persona {
 
      /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -22,8 +21,8 @@ public class Dueno extends Persona {
      * @param nombreUsu
      * @param password
      */
-    public Dueno(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, String nombreUsu, String password) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Dueno( String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, String nombreUsu, String password) {
+        super( dni, nombre, telefono, mail, localidad);
         this.equipo = equipo;
         this.nombreUsu = nombreUsu;
         this.password = password;
@@ -32,7 +31,6 @@ public class Dueno extends Persona {
     
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -40,8 +38,8 @@ public class Dueno extends Persona {
      * @param localidad
      * @param equipo
      */
-    public Dueno(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Dueno( String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo) {
+        super( dni, nombre, telefono, mail, localidad);
         this.equipo = equipo;
 
     }
@@ -50,7 +48,6 @@ public class Dueno extends Persona {
     }
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -59,8 +56,8 @@ public class Dueno extends Persona {
      * @param nombreUsu
      * @param password
      */
-    public Dueno(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, String nombreUsu, String password) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Dueno( String dni, String nombre, String telefono, String mail, String localidad, String nombreUsu, String password) {
+        super( dni, nombre, telefono, mail, localidad);
         this.nombreUsu = nombreUsu;
         this.password = password;
 

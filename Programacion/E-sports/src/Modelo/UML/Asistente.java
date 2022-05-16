@@ -9,7 +9,6 @@ public class Asistente extends Persona {
 
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -17,15 +16,14 @@ public class Asistente extends Persona {
      * @param localidad
      * @param sueldo
      */
-    public Asistente(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, float sueldo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Asistente( String dni, String nombre, String telefono, String mail, String localidad, float sueldo) {
+        super( dni, nombre, telefono, mail, localidad);
         this.sueldo = sueldo;
 
     }
 
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -34,8 +32,8 @@ public class Asistente extends Persona {
      * @param equipo
      * @param sueldo
      */
-    public Asistente(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, float sueldo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Asistente( String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, float sueldo) {
+        super( dni, nombre, telefono, mail, localidad);
         this.equipo = equipo;
         this.sueldo = sueldo;
     }

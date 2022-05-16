@@ -18,7 +18,8 @@ case
      set ganados = ganados + 1
      where cod_equipo = v_equipo;
      dbms_output.put_line('Sumo 1 a ganados');
-   else
+     end if;
+   if v_resultado = 'P' then
      update equipo
      set perdidos = perdidos +1
      where cod_equipo = v_equipo;

@@ -13,7 +13,6 @@ public class Persona {
 
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -21,8 +20,7 @@ public class Persona {
      * @param localidad
      */
 
-    public Persona(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad) {
-        this.codPersona = codPersona;
+    public Persona( String dni, String nombre, String telefono, String mail, String localidad) {
         this.dni = dni;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -55,14 +53,15 @@ public class Persona {
         this.dni = dni;
     }
 
+    /**
+     * @retun nombre
+     */
     public String getNombre() {
         return nombre;
-        /**
-         * @retun nombre
-         */
+
     }
     /**
-     * @param telefono
+     * @param nombre
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;

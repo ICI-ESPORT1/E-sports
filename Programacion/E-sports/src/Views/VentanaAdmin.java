@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VentanaPrincipal {
+public class VentanaAdmin {
     private JMenuBar MenuOpcion;
     private JMenu Menu1_1;
     private JMenuBar Menu_Incripcion;
@@ -25,14 +25,15 @@ public class VentanaPrincipal {
     private JButton equiposButton;
 
 
-    public VentanaPrincipal() {
-        /*
-        Menu3_3.addActionListener(new ActionListener() {
+    public VentanaAdmin() {
+
+
+        Ins.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Main.abrirFormularioEquipo();
             }
-        });*/
+        });
 /*
         bInscripcion.addActionListener(new ActionListener() {
             @Override
@@ -53,21 +54,12 @@ public class VentanaPrincipal {
                 Main.abrirFormularioEquipo();
             }
         });
-        equiposButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Main.abrirVentanaVisualizarEquipos();
-                } catch (Exception z) {
-                    System.out.println(z.getClass());
-                }
-            }
-        });*/
+       */
     }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("VentanaPrincipal");
-        frame.setContentPane(new VentanaPrincipal().Ventana1);
+        frame.setContentPane(new VentanaAdmin().Ventana1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

@@ -12,48 +12,60 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Main {
+    static JFrame frame;
+    static JDialog dialog;
     private static BaseDatos bd;
 
     public static void main(String[] args) {
+
         bd = new BaseDatos();
         bd.abrirConexion();
-        abrirVentanaPrincipal();
+
+        //abrirVentanaPrincipal();
         //abrirFormularioEquipo();
+        //mostrarVentanaInvitado();
 
-        // abrirFormularioEquipo();
-        mostrarVentanaInvitado();
-
-        Login dialog = new Login();
+        dialog = new Login();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
+    }
+
+    public static void CerrarVentana(){
+        dialog.dispose();
+    }
+    public static void OcultarVentana(){
+        dialog.setVisible(false);
     }
 
     public static void abrirVentanaPrincipal() {
-        JFrame frame = new JFrame("VentanaPrincipal");
+        frame = new JFrame("VentanaPrincipal");
         frame.setContentPane(new VentanaPrincipal().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(false);
     }
 
+
     public static void mostrarVentanaInvitado()
     {
-        JFrame frame = new JFrame("VentanaInvitado");
+        frame = new JFrame("VentanaInvitado");
         frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // vp.setSize(700,700);
         frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(false);
+        CerrarVentana();
+
     }
+
+
 
     public static ArrayList<Jugador>crearListaJugadores(){
         return null;
         /*Recibe los datos de un jugador y los mete en un arrayList*/
     }
     public static void abrirFormularioEquipo() {
-        JFrame frame = new JFrame("FormularioInscripcion");
+        frame = new JFrame("FormularioInscripcion");
         frame.setContentPane(new FormularioInscripcion().getJpPrincipal());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -77,7 +89,7 @@ public class Main {
     }
 
     public static void abrirInscripcionJugadores(){
-        JFrame frame = new JFrame("InscribirJugadores");
+        frame = new JFrame("InscribirJugadores");
         frame.setContentPane(new InscribirJugadores().getJpJugador());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

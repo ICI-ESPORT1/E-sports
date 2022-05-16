@@ -1,9 +1,17 @@
 package Views;
 
+import Modelo.Excepciones.CampoIncorrecto;
+import Modelo.Excepciones.CampoVacio;
+import Modelo.Excepciones.EquipoRepetido;
+import com.company.Main;
+import java.util.regex.*;
 import javax.swing.*;
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Login extends javax.swing.JDialog {
     private javax.swing.JPanel contentPane;
@@ -12,6 +20,21 @@ public class Login extends javax.swing.JDialog {
     private JTextField textField1;
     private JTextField textField2;
     private JButton bInvitado;
+
+        public static boolean isValidName(String nombre)
+        {
+            String regex = "^[A-Za-z]\\w{5,29}$";
+
+            Pattern p = Pattern.compile(regex);
+
+            if (nombre == null) {
+                return false;
+            }
+
+            Matcher m = p.matcher(nombre);
+            return m.matches();
+        }
+
 
     public Login() {
         setContentPane(contentPane);
@@ -54,10 +77,12 @@ public class Login extends javax.swing.JDialog {
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
+                dispose();
             }
         });
 
     }
+
 
     private void onOK() {
         dispose();
@@ -73,5 +98,6 @@ public class Login extends javax.swing.JDialog {
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
+
     }
 }

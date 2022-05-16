@@ -9,13 +9,13 @@ import java.awt.event.ActionListener;
 
 public class Clasificacion {
     private JLabel lTitulo;
-    private static JTextArea taClasificacion;
+    private JTextArea taClasificacion;
     private JButton bVolver;
     private JPanel pClasificacion;
 
     private static Resultado resultado;
 
-    public static void llenarTextArea(){
+    public void llenarTextArea(){
         try {
             resultado= Main.obtenerClasificacion();
             taClasificacion.setText(String.valueOf(resultado));

@@ -188,8 +188,8 @@ public class VentanaEscudos extends JDialog {
                 dispose();
             }
         });
-
-       /* bSubir.addActionListener(new ActionListener() {
+/*
+        bSubir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                JFileChooser fc = new JFileChooser();
@@ -204,7 +204,7 @@ public class VentanaEscudos extends JDialog {
                 System.out.println(ruta);
 
             }
-        });*/ /*Preparado para un boton de subir imagen*/
+        });/*Preparado para un boton de subir imagen*/
     }
 
     private void onOK() {

@@ -7,10 +7,10 @@ public class Jugador extends Persona {
     private String nickname;
     private Rol rol;
     private float salario;
+
     private Equipo equipo;
 
     /**
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -20,8 +20,8 @@ public class Jugador extends Persona {
      * @param rol
      * @param salario
      */
-    public Jugador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Jugador( String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario) {
+        super( dni, nombre, telefono, mail, localidad);
         this.nickname = nickname;
         this.rol = rol;
         this.salario = salario;
@@ -29,19 +29,17 @@ public class Jugador extends Persona {
 
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
      * @param mail
      * @param localidad
      */
-    public Jugador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Jugador( String dni, String nombre, String telefono, String mail, String localidad) {
+        super( dni, nombre, telefono, mail, localidad);
 
     }
     /**
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -52,8 +50,8 @@ public class Jugador extends Persona {
      * @param salario
      * @param equipo
      */
-    public Jugador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario, Equipo equipo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Jugador( String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario, Equipo equipo) {
+        super( dni, nombre, telefono, mail, localidad);
         this.nickname = nickname;
         this.rol = rol;
         this.salario = salario;

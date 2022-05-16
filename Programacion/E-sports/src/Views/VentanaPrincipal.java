@@ -21,8 +21,7 @@ public class VentanaPrincipal {
     private JMenuItem Ins;
     private JButton bInscripcion;
     private JMenuItem jmiClasificacion;
-    private JMenuItem Ins;
-    private JButton bInscripcion;
+
     private JButton equiposButton;
 
 

@@ -139,21 +139,22 @@ public class FormularioInscripcion {
                         Date dfecha = formato.parse(tfFecha.getText());
                         java.sql.Date sqlFecha  = new java.sql.Date(dfecha.getTime());
 
-                       // Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText());
+                        Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText());
                     }
 
                     bDuenoValido = validarDatosDueno("dueno");
                     if(bDuenoValido){
-                        Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(),tfLocalidadD.getText(),tfTelfd.getText());
+                        Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(),tfLocalidadD.getText(),tfTelfd.getText(), tfEmaild.getText());
                     }
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
-                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo);
+                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo,tfEmailEnt.getText());
                     }
                     bAsisValido = validarDatosAsistente();
                     if(bAsisValido){
-                        Main.tenDatosAsistente(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo);
+                        Main.tenDatosAsistente(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo,tfEmailAsis.getText());
                     }
+
 
                     for(String[] row : listaJugadores){
                         String [] fila = new String[6];
@@ -161,6 +162,7 @@ public class FormularioInscripcion {
                         Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5],fila[6]);
                         System.out.println(row);
                     }
+
 
                 }
                 catch (Exception z){System.out.println(e.getClass());}
@@ -209,41 +211,6 @@ public class FormularioInscripcion {
         return jpPrincipal;
     }
 
-    public void llenarFormulario(){
-        tfNombreJ.setText("Celia");
-        tfNombreAsis.setText("Ana");
-        tfNombreEntre.setText("Fran");
-        tfNombreDueno.setText("Ivan");
-        tfNombreEquipo.setText("Equipo");
-        tfDniAsis.setText("72738006T");
-        tfDniEn.setText("72738006T");
-        tfDniJ.setText("72738006T");
-        tfDNId.setText("72738006T");
-        tfLocJug.setText("Vitoria");
-        tfLocAsis.setText("Vitoria");
-        tfLocEnt.setText("Vitoria");
-        tfLocalidadD.setText("Vitoria");
-        tfSueldoJ.setText("1439");
-        tfSueldoAsis.setText("1673");
-        tfSueldoE.setText("1876");
-        tfEmailJug.setText("ewe@fdas");
-        tfEmailAsis.setText("ewe@fdas");
-        tfEmaild.setText("ewe@fdas");
-        tfEmailEnt.setText("ewe@fdas");
-        tfEmailEquipo.setText("ewe@fdas");
-        tfTelfJug.setText("987987987");
-        tfTelfd.setText("987987987");
-        tfTelfAsis.setText("987987987");
-        tfTelfEnt.setText("987987987");
-        tfTelefonoEquipo.setText("987987987");
-        tfNacionalidad.setText("Francesa");
-        tfFecha.setText("12/07/2005");
-        tfEscudo.setText("este");
-        tfNick.setText("Ivantxo");
-    }
-    /**
-     * Metodo para llenar automaticamente el formulario para pruebas
-     */
     public void llenarFormulario(){
         tfNombreJ.setText("Celia");
         tfNombreAsis.setText("Ana");

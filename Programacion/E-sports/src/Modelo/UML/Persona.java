@@ -8,24 +8,22 @@ public class Persona {
     private String dni;
     private String nombre;
     private String telefono;
-    private String mail;
-    private String localidad;
+    private String direccion;
+
 
     /**
      *
      * @param dni
      * @param nombre
      * @param telefono
-     * @param mail
-     * @param localidad
+     * @param direccion
      */
 
-    public Persona( String dni, String nombre, String telefono, String mail, String localidad) {
+    public Persona( String dni, String nombre, String telefono, String direccion) {
         this.dni = dni;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.mail = mail;
-        this.localidad = localidad;
+        this.direccion = direccion;
     }
 
     public Persona() {
@@ -81,22 +79,10 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    /**
-     * @retun mail
-     */
-    public String getMail() {
-        return mail;
 
-    }
-    /**
-     * @param mail
-     */
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
 
-    public String getLocalidad() {
-        return localidad;
+    public String getDireccion() {
+        return direccion;
         /**
          * @retun localidad
          */
@@ -105,6 +91,6 @@ public class Persona {
      * @param localidad
      */
     public void setLocalidad(String localidad) {
-        this.localidad = localidad;
+        this.direccion = direccion;
     }
 }

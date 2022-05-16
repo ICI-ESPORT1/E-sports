@@ -28,7 +28,7 @@ public class EntrenadorDAO {
         c.setString(1,e.getDni());
         c.setString(2,e.getNombre());
         c.setString(3,e.getTelefono());
-        c.setString(4,e.getLocalidad());
+        c.setString(4,e.getDireccion());
         c.setInt(5, e.getEquipo().getId_equipo());
         c.setFloat(6, e.getSueldo());
 
@@ -91,13 +91,12 @@ public class EntrenadorDAO {
 
     public static void crearObjeto()throws Exception{
 
-        entrenador.setCodPersona(resultado.getInt("id_asistente"));
+        entrenador.setCodPersona(resultado.getInt("id_entrenador"));
         entrenador.setDni(resultado.getString("dni"));
         entrenador.setNombre(resultado.getString("nombre"));
         entrenador.setTelefono(resultado.getString("telefono"));
-        entrenador.setMail(resultado.getString("mail"));
-        entrenador.setLocalidad(resultado.getString("localidad"));
-        entrenador.setSueldo(resultado.getFloat("suledo"));
+        entrenador.setLocalidad(resultado.getString("direccion"));
+        entrenador.setSueldo(resultado.getFloat("sueldo"));
 
     }
 }

@@ -28,7 +28,7 @@ public class DuenoDAO {
         c.setString(1,d.getDni());
         c.setString(2,d.getNombre());
         c.setString(3,d.getTelefono());
-        c.setString(4,d.getLocalidad());
+        c.setString(4,d.getDireccion());
         c.setInt(5, d.getEquipo().getId_equipo());
 
         c.execute();
@@ -94,8 +94,7 @@ public class DuenoDAO {
         dueno.setDni(resultado.getString("dni"));
         dueno.setNombre(resultado.getString("nombre"));
         dueno.setTelefono(resultado.getString("telefono"));
-        dueno.setMail(resultado.getString("mail"));
-        dueno.setLocalidad(resultado.getString("localidad"));
+        dueno.setLocalidad(resultado.getString("direccion"));
 
     }
 }

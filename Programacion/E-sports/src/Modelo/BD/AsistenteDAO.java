@@ -54,7 +54,7 @@ public class AsistenteDAO {
 
         BaseDatos.cerrarConexion();
     }
-
+/*
     public static void cambioEquipoAsistente(Asistente a, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un asistente de equipo
         BaseDatos.abrirConexion();
@@ -70,7 +70,7 @@ public class AsistenteDAO {
 
         BaseDatos.cerrarConexion();
 
-    }
+    }*/ //Esto esta comentado porque no tiene email
 
     public static Asistente consultarAsistente(String dni)throws Exception{
         //Metodo para consultar un asistente por dni a la base de datos
@@ -95,9 +95,8 @@ public class AsistenteDAO {
         asistente.setDni(resultado.getString("dni"));
         asistente.setNombre(resultado.getString("nombre"));
         asistente.setTelefono(resultado.getString("telefono"));
-        asistente.setMail(resultado.getString("mail"));
-        asistente.setLocalidad(resultado.getString("localidad"));
-        asistente.setSueldo(resultado.getFloat("suledo"));
+        asistente.setLocalidad(resultado.getString("direccion"));
+        asistente.setSueldo(resultado.getFloat("sueldo"));
 
     }
 }

@@ -3,12 +3,13 @@ package Modelo.BD;
 import Modelo.UML.Equipo;
 
 import java.sql.*;
+import java.util.Locale;
 
 public class EquipoDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla equipo*/
 
-    private static Equipo equipo;
+    private static Equipo equipo = new Equipo();
 
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
@@ -75,18 +76,18 @@ public class EquipoDAO {
     public static Equipo consultarEquipo(String n)throws Exception{
         //Metodo para consultar un Equipo por nombre a la base de datos
         BaseDatos.abrirConexion();
-
-        plantilla="select * from equipo where nombre = ?";
+        String nombreMayus = n.toUpperCase();
+        plantilla="select * from equipo where upper(nombre) = ?";
 
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,n);
+        sentenciaPre.setString(1,nombreMayus);
 
         resultado = sentenciaPre.executeQuery();
         while (resultado.next()){
             crearObjeto();
         }
 
-
+        BaseDatos.cerrarConexion();
         return equipo;
 
     }

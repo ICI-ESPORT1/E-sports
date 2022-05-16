@@ -34,11 +34,12 @@ public class Main {
     private static  String escudoEquipo;
     private static Frame Form;
     private static ArrayList<Equipo>listaEquipos;
+    private static Equipo equipoConId=new Equipo();
 
     public static void main(String[] args) {
 
         bd = new BaseDatos();
-        bd.abrirConexion();
+
 
         ventanaLogin();
         //abrirVentanaPrincipal();
@@ -152,18 +153,18 @@ public class Main {
 
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////
     public static void tenDatosAsistente (String dni, String n, String d ,String t, Float s)throws Exception{
-        asistente = new Asistente(dni,n,d,t, equipo,s);
+        asistente = new Asistente(dni,n,d,t,s);
         System.out.println(asistente.getNombre());
       //  equipo.setAsistente(asistente);
-        altaAsistente(asistente,equipo);
+        altaAsistente(asistente);
     }
     /**
      * Metodo que llama a altaAsistente para hacer un insert en la base de datos
      * @param asistente
-     * @param e
+     * @param
      * @throws Exception
      */
-    public static void altaAsistente(Asistente asistente, Equipo e)throws Exception{
+    public static void altaAsistente(Asistente asistente)throws Exception{
        // asistente.setEquipo(e);
 
         AsistenteDAO.altaAsistente(asistente);
@@ -179,7 +180,7 @@ public class Main {
      * @throws Exception
      */
     public static void bajaAsistente(String dni, String n, Equipo e,String t,String d, Float s)throws Exception{
-        asistente = new Asistente(dni,n,t,d,equipo,s);
+        asistente = new Asistente(dni,n,t,d,s);
         listaEquipos.add(equipo);
 
         AsistenteDAO.bajaAsistente(asistente);
@@ -208,20 +209,19 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Entrenador ////////////////////////////////////
-    public static void tenDatosEntrenador(String dni,String n,String d,String t, Float s){
-        entrenador = new Entrenador(dni,n,d,t,equipo,s);
-        equipo.setEntrenador(entrenador);
+    public static void tenDatosEntrenador(String dni,String n,String t,String d, Float s)throws Exception{
+        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
+        equipo.setId_equipo(equipoConId.getId_equipo());
+        entrenador = new Entrenador(dni,n,t,d,equipo,s);
+        altaEntrenador(entrenador);
 
     }
     /**
      * Metodo que llama a altaEntrenador para hacer un insert en la base de datos
      * @param entrenador
-     * @param e
      * @throws Exception
      */
-    public static void altaEntrenador(Entrenador entrenador,Equipo e)throws Exception{
-
-        entrenador.setEquipo(e);
+    public static void altaEntrenador(Entrenador entrenador)throws Exception{
 
         EntrenadorDAO.altaEntrenador(entrenador);
 
@@ -278,9 +278,9 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Dueno ////////////////////////////////////
-    public static void tenDatosDueno(String dni, String n, String d, String t){
+    public static void tenDatosDueno(String dni, String n, String d, String t)throws Exception{
         dueno = new Dueno(dni,n,t,d,equipo);
-        equipo.setDueno(dueno);
+        altaDueno();
     }
     /**
      * Metodo que llama a altaDueno para hacer un insert en la base de datos
@@ -375,14 +375,15 @@ public class Main {
 
     public static void altaEquipo(Equipo e, Asistente a)throws Exception{
 
-        Asistente asisConIdEquipo;
-        Equipo equipoConId;
-        asisConIdEquipo = AsistenteDAO.consultarAsistente(asistente.getDni());
-        equipo.setAsistente(asisConIdEquipo);
-        EquipoDAO.altaEquipo(equipo);
+        Asistente asisConId;
 
+        asisConId = AsistenteDAO.consultarAsistente(asistente.getDni());
+        equipo.setAsistente(asisConId);
+        EquipoDAO.altaEquipo(equipo);
+        System.out.println(equipo.getNombre().toString());
+        /* ESTA CONSULTA YA NO HACE FALTA PORQUE HE BORRADO EL OBJETO EQUIPO DE ASISTENTE
         equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
-        asistente.setEquipo(equipo);
+        equipo.setId_equipo(equipoConId.getId_equipo());*/
 
     }
 

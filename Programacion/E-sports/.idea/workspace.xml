@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Base de Datos/script/Paquetes/Asistentes/PaqueteAsistenteCabecera.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Base de Datos/script/Paquetes/Asistentes/PaqueteAsistenteCabecera.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Base de Datos/script/Paquetes/Asistentes/PaqueteAsistenteCuerpo.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Base de Datos/script/Paquetes/Asistentes/PaqueteAsistenteCuerpo.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/BD/AsistenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/AsistenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/DuenoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/DuenoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/EntrenadorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/EntrenadorDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/JugadorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/JugadorDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Asistente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Asistente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="220" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="269" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/GITPROGRAMACION/Programacion/TEMA8/ejercicio1version3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -136,13 +144,10 @@
           <line>29</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
-          <line>375</line>
-          <properties class="com.company.Main" method="altaEquipo">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="23" />
+          <line>169</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

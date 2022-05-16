@@ -4,23 +4,11 @@ public class Asistente extends Persona {
     /**
      @author Inigo Bruk
      */
-    private Equipo equipo;
+
     private float sueldo;
 
-    /**
-     *
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @parm direccion
-     * @param equipo
-     * @param sueldo
-     */
-    public Asistente( String dni, String nombre, String telefono, String direccion, Equipo equipo, float sueldo) {
-        super( dni, nombre, telefono, direccion);
-        this.equipo = equipo;
-        this.sueldo = sueldo;
-    }
+
+
 
     public Asistente() {
     }
@@ -30,7 +18,7 @@ public class Asistente extends Persona {
     }
 
     public Asistente(Equipo equipo, float sueldo) {
-        this.equipo = equipo;
+
         this.sueldo = sueldo;
     }
 
@@ -45,18 +33,7 @@ public class Asistente extends Persona {
 
     public Asistente(String dni, String n, String d, String t, String m, Equipo equipo, Float s) {
     }
-    /**
-     * @retun equipo
-     */
-    public Equipo getEquipo() {
-        return equipo;
-    }
-    /**
-     * @param equipo
-     */
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
-    }
+
     /**
      * @retun sueldo
      */

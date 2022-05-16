@@ -88,7 +88,7 @@ public class JugadorDAO {
             crearObjeto();
             listaJugadores.add(jugador);
         }
-
+        BaseDatos.cerrarConexion();
         return listaJugadores;
 
     }

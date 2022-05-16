@@ -29,13 +29,13 @@ public class AsistenteDAO {
         c.setString(1,a.getDni());
         System.out.println(a.getDni());
         c.setString(2,a.getNombre());
+        System.out.println(a.getNombre());
         c.setString(3,a.getTelefono());
+        System.out.println(a.getTelefono());
         c.setFloat(4, a.getSueldo());
 
         c.execute();
-
         c.close();
-
         BaseDatos.cerrarConexion();
     }
 
@@ -86,7 +86,7 @@ public class AsistenteDAO {
             crearObjeto();
         }
 
-
+        BaseDatos.cerrarConexion();
         return asistente;
 
     }
@@ -94,6 +94,7 @@ public class AsistenteDAO {
     public static void crearObjeto()throws Exception{
 
         asistente.setCodPersona(resultado.getInt("id_asistente"));
+        System.out.println(asistente.getCodPersona());
         asistente.setDni(resultado.getString("dni"));
         asistente.setNombre(resultado.getString("nombre"));
         asistente.setTelefono(resultado.getString("telefono"));

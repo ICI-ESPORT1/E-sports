@@ -26,14 +26,19 @@ public class EntrenadorDAO {
         c=BaseDatos.getConexion().prepareCall("{call nuevo_entrenador(?,?,?,?,?,?)}");
 
         c.setString(1,e.getDni());
+        System.out.println(e.getDni().toString());
         c.setString(2,e.getNombre());
+        System.out.println(e.getNombre().toString());
         c.setString(3,e.getTelefono());
+        System.out.println(e.getTelefono().toString());
         c.setString(4,e.getDireccion());
-        c.setInt(5, e.getEquipo().getId_equipo());
+        System.out.println(e.getDireccion().toString());
+        c.setInt(5,e.getEquipo().getId_equipo());
+        System.out.println(e.getEquipo().getId_equipo());
         c.setFloat(6, e.getSueldo());
+        System.out.println(e.getSueldo());
 
         c.execute();
-
         c.close();
 
         BaseDatos.cerrarConexion();
@@ -84,7 +89,7 @@ public class EntrenadorDAO {
         resultado = sentenciaPre.executeQuery();
 
         crearObjeto();
-
+        BaseDatos.cerrarConexion();
         return entrenador;
 
     }

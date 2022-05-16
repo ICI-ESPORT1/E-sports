@@ -51,7 +51,7 @@ public class FormularioInscripcion {
     private JTextField tfDniEn;
     private JTextField tfTelfEnt;
     private JTextField tfEmailEnt;
-    private JTextField tfLocEnt;
+    private JTextField tfDirEnt;
     private JTextField tfSueldoE;
 
     private JPanel jpAsistente;
@@ -147,7 +147,7 @@ public class FormularioInscripcion {
 
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
-                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo);
+                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
                     }
 
                     bDuenoValido = validarDatosDueno("dueno");
@@ -224,7 +224,7 @@ public class FormularioInscripcion {
         tfDNId.setText("72738006T");
         tfDirJug.setText("Vitoria");
         tfDireccionAsis.setText("Vitoria");
-        tfLocEnt.setText("Vitoria");
+        tfDirEnt.setText("Vitoria");
         tfDireccionD.setText("Vitoria");
         tfSueldoJ.setText("1439");
         tfSueldoAsis.setText("1673");
@@ -389,7 +389,6 @@ public class FormularioInscripcion {
         boolean bnombreE = false;
         boolean bdniE =false;
         boolean btelefonoE = false;
-        boolean bemailE =false;
         boolean blocalidad = false;
         boolean bSueldo = false;
         try{
@@ -402,21 +401,21 @@ public class FormularioInscripcion {
             if(!bnombreE){
                 tfNombreEntre.setText("");
             }
-            bdniE = validarDni(tfDNId.getText());
+            bdniE = validarDni(tfDniEn.getText());
             if(!bdniE){
                 tfDniEn.setText("");
             }
 
-            btelefonoE = validarTelefono(tfTelfd.getText());
+            btelefonoE = validarTelefono(tfTelfEnt.getText());
             if(!btelefonoE){
                 tfTelfEnt.setText("");
             }
 
-            blocalidad = validarDireccion(tfDireccionD.getText());
+            blocalidad = validarDireccion(tfDirEnt.getText());
             if(!blocalidad){
-                tfLocEnt.setText("");
+                tfDirEnt.setText("");
             }
-            if(bdniE&&blocalidad&&bemailE&&bnombreE&&bSueldo&&btelefonoE){
+            if(bdniE&&blocalidad&&bnombreE&&bSueldo&&btelefonoE){
                 bEntrenador = true;
             }
 

@@ -83,7 +83,7 @@ public class DuenoDAO {
         resultado = sentenciaPre.executeQuery();
 
         crearObjeto();
-
+        BaseDatos.cerrarConexion();
         return dueno;
 
     }

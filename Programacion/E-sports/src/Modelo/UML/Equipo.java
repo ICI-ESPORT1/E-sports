@@ -18,9 +18,9 @@ public class Equipo {
     private String escudo;
 
     //ATRIBUTO DE LA RELACION CON ENTRENADOR, ASISTENTE Y DUENO
-    private Entrenador entrenador;
+    /*private Entrenador entrenador;*/
     private Asistente asistente;
-    private Dueno dueno;
+  /*  private Dueno dueno;*/
 
     //ATRIBUTO DE LA RELACION CON JUGADOR Y PARTIDO
     private ArrayList<Jugador> listaJugadores;
@@ -51,9 +51,7 @@ public class Equipo {
         this.telefono = telefono;
         this.mail = mail;
         this.escudo = escudo;
-        this.entrenador = entrenador;
         this.asistente = asistente;
-        this.dueno = dueno;
         this.listaJugadores = listaJugadores;
         this.listaPartidos = listaPartidos;
     }
@@ -83,19 +81,19 @@ public class Equipo {
      * @param f
      * @param t
      * @param m
-     * @param e
+
      */
 
 
 
-    public Equipo(String n, String na, LocalDate f, String t, String m, String escudoEquipo, Entrenador entrenador, Asistente asistente) {
+    public Equipo(String n, String na, LocalDate f, String t, String m, String escudoEquipo, Asistente asistente) {
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
         this.fechaCreacion = fechaCreacion;
         this.telefono = telefono;
         this.mail = mail;
         this.escudo = escudo;
-        this.entrenador=entrenador;
+
         this.asistente=asistente;
     }
 
@@ -211,21 +209,6 @@ public class Equipo {
         this.escudo = escudo;
     }
 
-    /**
-     *
-     * @return entrenador
-     */
-    public Entrenador getEntrenador() {
-        return entrenador;
-    }
-
-    /**
-     *
-     * @param entrenador
-     */
-    public void setEntrenador(Entrenador entrenador) {
-        this.entrenador = entrenador;
-    }
 
     /**
      *
@@ -243,21 +226,9 @@ public class Equipo {
         this.asistente = asistente;
     }
 
-    /**
-     *
-     * @return dueno
-     */
-    public Dueno getDueno() {
-        return dueno;
+    public Equipo() {
     }
 
-    /**
-     *
-     * @param dueno
-     */
-    public void setDueno(Dueno dueno) {
-        this.dueno = dueno;
-    }
 
     /**
      *

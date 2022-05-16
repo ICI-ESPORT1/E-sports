@@ -6,6 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Asistente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Asistente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Dueno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Dueno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Entrenador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Entrenador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Jugador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Persona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Clasificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Clasificacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Imagenes/icono2.png~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Imagenes/icono2.png~programacion-iker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Imagenes/iconoJava.jpeg~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Imagenes/iconoJava.jpeg~programacion-iker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaEscudos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaEscudos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,10 +52,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="444" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="220" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="262" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/PracticaUno" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -124,5 +138,16 @@
     <ignored-roots>
       <path value="$USER_HOME$" />
     </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Views/FormularioInscripcion.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

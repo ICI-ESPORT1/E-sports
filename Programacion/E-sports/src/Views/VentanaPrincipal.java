@@ -11,7 +11,6 @@ public class VentanaPrincipal {
     private JMenu Menu1_1;
     private JMenuBar Menu_Incripcion;
     private JMenu Menu2_2;
-    private JMenuBar MenuLogin;
     private JMenu Menu3_3;
     private JButton Logo;
     private JMenuBar MenuEquipo;
@@ -22,8 +21,7 @@ public class VentanaPrincipal {
     private JMenuItem Ins;
     private JButton bInscripcion;
     private JMenuItem jmiClasificacion;
-    private JMenuItem Ins;
-    private JButton bInscripcion;
+
     private JButton equiposButton;
 
 
@@ -74,7 +72,5 @@ public class VentanaPrincipal {
         frame.setVisible(true);
     }
 
-    public JPanel getVentana1() {
-        return Ventana1;
-    }
+    public JPanel getVentana1() {return Ventana1;}
 }

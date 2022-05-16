@@ -9,7 +9,6 @@ public class Entrenador extends Persona {
     private float sueldo;
     /**
      *
-     * @param codPersona
      * @param dni
      * @param nombre
      * @param telefono
@@ -17,22 +16,27 @@ public class Entrenador extends Persona {
      * @param localidad
      * @param sueldo
      */
-    public Entrenador(Integer codPersona, String dni, String nombre, String telefono, String mail, String localidad, float sueldo) {
-        super(codPersona, dni, nombre, telefono, mail, localidad);
+    public Entrenador( String dni, String nombre, String telefono, String mail, String localidad, float sueldo) {
+        super( dni, nombre, telefono, mail, localidad);
         this.sueldo = sueldo;
 
     }
+
     /**
      *
+     * @param dni
+     * @param nombre
+     * @param telefono
+     * @param mail
+     * @param localidad
+     * @param equipo
+     * @param sueldo
      */
-
-
-    public Entrenador(String dni, String n, String l, String t, Float s) {
+    public Entrenador(String dni, String nombre, String telefono, String mail, String localidad, Equipo equipo, float sueldo) {
+        super(dni, nombre, telefono, mail, localidad);
+        this.equipo = equipo;
+        this.sueldo = sueldo;
     }
-
-
-
-
 
     /**
      * @retun equipo

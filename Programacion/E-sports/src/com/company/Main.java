@@ -34,11 +34,12 @@ public class Main {
     private static  String escudoEquipo;
     private static Frame Form;
     private static ArrayList<Equipo>listaEquipos;
+    private static Equipo equipoConId=new Equipo();
 
     public static void main(String[] args) {
 
         bd = new BaseDatos();
-        bd.abrirConexion();
+
 
         ventanaLogin();
         //abrirVentanaPrincipal();
@@ -159,21 +160,19 @@ public class Main {
 
 
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////
-    public static void tenDatosAsistente(String dni, String n, String l ,String t, Float s){
-        asistente.setDni(dni);
-        asistente.setNombre(n);
-        asistente.setLocalidad(l);
-        asistente.setTelefono(t);
-        asistente.setSueldo(s);
+    public static void tenDatosAsistente (String dni, String n, String d ,String t, Float s)throws Exception{
+        asistente = new Asistente(dni,n,d,t,s);
+        System.out.println(asistente.getNombre());
+      //  equipo.setAsistente(asistente);
     }
     /**
      * Metodo que llama a altaAsistente para hacer un insert en la base de datos
      * @param asistente
-     * @param e
+     * @param
      * @throws Exception
      */
-    public static void altaAsistente(Asistente asistente, Equipo e)throws Exception{
-        asistente.setEquipo(e);
+    public static void altaAsistente(Asistente asistente)throws Exception{
+       // asistente.setEquipo(e);
 
         AsistenteDAO.altaAsistente(asistente);
     }
@@ -188,25 +187,15 @@ public class Main {
      * @throws Exception
      */
     public static void bajaAsistente(String dni, String n, Equipo e,String t,String d, Float s)throws Exception{
-        asistente = new Asistente(dni,n,t,d,equipo,s);
+        asistente = new Asistente(dni,n,t,d,s);
         listaEquipos.add(equipo);
 
         AsistenteDAO.bajaAsistente(asistente);
 
     }
 
-    /**
-     * Metodo que llama a cambioEquipoAsistente para hacer un update en la base de datos
-     * @param dni
-     * @param n
-     * @param l
-     * @param e
-     * @param t
-     * @param s
-     * @param idNuevoEquipo
-     * @throws Exception
-     */
-    public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo, String m)throws Exception{
+
+  /*  public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo, String m)throws Exception{
         asistente = new Asistente(dni,n,l,t,m, equipo,s);
         listaEquipos.add(equipo);}
 
@@ -231,20 +220,19 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Entrenador ////////////////////////////////////
-    public static void tenDatosEntrenador(String dni,String n,String d,String t, Float s){
-        entrenador = new Entrenador(dni,n,d,t,equipo,s);
-        equipo.setEntrenador(entrenador);
+    public static void tenDatosEntrenador(String dni,String n,String t,String d, Float s)throws Exception{
+        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
+        equipo.setId_equipo(equipoConId.getId_equipo());
+        entrenador = new Entrenador(dni,n,t,d,equipo,s);
+        altaEntrenador(entrenador);
 
     }
     /**
      * Metodo que llama a altaEntrenador para hacer un insert en la base de datos
      * @param entrenador
-     * @param e
      * @throws Exception
      */
-    public static void altaEntrenador(Entrenador entrenador,Equipo e)throws Exception{
-
-        entrenador.setEquipo(e);
+    public static void altaEntrenador(Entrenador entrenador)throws Exception{
 
         EntrenadorDAO.altaEntrenador(entrenador);
 
@@ -301,9 +289,9 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Dueno ////////////////////////////////////
-    public static void tenDatosDueno(String dni, String n, String d, String t){
+    public static void tenDatosDueno(String dni, String n, String d, String t)throws Exception{
         dueno = new Dueno(dni,n,t,d,equipo);
-        equipo.setDueno(dueno);
+        altaDueno();
     }
     /**
      * Metodo que llama a altaDueno para hacer un insert en la base de datos
@@ -373,7 +361,7 @@ public class Main {
     public static String dameEscudo(){
         return escudoEquipo;
     }
-    public static void tenDatosEquipo(String n, String na, LocalDate f, String t,String m){
+    public static void tenDatosEquipo(String n, String na, LocalDate f, String t,String m)throws Exception{
         /*Hay que crear un objeto equipo */
         escudoEquipo=dameEscudo();
         equipo = new Equipo(n,na, f, t, m, escudoEquipo);
@@ -385,6 +373,8 @@ public class Main {
         equipo.setTelefono(t);
         equipo.setMail(m);
         equipo.setEscudo(e);*/
+        altaEquipo(equipo,asistente);
+
     }
 
     /**
@@ -396,9 +386,15 @@ public class Main {
 
     public static void altaEquipo(Equipo e, Asistente a)throws Exception{
 
-        equipo.setAsistente(a);
+        Asistente asisConId;
 
+        asisConId = AsistenteDAO.consultarAsistente(asistente.getDni());
+        equipo.setAsistente(asisConId);
         EquipoDAO.altaEquipo(equipo);
+        System.out.println(equipo.getNombre().toString());
+        /* ESTA CONSULTA YA NO HACE FALTA PORQUE HE BORRADO EL OBJETO EQUIPO DE ASISTENTE
+        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
+        equipo.setId_equipo(equipoConId.getId_equipo());*/
 
     }
 

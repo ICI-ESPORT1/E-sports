@@ -3,12 +3,13 @@ package Modelo.BD;
 import Modelo.UML.Equipo;
 
 import java.sql.*;
+import java.util.Locale;
 
 public class EquipoDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla equipo*/
 
-    private static Equipo equipo;
+    private static Equipo equipo = new Equipo();
 
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
@@ -20,7 +21,7 @@ public class EquipoDAO {
         //Metodo para insertar un nuevo equipo en la tabla equipo
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_equipo(?,?,?,?,?,?,?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.nuevo_equipo(?,?,?,?,?,?,?)}");
 
         c.setString(1,e.getNombre());
         c.setString(2,e.getNacionalidad());
@@ -28,6 +29,8 @@ public class EquipoDAO {
         c.setString(4,e.getTelefono());
         c.setString(5, e.getMail());
         c.setString(6, e.getEscudo());
+        /*Antes de añadir el asistente necesitamos el id del asistente que acabamos de insertar*/
+
         c.setInt(7, e.getAsistente().getCodPersona());
 
         c.execute();
@@ -73,16 +76,18 @@ public class EquipoDAO {
     public static Equipo consultarEquipo(String n)throws Exception{
         //Metodo para consultar un Equipo por nombre a la base de datos
         BaseDatos.abrirConexion();
-
-        plantilla="select * from equipo where nombre = ?";
+        String nombreMayus = n.toUpperCase();
+        plantilla="select * from equipo where upper(nombre) = ?";
 
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,n);
+        sentenciaPre.setString(1,nombreMayus);
 
         resultado = sentenciaPre.executeQuery();
+        while (resultado.next()){
+            crearObjeto();
+        }
 
-        crearObjeto();
-
+        BaseDatos.cerrarConexion();
         return equipo;
 
     }

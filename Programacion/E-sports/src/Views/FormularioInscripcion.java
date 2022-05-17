@@ -12,7 +12,6 @@ import com.company.*;
 
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -52,7 +51,7 @@ public class FormularioInscripcion {
     private JTextField tfDniEn;
     private JTextField tfTelfEnt;
     private JTextField tfEmailEnt;
-    private JTextField tfLocEnt;
+    private JTextField tfDirEnt;
     private JTextField tfSueldoE;
 
     private JPanel jpAsistente;
@@ -146,19 +145,17 @@ public class FormularioInscripcion {
                         Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText());
                     }
 
-                    bDuenoValido = validarDatosDueno("dueno");
-                    if(bDuenoValido){
-                        Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(),tfLocalidadD.getText(),tfTelfd.getText(), tfEmaild.getText());
-                    }
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
-                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo,tfEmailEnt.getText());
-                    }
-                    bAsisValido = validarDatosAsistente();
-                    if(bAsisValido){
-                        Main.tenDatosAsistente(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo,tfEmailAsis.getText());
+                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
                     }
 
+                    bDuenoValido = validarDatosDueno("dueno");
+                    if(bDuenoValido){
+                        Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(), tfDireccionD.getText(),tfTelfd.getText());
+                    }
+                    /*PARA JUGADORES*/
+                    llenarListaJugadores();
 
                     for(String[] row : listaJugadores){
                         String [] fila = new String[6];
@@ -182,7 +179,7 @@ public class FormularioInscripcion {
 
                     tfDniJ.setEditable(false);
                     tfNombreJ.setEditable(false);
-                    tfLocJug.setEditable(false);
+                    tfDirJug.setEditable(false);
                     tfTelfJug.setEditable(false);
                     tfSueldoJ.setEditable(false);
                     tfEmailJug.setEditable(false);
@@ -227,7 +224,7 @@ public class FormularioInscripcion {
         tfDNId.setText("72738006T");
         tfDirJug.setText("Vitoria");
         tfDireccionAsis.setText("Vitoria");
-        tfLocEnt.setText("Vitoria");
+        tfDirEnt.setText("Vitoria");
         tfDireccionD.setText("Vitoria");
         tfSueldoJ.setText("1439");
         tfSueldoAsis.setText("1673");
@@ -262,7 +259,7 @@ public class FormularioInscripcion {
           if(validarDatosJugador("jugador") ) {
               dni = tfDniJ.getText();
               nombre =tfNombreJ.getText();
-              loc =tfLocJug.getText();
+              loc = tfDirJug.getText();
               telf=tfTelfJug.getText();
               sueldo=tfSueldoJ.getText();
               mail =tfEmailJug.getText();
@@ -294,7 +291,7 @@ public class FormularioInscripcion {
     public void limpiarCamposJugador(){
         tfDniJ.setText("");
         tfNombreJ.setText("");
-        tfLocJug.setText("");
+        tfDirJug.setText("");
         tfTelfJug.setText("");
         tfSueldoJ.setText("");
         tfEmailJug.setText("");
@@ -392,7 +389,6 @@ public class FormularioInscripcion {
         boolean bnombreE = false;
         boolean bdniE =false;
         boolean btelefonoE = false;
-        boolean bemailE =false;
         boolean blocalidad = false;
         boolean bSueldo = false;
         try{
@@ -405,21 +401,21 @@ public class FormularioInscripcion {
             if(!bnombreE){
                 tfNombreEntre.setText("");
             }
-            bdniE = validarDni(tfDNId.getText());
+            bdniE = validarDni(tfDniEn.getText());
             if(!bdniE){
                 tfDniEn.setText("");
             }
 
-            btelefonoE = validarTelefono(tfTelfd.getText());
+            btelefonoE = validarTelefono(tfTelfEnt.getText());
             if(!btelefonoE){
                 tfTelfEnt.setText("");
             }
 
-            blocalidad = validarDireccion(tfDireccionD.getText());
+            blocalidad = validarDireccion(tfDirEnt.getText());
             if(!blocalidad){
-                tfLocEnt.setText("");
+                tfDirEnt.setText("");
             }
-            if(bdniE&&blocalidad&&bemailE&&bnombreE&&bSueldo&&btelefonoE){
+            if(bdniE&&blocalidad&&bnombreE&&bSueldo&&btelefonoE){
                 bEntrenador = true;
             }
 
@@ -464,15 +460,12 @@ public class FormularioInscripcion {
                 if(!bTelefonoA){
                     tfTelfAsis.setText("");
                 }
-                bEmailA = validarEmail(tfEmailAsis.getText());
-                if(!bEmailA){
-                    tfEmailAsis.setText("");
+
+                bdireccion = validarDireccion(tfDireccionAsis.getText());
+                if(!bdireccion){
+                    tfDireccionAsis.setText("");
                 }
-                blocalidad = validarLocalidad(tfLocAsis.getText());
-                if(!blocalidad){
-                    tfLocAsis.setText("");
-                }
-                if(bDniA&&blocalidad&&bEmailA&&bNombreA&&bSueldo&&bTelefonoA){
+                if(bDniA&&bdireccion&&bNombreA&&bSueldo&&bTelefonoA){
                     bAsistente = true;
                 }
 
@@ -566,7 +559,7 @@ public class FormularioInscripcion {
      * @param loc
      * @return
      */
-    public boolean validarLocalidad(String loc){
+    public boolean validarDireccion(String loc){
         boolean bLoc=false;
         try {
             if (loc.isEmpty()) {
@@ -617,39 +610,6 @@ public class FormularioInscripcion {
         return bDniValido;
     }
 
-    /**
-     * Metodo para validar el email
-     * @param email
-     * @return
-     */
-    public boolean validarEmail(String email){
-        boolean bEmail = false;
-        try{
-            if(email.isEmpty()){
-                throw new CampoVacio();
-            }
-            else {
-                Pattern patron = Pattern.compile("^[a-z](.+)@(.+)$");
-                Matcher mat = patron.matcher(tfEmailEquipo.getText());
-
-                if(mat.matches()){
-                    System.out.println("EL PATRON DEL EMAIL COINCIDE");
-                    bEmail = true;
-                }
-                else{
-                    System.out.println("EL PATRON DEL EMAIL NO COINCIDE");
-                    throw new CampoIncorrecto();
-                }
-            }
-
-        }catch (CampoIncorrecto e){
-            JOptionPane.showMessageDialog(null,"EL EMAIL NO ES CORRECTO");
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null,"EL EMAIL NO ES VALIDO");
-            System.out.println(e.getClass());}
-        return bEmail;
-    }
     /**
      * Este método me permite validar un teléfono, como se va a utilizar para validar
      * el telefono de los jugadores, le paso un parametro en lugar de usar la variable global

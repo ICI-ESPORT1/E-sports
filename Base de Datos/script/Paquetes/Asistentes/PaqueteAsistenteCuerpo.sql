@@ -7,8 +7,6 @@ pragma exception_init(e_equipoNoExiste,-20002);
 e_asisNoExiste exception;
 pragma exception_init(e_asisNoExiste,-20003);
 
-
-
 /*Declaro funciones*/
 function validar_equipo
 (p_equipo in number)
@@ -54,23 +52,18 @@ procedure nuevo_asistente
 p_dni asistente.dni%type,
 p_nombre asistente.nombre%type,
 p_telefono asistente.telefono%type,
-p_direccion asistente.direccion%type,
-p_id_equipo equipo.cod_equipo%type,
 p_sueldo asistente.sueldo%type
 )
 is
 
 begin
-  if validar_equipo(p_id_equipo)then
+
    insert into asistente
-   (dni,nombre,telefono,direccion,sueldo) values
-   (p_dni,p_nombre,p_telefono,p_direccion,p_sueldo);
-  else
-    raise e_equipoNoExiste;   
-  end if;
+   (dni,nombre,telefono,sueldo) values
+   (p_dni,p_nombre,p_telefono,p_sueldo);
+
  exception
-    when e_equipoNoExiste then
-    dbms_output.put_line ('El equipo no existe');
+
    when others then
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END nuevo_asistente;  

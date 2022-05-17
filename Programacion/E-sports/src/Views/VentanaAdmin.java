@@ -21,6 +21,11 @@ public class VentanaAdmin {
     private JMenuItem Ins;
     private JButton bInscripcion;
     private JMenuItem jmiClasificacion;
+    private JMenuItem jornada;
+    private JMenuItem PartidosJugados;
+    private JMenuItem verEquipo;
+    private JMenuItem DarBaja;
+    private JMenuItem DarAlta;
 
     private JButton equiposButton;
 
@@ -31,30 +36,45 @@ public class VentanaAdmin {
         Ins.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Main.abrirFormularioEquipo();
             }
         });
-/*
-        bInscripcion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirFormularioEquipo();
-            }
-        });
+
         jmiClasificacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Main.abrirClasificacion();
             }
         });
 
-        bInscripcion.addActionListener(new ActionListener() {
+        verEquipo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirFormularioEquipo();
+                try {
+                    Main.visualizarEquipo();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
-       */
+
+        DarBaja.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirBajasPersonas();
+            }
+        });
+
+        DarAlta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirAltasPersonas();
+            }
+        });
+
     }
 
     public static void main(String[] args) {
@@ -66,4 +86,6 @@ public class VentanaAdmin {
     }
 
     public JPanel getVentana1() {return Ventana1;}
+
+
 }

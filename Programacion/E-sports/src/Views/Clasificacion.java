@@ -6,13 +6,14 @@ import Modelo.UML.Resultado;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class Clasificacion {
+public class Clasificacion extends JFrame {
     private JLabel lTitulo;
     private JTextArea taClasificacion;
-    private JButton bVolver;
+    private JButton bCancelar;
     private JPanel pClasificacion;
-
     private static Resultado resultado;
 
     public void llenarTextArea(){
@@ -25,11 +26,15 @@ public class Clasificacion {
         }
     }
 
+
+
     public Clasificacion() {
-        bVolver.addActionListener(new ActionListener() {
+
+        bCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaPrincipal();
+
+               Main.cerrarVentana();
             }
         });
     }
@@ -43,6 +48,8 @@ public class Clasificacion {
     }
 
     public JPanel getpClasificacion() {
+
         return pClasificacion;
     }
+
 }

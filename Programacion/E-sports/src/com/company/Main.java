@@ -53,30 +53,46 @@ public class Main {
         dialog = new Login();
         dialog.pack();
         dialog.setVisible(true);
+
     }
 
+
+    //funcion cerrar ventana con frame
+    public static void cerrarVentana(){
+        frame.dispose();
+    }
+
+    //funcion cerrar ventana con dialog
     public static void CerrarVentana(){
         dialog.dispose();
     }
-    public static void OcultarVentana(){
-        dialog.setVisible(false);
+
+    public static void VentanaInvitado(){
+        frame = new JFrame("VentanaInvitado");
+        frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
+
 
     /**
      * Este método contiene el Main de la ventana VisualizarEquipos
      * @throws Exception
      */
-    public static void abrirVentanaVisualizarEquipos()throws Exception{
-        VisualizarEquipos dialog = new VisualizarEquipos();
+        public static void visualizarEquipo()throws Exception{
+        dialog = new VisualizarEquipos();
         dialog.pack();
         dialog.setVisible(true);
     }
+
+
     /**
      * Este método contiene el Main de la ventana ElegirEscudos
      * @throws Exception
      */
     public static void abrirVentanaEscudos()throws Exception{
-        VentanaEscudos dialog = new VentanaEscudos();
+        dialog = new VentanaEscudos();
         dialog.pack();
         dialog.setVisible(true);
     }
@@ -91,7 +107,9 @@ public class Main {
         frame.setVisible(true);
     }
 
-
+    /**
+     * Este método contiene el Main de la ventana Invitado para poder abrirla
+     */
     public static void mostrarVentanaInvitado()
     {
         frame = new JFrame("VentanaInvitado");
@@ -103,16 +121,16 @@ public class Main {
         CerrarVentana();
 
     }
-
-
-
+    /**
+     * Este método contiene el Main de la ventana para inscribir jugadores
+     */
     public static ArrayList<Jugador>crearListaJugadores(){
         return null;
         /*Recibe los datos de un jugador y los mete en un arrayList*/
     }
 
     /**
-     * Este método contiene el Main de la ventana para inscribir jugadores
+     * Este método contiene el Main de la ventana Formulario Incripcion para poder abrirla
      */
     public static void abrirFormularioEquipo() {
         frame = new JFrame("FormularioInscripcion");
@@ -140,9 +158,27 @@ public class Main {
         return nombreEncontrado;
     }
 
+    /**
+     * Este método contiene el Main de la ventana clasificacion para poder abrirla
+     */
     public static void abrirClasificacion(){
-        JFrame frame = new JFrame("Clasificacion");
+        frame = new JFrame("Clasificacion");
         frame.setContentPane(new Clasificacion().getpClasificacion());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void abrirBajasPersonas(){
+        frame = new JFrame("VentanaBajas");
+        frame.setContentPane(new BajasPersonas().getBajas());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public static void abrirAltasPersonas(){
+        frame = new JFrame("VentanaAltas");
+        frame.setContentPane(new AltaPersonas().getAltas());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -161,9 +197,9 @@ public class Main {
      * @param e
      * @throws Exception
      */
+
     public static void altaAsistente(Asistente asistente, Equipo e)throws Exception{
         asistente.setEquipo(e);
-
         AsistenteDAO.altaAsistente(asistente);
     }
 
@@ -180,10 +216,11 @@ public class Main {
     public static void bajaAsistente(String dni, String n, String l, Equipo e,String t, Float s, String m)throws Exception{
         asistente = new Asistente(dni,n,l,t,m, equipo,s);
         listaEquipos.add(equipo);
-
         AsistenteDAO.bajaAsistente(asistente);
 
     }
+
+
 
     /**
      * Metodo que llama a cambioEquipoAsistente para hacer un update en la base de datos
@@ -231,7 +268,6 @@ public class Main {
     public static void altaEntrenador(Entrenador entrenador,Equipo e)throws Exception{
 
         entrenador.setEquipo(e);
-
         EntrenadorDAO.altaEntrenador(entrenador);
 
     }

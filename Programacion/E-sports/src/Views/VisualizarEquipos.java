@@ -1,5 +1,7 @@
 package Views;
 
+import com.company.Main;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -22,6 +24,7 @@ public class VisualizarEquipos extends JDialog {
 
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 onCancel();
             }
         });

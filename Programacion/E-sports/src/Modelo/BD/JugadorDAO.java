@@ -19,7 +19,7 @@ public class JugadorDAO {
 
     public static void altaJugador(Jugador j)throws Exception{
         //Metodo para insertar un nuevo jugador en la tabla jugador
-        BaseDatos.abrirConexion();
+       // BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call nuevo_jugador(?,?,?,?,?,?,?,?)}");
 
@@ -38,13 +38,13 @@ public class JugadorDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+     //   BaseDatos.cerrarConexion();
     }
 
 
     public static void bajaJugador(Jugador j)throws Exception{
         //metodo para borrar un jugador de la tabla jugador por id_jugador
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call borrar_jugador(?)}");
 
@@ -54,12 +54,12 @@ public class JugadorDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+     //   BaseDatos.cerrarConexion();
     }
 
     public static void cambiarEquipoJugador(Jugador j, int idEquipoNuevo)throws Exception{
         //metodo para cambiar un jugador de equipo
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call cambio_equipo_jugador(?,?)}");
 
@@ -70,13 +70,13 @@ public class JugadorDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+     //   BaseDatos.cerrarConexion();
 
     }
 
     public static ArrayList<Jugador> consultarJugadoresEquipo(int idEquipo)throws Exception{
         //Metodo para consultar todos los jugadores de un equipo
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         plantilla="select * from jugador where id_equipo = ?";
 
@@ -90,14 +90,26 @@ public class JugadorDAO {
             crearObjeto();
             listaJugadores.add(jugador);
         }
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
         return listaJugadores;
 
     }
+    public static Jugador jugadorConId(String dni)throws Exception{
+      //  BaseDatos.abrirConexion();
+        String dniMayus = dni.toUpperCase();
+        plantilla ="select * from jugador where upper(dni)=?";
 
+        sentenciaPre =BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,dniMayus);
+        resultado = sentenciaPre.executeQuery();
+        while(resultado.next()){
+            crearObjeto();
+        }
+        return jugador;
+    }
     public static ArrayList<Jugador> consultarJugador()throws Exception{
         //Metodo para consultar todos los jugadores
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         plantilla="select * from jugador where nombre = ";
 
@@ -117,7 +129,7 @@ public class JugadorDAO {
 
     public static void cambiarDatosJugador(Jugador jugador)throws Exception{
         //Metodo para modificar los datos de un jugador
-        BaseDatos.abrirConexion();
+       // BaseDatos.abrirConexion();
 
         plantilla="update jugador nombre = ?, telefono = ?, direccion = ?, id_equipo = ?, nickname = ?, sueldo = ?, id_rol = ? where dni = ?";
 
@@ -133,7 +145,7 @@ public class JugadorDAO {
 
         resultado = sentenciaPre.executeQuery();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
     }
 
     public static void crearObjeto()throws Exception{

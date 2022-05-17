@@ -22,7 +22,7 @@ public class EntrenadorDAO {
 
     public static void altaEntrenador(Entrenador e)throws Exception{
         //Metodo para insertar un nuevo entrenador en la tabla entrenador
-        BaseDatos.abrirConexion();
+       // BaseDatos.abrirConexion();
     /*
         calla =BaseDatos.getConexion().prepareCall("{call nuevo_entrenador(?,?,?,?,?,?)}");
 
@@ -53,13 +53,13 @@ public class EntrenadorDAO {
         sentenciaPre.setFloat(6, e.getSueldo());
         int n = sentenciaPre.executeUpdate();
         System.out.println("filas "+ n);
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
     }
 
 
     public static void bajaEntrenador(Entrenador e)throws Exception{
         //metodo para borrar un entrenador de la tabla entrenador por id_entrenador
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         calla =BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
 
@@ -69,12 +69,12 @@ public class EntrenadorDAO {
 
         calla.close();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
     }
 
     public static void cambioEquipoEntrenador(Entrenador e, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un entrenador de equipo
-        BaseDatos.abrirConexion();
+       // BaseDatos.abrirConexion();
 
         calla =BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
 
@@ -85,13 +85,13 @@ public class EntrenadorDAO {
 
         calla.close();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
 
     }
 
     public static Entrenador consultarEntrenador(String dni)throws Exception{
         //Metodo para consultar un entrenador por dni a la base de datos
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         plantilla="select * from entrenador where dni = ?";
 
@@ -101,7 +101,7 @@ public class EntrenadorDAO {
         resultado = sentenciaPre.executeQuery();
 
         crearObjeto();
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
         return entrenador;
 
     }

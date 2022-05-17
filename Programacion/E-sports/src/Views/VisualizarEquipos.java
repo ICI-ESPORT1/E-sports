@@ -10,11 +10,18 @@ public class VisualizarEquipos extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JLabel lTitutlo;
+    private JPanel jpTitulo;
+    private JPanel jpEquipos;
+    private JTextArea taInforEqui;
 
-    public VisualizarEquipos() {
+    public VisualizarEquipos() throws Exception {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        /*Pedir los datos de los equipos*/
+        Main.consultarEquipos();
+        String equipos = Main.dameStringEquipos();
+        taInforEqui.setText(equipos);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +62,7 @@ public class VisualizarEquipos extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         VisualizarEquipos dialog = new VisualizarEquipos();
         dialog.pack();
         dialog.setVisible(true);

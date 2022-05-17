@@ -93,22 +93,45 @@ public class JugadorDAO {
 
     }
 
-    public static Jugador consultarJugador(int idJugador)throws Exception{
-        //Metodo para consultar un jugador por dni
+    public static ArrayList<Jugador> consultarJugador()throws Exception{
+        //Metodo para consultar todos los jugadores
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call cambio_equipo_jugador(?,?)}");
+        plantilla="select * from jugador where nombre = ";
 
-        c.setInt(1,idJugador);
-        c.registerOutParameter(2, (SQLType) jugador);
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,"Celia");
 
-        c.execute();
+        resultado = sentenciaPre.executeQuery();
 
-        c.close();
+        listaJugadores= new ArrayList<>();
+        while(resultado.next()) {
+            crearObjeto();
+            listaJugadores.add(jugador);
+        }
+
+        return listaJugadores;
+    }
+
+    public static void cambiarDatosJugador(Jugador jugador)throws Exception{
+        //Metodo para modificar los datos de un jugador
+        BaseDatos.abrirConexion();
+
+        plantilla="update jugador nombre = ?, telefono = ?, direccion = ?, id_equipo = ?, nickname = ?, sueldo = ?, id_rol = ? where dni = ?";
+
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,jugador.getNombre());
+        sentenciaPre.setString(2,jugador.getTelefono());
+        sentenciaPre.setString(3,jugador.getDireccion());
+        sentenciaPre.setInt(4,jugador.getEquipo().getId_equipo());
+        sentenciaPre.setString(5,jugador.getNickname());
+        sentenciaPre.setFloat(6,jugador.getSalario());
+        sentenciaPre.setInt(7,jugador.getRol().getCodRol());
+        sentenciaPre.setString(8,jugador.getDni());
+
+        resultado = sentenciaPre.executeQuery();
 
         BaseDatos.cerrarConexion();
-
-        return jugador;
     }
 
     public static void crearObjeto()throws Exception{

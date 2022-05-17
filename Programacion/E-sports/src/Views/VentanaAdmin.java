@@ -22,6 +22,7 @@ public class VentanaAdmin {
     private JButton bInscripcion;
     private JMenuItem jmiClasificacion;
     private JMenuItem jmiJornadas;
+    private JMenuItem jmiModificarPersonas;
 
     private JButton equiposButton;
 
@@ -49,6 +50,13 @@ public class VentanaAdmin {
                 Main.abrirJornada();
             }
         });
+        jmiModificarPersonas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirModificarDatosPersona();
+            }
+        });
+
 
 /*
         bInscripcion.addActionListener(new ActionListener() {

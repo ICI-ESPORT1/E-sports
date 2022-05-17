@@ -73,11 +73,28 @@ public class EquipoDAO {
     public static Equipo consultarEquipo(String n)throws Exception{
         //Metodo para consultar un Equipo por nombre a la base de datos
         BaseDatos.abrirConexion();
-
-        plantilla="select * from equipo where nombre = ?";
+        String nombreMayus = n.toUpperCase();
+        plantilla="select * from equipo where upper(nombre) = ?";
 
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,n);
+        sentenciaPre.setString(1,nombreMayus);
+
+        resultado = sentenciaPre.executeQuery();
+
+        crearObjeto();
+
+        return equipo;
+
+    }
+
+    public static Equipo consultarEquipoID(String n)throws Exception{
+        //Metodo para consultar un Equipo por nombre a la base de datos
+        BaseDatos.abrirConexion();
+
+        plantilla="select * from equipo where cod_equipo = ?";
+
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setInt(1,Integer.parseInt(n));
 
         resultado = sentenciaPre.executeQuery();
 

@@ -18,6 +18,8 @@ public class Clasificacion {
 
 
     public Clasificacion() {
+        llenarTexto();
+
         bVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

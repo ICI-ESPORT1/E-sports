@@ -70,6 +70,13 @@ public class VentanaAdmin {
         });
 
         DarBaja.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        }
+
 
 /*
         bInscripcion.addActionListener(new ActionListener() {
@@ -86,7 +93,7 @@ public class VentanaAdmin {
             }
         });
 
-    }
+    }*/
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("VentanaPrincipal");

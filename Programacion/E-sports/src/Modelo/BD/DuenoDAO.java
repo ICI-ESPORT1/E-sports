@@ -21,9 +21,9 @@ public class DuenoDAO {
 
     public static void altaDueno(Dueno d)throws Exception{
         //Metodo para insertar un nuevo dueno en la tabla dueno
-        BaseDatos.abrirConexion();
+     //   BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_dueno(?,?,?,?,?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarDueno.nuevo_dueno(?,?,?,?,?)}");
 
         c.setString(1,d.getDni());
         c.setString(2,d.getNombre());
@@ -35,13 +35,13 @@ public class DuenoDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+     //   BaseDatos.cerrarConexion();
     }
 
 
     public static void bajaDueno(Dueno d)throws Exception{
         //metodo para borrar un dueno de la tabla dueno por id_dueno
-        BaseDatos.abrirConexion();
+     //   BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call borrar_dueno(?)}");
 
@@ -51,12 +51,12 @@ public class DuenoDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
     }
 
     public static void cambioEquipoDueno(Dueno d, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un dueño de equipo
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call cambio_equipo_dueno(?,?)}");
 
@@ -67,13 +67,13 @@ public class DuenoDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+       // BaseDatos.cerrarConexion();
 
     }
 
     public static Dueno consultarDueno(String d)throws Exception{
         //Metodo para consultar un Dueno por dni a la base de datos
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         plantilla="select * from dueno where dni = ?";
 
@@ -83,7 +83,7 @@ public class DuenoDAO {
         resultado = sentenciaPre.executeQuery();
 
         crearObjeto();
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
         return dueno;
 
     }

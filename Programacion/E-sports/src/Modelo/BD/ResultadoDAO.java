@@ -36,7 +36,7 @@ public class ResultadoDAO {
 
     public static Resultado obtenerPartidosJornadas()throws Exception{
         //Metodo para mostrar todos los partidos de las jornadas
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call gestionResultados.partidosJornada(?)}");
 
@@ -46,7 +46,7 @@ public class ResultadoDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
 
         return res;
 
@@ -54,7 +54,7 @@ public class ResultadoDAO {
 
     public static Resultado obtenerPartidos()throws Exception{
         //Metodo para mostrar todos los partidos que se han jugado
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call gestionResultados.partidos(?)}");
 
@@ -64,7 +64,7 @@ public class ResultadoDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+     //   BaseDatos.cerrarConexion();
 
         return res;
     }

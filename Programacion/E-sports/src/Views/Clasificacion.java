@@ -2,7 +2,7 @@ package Views;
 
 import com.company.Main;
 import Modelo.UML.Resultado;
-import javafx.scene.control.Labeled;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +32,7 @@ public class Clasificacion extends JFrame {
     public Clasificacion() {
         llenarTexto();
 
-        bVolver.addActionListener(new ActionListener() {
+        bCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -61,7 +61,7 @@ public class FormularioInscripcion {
     private JTextField tfDireccionAsis;
     private JTextField tfSueldoAsis;
 
-    private JButton bAnadirJugador;
+    private JButton bAceptar;
     private JLabel lNombreEn;
     private JLabel lDniEnt;
     private JLabel lTelefono;
@@ -128,13 +128,13 @@ public class FormularioInscripcion {
 
         llenarFormulario();
 
-        bAnadirJugador.addActionListener(new ActionListener() {
+        bAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
                     bAsisValido = validarDatosAsistente();
                     if(bAsisValido){
-                        Main.tenDatosAsistente(tfDniAsis.getText(),tfNombreAsis.getText(),tfDireccionAsis.getText(),tfTelfAsis.getText(),sueldo);
+                        Main.tenDatosAsistente(tfDniAsis.getText(),tfNombreAsis.getText(),tfTelfAsis.getText(),tfDireccionAsis.getText(),sueldo);
                     }
 
                     bEquipoValido = validarDatosEquipo("especial");
@@ -178,7 +178,6 @@ public class FormularioInscripcion {
                 llenarListaJugadores();
                 if(lContador.getText().equalsIgnoreCase("Jugador 7")){
                     lContador.setText("Maximo alcanzado");
-
                     tfDniJ.setEditable(false);
                     tfNombreJ.setEditable(false);
                     tfDirJug.setEditable(false);

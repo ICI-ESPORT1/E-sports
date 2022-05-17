@@ -19,7 +19,7 @@ public class RolDAO {
 
 
     public static Rol obtenerRol(String r)throws Exception{
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
         String rM = r.toUpperCase();
         plantilla = "select * from rol where upper(Nombre)= ?";
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
@@ -31,7 +31,7 @@ public class RolDAO {
             crearObjeto();
         }
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
 
         return rol;
 

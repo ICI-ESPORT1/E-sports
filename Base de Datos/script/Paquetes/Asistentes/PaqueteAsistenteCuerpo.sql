@@ -52,6 +52,7 @@ procedure nuevo_asistente
 p_dni asistente.dni%type,
 p_nombre asistente.nombre%type,
 p_telefono asistente.telefono%type,
+p_direccion asistente.direccion%type,
 p_sueldo asistente.sueldo%type
 )
 is
@@ -59,8 +60,8 @@ is
 begin
 
    insert into asistente
-   (dni,nombre,telefono,sueldo) values
-   (p_dni,p_nombre,p_telefono,p_sueldo);
+   (dni,nombre,telefono,direccion,sueldo) values
+   (p_dni,p_nombre,p_telefono,p_direccion,p_sueldo);
 
  exception
 

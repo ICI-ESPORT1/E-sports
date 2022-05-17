@@ -712,7 +712,7 @@
               <text value="INSCRIPCION EQUIPOS"/>
             </properties>
           </component>
-          <component id="f83c4" class="javax.swing.JButton" binding="bAnadirJugador">
+          <component id="f83c4" class="javax.swing.JButton" binding="bAceptar">
             <constraints>
               <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

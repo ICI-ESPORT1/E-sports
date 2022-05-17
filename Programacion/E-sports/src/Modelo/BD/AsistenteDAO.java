@@ -2,57 +2,60 @@ package Modelo.BD;
 
 import Modelo.UML.*;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class AsistenteDAO {
 
- /* Clase que contiene los metodos necesarios para trabajar con la tabla asistente*/
+    /* Clase que contiene los metodos necesarios para trabajar con la tabla asistente*/
 
     private static Asistente asistente = new Asistente();
 
-    private  static PreparedStatement sentenciaPre;
-    private  static String plantilla;
-    private  static Statement sentencia;
-    private  static ResultSet resultado;
+    private static PreparedStatement sentenciaPre;
+    private static String plantilla;
+    private static Statement sentencia;
+    private static ResultSet resultado;
     private static CallableStatement calla;
 
-    public static void altaAsistente(Asistente a)throws Exception{
+    public static void altaAsistente(Asistente a) {
         //Metodo para insertar un nuevo asistente en la tabla asistente
-        BaseDatos.abrirConexion();
+        //  BaseDatos.abrirConexion();
+        try {
+            calla = BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?,?)}");
 
-        calla =BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?)}");
 
+            calla.setString(1, a.getDni());
+            System.out.println(a.getDni());
+            calla.setString(2, a.getNombre());
+            System.out.println(a.getNombre());
+            calla.setString(3, a.getTelefono());
+            System.out.println(a.getTelefono());
+            calla.setString(4,a.getDireccion());
+            calla.setFloat(5, a.getSueldo());
+            System.out.println(a.getSueldo());
+            calla.execute();
+            calla.close();
+            //  BaseDatos.cerrarConexion();
 
-        calla.setString(1,a.getDni());
-        System.out.println(a.getDni());
-        calla.setString(2,a.getNombre());
-        System.out.println(a.getNombre());
-        calla.setString(3,a.getTelefono());
-        System.out.println(a.getTelefono());
-        calla.setFloat(4, a.getSueldo());
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getErrorCode());
+        }
 
-        calla.execute();
-        calla.close();
-        BaseDatos.cerrarConexion();
     }
 
 
-    public static void bajaAsistente(Asistente a)throws Exception{
+    public static void bajaAsistente(Asistente a) throws Exception {
         //metodo para borrar un asistente de la tabla asistente por id_asistente
-        BaseDatos.abrirConexion();
+        // BaseDatos.abrirConexion();
 
-        calla =BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
+        calla = BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
 
-        calla.setInt(1,a.getCodPersona());
+        calla.setInt(1, a.getCodPersona());
 
         calla.execute();
 
         calla.close();
 
-        BaseDatos.cerrarConexion();
+        //  BaseDatos.cerrarConexion();
     }
 /*
     public static void cambioEquipoAsistente(Asistente a, int idEquipoNuevo)throws Exception{
@@ -72,26 +75,26 @@ public class AsistenteDAO {
 
     }*/ //Esto esta comentado porque no tiene email
 
-    public static Asistente consultarAsistente(String dni)throws Exception{
+    public static Asistente consultarAsistente(String dni) throws Exception {
         //Metodo para consultar un asistente por dni a la base de datos
-        BaseDatos.abrirConexion();
+        //  BaseDatos.abrirConexion();
 
-        plantilla="select * from asistente where dni = ?";
+        plantilla = "select * from asistente where dni = ?";
 
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,dni);
+        sentenciaPre.setString(1, dni);
 
         resultado = sentenciaPre.executeQuery();
-        if(resultado.next()){
+        if (resultado.next()) {
             crearObjeto();
         }
 
-        BaseDatos.cerrarConexion();
+        //  BaseDatos.cerrarConexion();
         return asistente;
 
     }
 
-    public static void crearObjeto()throws Exception{
+    public static void crearObjeto() throws Exception {
 
         asistente.setCodPersona(resultado.getInt("id_asistente"));
         System.out.println(asistente.getCodPersona());

@@ -17,11 +17,12 @@ public class ResultadoDAO {
 
     public static Resultado obtenerClasificacion()throws Exception{
         //Metodo para mostrar la clasificacion actual
-        BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call obtenerClasificacion(?)}");
+        System.out.println("bien");
+        c=BaseDatos.getConexion().prepareCall("{call gestionResultados.obtenerClasificacion(?)}");
 
         c.registerOutParameter(1, (SQLType) res);
+
 
         c.execute();
 
@@ -37,7 +38,7 @@ public class ResultadoDAO {
         //Metodo para mostrar todos los partidos de las jornadas
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call partidosJornada(?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionResultados.partidosJornada(?)}");
 
         c.registerOutParameter(1, (SQLType) res);
 
@@ -49,6 +50,23 @@ public class ResultadoDAO {
 
         return res;
 
+    }
+
+    public static Resultado obtenerPartidos()throws Exception{
+        //Metodo para mostrar todos los partidos que se han jugado
+        BaseDatos.abrirConexion();
+
+        c=BaseDatos.getConexion().prepareCall("{call gestionResultados.partidos(?)}");
+
+        c.registerOutParameter(1,(SQLType) res);
+
+        c.execute();
+
+        c.close();
+
+        BaseDatos.cerrarConexion();
+
+        return res;
     }
 
 

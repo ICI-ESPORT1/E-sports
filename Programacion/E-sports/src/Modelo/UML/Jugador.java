@@ -11,20 +11,29 @@ public class Jugador extends Persona {
     private Equipo equipo;
 
     /**
+     *
      * @param dni
      * @param nombre
      * @param telefono
-     * @param mail
-     * @param localidad
+     * @param direccion
      * @param nickname
      * @param rol
      * @param salario
+     * @param equipo
      */
-    public Jugador( String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario) {
-        super( dni, nombre, telefono, mail, localidad);
+    public Jugador(String dni, String nombre, String telefono, String direccion, String nickname, Rol rol, float salario, Equipo equipo) {
+        super(dni, nombre, telefono, direccion);
         this.nickname = nickname;
         this.rol = rol;
         this.salario = salario;
+        this.equipo = equipo;
+    }
+
+    public Jugador(String nickname, Rol rol, float salario, Equipo equipo) {
+        this.nickname = nickname;
+        this.rol = rol;
+        this.salario = salario;
+        this.equipo = equipo;
     }
 
     /**
@@ -32,30 +41,37 @@ public class Jugador extends Persona {
      * @param dni
      * @param nombre
      * @param telefono
-     * @param mail
-     * @param localidad
+     * @param direccion
+     * @param nickname
      */
-    public Jugador( String dni, String nombre, String telefono, String mail, String localidad) {
-        super( dni, nombre, telefono, mail, localidad);
-
+    public Jugador(String dni, String nombre, String telefono, String direccion, String nickname) {
+        super(dni, nombre, telefono, direccion);
+        this.nickname = nickname;
     }
+
     /**
+     *
      * @param dni
      * @param nombre
      * @param telefono
-     * @param mail
-     * @param localidad
+     * @param direccion
      * @param nickname
-     * @param rol
      * @param salario
-     * @param equipo
      */
-    public Jugador( String dni, String nombre, String telefono, String mail, String localidad, String nickname, Rol rol, float salario, Equipo equipo) {
-        super( dni, nombre, telefono, mail, localidad);
+    public Jugador(String dni, String nombre, String telefono, String direccion, String nickname, float salario) {
+        super(dni, nombre, telefono, direccion);
         this.nickname = nickname;
-        this.rol = rol;
         this.salario = salario;
-        this.equipo = equipo;
+    }
+
+    /**
+     *
+     * @param nickname
+     * @param salario
+     */
+    public Jugador(String nickname, float salario) {
+        this.nickname = nickname;
+        this.salario = salario;
     }
 
     public Jugador() {

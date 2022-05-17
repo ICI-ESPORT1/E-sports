@@ -6,11 +6,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VentanaAdmin {
+public class VentanaPrincipal {
     private JMenuBar MenuOpcion;
     private JMenu Menu1_1;
     private JMenuBar Menu_Incripcion;
     private JMenu Menu2_2;
+    private JMenuBar MenuLogin;
     private JMenu Menu3_3;
     private JButton Logo;
     private JMenuBar MenuEquipo;
@@ -22,19 +23,15 @@ public class VentanaAdmin {
     private JButton bInscripcion;
     private JMenuItem jmiClasificacion;
 
-    private JButton equiposButton;
 
-
-    public VentanaAdmin() {
-
-
-        Ins.addActionListener(new ActionListener() {
+    public VentanaPrincipal() {
+        Menu3_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirFormularioEquipo();
+
             }
         });
-/*
+
         bInscripcion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,23 +44,17 @@ public class VentanaAdmin {
                 Main.abrirClasificacion();
             }
         });
-
-        bInscripcion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirFormularioEquipo();
-            }
-        });
-       */
     }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("VentanaPrincipal");
-        frame.setContentPane(new VentanaAdmin().Ventana1);
+        frame.setContentPane(new VentanaPrincipal().Ventana1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public JPanel getVentana1() {return Ventana1;}
+    public JPanel getVentana1() {
+        return Ventana1;
+    }
 }

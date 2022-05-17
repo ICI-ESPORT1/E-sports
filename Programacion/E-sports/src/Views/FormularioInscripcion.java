@@ -168,7 +168,7 @@ public class FormularioInscripcion {
 
                     }
                 }
-                catch (Exception z){System.out.println(e.getClass());}
+                catch (Exception z){System.out.println(z.getMessage());}
 
             }
         });

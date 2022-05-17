@@ -37,7 +37,7 @@ public class AsistenteDAO {
             //  BaseDatos.cerrarConexion();
 
         } catch (SQLException sqle) {
-            System.out.println(sqle.getErrorCode());
+            System.out.println(sqle.getMessage());
         }
 
     }

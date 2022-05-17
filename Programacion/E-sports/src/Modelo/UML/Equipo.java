@@ -87,14 +87,14 @@ public class Equipo {
 
 
     public Equipo(String n, String na, LocalDate f, String t, String m, String escudoEquipo, Asistente asistente) {
-        this.nombre = nombre;
-        this.nacionalidad = nacionalidad;
-        this.fechaCreacion = fechaCreacion;
-        this.telefono = telefono;
-        this.mail = mail;
-        this.escudo = escudo;
+        this.nombre = n;
+        this.nacionalidad = na;
+        this.fechaCreacion = f;
+        this.telefono = t;
+        this.mail = m;
 
         this.asistente=asistente;
+        this.escudo = escudo;
     }
 
     /**

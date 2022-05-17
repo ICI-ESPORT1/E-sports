@@ -1,7 +1,6 @@
 package Modelo.BD;
 
 import Modelo.UML.Entrenador;
-import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -18,7 +17,7 @@ public class EntrenadorDAO {
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
-    private static CallableStatement calla;
+    private static CallableStatement c;
 
     public static void altaEntrenador(Entrenador e)throws Exception{
         //Metodo para insertar un nuevo entrenador en la tabla entrenador
@@ -51,7 +50,8 @@ public class EntrenadorDAO {
         int idEquipo =e.getEquipo().getId_equipo();
         sentenciaPre.setInt(5,idEquipo );
         sentenciaPre.setFloat(6, e.getSueldo());
-        int n = sentenciaPre.executeUpdate();
+        sentenciaPre.executeUpdate();
+        int n = 1;
         System.out.println("filas "+ n);
       //  BaseDatos.cerrarConexion();
     }
@@ -61,13 +61,13 @@ public class EntrenadorDAO {
         //metodo para borrar un entrenador de la tabla entrenador por id_entrenador
       //  BaseDatos.abrirConexion();
 
-        calla =BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
+        c =BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
 
-        calla.setInt(1,e.getCodPersona());
+        c.setInt(1,e.getCodPersona());
 
-        calla.execute();
+        c.execute();
 
-        calla.close();
+        c.close();
 
       //  BaseDatos.cerrarConexion();
     }
@@ -76,14 +76,14 @@ public class EntrenadorDAO {
         //metodo para cambiar a un entrenador de equipo
        // BaseDatos.abrirConexion();
 
-        calla =BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
+        c =BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
 
-        calla.setInt(1,e.getCodPersona());
-        calla.setInt(2,idEquipoNuevo);
+        c.setInt(1,e.getCodPersona());
+        c.setInt(2,idEquipoNuevo);
 
-        calla.execute();
+        c.execute();
 
-        calla.close();
+        c.close();
 
       //  BaseDatos.cerrarConexion();
 

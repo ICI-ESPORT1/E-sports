@@ -81,8 +81,8 @@ public class DuenoDAO {
         sentenciaPre.setString(1,d);
 
         resultado = sentenciaPre.executeQuery();
-
-        crearObjeto();
+        while(resultado.next()){
+        crearObjeto();}
       //  BaseDatos.cerrarConexion();
         return dueno;
 

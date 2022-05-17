@@ -89,6 +89,7 @@ public class FormularioInscripcion {
     private JLabel lContador;
     private JButton bEscudo;
     private JButton button1;
+    private JButton bCancelar;
     private JButton bSiguiente;
     /* Variables para la validacion de datos*/
     private String sNombreEquipo = "";
@@ -205,6 +206,12 @@ public class FormularioInscripcion {
         });
 
 
+        bCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.cerrarVentana();
+            }
+        });
     }
 
     public JPanel getJpPrincipal() {

@@ -27,10 +27,12 @@ public class JugadorDAO {
         c.setString(2,j.getNombre());
         c.setString(3, j.getTelefono());
         c.setString(4,j.getDireccion());
-        c.setInt(5, j.getEquipo().getId_equipo());
+        int idE = j.getEquipo().getId_equipo();
+        c.setInt(5,idE);
         c.setString(6, j.getNickname());
         c.setFloat(7, j.getSalario());
-        c.setFloat(8, j.getRol().getCodRol());
+        int idR =j.getRol().getCodRol();
+        c.setInt(8, idR);
 
         c.execute();
 

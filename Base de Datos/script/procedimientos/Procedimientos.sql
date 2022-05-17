@@ -44,12 +44,12 @@ begin
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END nuevo_equipo;
 
-
+/*
 begin
 nuevo_equipo('asf','asderg',to_date('01/01/88','DD/MM/YY'),123123123,'adsg','aerdhf');
 end;
 
-select * from EQUIPO;
+select * from EQUIPO;*/
 
 
 /*PROCEDIMIENTO PARA BORRAR EQUIPOS*/
@@ -71,12 +71,12 @@ begin
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END borrar_equipo;  
 
-
+/*
 begin
 borrar_equipo('asf');
 end;
 
-select * from EQUIPO;
+select * from EQUIPO;*/
 
 
 
@@ -102,7 +102,7 @@ begin
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END cambiar_nomre_equipo;
 
-
+/*
 begin
 cambiar_nomre_equipo('asf','sdagasdg');
 end;
@@ -172,17 +172,17 @@ begin
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END nuevo_entrenador;
 
-/*PRUEBO CON UN NUMERO DE EQUIPO QUE EXISTE*/
+/*PRUEBO CON UN NUMERO DE EQUIPO QUE EXISTE*
 begin
   nuevo_entrenador('28403035P','Logan Miller','643455403','3 Carrs Close- Prudhoe',10,9863);
 end;
 SELECT NOMBRE
 FROM ENTRENADOR;
 
-/*PRUEBO CON UN NUMERO DE EQUIPO QUE NO EXISTE*/
+/*PRUEBO CON UN NUMERO DE EQUIPO QUE NO EXISTE
 begin
   nuevo_jugador('28403035P','Logan Miller','643455403','3 Carrs Close- Prudhoe',10,'mote',9863,1);
-end;
+end;*/
 
 
 
@@ -209,7 +209,7 @@ begin
    when others then
       dbms_output.put_line('HA OCURRIDO UN ERROR');
 end cambio_equipo_entrenador;   
-
+/*
 
 begin
 cambio_equipo_entrenador(18,3);
@@ -218,16 +218,16 @@ end;
 select id_entrenador, nombre, id_equipo
 from entrenador;
 
-
+/*
 /*ENTRENADOR NO EXISTE*/
-begin
+/*begin
 cambio_equipo_entrenador(20,3);
 end;
-
-/*EQUIPO NO EXISTE*/
+/*
+/*EQUIPO NO EXISTE*//*
 begin
 cambio_equipo_entrenador(18,7);
-end;
+end;*/
 
 
 
@@ -251,16 +251,15 @@ begin
      dbms_output.put_line('HA OCURRIDO UN ERROR');
 END borrar_entrenador;  
 
-
-/*PRUEBO CON UN ID QUE EXISTE*/
-begin
+/*
+/*PRUEBO CON UN ID QUE EXISTE
   borrar_entrenador(22);
 end;
 SELECT NOMBRE
-FROM ENTRENADOR;
+FROM ENTRENADOR;*/
 
 
-/*PRUEBO CON UN ID QUE NO EXISTE*/
+/*PRUEBO CON UN ID QUE NO EXISTE
 begin
   borrar_entrenador(26);
 end;
@@ -324,7 +323,7 @@ if validar_equipo(p_id_equipo) then
 
   end if;
 end datos_equipo; 
-
+/*
 declare
 entr entrenador.nombre%type;
 asis asistente.nombre%type;
@@ -564,8 +563,8 @@ v_codError := sqlcode;
 v_mensError := 'El equipo no existe';
 
 dbms_output.put_line('ERROR: '||v_codError || v_mensError );
-END;
-end gestionResultados;
+
+end obtenerClasificacion;
 
 declare
 sc_cursor  gestionResultados.tcursor;

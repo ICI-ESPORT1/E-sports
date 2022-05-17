@@ -1,6 +1,7 @@
 package Modelo.BD;
 
 import Modelo.UML.Entrenador;
+import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -17,30 +18,41 @@ public class EntrenadorDAO {
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
-    private static CallableStatement c;
+    private static CallableStatement calla;
 
     public static void altaEntrenador(Entrenador e)throws Exception{
         //Metodo para insertar un nuevo entrenador en la tabla entrenador
         BaseDatos.abrirConexion();
+    /*
+        calla =BaseDatos.getConexion().prepareCall("{call nuevo_entrenador(?,?,?,?,?,?)}");
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_entrenador(?,?,?,?,?,?)}");
-
-        c.setString(1,e.getDni());
+        calla.setString(1,"72738006T");
         System.out.println(e.getDni().toString());
-        c.setString(2,e.getNombre());
+        calla.setString(2,"Celia");
         System.out.println(e.getNombre().toString());
-        c.setString(3,e.getTelefono());
+        calla.setString(3,"633166160");
         System.out.println(e.getTelefono().toString());
-        c.setString(4,e.getDireccion());
+        calla.setString(4,"es la calle esa");
         System.out.println(e.getDireccion().toString());
-        c.setInt(5,e.getEquipo().getId_equipo());
+        int idE = e.getEquipo().getId_equipo();
+        calla.setInt(5,idE);
         System.out.println(e.getEquipo().getId_equipo());
-        c.setFloat(6, e.getSueldo());
+        calla.setFloat(6, 1543);
         System.out.println(e.getSueldo());
 
-        c.execute();
-        c.close();
-
+        calla.execute();
+        calla.close(); */
+        plantilla = "INSERT INTO entrenador (dni,nombre,telefono,direccion,id_equipo,sueldo) VALUES (?,?,?,?,?,?)";
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1, e.getDni());
+        sentenciaPre.setString(2, e.getNombre());
+        sentenciaPre.setString(3, e.getTelefono());
+        sentenciaPre.setString(4,e.getDireccion());
+        int idEquipo =e.getEquipo().getId_equipo();
+        sentenciaPre.setInt(5,idEquipo );
+        sentenciaPre.setFloat(6, e.getSueldo());
+        int n = sentenciaPre.executeUpdate();
+        System.out.println("filas "+ n);
         BaseDatos.cerrarConexion();
     }
 
@@ -49,13 +61,13 @@ public class EntrenadorDAO {
         //metodo para borrar un entrenador de la tabla entrenador por id_entrenador
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
+        calla =BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
 
-        c.setInt(1,e.getCodPersona());
+        calla.setInt(1,e.getCodPersona());
 
-        c.execute();
+        calla.execute();
 
-        c.close();
+        calla.close();
 
         BaseDatos.cerrarConexion();
     }
@@ -64,14 +76,14 @@ public class EntrenadorDAO {
         //metodo para cambiar a un entrenador de equipo
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
+        calla =BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
 
-        c.setInt(1,e.getCodPersona());
-        c.setInt(2,idEquipoNuevo);
+        calla.setInt(1,e.getCodPersona());
+        calla.setInt(2,idEquipoNuevo);
 
-        c.execute();
+        calla.execute();
 
-        c.close();
+        calla.close();
 
         BaseDatos.cerrarConexion();
 

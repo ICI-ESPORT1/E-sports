@@ -106,7 +106,7 @@ public class FormularioInscripcion {
     private float sueldo = 0;
     private List<String[]> listaJugadores = new ArrayList<String[]>();
     private ArrayList<String>listaDeRoles = new ArrayList<>();
-
+    private String rol ="";
 
 
 
@@ -160,11 +160,12 @@ public class FormularioInscripcion {
                     for(String[] row : listaJugadores){
                         String [] fila = new String[6];
                         fila = row;
-                        Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5],fila[6]);
+                        Main.tenDatosRol(rol);
+                        Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5]);
+
                         System.out.println(row);
+
                     }
-
-
                 }
                 catch (Exception z){System.out.println(e.getClass());}
 
@@ -202,8 +203,6 @@ public class FormularioInscripcion {
                 }
             }
         });
-
-
 
 
     }
@@ -250,8 +249,8 @@ public class FormularioInscripcion {
         String telf ="";
         String sueldo="";
         String nick="";
-        String rol="";
-        String mail ="";
+
+
         int tamanoLista = 0;
 
         try{
@@ -262,11 +261,10 @@ public class FormularioInscripcion {
               loc = tfDirJug.getText();
               telf=tfTelfJug.getText();
               sueldo=tfSueldoJ.getText();
-              mail =tfEmailJug.getText();
               nick=tfNick.getText();
-              rol = "";
 
-              listaJugadores.add(new String[]{dni,nombre,telf,mail,loc,nick,sueldo});
+
+              listaJugadores.add(new String[]{dni,nombre,telf,loc,nick,sueldo}); //ok
               for(String[] row : listaJugadores){
                   String [] fila = new String[6];
                   fila = row;
@@ -348,7 +346,6 @@ public class FormularioInscripcion {
         boolean bnombreP =false;
         boolean bdni = false;
         boolean btelefono =false;
-        boolean bemail = false;
         boolean blocalidad =false;
         try{
 
@@ -370,7 +367,7 @@ public class FormularioInscripcion {
             if(!blocalidad){
                 tfDireccionD.setText("");
             }
-            if(bnombreP&&bemail&&blocalidad&&bdni&&btelefono){
+            if(bnombreP&&blocalidad&&bdni&&btelefono){
                 bDuenoValido = true;
             }
 

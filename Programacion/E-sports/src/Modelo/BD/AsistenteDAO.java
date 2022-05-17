@@ -17,25 +17,25 @@ public class AsistenteDAO {
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
-    private static CallableStatement c;
+    private static CallableStatement calla;
 
     public static void altaAsistente(Asistente a)throws Exception{
         //Metodo para insertar un nuevo asistente en la tabla asistente
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?)}");
+        calla =BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?)}");
 
 
-        c.setString(1,a.getDni());
+        calla.setString(1,a.getDni());
         System.out.println(a.getDni());
-        c.setString(2,a.getNombre());
+        calla.setString(2,a.getNombre());
         System.out.println(a.getNombre());
-        c.setString(3,a.getTelefono());
+        calla.setString(3,a.getTelefono());
         System.out.println(a.getTelefono());
-        c.setFloat(4, a.getSueldo());
+        calla.setFloat(4, a.getSueldo());
 
-        c.execute();
-        c.close();
+        calla.execute();
+        calla.close();
         BaseDatos.cerrarConexion();
     }
 
@@ -44,13 +44,13 @@ public class AsistenteDAO {
         //metodo para borrar un asistente de la tabla asistente por id_asistente
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
+        calla =BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
 
-        c.setInt(1,a.getCodPersona());
+        calla.setInt(1,a.getCodPersona());
 
-        c.execute();
+        calla.execute();
 
-        c.close();
+        calla.close();
 
         BaseDatos.cerrarConexion();
     }

@@ -49,7 +49,7 @@ p_nombre entrenador.nombre%type,
 p_telefono entrenador.telefono%type,
 p_direccion entrenador.direccion%type,
 p_id_equipo entrenador.id_equipo%type,
-p_sueldo entrenador.sueldo%type,
+p_sueldo entrenador.sueldo%type
 )
 is
 begin

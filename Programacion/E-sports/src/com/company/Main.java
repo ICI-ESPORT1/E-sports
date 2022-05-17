@@ -30,7 +30,7 @@ public class Main {
     private static Jornada jornada;
     private static Jugador jugador = new Jugador();
     private static Resultado resultado;
-    private static Rol rol ;
+    private static Rol rol =new Rol();
     private static  String escudoEquipo;
     private static Frame Form;
     private static ArrayList<Equipo>listaEquipos;
@@ -163,6 +163,7 @@ public class Main {
     public static void tenDatosAsistente (String dni, String n, String d ,String t, Float s)throws Exception{
         asistente = new Asistente(dni,n,d,t,s);
         System.out.println(asistente.getNombre());
+        altaAsistente(asistente);
       //  equipo.setAsistente(asistente);
     }
     /**
@@ -502,27 +503,30 @@ public class Main {
      * @throws Exception
      */
     public static void tenDatosRol(String sRol) throws Exception{
-        rol.setNombre(sRol);
+       rol= RolDAO.obtenerRol(sRol);
+
     }
 
     /**
      * Este método recibe ls datos de un jugador y crea el objeto jugador.
      * Utiliza el objeto rol y el objeto equipo que son globales y ya están creados
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
-     * @param nick
-     * @param su
+     *
+     *
      * @throws Exception
      */
-    public static void tenDatosJugador (String dni, String nombre, String telefono,String mail, String localidad, String nick,String su)throws Exception{
+  /*  public static void tenDatosJugador()throws Exception{
         float sueldo = Float.parseFloat(su);
-        jugador = new Jugador(dni,nombre,telefono,mail,localidad,nick,sueldo,rol,equipo);
+        jugador = new Jugador(dni,nombre,telefono,localidad,nick,rol,sueldo,equipo);
         listaJugadores.add(jugador);
         altaJugador(jugador);
 
+    }*/
+    public static void tenDatosJugador(String d, String n, String t, String di,String z,String su)throws Exception{
+
+        float sueldo = Float.parseFloat(su);
+        jugador = new Jugador(d,n,t,di,z,rol,sueldo,equipo);
+        listaJugadores.add(jugador);
+        altaJugador(jugador);
     }
     /**
      * Metodo que llama a altaJugador para hacer un insert en la base de datos
@@ -651,5 +655,6 @@ public class Main {
     public static Resultado obtenerPartidos()throws Exception{
         return resultado=ResultadoDAO.obtenerPartidos();
     }
+
 
 }

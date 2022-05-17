@@ -157,6 +157,14 @@ public class Main {
         frame.setVisible(true);
     }
 
+    public static void abrirModificarDatosPersona(){
+        JFrame frame = new JFrame("ModificarDatosPersona");
+        frame.setContentPane(new ModificarDatosPersona().getJpModificarDatosPersona());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
 
 
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////
@@ -618,14 +626,32 @@ public class Main {
 
     /**
      * Metodo que llama a consultarJugador para hacer una select en la base de datos
-     * @param id
+     * @param dni
      * @return jugador
      * @throws Exception
      */
-    public static Jugador consultarJugador(int id)throws Exception{
+    public static Jugador consultarJugador(String dni)throws Exception{
+         boolean salir=false;
+        int x;
+        listaJugadores=JugadorDAO.consultarJugador();
 
-        return jugador=JugadorDAO.consultarJugador(id);
 
+        for (x=0;x<listaJugadores.size()||salir;x++){
+
+            if(listaJugadores.get(x).getDni().equalsIgnoreCase(dni))
+                salir=true;
+        }
+
+       return jugador = new Jugador(listaJugadores.get(x).getDni(),listaJugadores.get(x).getNombre(),listaJugadores.get(x).getTelefono(),listaJugadores.get(x).getDireccion(),listaJugadores.get(x).getNickname(),listaJugadores.get(x).getRol(),listaJugadores.get(x).getSalario(),listaJugadores.get(x).getEquipo());
+
+    }
+
+    public static void cambiarDatosJugador(String dni, String n, String t, String d,String nn, Float s, String r, String e)throws Exception{
+        rol=RolDAO.obtenerRol(r);
+        equipo=EquipoDAO.consultarEquipoID(e);
+        jugador= new Jugador(dni,n,t,d,nn,rol,s,equipo);
+
+        JugadorDAO.cambiarDatosJugador(jugador);
     }
 
     ////////////////////////////////////// Metodos para la tabla Resultado ////////////////////////////////////

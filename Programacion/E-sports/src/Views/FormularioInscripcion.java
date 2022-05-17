@@ -705,12 +705,6 @@ public class FormularioInscripcion {
             JOptionPane.showMessageDialog(null,"EL CAMPO " + tipo+ " NO ES CORRECTO");
             System.out.println(e.getClass());}
         return bNombre;
-    } /*VALIDA*/
-
-    /**
-     * Funcion para validar semanticamente la nacionalidad.
-     * @return bNacionalidad
-     */
-
+    }
 
 }

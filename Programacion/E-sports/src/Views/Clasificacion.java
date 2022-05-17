@@ -30,8 +30,9 @@ public class Clasificacion extends JFrame {
 
 
     public Clasificacion() {
+        llenarTexto();
 
-        bCancelar.addActionListener(new ActionListener() {
+        bVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

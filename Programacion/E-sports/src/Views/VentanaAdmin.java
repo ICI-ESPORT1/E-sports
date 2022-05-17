@@ -26,6 +26,8 @@ public class VentanaAdmin {
     private JMenuItem verEquipo;
     private JMenuItem DarBaja;
     private JMenuItem DarAlta;
+    private JMenuItem jmiJornadas;
+    private JMenuItem jmiModificarPersonas;
 
     private JButton equiposButton;
 
@@ -60,8 +62,17 @@ public class VentanaAdmin {
                 }
             }
         });
+        jmiModificarPersonas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirModificarDatosPersona();
+            }
+        });
 
         DarBaja.addActionListener(new ActionListener() {
+
+/*
+        bInscripcion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.abrirBajasPersonas();

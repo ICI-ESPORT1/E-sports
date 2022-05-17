@@ -83,6 +83,23 @@ public class EquipoDAO {
         sentenciaPre.setString(1,nombreMayus);
 
         resultado = sentenciaPre.executeQuery();
+
+        crearObjeto();
+
+        return equipo;
+
+    }
+
+    public static Equipo consultarEquipoID(String n)throws Exception{
+        //Metodo para consultar un Equipo por nombre a la base de datos
+        BaseDatos.abrirConexion();
+
+        plantilla="select * from equipo where cod_equipo = ?";
+
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setInt(1,Integer.parseInt(n));
+
+        resultado = sentenciaPre.executeQuery();
         while (resultado.next()){
             crearObjeto();
         }

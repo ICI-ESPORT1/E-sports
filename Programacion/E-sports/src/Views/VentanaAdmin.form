@@ -64,10 +64,22 @@
                       <text value="BajaPersona"/>
                     </properties>
                   </component>
-                  <component id="df469" class="javax.swing.JMenuItem">
+                  <component id="ad84d" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
-                      <text value="ModificarJugador"/>
+                      <text value="AltaJugador"/>
+                    </properties>
+                  </component>
+                  <component id="8ad51" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="BajaJugador"/>
+                    </properties>
+                  </component>
+                  <component id="df469" class="javax.swing.JMenuItem" binding="jmiModificarPersonas">
+                    <constraints/>
+                    <properties>
+                      <text value="ModificarPersonas"/>
                     </properties>
                   </component>
                   <component id="3a9c3" class="javax.swing.JMenuItem">
@@ -86,6 +98,18 @@
                     <constraints/>
                     <properties>
                       <text value="BorrarJornada"/>
+                    </properties>
+                  </component>
+                  <component id="7b66" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="AltaDueño"/>
+                    </properties>
+                  </component>
+                  <component id="2f5ae" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="BajaDueño"/>
                     </properties>
                   </component>
                   <component id="5861" class="javax.swing.JMenuItem">

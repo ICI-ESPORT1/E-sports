@@ -5,6 +5,7 @@ package Views;
  * Esta clase es una vista en la que se van a recoger y validar los datos de los equipos y sus integrantes.
  */
 
+import Modelo.BD.BaseDatos;
 import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
 import Modelo.Excepciones.EquipoRepetido;
@@ -51,7 +52,7 @@ public class FormularioInscripcion {
     private JTextField tfDniEn;
     private JTextField tfTelfEnt;
     private JTextField tfEmailEnt;
-    private JTextField tfLocEnt;
+    private JTextField tfDirEnt;
     private JTextField tfSueldoE;
 
     private JPanel jpAsistente;
@@ -61,7 +62,7 @@ public class FormularioInscripcion {
     private JTextField tfDireccionAsis;
     private JTextField tfSueldoAsis;
 
-    private JButton bAnadirJugador;
+    private JButton bAceptar;
     private JLabel lNombreEn;
     private JLabel lDniEnt;
     private JLabel lTelefono;
@@ -89,6 +90,7 @@ public class FormularioInscripcion {
     private JLabel lContador;
     private JButton bEscudo;
     private JButton button1;
+    private JButton bCancelar;
     private JButton bSiguiente;
     /* Variables para la validacion de datos*/
     private String sNombreEquipo = "";
@@ -106,7 +108,7 @@ public class FormularioInscripcion {
     private float sueldo = 0;
     private List<String[]> listaJugadores = new ArrayList<String[]>();
     private ArrayList<String>listaDeRoles = new ArrayList<>();
-
+    private String rol ="";
 
 
 
@@ -127,13 +129,16 @@ public class FormularioInscripcion {
 
         llenarFormulario();
 
-        bAnadirJugador.addActionListener(new ActionListener() {
+        bAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    /*AQUI ABRE CONEXION CON BASE DE DATOS*/
+                    BaseDatos.abrirConexion();
+
                     bAsisValido = validarDatosAsistente();
                     if(bAsisValido){
-                        Main.tenDatosAsistente(tfDniAsis.getText(),tfNombreAsis.getText(),tfDireccionAsis.getText(),tfTelfAsis.getText(),sueldo);
+                        Main.tenDatosAsistente(tfDniAsis.getText(),tfNombreAsis.getText(),tfTelfAsis.getText(),tfDireccionAsis.getText(),sueldo);
                     }
 
                     bEquipoValido = validarDatosEquipo("especial");
@@ -141,42 +146,47 @@ public class FormularioInscripcion {
                         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                         Date dfecha = formato.parse(tfFecha.getText());
                         java.sql.Date sqlFecha  = new java.sql.Date(dfecha.getTime());
-
                         Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText());
                     }
 
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
-                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfLocEnt.getText(),tfTelfEnt.getText(),sueldo);
+                      //  Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
+                        System.out.println("AQUI SE INSERTARIA EL ENTRENADOR");
                     }
 
                     bDuenoValido = validarDatosDueno("dueno");
                     if(bDuenoValido){
                         Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(), tfDireccionD.getText(),tfTelfd.getText());
                     }
+
                     /*PARA JUGADORES*/
                     llenarListaJugadores();
 
                     for(String[] row : listaJugadores){
                         String [] fila = new String[6];
                         fila = row;
-                        Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5],fila[6]);
+                        Main.tenDatosRol(rol);
+                        Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5]);
+
                         System.out.println(row);
                     }
-
-
+                    /*AQUI CIERRA CONEXION CON BASE DE DATOS*/
+                    BaseDatos.cerrarConexion();
                 }
-                catch (Exception z){System.out.println(e.getClass());}
+                catch (Exception z){System.out.println(z.getMessage());}
 
             }
         });
+
+
+
         añadirJug.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 llenarListaJugadores();
                 if(lContador.getText().equalsIgnoreCase("Jugador 7")){
                     lContador.setText("Maximo alcanzado");
-
                     tfDniJ.setEditable(false);
                     tfNombreJ.setEditable(false);
                     tfDirJug.setEditable(false);
@@ -204,8 +214,12 @@ public class FormularioInscripcion {
         });
 
 
-
-
+        bCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.cerrarVentana();
+            }
+        });
     }
 
     public JPanel getJpPrincipal() {
@@ -224,7 +238,7 @@ public class FormularioInscripcion {
         tfDNId.setText("72738006T");
         tfDirJug.setText("Vitoria");
         tfDireccionAsis.setText("Vitoria");
-        tfLocEnt.setText("Vitoria");
+        tfDirEnt.setText("Vitoria");
         tfDireccionD.setText("Vitoria");
         tfSueldoJ.setText("1439");
         tfSueldoAsis.setText("1673");
@@ -250,8 +264,6 @@ public class FormularioInscripcion {
         String telf ="";
         String sueldo="";
         String nick="";
-        String rol="";
-        String mail ="";
         int tamanoLista = 0;
 
         try{
@@ -262,15 +274,13 @@ public class FormularioInscripcion {
               loc = tfDirJug.getText();
               telf=tfTelfJug.getText();
               sueldo=tfSueldoJ.getText();
-              mail =tfEmailJug.getText();
               nick=tfNick.getText();
-              rol = "";
 
-              listaJugadores.add(new String[]{dni,nombre,telf,mail,loc,nick,sueldo});
+              listaJugadores.add(new String[]{dni,nombre,telf,loc,nick,sueldo}); //ok
               for(String[] row : listaJugadores){
                   String [] fila = new String[6];
                   fila = row;
-                  System.out.println(Arrays.toString(row));
+
               }
               tamanoLista = listaJugadores.size()+1;
 
@@ -348,7 +358,6 @@ public class FormularioInscripcion {
         boolean bnombreP =false;
         boolean bdni = false;
         boolean btelefono =false;
-        boolean bemail = false;
         boolean blocalidad =false;
         try{
 
@@ -370,7 +379,7 @@ public class FormularioInscripcion {
             if(!blocalidad){
                 tfDireccionD.setText("");
             }
-            if(bnombreP&&bemail&&blocalidad&&bdni&&btelefono){
+            if(bnombreP&&blocalidad&&bdni&&btelefono){
                 bDuenoValido = true;
             }
 
@@ -389,7 +398,6 @@ public class FormularioInscripcion {
         boolean bnombreE = false;
         boolean bdniE =false;
         boolean btelefonoE = false;
-        boolean bemailE =false;
         boolean blocalidad = false;
         boolean bSueldo = false;
         try{
@@ -402,21 +410,21 @@ public class FormularioInscripcion {
             if(!bnombreE){
                 tfNombreEntre.setText("");
             }
-            bdniE = validarDni(tfDNId.getText());
+            bdniE = validarDni(tfDniEn.getText());
             if(!bdniE){
                 tfDniEn.setText("");
             }
 
-            btelefonoE = validarTelefono(tfTelfd.getText());
+            btelefonoE = validarTelefono(tfTelfEnt.getText());
             if(!btelefonoE){
                 tfTelfEnt.setText("");
             }
 
-            blocalidad = validarDireccion(tfDireccionD.getText());
+            blocalidad = validarDireccion(tfDirEnt.getText());
             if(!blocalidad){
-                tfLocEnt.setText("");
+                tfDirEnt.setText("");
             }
-            if(bdniE&&blocalidad&&bemailE&&bnombreE&&bSueldo&&btelefonoE){
+            if(bdniE&&blocalidad&&bnombreE&&bSueldo&&btelefonoE){
                 bEntrenador = true;
             }
 

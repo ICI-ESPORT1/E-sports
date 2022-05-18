@@ -13,7 +13,7 @@ public class BaseDatos {
     private static String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
 
     private static Connection conexion;
-    private static boolean casa = false;
+    private static boolean casa = true;
 
     public BaseDatos() {
     }
@@ -32,20 +32,16 @@ public class BaseDatos {
     public static void abrirConexion(){
         try{
             if(!casa){
-                System.out.println("He establecido la conexion");
                 Class.forName("oracle.jdbc.OracleDriver");
                 conexion = DriverManager.getConnection(url,usuario, pass);
             }
             else{
-                System.out.println("He establecido la conexion");
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                conexion = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.192:1521/orcl","system", "oracle");
+                conexion = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.45:1521/orcl","system", "oracle");
             }
-
-
             if(conexion == null){
                 throw new Exception("Problemas con la conexion");
-            }
+            }else{System.out.println("He establecido la conexion");}
         }catch (Exception e){System.out.println(e.getClass());}
     }
 
@@ -55,9 +51,9 @@ public class BaseDatos {
     public static void cerrarConexion(){
         try{
             conexion.close();
-            System.out.println("Cierro la conexion");
-        }catch (Exception e){
-
-        }
+            if(conexion != null){
+                throw new Exception("No se ha cerrado la conexion");
+            }else{ System.out.println("Cierro la conexion");}
+        }catch (Exception e){System.out.println(e.getClass());}
     }
 }

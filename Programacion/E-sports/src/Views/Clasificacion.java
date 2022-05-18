@@ -2,28 +2,41 @@ package Views;
 
 import com.company.Main;
 import Modelo.UML.Resultado;
-import javafx.scene.control.Labeled;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class Clasificacion {
+public class Clasificacion extends JFrame {
     private JLabel lTitulo;
     private JTextArea taClasificacion;
-    private JButton bVolver;
+    private JButton bCancelar;
     private JPanel pClasificacion;
-
     private static Resultado resultado;
+
+    public void llenarTextArea(){
+        try {
+            resultado= Main.obtenerClasificacion();
+            taClasificacion.setText(String.valueOf(resultado));
+        }
+        catch (Exception e) {
+            System.out.println(e.getClass());
+        }
+    }
+
 
 
     public Clasificacion() {
         llenarTexto();
 
-        bVolver.addActionListener(new ActionListener() {
+        bCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaPrincipal();
+
+               Main.cerrarVentana();
             }
         });
     }
@@ -48,6 +61,8 @@ public class Clasificacion {
     }
 
     public JPanel getpClasificacion() {
+
         return pClasificacion;
     }
+
 }

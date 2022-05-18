@@ -8,6 +8,7 @@ public class Dueno extends Persona {
      */
     private Equipo equipo;
 
+
     public Dueno(String dni, String nombre, String telefono, String direccion, Equipo equipo) {
         super(dni, nombre, telefono, direccion);
         this.equipo = equipo;
@@ -20,6 +21,7 @@ public class Dueno extends Persona {
     public Dueno(String dni, String nombre, String telefono, String direccion) {
         super(dni, nombre, telefono, direccion);
     }
+
 
     public Dueno() {
     }

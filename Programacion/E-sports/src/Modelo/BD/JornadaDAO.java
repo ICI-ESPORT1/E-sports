@@ -18,7 +18,7 @@ public class JornadaDAO {
 
     public static void altaJornada(Jornada j)throws Exception{
         //Metodo para insertar una nueva jornada en la tabla jornada
-        BaseDatos.abrirConexion();
+     //   BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call nuevo_jornada(?,?,?)}");
 
@@ -30,13 +30,13 @@ public class JornadaDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
     }
 
 
     public static void bajaJornada(Jornada j)throws Exception{
         //metodo para borrar una jornada de la tabla jornada por num_jornada
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call borrar_jornada(?)}");
 
@@ -46,7 +46,7 @@ public class JornadaDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+    //    BaseDatos.cerrarConexion();
     }
 
 }

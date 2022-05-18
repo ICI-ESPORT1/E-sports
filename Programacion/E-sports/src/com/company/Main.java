@@ -12,9 +12,11 @@ import Views.VentanaAdmin;
 import Views.VisualizarEquipos;
 
 import javax.swing.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.awt.*;
 import java.time.LocalDate;
+import java.util.Random;
 
 public class Main {
     static JFrame frame;
@@ -22,61 +24,77 @@ public class Main {
     private static BaseDatos bd;
 
     private static ArrayList<Jugador> listaJugadores= new ArrayList<>();
-
+    private static ArrayList<Equipo> enfrentamientos= new ArrayList<>();
+    private static Calendario calendario= new Calendario();
     private static Asistente asistente ;
     private static Entrenador entrenador;
     private static Dueno dueno ;
     private static Equipo equipo;
-    private static Jornada jornada;
+    private static Partido partido= new Partido();
+    private static Jornada jornada = new Jornada();
     private static Jugador jugador = new Jugador();
     private static Resultado resultado;
-    private static Rol rol ;
+    private static Rol rol =new Rol();
     private static  String escudoEquipo;
     private static Frame Form;
-    private static ArrayList<Equipo>listaEquipos;
+    private static ArrayList<Equipo>listaEquipos = new ArrayList<>();
+    private static Equipo equipoConId=new Equipo();
+    private static ArrayList<Partido> listaPartidos = new ArrayList<>();
 
+    private static int numJ=jornada.getNumJornada();
     public static void main(String[] args) {
 
         bd = new BaseDatos();
-        bd.abrirConexion();
 
         ventanaLogin();
-        //abrirVentanaPrincipal();
-        //abrirFormularioEquipo();
-        //mostrarVentanaInvitado();
-        listaEquipos = new ArrayList<>();
-        //abrirVentanaPrincipal();
 
+       // BaseDatos.cerrarConexion();
 
     }
     public static void ventanaLogin(){
         dialog = new Login();
         dialog.pack();
         dialog.setVisible(true);
+
     }
 
+    //funcion cerrar ventana con frame
+    public static void cerrarVentana(){
+        frame.dispose();
+    }
+
+    //funcion cerrar ventana con dialog
     public static void CerrarVentana(){
         dialog.dispose();
     }
-    public static void OcultarVentana(){
-        dialog.setVisible(false);
+
+    public static void VentanaInvitado(){
+        frame = new JFrame("VentanaInvitado");
+        frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
+
 
     /**
      * Este método contiene el Main de la ventana VisualizarEquipos
      * @throws Exception
      */
-    public static void abrirVentanaVisualizarEquipos()throws Exception{
-        VisualizarEquipos dialog = new VisualizarEquipos();
+        public static void visualizarEquipo()throws Exception{
+            System.out.println("VISUALIZAR EQUIPO****");
+        dialog = new VisualizarEquipos();
         dialog.pack();
         dialog.setVisible(true);
     }
+
+
     /**
      * Este método contiene el Main de la ventana ElegirEscudos
      * @throws Exception
      */
     public static void abrirVentanaEscudos()throws Exception{
-        VentanaEscudos dialog = new VentanaEscudos();
+        dialog = new VentanaEscudos();
         dialog.pack();
         dialog.setVisible(true);
     }
@@ -91,7 +109,9 @@ public class Main {
         frame.setVisible(true);
     }
 
-
+    /**
+     * Este método contiene el Main de la ventana Invitado para poder abrirla
+     */
     public static void mostrarVentanaInvitado()
     {
         frame = new JFrame("VentanaInvitado");
@@ -103,16 +123,16 @@ public class Main {
         CerrarVentana();
 
     }
-
-
-
+    /**
+     * Este método contiene el Main de la ventana para inscribir jugadores
+     */
     public static ArrayList<Jugador>crearListaJugadores(){
         return null;
         /*Recibe los datos de un jugador y los mete en un arrayList*/
     }
 
     /**
-     * Este método contiene el Main de la ventana para inscribir jugadores
+     * Este método contiene el Main de la ventana Formulario Incripcion para poder abrirla
      */
     public static void abrirFormularioEquipo() {
         frame = new JFrame("FormularioInscripcion");
@@ -140,8 +160,11 @@ public class Main {
         return nombreEncontrado;
     }
 
+    /**
+     * Este método contiene el Main de la ventana clasificacion para poder abrirla
+     */
     public static void abrirClasificacion(){
-        JFrame frame = new JFrame("Clasificacion");
+        frame = new JFrame("Clasificacion");
         frame.setContentPane(new Clasificacion().getpClasificacion());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -151,6 +174,20 @@ public class Main {
     public static void abrirJornada(){
         JFrame frame = new JFrame("Jornadas");
         frame.setContentPane(new Jornadas().getJpJornadas());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public static void abrirBajasPersonas(){
+        frame = new JFrame("VentanaBajas");
+        frame.setContentPane(new BajasPersonas().getBajas());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public static void abrirAltasPersonas(){
+        frame = new JFrame("VentanaAltas");
+        frame.setContentPane(new AltaPersonas().getAltas());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -167,20 +204,24 @@ public class Main {
 
 
     ////////////////////////////////////// Metodos para la tabla asistente ////////////////////////////////////
-    public static void tenDatosAsistente (String dni, String n, String d ,String t, Float s)throws Exception{
-        asistente = new Asistente(dni,n,d,t, equipo,s);
+    public static void tenDatosAsistente (String dni, String n, String t,String d , Float s)throws Exception{
+        System.out.println("TEN DATOS ASISTENTE **********");
+        asistente = new Asistente(dni,n,t,d,s);
         System.out.println(asistente.getNombre());
-      //  equipo.setAsistente(asistente);
-        altaAsistente(asistente,equipo);
+        altaAsistente(asistente);
+        asistente = AsistenteDAO.consultarAsistente(dni); //Ya tengo el asistente con dni
+
+        //equipo.setAsistente(asistente); el equipo es null porque todavia no hay equipo
     }
     /**
      * Metodo que llama a altaAsistente para hacer un insert en la base de datos
      * @param asistente
-     * @param e
+     * @param
      * @throws Exception
      */
-    public static void altaAsistente(Asistente asistente, Equipo e)throws Exception{
-        asistente.setEquipo(e);
+    public static void altaAsistente(Asistente asistente)throws Exception{
+        System.out.println("ALTA ASISTENTE");
+       // asistente.setEquipo(e);
 
         AsistenteDAO.altaAsistente(asistente);
     }
@@ -195,13 +236,16 @@ public class Main {
      * @throws Exception
      */
     public static void bajaAsistente(String dni, String n, Equipo e,String t,String d, Float s)throws Exception{
-        asistente = new Asistente(dni,n,t,d,equipo,s);
+        asistente = new Asistente(dni,n,t,d,s);
         listaEquipos.add(equipo);
-
         AsistenteDAO.bajaAsistente(asistente);
 
     }
 
+
+  /*  public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo, String m)throws Exception{
+        asistente = new Asistente(dni,n,l,t,m, equipo,s);
+        listaEquipos.add(equipo);}
 
   /*  public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo, String m)throws Exception{
         asistente = new Asistente(dni,n,l,t,m, equipo,s);
@@ -218,26 +262,32 @@ public class Main {
      * @throws Exception
      */
     public static Asistente consultarAsistente(String dni)throws Exception{
+        System.out.println("CONSULTAR ASISTENTE DNI");
 
       return asistente=  AsistenteDAO.consultarAsistente(dni);
 
     }
 
     ////////////////////////////////////// Metodos para la tabla Entrenador ////////////////////////////////////
-    public static void tenDatosEntrenador(String dni,String n,String d,String t, Float s){
-        entrenador = new Entrenador(dni,n,d,t,equipo,s);
-        equipo.setEntrenador(entrenador);
+    public static void tenDatosEntrenador(String dni,String n,String t,String d, Float s)throws Exception{
+        System.out.println("TEN DATOS ENTRENADOR");
+        ObtenerEquipoConId();
+        equipo.setId_equipo(equipoConId.getId_equipo());
+        entrenador = new Entrenador(dni,n,t,d,equipo,s);
+        altaEntrenador(entrenador);
 
+    }
+    public static void ObtenerEquipoConId()throws Exception{
+        System.out.println("OBTENER EQUIPO CON ID**********");
+        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
     }
     /**
      * Metodo que llama a altaEntrenador para hacer un insert en la base de datos
      * @param entrenador
-     * @param e
      * @throws Exception
      */
-    public static void altaEntrenador(Entrenador entrenador,Equipo e)throws Exception{
-
-        entrenador.setEquipo(e);
+    public static void altaEntrenador(Entrenador entrenador)throws Exception{
+        System.out.println("ALTA ENTRENADOR**********");
 
         EntrenadorDAO.altaEntrenador(entrenador);
 
@@ -294,17 +344,22 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Dueno ////////////////////////////////////
-    public static void tenDatosDueno(String dni, String n, String d, String t){
+    public static void tenDatosDueno(String dni, String n, String d, String t)throws Exception{
+        System.out.println("TEN DATOS DUENO*************");
         dueno = new Dueno(dni,n,t,d,equipo);
-        equipo.setDueno(dueno);
+        altaDueno(dueno);
     }
     /**
      * Metodo que llama a altaDueno para hacer un insert en la base de datos
      * @throws Exception
+     * @param dueno
      */
-    public static void altaDueno()throws Exception{
+    public static void altaDueno(Dueno dueno)throws Exception{
+        System.out.println("ALTA DUENO **********");
 
         DuenoDAO.altaDueno(dueno);
+        Main.dueno = DuenoDAO.consultarDueno(Main.dueno.getDni());
+        Main.dueno.setEquipo(equipo);
 
     }
 
@@ -353,7 +408,7 @@ public class Main {
      * @throws Exception
      */
     public static Dueno consultarDueno(String dni)throws Exception{
-
+        System.out.println("CONSULTAR DUENO **********");
 
        return dueno= DuenoDAO.consultarDueno(dni);
 
@@ -361,16 +416,20 @@ public class Main {
 
     ////////////////////////////////////// Metodos para la tabla Equipo ////////////////////////////////////
     public static void tenEscudo(String escudo){
+        System.out.println("TEN ESCUDO *******");
         escudoEquipo = escudo;
     }
     public static String dameEscudo(){
+        System.out.println("DAME ESCUDO *************");
+
         return escudoEquipo;
     }
-    public static void tenDatosEquipo(String n, String na, LocalDate f, String t,String m){
+    public static void tenDatosEquipo(String n, String na, LocalDate f, String t,String m)throws Exception{
+        System.out.println("TEN DATOS EQUIPO ***********");
         /*Hay que crear un objeto equipo */
         escudoEquipo=dameEscudo();
-        equipo = new Equipo(n,na, f, t, m, escudoEquipo);
-        listaEquipos.add(equipo);
+        equipo = new Equipo(n,na, f, t, m, escudoEquipo,asistente);
+
 
         /*equipo.setNombre(n);
         equipo.setNacionalidad(na);
@@ -378,6 +437,11 @@ public class Main {
         equipo.setTelefono(t);
         equipo.setMail(m);
         equipo.setEscudo(e);*/
+        altaEquipo(equipo,asistente);
+        Equipo equipoConIDsinAsis = new Equipo();
+        equipoConIDsinAsis = EquipoDAO.consultarEquipo(n);
+        equipo.setId_equipo(equipoConIDsinAsis.getId_equipo());
+        listaEquipos.add(equipo);
     }
 
     /**
@@ -388,10 +452,16 @@ public class Main {
      */
 
     public static void altaEquipo(Equipo e, Asistente a)throws Exception{
+        System.out.println("ALTA EQUIPO ***********");
+        Asistente asisConId;
 
-        equipo.setAsistente(a);
-
-        EquipoDAO.altaEquipo(equipo);
+        asisConId = AsistenteDAO.consultarAsistente(asistente.getDni());
+        equipo.setAsistente(asisConId);
+        EquipoDAO.altaEquipo(equipo,asisConId);
+        System.out.println(equipo.getNombre().toString());
+        /* ESTA CONSULTA YA NO HACE FALTA PORQUE HE BORRADO EL OBJETO EQUIPO DE ASISTENTE
+        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
+        equipo.setId_equipo(equipoConId.getId_equipo());*/
 
     }
 
@@ -455,6 +525,19 @@ public class Main {
 
     }
 
+    public static void consultarEquipos()throws Exception{
+        System.out.println("CONSULTAR EQUIPOS**********");
+       listaEquipos = EquipoDAO.selectTodosLosEquipos();
+
+    }
+    public static String dameStringEquipos()throws Exception{
+        System.out.println("DAME STRING EQUIPOS***************");
+        String infoEquipos= "";
+        for (int i=0; i<listaEquipos.size();i++){
+            infoEquipos += "Equipo: " + listaEquipos.get(i).getNombre();
+        }
+        return infoEquipos;
+    }
     ////////////////////////////////////// Metodos para la tabla Jornada ////////////////////////////////////
 
     /**
@@ -499,34 +582,43 @@ public class Main {
      * @throws Exception
      */
     public static void tenDatosRol(String sRol) throws Exception{
-        rol.setNombre(sRol);
+        System.out.println("TEN DATOS ROL");
+       rol= RolDAO.obtenerRol(sRol);
+
     }
 
     /**
      * Este método recibe ls datos de un jugador y crea el objeto jugador.
      * Utiliza el objeto rol y el objeto equipo que son globales y ya están creados
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param mail
-     * @param localidad
-     * @param nick
-     * @param su
+     *
+     *
      * @throws Exception
      */
-    public static void tenDatosJugador (String dni, String nombre, String telefono,String mail, String localidad, String nick,String su)throws Exception{
+  /*  public static void tenDatosJugador()throws Exception{
         float sueldo = Float.parseFloat(su);
-        jugador = new Jugador(dni,nombre,telefono,mail,localidad,nick,sueldo,rol,equipo);
+        jugador = new Jugador(dni,nombre,telefono,localidad,nick,rol,sueldo,equipo);
         listaJugadores.add(jugador);
         altaJugador(jugador);
 
+    }*/
+    public static void tenDatosJugador(String d, String n, String t, String di,String z,String su)throws Exception{
+        System.out.println("TEN DATOS JUGADOR*************");
+        float sueldo = Float.parseFloat(su);
+        jugador = new Jugador(d,n,t,di,z,rol,sueldo,equipo);
+        listaJugadores.add(jugador);
+        altaJugador(jugador);
+        /*Necesito el id del jugador*/
+        jugador = JugadorDAO.jugadorConId(jugador.getDni());
+        listaJugadores.add(jugador);
+        rol.setListaJugador(listaJugadores);
+        equipo.setlistaJugadores(listaJugadores);
     }
     /**
      * Metodo que llama a altaJugador para hacer un insert en la base de datos
      * @throws Exception
      */
     public static void altaJugador(Jugador jugador)throws Exception{
-
+        System.out.println("ALTA JUGADOR************");
        /* jugador.setDni(d);
         jugador.setNombre(n);
         jugador.setTelefono(t);
@@ -603,6 +695,7 @@ public class Main {
      * @throws Exception
      */
     public static ArrayList<Jugador> consultarJugadoresEquipo(int idE)throws Exception{
+        System.out.println("CONSULTAR JUGADORES EQUIPO *****************");
         listaJugadores=new ArrayList<>();
 
         return listaJugadores=JugadorDAO.consultarJugadoresEquipo(idE);
@@ -616,6 +709,7 @@ public class Main {
      * @throws Exception
      */
     public static Jugador consultarJugador(String dni)throws Exception{
+        System.out.println("CONSULTAR JUGADOR**************");
          boolean salir=false;
         int x;
         listaJugadores=JugadorDAO.consultarJugador();
@@ -665,6 +759,106 @@ public class Main {
 
     public static Resultado obtenerPartidos()throws Exception{
         return resultado=ResultadoDAO.obtenerPartidos();
+    }
+
+
+    ////////////////////////////////////// Metodos para la tabla Partidos ////////////////////////////////////
+
+    public static boolean generarJornadas(){
+
+        calendario.setCerrado('N');
+        calendario.setTemporada("Primera");
+        try {
+            if (numJ==0)
+            CalendarioDAO.altaCalendario(calendario);
+
+        numJ=numJ+1;
+        jornada.setFecha(LocalDate.now());
+        jornada.setNumJornada(numJ);
+        jornada.setCalendario(calendario);
+
+
+
+            JornadaDAO.altaJornada(jornada);
+
+        partido.setTurno("Mañana");
+        partido.setJornada(jornada);
+        generarEnfrentamientos();
+        partido.setListaEquipos(enfrentamientos);
+
+            PartidoDAO.altaPartido(partido);
+        }
+        catch (Exception e){
+            System.out.println(e.getClass());
+        }
+
+        return true;
+
+    }
+
+    public static void generarEnfrentamientos(){
+        try{
+            listaEquipos=  EquipoDAO.selectTodosLosEquipos();
+        int nPartidos= listaEquipos.size() / 2;
+        int numPartido=;
+
+            Random random= new Random();
+
+            int min=0;
+            int max=listaEquipos.size();
+            int equipo1;
+            int equipo2;
+            do {
+                do {
+                    equipo1 = random.nextInt(max + min) + min;
+                    equipo2 = random.nextInt(max + min) + min;
+                }
+                while (equipo1 != equipo2);
+            }
+            while (equipo1!=)
+                enfrentamientos.add(listaEquipos.get(equipo1));
+                enfrentamientos.add(listaEquipos.get(equipo2));
+
+        ResultadoDAO.altaResultado(equipo1,numPartido);
+
+            }
+        catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        /*
+        try {
+            boolean[] usados = new boolean[nEquipos];
+            for (int i = 0; i < nEquipos; i++) {
+                int equipoAleatorio = (int) (Math.random() * nEquipos);
+                boolean encontrado = false;
+
+                while (!encontrado) {
+                    if (!usados[equipoAleatorio]) {
+                        usados[equipoAleatorio] = true;
+                        encontrado = true;
+                    } else {
+                        equipoAleatorio++;
+                        if (equipoAleatorio == nEquipos) {
+                            equipoAleatorio = 0;
+                        }
+                    }
+                }
+                if (i % 2 == 0) {
+                    equipo = EquipoDAO.consultarEquipoID(String.valueOf(equipoAleatorio));
+                    enfrentamientos.add(equipo);
+                    listaPartidos.get(1).setTurno("mañana");
+                    listaPartidos.get(1).setListaEquipos(enfrentamientos);
+
+                } else {
+
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getClass());
+        }
+*/
+
     }
 
 }

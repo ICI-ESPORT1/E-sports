@@ -1,14 +1,15 @@
 package Modelo.BD;
 
+import Modelo.UML.Dueno;
 import Modelo.UML.Rol;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class RolDAO {
-    /*Clase que contiene los metodos necesarios para trabajar con la tabla rol*/
-
-    private static Rol rol;
+    private static Rol rol= new Rol();
 
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
@@ -18,30 +19,26 @@ public class RolDAO {
 
 
     public static Rol obtenerRol(String r)throws Exception{
-        //Metodo para consultar un rol por nombre
-        BaseDatos.abrirConexion();
-        String rM=r.toUpperCase();
-        plantilla="select * from rol where upper(nombre) = ?";
-
+      //  BaseDatos.abrirConexion();
+        String rM = r.toUpperCase();
+        plantilla = "select * from rol where upper(Nombre)= ?";
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,r);
+        sentenciaPre.setString(1,rM);
 
         resultado = sentenciaPre.executeQuery();
 
-        while(resultado.next()) {
+        while(resultado.next()){
             crearObjeto();
         }
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
 
         return rol;
 
     }
-
     public static void crearObjeto()throws Exception{
         rol.setCodRol(resultado.getInt("id_rol"));
         rol.setNombre(resultado.getString("nombre"));
         rol.setDescripcion(resultado.getString("descripcion"));
-
     }
 }

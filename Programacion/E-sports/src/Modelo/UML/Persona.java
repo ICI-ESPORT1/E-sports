@@ -11,6 +11,14 @@ public class Persona {
     private String direccion;
 
 
+    public Persona(Integer codPersona, String dni, String nombre, String telefono, String direccion) {
+        this.codPersona = codPersona;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
+
     /**
      *
      * @param dni
@@ -18,6 +26,7 @@ public class Persona {
      * @param telefono
      * @param direccion
      */
+
 
     public Persona( String dni, String nombre, String telefono, String direccion) {
         this.dni = dni;

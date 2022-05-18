@@ -9,21 +9,25 @@ import java.util.ArrayList;
 public class Partido {
 
     private Integer idPartido;
-    private LocalDate fecha;
+    private String turno;
+    private Jornada jornada;
 
     //ATRIBUTO DE LA RELACION EQUIPO
     private ArrayList<Equipo> listaEquipos;
 
     /**
      *
-     * @param idPartido
-     * @param fecha
+     * @param turno
      * @param listaEquipos
      */
-    public Partido(Integer idPartido, LocalDate fecha, ArrayList<Equipo> listaEquipos) {
-        this.idPartido = idPartido;
-        this.fecha = fecha;
+    public Partido(String turno, ArrayList<Equipo> listaEquipos) {
+        this.turno = turno;
         this.listaEquipos = listaEquipos;
+    }
+
+    public Partido(String turno, Jornada jornada) {
+        this.turno = turno;
+        this.jornada = jornada;
     }
 
     /**
@@ -32,14 +36,12 @@ public class Partido {
     public Partido() {
     }
 
-    /**
-     *
-     * @param idPartido
-     * @param fecha
-     */
-    public Partido(Integer idPartido, LocalDate fecha) {
-        this.idPartido = idPartido;
-        this.fecha = fecha;
+    public Jornada getJornada() {
+        return jornada;
+    }
+
+    public void setJornada(Jornada jornada) {
+        this.jornada = jornada;
     }
 
     /**
@@ -60,18 +62,18 @@ public class Partido {
 
     /**
      *
-     * @return fecha
+     * @return turno
      */
-    public LocalDate getFecha() {
-        return fecha;
+    public String getTurno() {
+        return turno;
     }
 
     /**
      *
-     * @param fecha
+     * @param turno
      */
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 
     /**

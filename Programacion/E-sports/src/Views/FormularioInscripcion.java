@@ -5,6 +5,7 @@ package Views;
  * Esta clase es una vista en la que se van a recoger y validar los datos de los equipos y sus integrantes.
  */
 
+import Modelo.BD.BaseDatos;
 import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
 import Modelo.Excepciones.EquipoRepetido;
@@ -132,6 +133,9 @@ public class FormularioInscripcion {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    /*AQUI ABRE CONEXION CON BASE DE DATOS*/
+                    BaseDatos.abrirConexion();
+
                     bAsisValido = validarDatosAsistente();
                     if(bAsisValido){
                         Main.tenDatosAsistente(tfDniAsis.getText(),tfNombreAsis.getText(),tfTelfAsis.getText(),tfDireccionAsis.getText(),sueldo);
@@ -142,19 +146,20 @@ public class FormularioInscripcion {
                         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                         Date dfecha = formato.parse(tfFecha.getText());
                         java.sql.Date sqlFecha  = new java.sql.Date(dfecha.getTime());
-
                         Main.tenDatosEquipo(tfNombreEquipo.getText(),tfNacionalidad.getText(),ldFecha,tfTelefonoEquipo.getText(),tfEmailEquipo.getText());
                     }
 
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
-                        Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
+                      //  Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
+                        System.out.println("AQUI SE INSERTARIA EL ENTRENADOR");
                     }
 
                     bDuenoValido = validarDatosDueno("dueno");
                     if(bDuenoValido){
                         Main.tenDatosDueno(tfDNId.getText(),tfNombreDueno.getText(), tfDireccionD.getText(),tfTelfd.getText());
                     }
+
                     /*PARA JUGADORES*/
                     llenarListaJugadores();
 
@@ -165,13 +170,17 @@ public class FormularioInscripcion {
                         Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5]);
 
                         System.out.println(row);
-
                     }
+                    /*AQUI CIERRA CONEXION CON BASE DE DATOS*/
+                    BaseDatos.cerrarConexion();
                 }
                 catch (Exception z){System.out.println(z.getMessage());}
 
             }
         });
+
+
+
         añadirJug.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -255,8 +264,6 @@ public class FormularioInscripcion {
         String telf ="";
         String sueldo="";
         String nick="";
-
-
         int tamanoLista = 0;
 
         try{
@@ -269,12 +276,11 @@ public class FormularioInscripcion {
               sueldo=tfSueldoJ.getText();
               nick=tfNick.getText();
 
-
               listaJugadores.add(new String[]{dni,nombre,telf,loc,nick,sueldo}); //ok
               for(String[] row : listaJugadores){
                   String [] fila = new String[6];
                   fila = row;
-                  System.out.println(Arrays.toString(row));
+
               }
               tamanoLista = listaJugadores.size()+1;
 

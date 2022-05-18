@@ -40,7 +40,7 @@ public class Main {
     public static void main(String[] args) {
 
         bd = new BaseDatos();
-        BaseDatos.abrirConexion();
+
 
           ventanaLogin();
 
@@ -267,12 +267,15 @@ public class Main {
     ////////////////////////////////////// Metodos para la tabla Entrenador ////////////////////////////////////
     public static void tenDatosEntrenador(String dni,String n,String t,String d, Float s)throws Exception{
         System.out.println("TEN DATOS ENTRENADOR");
-        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
+        ObtenerEquipoConId();
         equipo.setId_equipo(equipoConId.getId_equipo());
         entrenador = new Entrenador(dni,n,t,d,equipo,s);
         altaEntrenador(entrenador);
 
-
+    }
+    public static void ObtenerEquipoConId()throws Exception{
+        System.out.println("OBTENER EQUIPO CON ID**********");
+        equipoConId = EquipoDAO.consultarEquipo(equipo.getNombre());
     }
     /**
      * Metodo que llama a altaEntrenador para hacer un insert en la base de datos
@@ -340,18 +343,19 @@ public class Main {
     public static void tenDatosDueno(String dni, String n, String d, String t)throws Exception{
         System.out.println("TEN DATOS DUENO*************");
         dueno = new Dueno(dni,n,t,d,equipo);
-        altaDueno();
+        altaDueno(dueno);
     }
     /**
      * Metodo que llama a altaDueno para hacer un insert en la base de datos
      * @throws Exception
+     * @param dueno
      */
-    public static void altaDueno()throws Exception{
+    public static void altaDueno(Dueno dueno)throws Exception{
         System.out.println("ALTA DUENO **********");
 
         DuenoDAO.altaDueno(dueno);
-        dueno = DuenoDAO.consultarDueno(dueno.getDni());
-        dueno.setEquipo(equipo);
+        Main.dueno = DuenoDAO.consultarDueno(Main.dueno.getDni());
+        Main.dueno.setEquipo(equipo);
 
     }
 

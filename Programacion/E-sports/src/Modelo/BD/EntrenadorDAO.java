@@ -20,27 +20,7 @@ public class EntrenadorDAO {
     private static CallableStatement c;
 
     public static void altaEntrenador(Entrenador e)throws Exception{
-        //Metodo para insertar un nuevo entrenador en la tabla entrenador
-       // BaseDatos.abrirConexion();
-    /*
-        calla =BaseDatos.getConexion().prepareCall("{call nuevo_entrenador(?,?,?,?,?,?)}");
 
-        calla.setString(1,"72738006T");
-        System.out.println(e.getDni().toString());
-        calla.setString(2,"Celia");
-        System.out.println(e.getNombre().toString());
-        calla.setString(3,"633166160");
-        System.out.println(e.getTelefono().toString());
-        calla.setString(4,"es la calle esa");
-        System.out.println(e.getDireccion().toString());
-        int idE = e.getEquipo().getId_equipo();
-        calla.setInt(5,idE);
-        System.out.println(e.getEquipo().getId_equipo());
-        calla.setFloat(6, 1543);
-        System.out.println(e.getSueldo());
-
-        calla.execute();
-        calla.close(); */
         plantilla = "INSERT INTO entrenador (dni,nombre,telefono,direccion,id_equipo,sueldo) VALUES (?,?,?,?,?,?)";
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
         sentenciaPre.setString(1, e.getDni());

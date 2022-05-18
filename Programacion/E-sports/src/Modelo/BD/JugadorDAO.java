@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class JugadorDAO {
     /* Clase que contiene los metodos necesarios para trabajar con la tabla jugador*/
 
-    private static Jugador jugador;
+    private static Jugador jugador = new Jugador();
     private static ArrayList<Jugador> listaJugadores;
 
     private  static PreparedStatement sentenciaPre;

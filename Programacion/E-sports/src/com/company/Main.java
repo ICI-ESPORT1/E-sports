@@ -13,10 +13,9 @@ import Views.VisualizarEquipos;
 
 import javax.swing.*;
 import java.sql.SQLOutput;
-import java.util.ArrayList;
+import java.util.*;
 import java.awt.*;
 import java.time.LocalDate;
-import java.util.Random;
 
 public class Main {
     static JFrame frame;
@@ -800,6 +799,7 @@ public class Main {
         try{
             listaEquipos=  EquipoDAO.selectTodosLosEquipos();
         int nPartidos= listaEquipos.size() / 2;
+
         int numPartido=;
 
             Random random= new Random();
@@ -824,6 +824,31 @@ public class Main {
             }
         catch (Exception e){
             System.out.println(e.getClass());
+        }
+
+        private static HashMap<Integer, Integer> generarPartidos (int cantPartidos) {
+            HashMap <Integer, Integer> retorno = new HashMap<Integer, Integer>();
+            Random randNum = new Random();
+            int eq1 = 0;
+
+            Set<Integer> set= new LinkedHashSet<Integer>();
+            Set<Integer>set1 = new LinkedHashSet<Integer>();
+            while (set.size() <= cantPartidos/2-1) {
+                set.add(randNum.nextInt(cantPartidos)+1);
+            }
+            while (set1.size() <= cantPartidos/2-1) {
+                eq1= randNum.nextInt(cantPartidos)+1;
+                if (!set1.contains(eq1) && !set.contains(eq1)) set1.add(eq1);
+            }
+            Iterator<Integer> it = set.iterator();
+            Iterator<Integer> it1 = set1.iterator();
+
+            for (int i = 0; i < cantPartidos/2; i++) {
+                retorno.put(it.next(), it1.next());
+            }
+            System.out.println(retorno.toString());
+
+            return retorno;
         }
         /*
         try {

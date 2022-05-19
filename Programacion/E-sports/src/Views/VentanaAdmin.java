@@ -28,6 +28,7 @@ public class VentanaAdmin {
     private JMenuItem DarAlta;
     private JMenuItem jmiJornadas;
     private JMenuItem jmiModificarPersonas;
+    private JMenuItem jmiModificarEquipo;
 
     private JButton equiposButton;
 
@@ -62,6 +63,17 @@ public class VentanaAdmin {
                 }
             }
         });
+        jmiModificarEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Main.VentanaModificarEquipo();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         jmiModificarPersonas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,32 +82,36 @@ public class VentanaAdmin {
         });
 
 
-            }
-        });
-
-
         DarAlta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirAltasPersonas();
-            }
-        });
+        @Override
+        public void actionPerformed (ActionEvent e){
+            Main.abrirAltasPersonas();
+        }
+    });
         jornada.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed (ActionEvent e){
+            Main.abrirJornada();
+        }
+    });
+        DarBaja.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirJornada();
+                Main.abrirBajasPersonas();
             }
         });
 
-    }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("VentanaAdmin");
+}
+
+public static void main(String[]args){
+        JFrame frame=new JFrame("VentanaAdmin");
         frame.setContentPane(new VentanaAdmin().Ventana1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
+        }
 
-    public JPanel getVentana1() {return Ventana1;}
-}
+
+public JPanel getVentana1(){return Ventana1;}
+        }

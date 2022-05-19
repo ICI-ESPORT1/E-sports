@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.awt.*;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.IdentityHashMap;
 
 import static com.sun.tools.attach.VirtualMachine.list;
 
@@ -194,6 +196,7 @@ public class Main {
         /*Recibe los datos de un jugador y los mete en un arrayList*/
     }
 
+
     /**
      * Este método contiene el Main de la ventana Formulario Incripcion para poder abrirla
      */
@@ -203,6 +206,12 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+    public static void VentanaModificarEquipo(){
+        VentanaModificarEquipo dialog = new VentanaModificarEquipo();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
 
     /**
@@ -560,6 +569,7 @@ public class Main {
      * @throws Exception
      */
     public static void bajaEquipo(String n, String na, LocalDate f, String t, String m, String e, Asistente a) throws Exception {
+        equipo = new Equipo();
         equipo.setNombre(n);
         equipo.setNacionalidad(na);
         equipo.setFechaCreacion(f);
@@ -568,33 +578,90 @@ public class Main {
         equipo.setEscudo(e);
         equipo.setAsistente(a);
 
-        EquipoDAO.bajaEquipo(equipo);
+        boolean borrado = EquipoDAO.bajaEquipo(equipo);
 
     }
 
     /**
      * Metodo que llama a cambiarNombreEquipo para hacer un cambio del nombre de equipo
      *
-     * @param n
-     * @param na
-     * @param f
-     * @param t
-     * @param m
-     * @param e
-     * @param a
-     * @param nombreNuevo
+     * @param nNuevo
      * @throws Exception
      */
-    public static void cambiarNombreEquipo(String n, String na, LocalDate f, String t, String m, String e, Asistente a, String nombreNuevo) throws Exception {
-        equipo.setNombre(n);
-        equipo.setNacionalidad(na);
-        equipo.setFechaCreacion(f);
-        equipo.setTelefono(t);
-        equipo.setMail(m);
-        equipo.setEscudo(e);
-        equipo.setAsistente(a);
+    public static void cambiarNombreEquipo(String nNuevo, String nViejo) throws Exception {
+        boolean nombreCambiado = false;
+        int posicionNombreV =0;
 
-        EquipoDAO.cambiarNombreEquipo(equipo, nombreNuevo);
+
+        //busco el equipo en la posicion de la lista
+        int i = 0;
+        for(i = 0; i<listaEquipos.size()&& !listaEquipos.get(i).getNombre().equalsIgnoreCase(nNuevo); i++){}
+            if(i< listaEquipos.size()){
+                JOptionPane.showMessageDialog(null,"El nombre ya existe");
+            }
+            else{
+               nombreCambiado = EquipoDAO.cambiarNombreEquipo(nNuevo,nViejo);
+               if(nombreCambiado){
+
+                   for(i = 0; i<listaEquipos.size()&& !listaEquipos.get(i).getNombre().equalsIgnoreCase(nViejo); i++){}
+                     posicionNombreV = i;
+                   listaEquipos.get(posicionNombreV).setNombre(nNuevo);
+               }
+                JOptionPane.showMessageDialog(null, "El nombre "+ nViejo + " se ha cambiado por: "+ nNuevo );
+            }
+
+    }
+    public static void cambiarNacionalidadEquipo(String naNuevo,String naViejo,String nombreViejo)throws Exception{
+        boolean nacCambiada =false;
+        int posicionNacVieja =0;
+        int i=0;
+        nacCambiada = EquipoDAO.cambiarNacionalidadEquipo(naNuevo, naViejo);
+        if(nacCambiada) {
+            for (i = 0; i < listaEquipos.size() && !listaEquipos.get(i).getNombre().equalsIgnoreCase(nombreViejo); i++) {}
+            posicionNacVieja = i;
+            listaEquipos.get(posicionNacVieja).setNacionalidad(naNuevo);
+            JOptionPane.showMessageDialog(null, "La nacionalidad "+ naViejo + " se ha cambiado por: "+ naNuevo );
+        }
+
+
+    }
+
+    public static void cambiarFechaEquipo(LocalDate fechaNuevo,LocalDate fechaViejo,String nombreViejo)throws Exception{
+        boolean fechaCambiada =false;
+        int posicionNacVieja =0;
+        int i=0;
+        fechaCambiada = EquipoDAO.cambiarFechaEquipo(fechaNuevo, fechaViejo);
+        if(fechaCambiada) {
+            for (i = 0; i < listaEquipos.size() && !listaEquipos.get(i).getNombre().equalsIgnoreCase(nombreViejo); i++) {}
+            posicionNacVieja = i;
+            listaEquipos.get(posicionNacVieja).setFechaCreacion(fechaNuevo);
+            JOptionPane.showMessageDialog(null, "La fecha de creacion se ha cambiado");
+        }
+    }
+    public static void cambiarTelefonoEquipo(String telfNuevo,String telfViejo,String nombreViejo)throws Exception{
+        boolean telfCambiada =false;
+        int posicionNacVieja =0;
+        int i=0;
+        telfCambiada = EquipoDAO.cambiarTelefonoEquipo(telfNuevo, telfViejo);
+        if(telfCambiada) {
+            for (i = 0; i < listaEquipos.size() && !listaEquipos.get(i).getNombre().equalsIgnoreCase(nombreViejo); i++) {}
+            posicionNacVieja = i;
+            listaEquipos.get(posicionNacVieja).setTelefono(telfNuevo);
+            JOptionPane.showMessageDialog(null, "El telefono "+ telfViejo + " se ha cambiado por: "+ telfNuevo);
+
+        }
+    }
+    public static void cambiarMailEquipo(String mailNuevo, String mailViejo, String nombreViejo)throws Exception{
+        boolean telfCambiada =false;
+        int posicionNacVieja =0;
+        int i=0;
+        telfCambiada = EquipoDAO.cambiarMailEquipo(mailNuevo, mailViejo);
+        if(telfCambiada) {
+            for (i = 0; i < listaEquipos.size() && !listaEquipos.get(i).getNombre().equalsIgnoreCase(nombreViejo); i++) {}
+            posicionNacVieja = i;
+            listaEquipos.get(posicionNacVieja).setMail(mailNuevo);
+            JOptionPane.showMessageDialog(null, "El telefono "+ mailViejo + " se ha cambiado por: "+ mailNuevo);
+        }
     }
 
     /**
@@ -614,9 +681,58 @@ public class Main {
         System.out.println("CONSULTAR EQUIPOS**********");
         listaEquipos = new ArrayList<>();
         listaEquipos = EquipoDAO.selectTodosLosEquipos();
-
     }
+    public static ArrayList<String> dameNombresEquipos(){
+        ArrayList<String> listaNombreEquipos = new ArrayList<>();
+        try{
+            for(int i=0;i<listaEquipos.size();i++){
+                listaNombreEquipos.add(listaEquipos.get(i).getNombre());
+            }
 
+        }catch (Exception e){System.out.println(e.getMessage());}
+
+        return listaNombreEquipos;
+    }
+    public static String dameNombreDelEquipo(int pos){
+        String nombreEq ="";
+        try{
+            nombreEq = listaEquipos.get(pos).getNombre();
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return nombreEq;
+    }
+    public static String dameNacionalidadDelEquipo(int pos){
+        String nacionalidadEq ="";
+        try{
+            nacionalidadEq = listaEquipos.get(pos).getNacionalidad();
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return nacionalidadEq;
+    }
+    public static LocalDate dameFechaDelEquipo(int pos){
+        LocalDate fechaEq = null;
+        try{
+            fechaEq = listaEquipos.get(pos).getFechaCreacion();
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return fechaEq;
+    }
+    public static String dameTelefonoDelEquipo(int pos){
+        String telefonoEq ="";
+        try{
+            telefonoEq = listaEquipos.get(pos).getTelefono();
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return telefonoEq;
+    }
+    public static String dameMailDelEquipo(int pos){
+        String mailEq ="";
+        try{
+            mailEq = listaEquipos.get(pos).getMail();
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return mailEq;
+    }
     public static String dameStringEquipos() throws Exception {
 
         System.out.println("DAME STRING EQUIPOS***************");
@@ -626,6 +742,7 @@ public class Main {
         }
         return infoEquipos;
     }
+
     ////////////////////////////////////// Metodos para la tabla Jornada ////////////////////////////////////
     public static String dameStringJornadas(){
         String Jornadas ="";
@@ -831,6 +948,83 @@ public class Main {
         jugador = new Jugador(dni, n, t, d, nn, rol, s, equipo);
 
         JugadorDAO.cambiarDatosJugador(jugador);
+    }
+
+    public static void cambiarNombreJugador(String nNuevo, String nViejo,String dni, int posEq){
+        boolean nombreCambiado = false;
+        int posicionNombreV =0;
+        String nombreEquipo = listaEquipos.get(posEq).getNombre();
+
+        //busco al jugador en la posicion de la lista
+        int i = 0;
+        int z = 0;
+
+            nombreCambiado = JugadorDAO.cambiarNombreJugador(nNuevo,nViejo);
+            if(nombreCambiado){
+
+                for(i = 0; i<listaJugadores.size()&& !listaJugadores.get(i).getNombre().equalsIgnoreCase(nViejo); i++){}
+                posicionNombreV = i;
+                listaJugadores.get(posicionNombreV).setNombre(nNuevo);
+                listaEquipos.get(posEq).setlistaJugadores(listaJugadores);
+            }
+            JOptionPane.showMessageDialog(null, "El nombre "+ nViejo + " se ha cambiado por: "+ nNuevo );
+        }
+
+
+    public static void sacaListaDeJugadores( int pos){
+        try{
+            int idEquipo =0;
+            listaJugadores = new ArrayList<>();
+            idEquipo = listaEquipos.get(pos).getId_equipo();
+            listaJugadores = JugadorDAO.consultarJugadoresEquipo(idEquipo);  //La lista de jugadores del equipo seleccionado
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+    }
+    public static String dameNombreDelJugador(String dniPersona){
+        String nombreJugador="";
+        int i=0;
+        int pos=0;
+        for (i=0; i<listaJugadores.size()&& !listaJugadores.get(i).getDni().equalsIgnoreCase(dniPersona);i++){}
+        if(i<listaJugadores.size()){
+            pos = i;
+            nombreJugador = listaJugadores.get(pos).getNombre();
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"El dni no coincide con ningun jugador");
+        }
+        return nombreJugador;
+    }
+    public static String dameTelefonoDelJugador(String dniPersona){
+        String telefono ="";
+        int i=0;
+        int pos=0;
+        try{
+            for (i=0; i<listaJugadores.size()&& !listaJugadores.get(i).getDni().equalsIgnoreCase(dniPersona);i++){}
+            if(i<listaJugadores.size()){
+                pos = i;
+                telefono = listaJugadores.get(pos).getTelefono();
+            }else{
+                JOptionPane.showMessageDialog(null,"El dni no coincide con ningun jugador");
+            }
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return telefono;
+    }
+    public static String dameSalarioDelJugador(String dniPersona){
+        String salario ="";
+        int i=0;
+        int pos=0;
+        try{
+            for (i=0; i<listaJugadores.size()&& !listaJugadores.get(i).getDni().equalsIgnoreCase(dniPersona);i++){}
+            if(i<listaJugadores.size()){
+                pos = i;
+                salario = String.valueOf(listaJugadores.get(pos).getSalario());
+            }else{
+                JOptionPane.showMessageDialog(null,"El dni no coincide con ningun jugador");
+            }
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return salario;
+
     }
 
     ////////////////////////////////////// Metodos para la tabla Resultado ////////////////////////////////////

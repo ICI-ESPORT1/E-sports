@@ -147,6 +147,26 @@ public class JugadorDAO {
 
       //  BaseDatos.cerrarConexion();
     }
+    public static boolean cambiarNombreJugador(String nN, String nV){
+        int ok=0;
+        boolean cambiado = false;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update jugador set nombre = ? where nombre = ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1,nN.toUpperCase());
+            sentenciaPre.setString(2,nV.toUpperCase());
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+
+        BaseDatos.cerrarConexion();
+        return cambiado;
+    }
 
     public static void crearObjeto()throws Exception{
 

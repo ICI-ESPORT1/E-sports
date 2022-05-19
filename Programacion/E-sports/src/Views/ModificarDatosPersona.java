@@ -1,5 +1,6 @@
 package Views;
 
+import Modelo.BD.BaseDatos;
 import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
 import Modelo.UML.Jugador;
@@ -10,25 +11,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ModificarDatosPersona {
     private JLabel lTitulo;
-    private JComboBox comboBox1;
+    private JComboBox cbRol;
     private JTextField tfDNI;
-    private JLabel lDNI;
     private JLabel lNombre;
     private JTextField tfNombre;
     private JLabel lTelefono;
     private JTextField tfTelefono;
-    private JLabel lDireccion;
     private JTextField tfDireccion;
     private JTextField tfNickname;
     private JTextField tfSalarioJ;
     private JTextField tfRol;
     private JTextField tfEquipo;
-    private JLabel lEquipo;
     private JButton bCancelar;
     private JButton bInsertar;
     private JPanel jpModificarDatosPersona;
@@ -37,13 +37,19 @@ public class ModificarDatosPersona {
     private JPanel jpEntrAsis;
     private JLabel lSalario;
     private JTextField tfSalario;
-    private JLabel lNickname;
-    private JLabel lRol;
+    private JComboBox cbEquipos;
+    private JTextField tfDni;
 
     private float sueldo = 0;
     private Jugador jugador;
+    private ArrayList<String>listaNombresEquipo;
+    private String nombreViejo;
+    private String telfViejo;
+    private Float salarioViejo;
 
     public ModificarDatosPersona() {
+        llenarComboBox(); //Llena el combo de Equipos
+
         bCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,6 +60,29 @@ public class ModificarDatosPersona {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    if(!tfNombre.getText().equalsIgnoreCase(nombreViejo)){
+                        boolean bNombre = validarNombre(tfNombre.getText(),"tipo");
+                        if(bNombre){
+                            Main.cambiarNombreJugador(tfNombre.getText(),nombreViejo,tfDni.getText(),cbEquipos.getSelectedIndex());
+                        }
+                    }
+
+                    if(!tfTelefono.getText().equalsIgnoreCase(telfViejo)){
+                        boolean bTelefono = validarTelefono(tfTelefono.getText());
+                        if(bTelefono){
+                            Main.cambiarTelefonoJugador(tfTelefono.getText(),telfViejo,nombreViejo);
+                        }
+                    }
+                    if(!tfSalario.getText().equalsIgnoreCase(String.valueOf(salarioViejo))){
+                        boolean bSueldo = validarSueldo();
+                        if(bSueldo){
+                            Main.cambiarSalarioEquipo(tfSalario.getText(),String.valueOf(salarioViejo) ,nombreViejo);
+                        }
+                    }
+
+
+
+
                     if (validarDatosJugador("jugador"))
                     Main.cambiarDatosJugador(tfDNI.getText(), tfNombre.getText(), tfTelefono.getText(), tfDireccion.getText(),tfNickname.getText(),Float.parseFloat(tfSalarioJ.getText()), tfRol.getText(), tfEquipo.getText());
                     System.out.println("jugador modificado");
@@ -69,6 +98,7 @@ public class ModificarDatosPersona {
                 super.focusLost(e);
                 try {
                     if (validarDni(tfDNI.getText())) {
+
                         String dni =tfDNI.getText();
                         jugador = Main.consultarJugador(dni);
 
@@ -89,10 +119,11 @@ public class ModificarDatosPersona {
                 }
             }
         });
-        comboBox1.addActionListener(new ActionListener() {
+        /*
+        cbRol.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               int selecionado = comboBox1.getSelectedIndex();
+               int selecionado = cbRol.getSelectedIndex();
 
                if(selecionado==0){
                    tfNickname.setEditable(true);
@@ -112,9 +143,9 @@ public class ModificarDatosPersona {
                    tfSalario.setEditable(false);
                }
             }
-        });
+        });*/ // Se han quitado campos de las personas
     }
-
+/* **********************FUNCIONES PARA VALIDAR DATOS************************************/
     public boolean validarDatosJugador(String tipo){
         boolean bJugador = false;
         boolean bNombreJ = false;
@@ -157,7 +188,6 @@ public class ModificarDatosPersona {
         }catch (Exception e){System.out.println(e.getClass());}
         return bJugador;
     }
-
     /**
      * Metodo para validar el sueldo
      * @return
@@ -184,7 +214,6 @@ public class ModificarDatosPersona {
         }
         return bSueldo;
     }
-
     /**
      * Metodo para validar la localidad
      * @param loc
@@ -214,7 +243,6 @@ public class ModificarDatosPersona {
         }
         return bLoc;
     }
-
     /**
      * Metodo para validar el dni.
      * @param sdni
@@ -240,7 +268,6 @@ public class ModificarDatosPersona {
         }catch (Exception e){System.out.println(e.getClass());}
         return bDniValido;
     }
-
     /**
      * Este método me permite validar un teléfono, como se va a utilizar para validar
      * el telefono de los jugadores, le paso un parametro en lugar de usar la variable global
@@ -309,7 +336,39 @@ public class ModificarDatosPersona {
         return bNombre;
 
     }
+    private void llenarComboBox(){
+        try{
+            BaseDatos.abrirConexion();
+            Main.consultarEquipos();
+            listaNombresEquipo = new ArrayList<>();
+            listaNombresEquipo = Main.dameNombresEquipos();
+            for(int i=0;i<listaNombresEquipo.size();i++){
+                cbEquipos.addItem(listaNombresEquipo.get(i));
+            }
+            BaseDatos.cerrarConexion();
+            cbEquipos.setSelectedIndex(-1);
+        }catch (Exception e){System.out.println(e.getMessage());}
+    }
+    private void llenarFormulario(){
+        try{
+            int posEquipoSel = cbEquipos.getSelectedIndex();
+            String dniPersona = tfDni.getText();
+            if(cbRol.getSelectedIndex() ==0){
+                Main.sacaListaDeJugadores(posEquipoSel);
 
+                nombreViejo = tfNombre.getText();
+                tfNombre.setText(Main.dameNombreDelJugador(dniPersona));
+                telfViejo = tfTelefono.getText();
+                tfTelefono.setText(Main.dameTelefonoDelJugador(dniPersona));
+                salarioViejo =Float.parseFloat(tfSalario.getText());
+                tfSalario.setText(String.valueOf(Main.dameSalarioDelJugador(dniPersona)));
+            }
+
+
+
+
+        }catch (Exception e ){System.out.println(e.getMessage());}
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("ModificarDatosPersona");

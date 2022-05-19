@@ -46,7 +46,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="f39ad" class="javax.swing.JMenuItem">
+                  <component id="f39ad" class="javax.swing.JMenuItem" binding="jmiModificarEquipo">
                     <constraints/>
                     <properties>
                       <text value="ModificarEquipo"/>

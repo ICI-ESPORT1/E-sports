@@ -3,10 +3,11 @@ package Modelo.BD;
 import Modelo.UML.Asistente;
 import Modelo.UML.Equipo;
 
+import javax.swing.*;
+import java.net.PortUnreachableException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class EquipoDAO {
 
@@ -46,7 +47,8 @@ public class EquipoDAO {
     }
 
 
-    public static void bajaEquipo(Equipo e)throws Exception{
+    public static boolean bajaEquipo(Equipo e)throws Exception{
+        boolean borrado= false;
         //metodo para borrar un equipo de la tabla equipo por nombre
         BaseDatos.abrirConexion();
 
@@ -54,28 +56,124 @@ public class EquipoDAO {
 
         c.setString(1,e.getNombre());
 
-        c.execute();
+       borrado = c.execute();
 
         c.close();
 
         BaseDatos.cerrarConexion();
+
+        return borrado;
     }
 
-    public static void cambiarNombreEquipo(Equipo e, String nombreNuevo)throws Exception{
-        //metodo para cambiar el nombre de un equipo
-        BaseDatos.abrirConexion();
+    public static boolean cambiarNombreEquipo(String nombreNuevo, String nombreViejo){
+        boolean nombreCambiado = false;
+        try{
 
-        c=BaseDatos.getConexion().prepareCall("{call cambiar_nombre_equipo(?,?)}");
+            //metodo para cambiar el nombre de un equipo
+            BaseDatos.abrirConexion();
 
-        c.setString(1,e.getNombre());
-        c.setString(2,nombreNuevo);
+            c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.cambiar_nombre_equipo(?,?)}");
 
-        c.execute();
+            c.setString(1,nombreNuevo);
+            c.setString(2,nombreViejo );
 
-        c.close();
+            nombreCambiado = c.execute();
 
-        BaseDatos.cerrarConexion();
+            c.close();
 
+            BaseDatos.cerrarConexion();
+
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");}
+
+
+       return nombreCambiado;
+    }
+
+    public static boolean cambiarNacionalidadEquipo(String naNuevo,String naViejo){
+        boolean cambiado=false;
+        int ok =0;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update equipo set nacionalidad= ? where upper(nacionalidad)= ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1,naNuevo);
+            sentenciaPre.setString(2, naViejo);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");}
+        return cambiado;
+    }
+    public static boolean cambiarTelefonoEquipo(String telNuevo,String telViejo){
+        boolean cambiado=false;
+        int ok =0;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update equipo set telefono = ? where telefono = ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1, telNuevo);
+            sentenciaPre.setString(2, telViejo);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");}
+        return cambiado;
+    }
+    public static boolean cambiarFechaEquipo(LocalDate ldNuevo, LocalDate ldViejo)throws Exception{
+        boolean cambiado=false;
+        int ok =0;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update equipo set fecha_creacion= ? where fecha_creacion= ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setDate(1,Date.valueOf(ldNuevo));
+            sentenciaPre.setDate(2, Date.valueOf(ldViejo));
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null, sqle.getMessage());}
+        return cambiado;
+    }
+    public static boolean cambiarMailEquipo(String mailNuevo,String mailViejo){
+        boolean cambiado=false;
+        int ok =0;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update equipo set mail = ? where mail = ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1, mailNuevo);
+            sentenciaPre.setString(2, mailViejo);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");
+        }
+        return cambiado;
     }
 
     public static Equipo consultarEquipo(String n)throws Exception{

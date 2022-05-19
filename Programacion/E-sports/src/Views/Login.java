@@ -69,6 +69,7 @@ public class Login extends javax.swing.JDialog {
             public void actionPerformed(ActionEvent e) {
 
                 Main.abrirVentanaAdmin();
+
             }
         });
     }

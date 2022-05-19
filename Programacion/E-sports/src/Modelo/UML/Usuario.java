@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Usuario {
 
+
     public ArrayList<Jornada> VisualizarJornadas(int numJornada){
         return null;
     }

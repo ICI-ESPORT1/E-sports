@@ -116,25 +116,33 @@ public class EquipoDAO {
 
     }
 
-    public static ArrayList<Equipo> selectTodosLosEquipos()throws Exception{
+    public static ArrayList<Equipo> selectTodosLosEquipos(){
      //   BaseDatos.abrirConexion();
+        try{
+            listaEquipos = new ArrayList<>();
+            plantilla= "select * from equipo";
+            sentenciaPre= BaseDatos.getConexion().prepareStatement(plantilla);
 
-        plantilla= "select * from equipo";
-        sentenciaPre= BaseDatos.getConexion().prepareStatement(plantilla);
+            resultado = sentenciaPre.executeQuery();
 
-        resultado = sentenciaPre.executeQuery();
-        while(resultado.next()){
-            System.out.println("CREANDO OBJETO*******");
-            System.out.println(resultado.getInt("cod_equipo"));
-             crearObjeto();
+            while(resultado.next()){
+                System.out.println("CREANDO OBJETO*******");
+                System.out.println(resultado.getInt("cod_equipo"));
+                crearObjeto();
+                listaEquipos.add(equipo);
+            }
 
-        }
+
+        }catch (SQLException sqle){
+            System.out.println(sqle.getMessage());
+        }catch (Exception e){System.out.println(e.getMessage());}
 
         return listaEquipos;
     }
 
-    public static void crearObjeto()throws Exception{
-
+    public static void crearObjeto(){
+    try{
+        equipo = new Equipo(); //Hay que iniciar aqui el objeto para que no se sobre escriba
         equipo.setId_equipo(resultado.getInt("cod_equipo"));
         equipo.setNombre(resultado.getString("nombre"));
         equipo.setNacionalidad(resultado.getString("nacionalidad"));
@@ -144,10 +152,17 @@ public class EquipoDAO {
         equipo.setTelefono(resultado.getString("telefono"));
         equipo.setMail(resultado.getString("mail"));
 
-       // equipo.setFechaCreacion(resultado.getDate("fecha_creacion"));
+        // equipo.setFechaCreacion(resultado.getDate("fecha_creacion"));
         equipo.setEscudo(resultado.getString("escudo"));
 
-        listaEquipos.add(equipo);
+
+
+
+    }catch (Exception e){
+        System.out.println(e.getMessage());
+    }
+
+
 
     }
 }

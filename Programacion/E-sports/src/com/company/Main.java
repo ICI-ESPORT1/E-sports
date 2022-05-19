@@ -35,7 +35,7 @@ public class Main {
     private static Asistente asistente;
     private static Entrenador entrenador;
     private static Dueno dueno;
-    private static Equipo equipo;
+    private static Equipo equipo = new Equipo();
     private static Jornada jornada;
     private static Jugador jugador = new Jugador();
     private static Resultado resultado;
@@ -47,7 +47,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        String sResultados = "";
+      /*  String sResultados = "";
         try {
 
             File file = new File("resultados.xml");
@@ -101,7 +101,7 @@ public class Main {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
         bd = new BaseDatos();
 
@@ -165,8 +165,8 @@ public class Main {
     /**
      * Este método contiene el Main de la ventana Principal para poder abrirla
      */
-    public static void abrirVentanaPrincipal() {
-        frame = new JFrame("VentanaPrincipal");
+    public static void abrirVentanaAdmin() {
+        frame = new JFrame("VentanaAdmin");
         frame.setContentPane(new VentanaAdmin().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -237,11 +237,10 @@ public class Main {
     }
 
     public static void abrirJornada() {
-        JFrame frame = new JFrame("Jornadas");
-        frame.setContentPane(new Jornadas().getJpJornadas());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        VentanaJornadas dialog = new VentanaJornadas();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
 
     public static void abrirBajasPersonas() {
@@ -614,20 +613,26 @@ public class Main {
 
     public static void consultarEquipos() throws Exception {
         System.out.println("CONSULTAR EQUIPOS**********");
+        listaEquipos = new ArrayList<>();
         listaEquipos = EquipoDAO.selectTodosLosEquipos();
 
     }
 
     public static String dameStringEquipos() throws Exception {
+
         System.out.println("DAME STRING EQUIPOS***************");
         String infoEquipos = "";
         for (int i = 0; i < listaEquipos.size(); i++) {
-            infoEquipos += "Equipo: " + listaEquipos.get(i).getNombre();
+            infoEquipos += listaEquipos.get(i).toString();
         }
         return infoEquipos;
     }
     ////////////////////////////////////// Metodos para la tabla Jornada ////////////////////////////////////
+    public static String dameStringJornadas(){
+        String Jornadas ="";
 
+        return Jornadas;
+    }
     /**
      * Metodo que llama a altaJornada para hacer un insert en la base de datos
      *
@@ -695,7 +700,7 @@ public class Main {
         System.out.println("TEN DATOS JUGADOR*************");
         float sueldo = Float.parseFloat(su);
         jugador = new Jugador(d, n, t, di, z, rol, sueldo, equipo);
-        listaJugadores.add(jugador);
+
         altaJugador(jugador);
         /*Necesito el id del jugador*/
         jugador = JugadorDAO.jugadorConId(jugador.getDni());
@@ -830,6 +835,66 @@ public class Main {
     }
 
     ////////////////////////////////////// Metodos para la tabla Resultado ////////////////////////////////////
+
+    public static String consultarJornadas(){
+
+        String sResultados = "";
+        try {
+
+            File file = new File("resultados.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(file);
+            document.getDocumentElement().normalize();
+            // GET DOCUMENT COGE AUTOMÁTICAMENTE EL nodo "ROOT" (RESUMEN RESULTADOS)
+            System.out.println(document.getDocumentElement().getNodeName());
+            sResultados = sResultados + (document.getDocumentElement().getNodeName() + "\n");
+            // Primer nodo "JORNADAS"
+            NodeList nListJornadas = document.getElementsByTagName("JORNADA");
+            System.out.println("----------------------------");
+            for (int temp = 0; temp < nListJornadas.getLength(); temp++) {
+                Node nJornada = nListJornadas.item(temp);
+                Element eJornada = (Element) nJornada;
+                System.out.println("Jornada : " + eJornada.getAttribute("num_jornada")); // Esto se pone porque tiene atributo
+                sResultados = sResultados + "Jornada : " + (eJornada.getAttribute("num_jornada") + "\n");
+
+                NodeList nListLista_Partidos = eJornada.getElementsByTagName("LISTA_PARTIDOS");
+                for (int temp1 = 0; temp1 < nListLista_Partidos.getLength(); temp1++) {
+                    Node nLista_Partidos = nListLista_Partidos.item(temp1);
+                    Element eLista_Partidos = (Element) nLista_Partidos;
+
+                    NodeList nListT_Partido = eLista_Partidos.getElementsByTagName("T_PARTIDO");
+                    for (int temp2 = 0; temp2 < nListT_Partido.getLength(); temp2++) {
+                        Node nT_Partido = nListT_Partido.item(temp2);
+                        Element eT_Partido = (Element) nT_Partido;
+                        System.out.println("Partido : " + eT_Partido.getAttribute("id_partido"));// Esto se pone porque tiene atributo
+                        sResultados = sResultados + "Partido : " + (eT_Partido.getAttribute("id_partido") + "\n");
+
+                        NodeList nListEquipos = eT_Partido.getElementsByTagName("EQUIPOS");
+                        for (int temp3 = 0; temp3 < nListEquipos.getLength(); temp3++) {
+                            Node nEquipos = nListEquipos.item(temp3);
+                            Element eEquipos = (Element) nEquipos;
+
+                            NodeList nListT_EQUIPO = eEquipos.getElementsByTagName("T_EQUIPO");
+                            for(int temp4 = 0; temp4 < nListT_EQUIPO.getLength(); temp4++) {
+                                Node nT_EQUIPO = nListT_EQUIPO.item(temp4);
+                                Element eT_EQUIPO = (Element) nT_EQUIPO;
+                                System.out.println("Equipo : " + eT_EQUIPO.getElementsByTagName("NOMBRE").item(0).getTextContent());// Esto se pone porque tiene atributo
+                                sResultados = sResultados + (eT_EQUIPO.getElementsByTagName("NOMBRE").item(0).getTextContent() + "\n");
+                                System.out.println("Resultado : " + eT_EQUIPO.getElementsByTagName("RESULTADO").item(0).getTextContent());// Esto se pone porque tiene atributo
+                                sResultados = sResultados + (eT_EQUIPO.getElementsByTagName("RESULTADO").item(0).getTextContent() + "\n");
+                            }
+                        }
+                    }
+                }
+                System.out.println("*****************************");
+                sResultados = sResultados + ("*****************************\n");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return sResultados;
+    }
 
     /**
      * Metodo que llama a obtenerClasificacion para que nos devuelva la clasificacion actual

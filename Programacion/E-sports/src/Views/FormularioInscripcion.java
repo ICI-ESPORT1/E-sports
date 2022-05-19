@@ -277,11 +277,11 @@ public class FormularioInscripcion {
               nick=tfNick.getText();
 
               listaJugadores.add(new String[]{dni,nombre,telf,loc,nick,sueldo}); //ok
-              for(String[] row : listaJugadores){
+            /*  for(String[] row : listaJugadores){
                   String [] fila = new String[6];
                   fila = row;
 
-              }
+              }*/
               tamanoLista = listaJugadores.size()+1;
 
               //limpiarCamposJugador();

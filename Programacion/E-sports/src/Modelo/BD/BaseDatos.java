@@ -13,7 +13,7 @@ public class BaseDatos {
     private static String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
 
     private static Connection conexion;
-    private static boolean casa = true;
+    private static boolean casa = false;
 
     public BaseDatos() {
     }

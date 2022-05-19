@@ -22,6 +22,18 @@ public class Equipo {
     private Asistente asistente;
   /*  private Dueno dueno;*/
 
+    @Override
+    public String toString() {
+        return
+                "IDENTIFICADOR DEL EQUIPO: " + idEquipo + "\n"+
+                "NOMBRE: " + nombre  +"\n" +
+                "NACIONALIDAD: " + nacionalidad + "\n" +
+                "FECHA DE CREACION: " + fechaCreacion +"\n" +
+                "TELEFONO DE CONTACTO: " + telefono + "\n" +
+                "e-Mail: " + mail + "\n" +
+                "*******************************************"+ "\n";
+    }
+
     //ATRIBUTO DE LA RELACION CON JUGADOR Y PARTIDO
     private ArrayList<Jugador> listaJugadores;
     private ArrayList<Partido> listaPartidos;

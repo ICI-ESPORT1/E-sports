@@ -75,16 +75,7 @@ public class VentanaAdmin {
 
             }
         });
-        }
 
-
-/*
-        bInscripcion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirBajasPersonas();
-            }
-        });
 
         DarAlta.addActionListener(new ActionListener() {
             @Override
@@ -92,11 +83,17 @@ public class VentanaAdmin {
                 Main.abrirAltasPersonas();
             }
         });
+        jornada.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirJornada();
+            }
+        });
 
-    }*/
+    }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("VentanaPrincipal");
+        JFrame frame = new JFrame("VentanaAdmin");
         frame.setContentPane(new VentanaAdmin().Ventana1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

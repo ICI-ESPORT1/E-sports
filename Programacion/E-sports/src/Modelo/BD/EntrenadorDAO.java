@@ -20,7 +20,7 @@ public class EntrenadorDAO {
     private static CallableStatement c;
 
     public static void altaEntrenador(Entrenador e)throws Exception{
-
+        int n = 0;
         plantilla = "INSERT INTO entrenador (dni,nombre,telefono,direccion,id_equipo,sueldo) VALUES (?,?,?,?,?,?)";
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
         sentenciaPre.setString(1, e.getDni());
@@ -30,8 +30,8 @@ public class EntrenadorDAO {
         int idEquipo =e.getEquipo().getId_equipo();
         sentenciaPre.setInt(5,idEquipo );
         sentenciaPre.setFloat(6, e.getSueldo());
-        sentenciaPre.executeUpdate();
-        int n = 1;
+        n = sentenciaPre.executeUpdate();
+
         System.out.println("filas "+ n);
       //  BaseDatos.cerrarConexion();
     }

@@ -73,7 +73,7 @@ public class Login extends javax.swing.JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Main.abrirVentanaPrincipal();
+                Main.abrirVentanaAdmin();
             }
         });
     }

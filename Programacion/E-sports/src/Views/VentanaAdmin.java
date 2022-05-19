@@ -21,6 +21,14 @@ public class VentanaAdmin {
     private JMenuItem Ins;
     private JButton bInscripcion;
     private JMenuItem jmiClasificacion;
+    private JMenuItem jornada;
+    private JMenuItem PartidosJugados;
+    private JMenuItem verEquipo;
+    private JMenuItem DarBaja;
+    private JMenuItem DarAlta;
+    private JMenuItem jmiJornadas;
+    private JMenuItem jmiModificarPersonas;
+    private JMenuItem jmiPartidos;
 
     private JButton equiposButton;
 
@@ -31,31 +39,72 @@ public class VentanaAdmin {
         Ins.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Main.abrirFormularioEquipo();
             }
         });
-/*
-        bInscripcion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirFormularioEquipo();
-            }
-        });
+
         jmiClasificacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Main.abrirClasificacion();
             }
         });
 
+        verEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Main.visualizarEquipo();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        jmiModificarPersonas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirModificarDatosPersona();
+            }
+        });
+
+        DarBaja.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        jmiPartidos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (Main.generarPatidos());
+
+            }
+        });
+
+
+
+        }
+
+
+/*
         bInscripcion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirFormularioEquipo();
+                Main.abrirBajasPersonas();
             }
         });
-       */
-    }
+
+        DarAlta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirAltasPersonas();
+            }
+        });
+
+    }*/
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("VentanaPrincipal");
@@ -66,4 +115,6 @@ public class VentanaAdmin {
     }
 
     public JPanel getVentana1() {return Ventana1;}
+
+
 }

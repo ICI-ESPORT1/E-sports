@@ -20,31 +20,28 @@ public class EntrenadorDAO {
     private static CallableStatement c;
 
     public static void altaEntrenador(Entrenador e)throws Exception{
-        //Metodo para insertar un nuevo entrenador en la tabla entrenador
-        BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_entrenador(?,?,?,?,?,?)}");
-
-        c.setString(1,e.getDni());
-        c.setString(2,e.getNombre());
-        c.setString(3,e.getTelefono());
-        c.setString(4,e.getLocalidad());
-        c.setInt(5, e.getEquipo().getId_equipo());
-        c.setFloat(6, e.getSueldo());
-
-        c.execute();
-
-        c.close();
-
-        BaseDatos.cerrarConexion();
+        plantilla = "INSERT INTO entrenador (dni,nombre,telefono,direccion,id_equipo,sueldo) VALUES (?,?,?,?,?,?)";
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1, e.getDni());
+        sentenciaPre.setString(2, e.getNombre());
+        sentenciaPre.setString(3, e.getTelefono());
+        sentenciaPre.setString(4,e.getDireccion());
+        int idEquipo =e.getEquipo().getId_equipo();
+        sentenciaPre.setInt(5,idEquipo );
+        sentenciaPre.setFloat(6, e.getSueldo());
+        sentenciaPre.executeUpdate();
+        int n = 1;
+        System.out.println("filas "+ n);
+      //  BaseDatos.cerrarConexion();
     }
 
 
     public static void bajaEntrenador(Entrenador e)throws Exception{
         //metodo para borrar un entrenador de la tabla entrenador por id_entrenador
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
+        c =BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
 
         c.setInt(1,e.getCodPersona());
 
@@ -52,14 +49,14 @@ public class EntrenadorDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
     }
 
     public static void cambioEquipoEntrenador(Entrenador e, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un entrenador de equipo
-        BaseDatos.abrirConexion();
+       // BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
+        c =BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
 
         c.setInt(1,e.getCodPersona());
         c.setInt(2,idEquipoNuevo);
@@ -68,13 +65,13 @@ public class EntrenadorDAO {
 
         c.close();
 
-        BaseDatos.cerrarConexion();
+      //  BaseDatos.cerrarConexion();
 
     }
 
     public static Entrenador consultarEntrenador(String dni)throws Exception{
         //Metodo para consultar un entrenador por dni a la base de datos
-        BaseDatos.abrirConexion();
+      //  BaseDatos.abrirConexion();
 
         plantilla="select * from entrenador where dni = ?";
 
@@ -84,20 +81,19 @@ public class EntrenadorDAO {
         resultado = sentenciaPre.executeQuery();
 
         crearObjeto();
-
+      //  BaseDatos.cerrarConexion();
         return entrenador;
 
     }
 
     public static void crearObjeto()throws Exception{
 
-        entrenador.setCodPersona(resultado.getInt("id_asistente"));
+        entrenador.setCodPersona(resultado.getInt("id_entrenador"));
         entrenador.setDni(resultado.getString("dni"));
         entrenador.setNombre(resultado.getString("nombre"));
         entrenador.setTelefono(resultado.getString("telefono"));
-        entrenador.setMail(resultado.getString("mail"));
-        entrenador.setLocalidad(resultado.getString("localidad"));
-        entrenador.setSueldo(resultado.getFloat("suledo"));
+        entrenador.setLocalidad(resultado.getString("direccion"));
+        entrenador.setSueldo(resultado.getFloat("sueldo"));
 
     }
 }

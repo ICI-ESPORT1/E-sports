@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Views.VentanaAdmin">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Views.VentanaPrincipal">
   <grid id="27dc6" binding="Ventana1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
     <constraints>
-      <xy x="166" y="414" width="709" height="684"/>
+      <xy x="20" y="20" width="1402" height="3338"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="45af" layout-manager="GridLayoutManager" row-count="3" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="45af" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints/>
         <properties>
@@ -52,16 +52,16 @@
                       <text value="ModificarEquipo"/>
                     </properties>
                   </component>
-                  <component id="ad84d" class="javax.swing.JMenuItem" binding="DarAlta">
+                  <component id="a26c0" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
-                      <text value="AltaPersona"/>
+                      <text value="AltaEquipo"/>
                     </properties>
                   </component>
-                  <component id="8ad51" class="javax.swing.JMenuItem" binding="DarBaja">
+                  <component id="6470" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
-                      <text value="BajaPersona"/>
+                      <text value="BajaEquipo"/>
                     </properties>
                   </component>
                   <component id="ad84d" class="javax.swing.JMenuItem">
@@ -76,10 +76,10 @@
                       <text value="BajaJugador"/>
                     </properties>
                   </component>
-                  <component id="df469" class="javax.swing.JMenuItem" binding="jmiModificarPersonas">
+                  <component id="df469" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
-                      <text value="ModificarPersonas"/>
+                      <text value="ModificarJugador"/>
                     </properties>
                   </component>
                   <component id="3a9c3" class="javax.swing.JMenuItem">
@@ -112,6 +112,12 @@
                       <text value="BajaDueño"/>
                     </properties>
                   </component>
+                  <component id="c35f8" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="ModificarDueño"/>
+                    </properties>
+                  </component>
                   <component id="5861" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
@@ -130,7 +136,7 @@
                       <text value="DatosEquipo"/>
                     </properties>
                   </component>
-                  <component id="c1aa0" class="javax.swing.JMenuItem" binding="jmiPartidos">
+                  <component id="c1aa0" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
                       <text value="GenerarPartidos"/>
@@ -168,9 +174,30 @@
               </grid>
             </children>
           </grid>
+          <grid id="2b6f8" class="javax.swing.JMenuBar" binding="MenuLogin" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <foreground color="-16777216"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="e9ec4" class="javax.swing.JMenu" binding="Menu3_3" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <foreground color="-15901303"/>
+                  <text value="Login"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
           <component id="56bd6" class="javax.swing.JButton" binding="Logo">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <enabled value="true"/>
@@ -178,30 +205,27 @@
               <text value=""/>
             </properties>
           </component>
-          <grid id="e69a4" class="javax.swing.JMenuBar" binding="MenuEquipo" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+          <grid id="e69a4" class="javax.swing.JMenuBar" binding="MenuEquipo" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <foreground color="-11052704"/>
+              <foreground color="-16777216"/>
             </properties>
             <border type="none"/>
             <children>
-              <grid id="dddaa" class="javax.swing.JMenu" binding="Menu4_4" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-                <constraints/>
+              <grid id="dddaa" class="javax.swing.JMenu" binding="Menu4_4" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
                 <properties>
                   <foreground color="-15901303"/>
                   <text value="Equipo"/>
                 </properties>
                 <border type="none"/>
-                <children>
-                  <component id="aac61" class="javax.swing.JMenuItem" binding="verEquipo">
-                    <constraints/>
-                    <properties>
-                      <text value="VerEquipo"/>
-                    </properties>
-                  </component>
-                </children>
+                <children/>
               </grid>
             </children>
           </grid>
@@ -224,13 +248,13 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="10548" class="javax.swing.JMenuItem" binding="jornada">
+                  <component id="10548" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
                       <text value="Jornadas"/>
                     </properties>
                   </component>
-                  <component id="625f8" class="javax.swing.JMenuItem" binding="PartidosJugados">
+                  <component id="625f8" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
                       <text value="PartidosJugados"/>
@@ -246,8 +270,22 @@
               </grid>
             </children>
           </grid>
+          <component id="9eb86" class="javax.swing.JButton" binding="bInscripcion">
+            <constraints>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Inscripcion"/>
+            </properties>
+          </component>
         </children>
       </grid>
+      <hspacer id="18374">
+        <constraints/>
+      </hspacer>
+      <vspacer id="80082">
+        <constraints/>
+      </vspacer>
     </children>
   </grid>
 </form>

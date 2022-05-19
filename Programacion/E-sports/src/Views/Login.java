@@ -4,6 +4,8 @@ import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
 import Modelo.Excepciones.EquipoRepetido;
 import com.company.Main;
+
+import java.awt.*;
 import java.util.regex.*;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -20,20 +22,6 @@ public class Login extends javax.swing.JDialog {
     private JTextField textField1;
     private JTextField textField2;
     private JButton bInvitado;
-
-        public static boolean isValidName(String nombre)
-        {
-            String regex = "^[A-Za-z]\\w{5,29}$";
-
-            Pattern p = Pattern.compile(regex);
-
-            if (nombre == null) {
-                return false;
-            }
-
-            Matcher m = p.matcher(nombre);
-            return m.matches();
-        }
 
 
     public Login() {
@@ -58,6 +46,7 @@ public class Login extends javax.swing.JDialog {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent e) {
+
                 onCancel();
             }
         });
@@ -66,24 +55,24 @@ public class Login extends javax.swing.JDialog {
 
         contentPane.registerKeyboardAction(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+
                 onCancel();
             }
+
         }, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0), javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
         bInvitado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("VentanaInvitado");
-                frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-                dispose();
+
+                Main.VentanaInvitado();
             }
         });
 
         bAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Main.abrirVentanaPrincipal();
             }
         });
@@ -91,6 +80,7 @@ public class Login extends javax.swing.JDialog {
 
 
     private void onOK() {
+
         dispose();
     }
 
@@ -104,6 +94,9 @@ public class Login extends javax.swing.JDialog {
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
+        dialog.setLocationRelativeTo(null);
 
     }
+
+
 }

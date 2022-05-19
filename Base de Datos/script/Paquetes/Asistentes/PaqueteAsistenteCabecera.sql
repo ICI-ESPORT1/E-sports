@@ -9,7 +9,7 @@ p_direccion asistente.direccion%type,
 p_sueldo asistente.sueldo%type
 );
 
-procedure cambio_equipo
+procedure cambio_equipo_asistente
 (
 p_idAsistente asistente.id_asistente%type,
 p_idEquipoNuevo equipo.cod_equipo%type

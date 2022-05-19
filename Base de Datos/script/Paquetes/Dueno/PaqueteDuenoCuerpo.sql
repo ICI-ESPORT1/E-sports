@@ -1,14 +1,8 @@
 /*CUERPO PAQUETE GESTIONAR JUGADORES*/
 create or replace package body gestionarDueno as
-/*Excepciones del paquete*/
-e_equipoNoExiste exception;
-pragma exception_init(e_equipoNoExiste,-20002);
-
-e_dueNoExiste exception;
-pragma exception_init(e_dueNoExiste,-20004);
 
 /******declaro las funciones que son comunes a todos los procedimientos*******/
-    function validar_equipo
+    function validar_equipo_dueno
     (p_equipo in number)
     return boolean;
 function validar_dueno
@@ -16,7 +10,7 @@ function validar_dueno
     return boolean; 
     
 /*Programacion de las funciones*/    
-    function validar_equipo
+    function validar_equipo_dueno
     (p_equipo in number)
     return boolean
     is          
@@ -29,7 +23,7 @@ function validar_dueno
     exception
         when no_data_found then
           return false;
-    end validar_equipo;    
+    end validar_equipo_dueno;    
     
     function validar_dueno
     (p_dueno in number)
@@ -59,8 +53,11 @@ p_direccion dueno.direccion%type,
 p_id_equipo dueno.id_equipo%type
 )
 as
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
+e_equipoNoExiste exception;
 begin
-  if validar_equipo(p_id_equipo)then
+  if validar_equipo_dueno(p_id_equipo)then
 
      insert into dueno
      (DNI, NOMBRE, TELEFONO, DIRECCION, ID_EQUIPO)
@@ -70,9 +67,13 @@ begin
   end if;
   exception
   when e_equipoNoExiste then
-    dbms_output.put_line ('El equipo no existe');
+    v_error_mensaje:='El equipo no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20031,v_error);
    when others then
-     dbms_output.put_line('HA OCURRIDO UN ERROR');
+     v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20032,v_error);
 END nuevo_dueno;
 
 
@@ -83,9 +84,13 @@ p_idDueno dueno.id_dueno%type,
 p_idEquipoNuevo dueno.id_equipo%type
 )
 is
+e_equipoNoExiste exception;
+e_dueNoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
  if validar_dueno(p_idDueno) then
-    if validar_equipo(p_idEquipoNuevo)then
+    if validar_equipo_dueno(p_idEquipoNuevo)then
       update dueno
       set id_equipo = p_idEquipoNuevo
       where id_dueno = p_idDueno;
@@ -95,13 +100,23 @@ begin
  else
   raise e_dueNoExiste;
  end if;
+ 
  exception
     when e_equipoNoExiste then
-        dbms_output.put_line ('El equipo no existe');
+    v_error_mensaje:='El equipo no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20033,v_error);
+    
     when e_dueNoExiste then
-         dbms_output.put_line ('El dueno no existe');
+    v_error_mensaje:='El dueño no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20034,v_error);
+    
     when others then
-        dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20035,v_error);
+    
 end cambio_equipo_dueno; 
 
 /*PROCEDIMIENTO PARA BORRAR DE EQUIPO AL DUENO******************************/
@@ -110,6 +125,9 @@ procedure borrar_dueno
 p_idDueno dueno.id_dueno%type
 )
 is
+e_dueNoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
   if validar_dueno(p_idDueno) then
    delete from dueno
@@ -118,11 +136,18 @@ begin
    else
       raise e_dueNoExiste;
   end if;
+  
   exception
     when e_dueNoExiste then
-        dbms_output.put_line ('El dueno no existe');
+    v_error_mensaje:='El dueño no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20034,v_error);
+    
     when others then
-        dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20035,v_error);
+    
 END borrar_dueno;
 
 end gestionarDueno;

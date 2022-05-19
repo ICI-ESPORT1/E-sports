@@ -1,5 +1,3 @@
-/*PROCEDIMINETOS ANONIMOS DATOSJUGADOR*/
-
 declare
 sc_cursor visualizarDatos.tcursor;
 reg_datos datosJugadores%rowtype;

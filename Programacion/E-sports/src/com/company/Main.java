@@ -8,7 +8,6 @@ import Modelo.UML.*;
 import Views.Clasificacion;
 import Views.FormularioInscripcion;
 import Views.VentanaEscudos;
-import Views.VentanaAdmin;
 import Views.VisualizarEquipos;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

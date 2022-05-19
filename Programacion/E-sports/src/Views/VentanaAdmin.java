@@ -69,9 +69,6 @@ public class VentanaAdmin {
             }
         });
 
-        DarBaja.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
             }
         });
@@ -101,6 +98,4 @@ public class VentanaAdmin {
     }
 
     public JPanel getVentana1() {return Ventana1;}
-
-
 }

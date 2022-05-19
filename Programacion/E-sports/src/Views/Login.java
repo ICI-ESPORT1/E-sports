@@ -29,11 +29,6 @@ public class Login extends javax.swing.JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonCancel);
 
-        bAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                onOK();
-            }
-        });
 
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {

@@ -5,24 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Views/VentanaJornadas.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Views/VentanaJornadas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Base de Datos/script/Tablas/Creacion_tablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Base de Datos/script/Tablas/Creacion_tablas.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/BD/EntrenadorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/EntrenadorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/RolDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/RolDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Jornadas.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Jornadas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaPrincipal.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentanaPrincipal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VisualizarEquipos.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VisualizarEquipos.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VisualizarEquipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VisualizarEquipos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +140,14 @@
           <url>file://$PROJECT_DIR$/src/Views/VisualizarEquipos.java</url>
           <line>24</line>
           <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>339</line>
+          <properties class="com.company.Main" method="tenDatosDueno">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

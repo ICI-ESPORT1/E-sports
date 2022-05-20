@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Modelo/Encriptar/encriptacion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-sports.iml" beforeDir="false" afterPath="$PROJECT_DIR$/E-sports.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/CalendarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/CalendarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/JornadaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/JornadaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/PartidoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/PartidoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/UsuarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Partido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Partido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Usuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaAdmin.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaAdmin.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/partidosJugados.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ultimaJorn.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/partidosJugados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ultimaJorn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,16 +147,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
-          <line>1036</line>
+          <line>1073</line>
           <properties class="com.company.Main" method="sacaListaDeJugadores">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Views/Login.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="14" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>1289</line>
+          <properties class="com.company.Main" method="generarJornadas">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

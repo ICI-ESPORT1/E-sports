@@ -64,7 +64,7 @@
                       <text value="DatosJugador"/>
                     </properties>
                   </component>
-                  <component id="c1aa0" class="javax.swing.JMenuItem">
+                  <component id="c1aa0" class="javax.swing.JMenuItem" binding="jmiGenerarPartidos">
                     <constraints/>
                     <properties>
                       <text value="GenerarPartidos"/>

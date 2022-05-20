@@ -29,6 +29,7 @@ public class VentanaAdmin {
     private JMenuItem jmiJornadas;
     private JMenuItem jmiModificarPersonas;
     private JMenuItem jmiModificarEquipo;
+    private JMenuItem jmiGenerarPartidos;
 
     private JButton equiposButton;
 
@@ -49,6 +50,14 @@ public class VentanaAdmin {
             public void actionPerformed(ActionEvent e) {
 
                 Main.abrirClasificacion();
+            }
+        });
+
+        PartidosJugados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Main.abrirUltimaJOrn();
             }
         });
 
@@ -74,11 +83,20 @@ public class VentanaAdmin {
 
 
         jornada.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed (ActionEvent e){
-            Main.abrirJornada();
-        }
-    });
+            @Override
+            public void actionPerformed (ActionEvent e){
+                Main.abrirJornada();
+            }
+        });
+
+        jmiGenerarPartidos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e){
+                Main.generarJornadas();
+            }
+        });
+
+
 
         
 }

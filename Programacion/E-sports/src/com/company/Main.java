@@ -19,26 +19,30 @@ import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 import java.awt.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.IdentityHashMap;
 
 import static com.sun.tools.attach.VirtualMachine.list;
 
 public class Main {
     static JFrame frame;
     static JDialog dialog;
+    static JDialog dialogLogin;
     private static BaseDatos bd;
 
     private static ArrayList<Jugador> listaJugadores = new ArrayList<>();
+    private static ArrayList<HashMap> listaEnfrentaminetos= new ArrayList<>();
+    private static ArrayList<Equipo> enfrentamientos= new ArrayList<>();
+    private static ArrayList<Jornada> listaJornadas= new ArrayList<>();
 
+    private static Partido partido= new Partido();
+    private static Calendario calendario= new Calendario();
     private static Asistente asistente;
     private static Entrenador entrenador;
     private static Dueno dueno;
     private static Equipo equipo = new Equipo();
-    private static Jornada jornada;
+    private static Jornada jornada = new Jornada();
     private static Jugador jugador = new Jugador();
     private static Resultado resultado;
     private static Rol rol = new Rol();
@@ -116,9 +120,9 @@ public class Main {
     }
 
     public static void ventanaLogin() {
-        dialog = new Login();
-        dialog.pack();
-        dialog.setVisible(true);
+        dialogLogin = new Login();
+        dialogLogin.pack();
+        dialogLogin.setVisible(true);
 
     }
 
@@ -138,6 +142,8 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        dialogLogin.dispose();
+
     }
 
 
@@ -253,6 +259,16 @@ public class Main {
         System.exit(0);
     }
 
+    public static void abrirUltimaJOrn() {
+        JFrame frame = new JFrame("partidosJugados");
+        frame.setContentPane(new ultimaJorn().getJpPartidos());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+
+
     public static void abrirBajasPersonas() {
         frame = new JFrame("VentanaBajas");
         frame.setContentPane(new BajasPersonas().getBajas());
@@ -346,6 +362,27 @@ public class Main {
         return asistente = AsistenteDAO.consultarAsistente(dni);
 
     }
+
+
+
+
+
+    /////////////////////////////////Metodo Para la conexion con usuario y contraseña///////////////////////////
+    public static void tomaDatosUsuario (String username, String password) throws Exception {
+        username = username.toUpperCase();
+        Usuario usuario = new Usuario(username,password);
+        Usuario bd = new Usuario();
+        bd = UsuarioDAO.tomaDatosUsuario(usuario);
+
+        if (usuario.getPassword().equals(bd.getPassword())){
+            Main.abrirVentanaAdmin();
+            dialogLogin.dispose();
+        }else {
+            JOptionPane.showMessageDialog(null,"El Usuario o contraseña es incurrecto");
+        }
+
+    }
+
 
     ////////////////////////////////////// Metodos para la tabla Entrenador ////////////////////////////////////
     public static void tenDatosEntrenador(String dni, String n, String t, String d, Float s) throws Exception {
@@ -1156,6 +1193,70 @@ public class Main {
         return sResultados;
     }
 
+    public static String consultarUltimaJonr(){
+
+        String sUltimaJornada = "";
+        try {
+
+            File file = new File("ultimaJorn.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(file);
+            document.getDocumentElement().normalize();
+            // GET DOCUMENT COGE AUTOMÁTICAMENTE EL nodo "ROOT" (RESUMEN ULTIMAJORN)
+            System.out.println(document.getDocumentElement().getNodeName());
+            sUltimaJornada = sUltimaJornada + (document.getDocumentElement().getNodeName() + "\n");
+            // Primer nodo "JORNADA"
+            NodeList nListJornada = document.getElementsByTagName("JORNADA");
+            System.out.println("----------------------------");
+            for (int temp = 0; temp < nListJornada.getLength(); temp++) {
+                Node nJornada = nListJornada.item(temp);
+                Element eJornada = (Element) nJornada;
+                System.out.println("Jornada : " + eJornada.getAttribute("num_jornada")); // Esto se pone porque tiene atributo
+                sUltimaJornada = sUltimaJornada + "Jornada : " + (eJornada.getAttribute("num_jornada") + "\n");
+
+                NodeList nListPartidos = eJornada.getElementsByTagName("PARTIDOS");
+                for (int temp1 = 0; temp1 < nListPartidos.getLength(); temp1++) {
+                    Node nPartidos = nListPartidos.item(temp1);
+                    Element ePartidos = (Element) nPartidos;
+
+                    NodeList nListPartido_TI = ePartidos.getElementsByTagName("PARTIDO_TI");
+                    for (int temp2 = 0; temp2 < nListPartido_TI.getLength(); temp2++) {
+                        Node nPartido_TI = nListPartido_TI.item(temp2);
+                        Element ePartido_TI = (Element) nPartido_TI;
+                        System.out.println("Partido : " + ePartido_TI.getAttribute("id_partido") + "   Turno : " + ePartido_TI.getAttribute("turno"));// Esto se pone porque tiene atributo
+                        sUltimaJornada = sUltimaJornada + "Partido : " + ePartido_TI.getAttribute("id_partido") + "   Turno : " + (ePartido_TI.getAttribute("turno") + "\n");
+
+                        NodeList nListEquipos = ePartido_TI.getElementsByTagName("EQUIPOS");
+                        for (int temp3 = 0; temp3 < nListEquipos.getLength(); temp3++) {
+                            Node nEquipos = nListEquipos.item(temp3);
+                            Element eEquipos = (Element) nEquipos;
+
+                            NodeList nListEQUIPO_TIP = eEquipos.getElementsByTagName("EQUIPO_TIP");
+                            for(int temp4 = 0; temp4 < nListEQUIPO_TIP.getLength(); temp4++) {
+                                Node nEQUIPO_TIP = nListEQUIPO_TIP.item(temp4);
+                                Element eEQUIPO_TIP = (Element) nEQUIPO_TIP;
+                                System.out.println("\nCod_Equipo : " + eEQUIPO_TIP.getAttribute("cod_Equipo"));// Esto se pone porque tiene atributo
+                                sUltimaJornada = sUltimaJornada + "EQUIPO : " + (eEQUIPO_TIP.getAttribute("id_partido") + "\n");
+                                System.out.println("Equipo : " + eEQUIPO_TIP.getElementsByTagName("NOMBRE").item(0).getTextContent());// Esto se pone porque tiene atributo
+                                sUltimaJornada = sUltimaJornada + (eEQUIPO_TIP.getElementsByTagName("NOMBRE").item(0).getTextContent() + "\n");
+                                System.out.println("Resultado : " + eEQUIPO_TIP.getElementsByTagName("RESULTADO").item(0).getTextContent());// Esto se pone porque tiene atributo
+                                sUltimaJornada = sUltimaJornada + (eEQUIPO_TIP.getElementsByTagName("RESULTADO").item(0).getTextContent() + "\n");
+                            }
+                        }
+                    }
+                }
+                System.out.println("*****************************");
+                sUltimaJornada = sUltimaJornada + ("*****************************\n");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return  sUltimaJornada;
+
+    }
+
     /**
      * Metodo que llama a obtenerClasificacion para que nos devuelva la clasificacion actual
      *
@@ -1182,6 +1283,109 @@ public class Main {
 
     public static Resultado obtenerPartidos() throws Exception {
         return resultado = ResultadoDAO.obtenerPartidos();
+    }
+
+    ////////////////////////////////////// Metodos para la tabla Partidos ////////////////////////////////////
+
+    public static boolean generarJornadas(){
+        Integer semana=1;
+        BaseDatos.abrirConexion();
+        listaEquipos=EquipoDAO.selectTodosLosEquipos();
+        calendario=CalendarioDAO.buscarCalendario();
+        try {
+            if (!CalendarioDAO.buscarCalendarioBoolean()){
+                System.out.println("no existe el calendario");
+            }
+            LocalDate ldFecha = LocalDate.now().plusDays(7);
+            for (int i = 0; i < listaEquipos.size()-1 ; i++) {
+                jornada = new Jornada();
+                jornada.setFecha(ldFecha);
+                jornada.setCalendario(calendario);
+                jornada.setNumSemana(semana.toString());
+                JornadaDAO.altaJornada(jornada);
+                ldFecha = ldFecha.plusDays(7);
+                System.out.println("+1");
+                listaJornadas.add(jornada);
+                semana=semana+1;
+            }
+            listaJornadas=new ArrayList<>();
+
+            listaJornadas=JornadaDAO.selectTodos();
+
+            for (int j = 1; j < listaJornadas.size(); j++) {
+                jornada=listaJornadas.get(j);
+                for (int p = 0; p < listaEquipos.size()/2 ; p++) {
+
+                    Random randNum = new Random();
+                    int turno = randNum.nextInt(2) + 1;
+                    if (turno == 1)
+                        partido.setTurno("Mañana");
+                    if (turno == 2)
+                        partido.setTurno("Tarde");
+                    partido.setJornada(jornada);
+                    generarEnfrentamientos();
+                    partido.setListaEquipos(enfrentamientos);
+                    System.out.println(partido.getListaEquipos());
+                    PartidoDAO.altaPartido(partido);
+                }
+            }
+
+
+            BaseDatos.cerrarConexion();
+        }
+        catch (Exception e){
+            System.out.println(e.getClass());
+        }
+
+        return true;
+
+    }
+
+    public static void generarEnfrentamientos() {
+        try {
+            listaEquipos = EquipoDAO.selectTodosLosEquipos();
+            int nPartidos = listaEquipos.size() / 2;
+
+            for (int i = 0; i < listaEquipos.size()-1; i++) {
+                HashMap<Integer, Integer> retorno =   generarPartidos(listaEquipos.size());
+                System.out.println(retorno.toString().indexOf(1));
+                System.out.println("");
+            }
+
+
+            //     ResultadoDAO.altaResultado(equipo1, numPartido);
+
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+        }
+    }
+
+    public static HashMap<Integer, Integer> generarPartidos (int cantPartidos) {
+        HashMap<Integer, Integer> retorno = new HashMap<Integer, Integer>();
+        Random randNum = new Random();
+        int eq1 = 0;
+
+
+
+        Set<Integer> set = new LinkedHashSet<Integer>();
+        Set<Integer> set1 = new LinkedHashSet<Integer>();
+        while (set.size() <= cantPartidos / 2 - 1) {
+            set.add(randNum.nextInt(cantPartidos) + 1);
+        }
+        while (set1.size() <= cantPartidos / 2 - 1) {
+            eq1 = randNum.nextInt(cantPartidos) + 1;
+            if (!set1.contains(eq1) && !set.contains(eq1)) set1.add(eq1);
+        }
+        Iterator<Integer> it = set.iterator();
+        Iterator<Integer> it1 = set1.iterator();
+
+        for (int i = 0; i < cantPartidos / 2; i++) {
+            retorno.put(it.next(), it1.next());
+        }
+        System.out.println(retorno.toString());
+
+
+        return retorno;
     }
 
 

@@ -1,20 +1,21 @@
 package Views;
 
-import Modelo.UML.Resultado;
 import com.company.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class partidosJugados {
+public class ultimaJorn {
     private JButton bVolver;
-    private JTextArea textArea1;
+    private JTextArea taPartidos;
     private JPanel jpPartidos;
 
-    private static Resultado resultado;
+    private static String resultado;
 
-    public partidosJugados() {
+    public ultimaJorn() {
+        llenarTexto();
+        taPartidos.setText(resultado);
         bVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,7 +26,7 @@ public class partidosJugados {
 
     public static void llenarTexto(){
         try{
-            resultado=Main.obtenerPartidos();
+            resultado=Main.consultarUltimaJonr();
 
         }
         catch (Exception e){
@@ -37,7 +38,7 @@ public class partidosJugados {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("partidosJugados");
-        frame.setContentPane(new partidosJugados().getJpPartidos());
+        frame.setContentPane(new ultimaJorn().getJpPartidos());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

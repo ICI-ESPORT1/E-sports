@@ -169,7 +169,7 @@ public class Main {
      * Este método contiene el Main de la ventana Principal para poder abrirla
      */
     public static void abrirVentanaAdmin() {
-        frame = new JFrame("VentanaAdmin");
+        frame=new JFrame("VentanaAdmin");
         frame.setContentPane(new VentanaAdmin().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

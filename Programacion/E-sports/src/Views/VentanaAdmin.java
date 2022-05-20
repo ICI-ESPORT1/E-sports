@@ -52,17 +52,7 @@ public class VentanaAdmin {
             }
         });
 
-        verEquipo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Main.visualizarEquipo();
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
         jmiModificarEquipo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,26 +72,15 @@ public class VentanaAdmin {
         });
 
 
-        DarAlta.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed (ActionEvent e){
-            Main.abrirAltasPersonas();
-        }
-    });
+
         jornada.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed (ActionEvent e){
             Main.abrirJornada();
         }
     });
-        DarBaja.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirBajasPersonas();
-            }
-        });
 
-
+        
 }
 
 public static void main(String[]args){

@@ -67,8 +67,8 @@ public class Login extends javax.swing.JDialog {
         bAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 Main.abrirVentanaAdmin();
+                //Main.VentanaInvitado();
 
             }
         });

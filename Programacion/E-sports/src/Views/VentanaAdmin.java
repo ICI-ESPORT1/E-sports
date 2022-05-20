@@ -98,7 +98,7 @@ public class VentanaAdmin {
 
 
 
-        
+
 }
 
 public static void main(String[]args){

@@ -1284,8 +1284,12 @@ public class Main {
     public static Resultado obtenerPartidos() throws Exception {
         return resultado = ResultadoDAO.obtenerPartidos();
     }
+/////////////////////////////////RESULTADOS/////////////////////////////////////////////////////
+    public static void tomaResultado(int idEq1,int res1,int idEq2,int res2){
 
-    ////////////////////////////////////// Metodos para la tabla Partidos ////////////////////////////////////
+     ResultadoDAO.insertResultado(idEq1,res1);
+     ResultadoDAO.insertResultado(idEq2,res2);
+    }
 
     public static boolean generarJornadas(){
         Integer semana=1;

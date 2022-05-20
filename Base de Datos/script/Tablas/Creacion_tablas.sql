@@ -1,3 +1,4 @@
+/*Creacion de tablas para la modificacion de Usuario*/
 /*EQUIPO 2*/
 DROP TABLE equipo CASCADE CONSTRAINTS;
 DROP TABLE entrenador CASCADE CONSTRAINTS;
@@ -10,8 +11,7 @@ DROP TABLE resultado CASCADE CONSTRAINTS;
 DROP TABLE jornada CASCADE CONSTRAINTS;
 DROP TABLE calendario CASCADE CONSTRAINTS;
 DROP TABLE fichero CASCADE CONSTRAINTS;
-DROP TABLE administrador CASCADE CONSTRAINTS;
-DROP TABLE grupo_usuario CASCADE CONSTRAINTS;
+DROP TABLE usuario CASCADE CONSTRAINTS;
 
 
 CREATE TABLE asistente(
@@ -127,26 +127,21 @@ resultado varchar2 (5),
 );
 
 
-create table fichero(
-resultado clob
+CREATE TABLE fichero (
+num_doc number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT fic_num_pk PRIMARY KEY,
+nombre_clob clob,
+id_calendario number(3),
+CONSTRAINT fic_num_fk FOREIGN KEY (id_calendario)
+        REFERENCES calendario(id_calendario) ON DELETE SET NULL
 );
 
 
-CREATE TABLE grupo_usuario(
-id_rol number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT grup_id_pk PRIMARY KEY,
-descripcion varchar2(150)
-);
-
-
-CREATE TABLE administrador(
-id_admin number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT adm_id_pk PRIMARY KEY,
-nombre varchar2(20),
-nombreusu varchar2(25) CONSTRAINT adm_usu_un UNIQUE,
-apellido varchar2(20),
-pass varchar(20),
-id_rol number(3),
-CONSTRAINT adm_id_fk FOREIGN KEY (id_rol)
-        REFERENCES grupo_usuario(id_rol) ON DELETE SET NULL
+CREATE TABLE usuario(
+id_rol number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT gru_id_pk PRIMARY KEY,
+username varchar2(150) CONSTRAINT usu_use_un UNIQUE,
+password varchar2(40)not null,
+codUsuario varchar2(3)not null,
+CONSTRAINT usu_cod_ck CHECK(codUsuario = 'ADM')
 );
 
 

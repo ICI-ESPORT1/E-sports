@@ -166,6 +166,9 @@ insert into resultado(id_equipo,id_partido, resultado) values(3,3,'P');
 insert into resultado(id_equipo,id_partido, resultado) values(2,4,'G');
 
 insert into resultado(id_equipo,id_partido, resultado) values(4,4,'P');
+/*INSERT USUARIO*/
+insert into usuario(username,password, codUsuario) values('admin','admin','ADM');
+
 
 
 

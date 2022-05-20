@@ -73,10 +73,29 @@ public class JugadorDAO {
      //   BaseDatos.cerrarConexion();
 
     }
+    public static ArrayList<Jugador> consultarJugadoresEquipoN(String nombre)throws Exception{
+        //Metodo para consultar todos los jugadores de un equipo
+        //  BaseDatos.abrirConexion();
 
+        plantilla="select * from jugador where nombre = ?";
+
+        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,nombre);
+
+        resultado = sentenciaPre.executeQuery();
+
+        listaJugadores= new ArrayList<>();
+        while(resultado.next()) {
+            crearObjeto();
+            listaJugadores.add(jugador);
+        }
+        //  BaseDatos.cerrarConexion();
+        return listaJugadores;
+
+    }
     public static ArrayList<Jugador> consultarJugadoresEquipo(int idEquipo)throws Exception{
         //Metodo para consultar todos los jugadores de un equipo
-      //  BaseDatos.abrirConexion();
+        BaseDatos.abrirConexion();
 
         plantilla="select * from jugador where id_equipo = ?";
 
@@ -90,7 +109,7 @@ public class JugadorDAO {
             crearObjeto();
             listaJugadores.add(jugador);
         }
-      //  BaseDatos.cerrarConexion();
+       BaseDatos.cerrarConexion();
         return listaJugadores;
 
     }
@@ -147,16 +166,57 @@ public class JugadorDAO {
 
       //  BaseDatos.cerrarConexion();
     }
-    public static boolean cambiarNombreJugador(String nN, String nV){
+    /* *****************************************************************************************/
+    public static boolean cambiarNombreJugador(String nN, String dniJug){
         int ok=0;
         boolean cambiado = false;
         try{
             BaseDatos.abrirConexion();
-            plantilla="update jugador set nombre = ? where nombre = ?" ;
+            plantilla="update jugador set nombre = ? where dni = ?" ;
 
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
             sentenciaPre.setString(1,nN.toUpperCase());
-            sentenciaPre.setString(2,nV.toUpperCase());
+            sentenciaPre.setString(2,dniJug);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+
+        BaseDatos.cerrarConexion();
+        return cambiado;
+    }
+    public static boolean cambiarTelefonoJugador(String telfNuevo,String dniJug){
+        int ok=0;
+        boolean cambiado = false;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update jugador set telefono = ? where dni = ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1,telfNuevo);
+            sentenciaPre.setString(2,dniJug);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+
+        BaseDatos.cerrarConexion();
+        return cambiado;
+    }
+    public static boolean cambiarSalarioJugador(Float fSalNuevo, String dniJug){
+        int ok=0;
+        boolean cambiado = false;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update jugador set sueldo = ? where dni = ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setFloat(1,fSalNuevo);
+            sentenciaPre.setString(2,dniJug);
             ok = sentenciaPre.executeUpdate();
 
             if(ok ==1){

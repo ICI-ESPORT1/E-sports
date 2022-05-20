@@ -158,7 +158,6 @@
                 <item value="Jugador"/>
                 <item value="Entrenador"/>
                 <item value="Asistente"/>
-                <item value="Dueno"/>
               </model>
             </properties>
           </component>

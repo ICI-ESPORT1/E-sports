@@ -9,6 +9,7 @@ import Views.Clasificacion;
 import Views.FormularioInscripcion;
 import Views.VentanaEscudos;
 import Views.VisualizarEquipos;
+import com.sun.codemodel.internal.util.UnicodeEscapeWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -45,6 +46,7 @@ public class Main {
     private static Frame Form;
     private static ArrayList<Equipo> listaEquipos = new ArrayList<>();
     private static Equipo equipoConId = new Equipo();
+    private static ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -411,7 +413,33 @@ public class Main {
         EntrenadorDAO.cambioEquipoEntrenador(entrenador, idNuevoEquipo);
 
     }
+    public static void dameListaEntrenadores(){
+        listaEntrenadores = EntrenadorDAO.selectTodos();
+    }
+    public static void cambiarNombreEntrenador(String nNuevo,String dni){
+        boolean nombreCambiado = false;
+        int posicionentre =0;
+        int i = 0;
+        // Necesito un arraylist de entrenadores
 
+        for(i=0; i<listaEntrenadores.size()&& !listaEntrenadores.get(i).getDni().equalsIgnoreCase(dni);i++){}
+        posicionentre = i;
+            if(i<listaEntrenadores.size()){
+                //el entrenador existe
+                nombreCambiado = EntrenadorDAO.cambiarNombreEntrenador(nNuevo,dni);
+                if(nombreCambiado){
+                    listaEntrenadores.get(posicionentre).setNombre(nNuevo);
+                    JOptionPane.showMessageDialog(null, "El nombre del entrenador se ha cambiado por: "+ nNuevo );
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se ha encontrado el dni");
+            }
+
+    }
+    public static void cambiarTelefonoEntrenador(String nTelf,String dni){
+
+    }
     /**
      * Metodo que llama a consultarEntrenador para hacer una select en la base de datos
      *
@@ -950,14 +978,13 @@ public class Main {
         JugadorDAO.cambiarDatosJugador(jugador);
     }
 
+
     public static void cambiarNombreJugador(String nNuevo, String nViejo,String dni, int posEq){
         boolean nombreCambiado = false;
         int posicionNombreV =0;
-        String nombreEquipo = listaEquipos.get(posEq).getNombre();
 
         //busco al jugador en la posicion de la lista
         int i = 0;
-        int z = 0;
 
             nombreCambiado = JugadorDAO.cambiarNombreJugador(nNuevo,nViejo);
             if(nombreCambiado){
@@ -970,13 +997,50 @@ public class Main {
             JOptionPane.showMessageDialog(null, "El nombre "+ nViejo + " se ha cambiado por: "+ nNuevo );
         }
 
+    public static void cambiarTelefonoJugador(String telfNuevo,String dni, int posEq){
+        boolean nombreCambiado = false;
+        int posicionNombreV = 0;
 
-    public static void sacaListaDeJugadores( int pos){
+
+        //busco al jugador en la posicion de la lista
+        int i = 0;
+
+        nombreCambiado = JugadorDAO.cambiarTelefonoJugador(telfNuevo,dni);
+        if(nombreCambiado){
+
+            for(i = 0; i<listaJugadores.size()&& !listaJugadores.get(i).getDni().equalsIgnoreCase(dni); i++){}
+            posicionNombreV = i;
+            listaJugadores.get(posicionNombreV).setTelefono(telfNuevo);
+            listaEquipos.get(posEq).setlistaJugadores(listaJugadores);
+        }
+        JOptionPane.showMessageDialog(null, "El telefono se ha cambiado por: " + telfNuevo );
+    }
+    public static void cambiarSalarioEquipo(String salarioNuevo,String dniJug ,String nombreViejo, int posEq){
+        boolean salarioCambiado = false;
+        int posicionNombreV =0;
+        float fSalNuevo = Float.parseFloat(salarioNuevo);
+
+        int i = 0;
+
+        salarioCambiado = JugadorDAO.cambiarSalarioJugador(fSalNuevo,dniJug);
+        if(salarioCambiado){
+            //busco al jugador en la posicion de la lista
+            for(i = 0; i<listaJugadores.size()&& !listaJugadores.get(i).getNombre().equalsIgnoreCase(nombreViejo); i++){}
+            posicionNombreV = i;
+            listaJugadores.get(posicionNombreV).setSalario(fSalNuevo);
+            listaEquipos.get(posEq).setlistaJugadores(listaJugadores);
+        }
+        JOptionPane.showMessageDialog(null, "El salario es ahora de: "+ salarioNuevo);
+    }
+
+
+    public static void sacaListaDeJugadores(int pos){
         try{
-            int idEquipo =0;
+            String nombreEquipo ="";
             listaJugadores = new ArrayList<>();
-            idEquipo = listaEquipos.get(pos).getId_equipo();
-            listaJugadores = JugadorDAO.consultarJugadoresEquipo(idEquipo);  //La lista de jugadores del equipo seleccionado
+            nombreEquipo = listaEquipos.get(pos).getNombre();
+            int idEq = listaEquipos.get(pos).getId_equipo();
+            listaJugadores = JugadorDAO.consultarJugadoresEquipo(idEq);  //La lista de jugadores del equipo seleccionado
 
         }catch (Exception e){System.out.println(e.getMessage());}
     }
@@ -984,6 +1048,8 @@ public class Main {
         String nombreJugador="";
         int i=0;
         int pos=0;
+        int idEq = listaEquipos.get(pos).getId_equipo();
+
         for (i=0; i<listaJugadores.size()&& !listaJugadores.get(i).getDni().equalsIgnoreCase(dniPersona);i++){}
         if(i<listaJugadores.size()){
             pos = i;
@@ -1026,6 +1092,7 @@ public class Main {
         return salario;
 
     }
+
 
     ////////////////////////////////////// Metodos para la tabla Resultado ////////////////////////////////////
 

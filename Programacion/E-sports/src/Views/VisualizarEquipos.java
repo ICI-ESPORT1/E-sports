@@ -1,5 +1,6 @@
 package Views;
 
+import Modelo.BD.BaseDatos;
 import com.company.Main;
 
 import javax.swing.*;
@@ -19,13 +20,19 @@ public class VisualizarEquipos extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         /*Pedir los datos de los equipos*/
+        BaseDatos.abrirConexion();
+
         Main.consultarEquipos();
         String equipos = Main.dameStringEquipos();
+        BaseDatos.cerrarConexion();
         taInforEqui.setText(equipos);
+
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                taInforEqui.remove(taInforEqui);
                 onOK();
+
             }
         });
 

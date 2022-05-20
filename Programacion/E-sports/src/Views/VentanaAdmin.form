@@ -46,34 +46,10 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="f39ad" class="javax.swing.JMenuItem">
+                  <component id="f39ad" class="javax.swing.JMenuItem" binding="jmiModificarEquipo">
                     <constraints/>
                     <properties>
                       <text value="ModificarEquipo"/>
-                    </properties>
-                  </component>
-                  <component id="ad84d" class="javax.swing.JMenuItem" binding="DarAlta">
-                    <constraints/>
-                    <properties>
-                      <text value="AltaPersona"/>
-                    </properties>
-                  </component>
-                  <component id="8ad51" class="javax.swing.JMenuItem" binding="DarBaja">
-                    <constraints/>
-                    <properties>
-                      <text value="BajaPersona"/>
-                    </properties>
-                  </component>
-                  <component id="ad84d" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="AltaJugador"/>
-                    </properties>
-                  </component>
-                  <component id="8ad51" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="BajaJugador"/>
                     </properties>
                   </component>
                   <component id="df469" class="javax.swing.JMenuItem" binding="jmiModificarPersonas">
@@ -82,55 +58,13 @@
                       <text value="ModificarPersonas"/>
                     </properties>
                   </component>
-                  <component id="3a9c3" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="GenerarJornadas"/>
-                    </properties>
-                  </component>
-                  <component id="effdc" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="ModificarJornadas"/>
-                    </properties>
-                  </component>
-                  <component id="62907" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="BorrarJornada"/>
-                    </properties>
-                  </component>
-                  <component id="7b66" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="AltaDueño"/>
-                    </properties>
-                  </component>
-                  <component id="2f5ae" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="BajaDueño"/>
-                    </properties>
-                  </component>
-                  <component id="5861" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="ObtenerDatosDueño"/>
-                    </properties>
-                  </component>
                   <component id="4f5d9" class="javax.swing.JMenuItem">
                     <constraints/>
                     <properties>
                       <text value="DatosJugador"/>
                     </properties>
                   </component>
-                  <component id="1139e" class="javax.swing.JMenuItem">
-                    <constraints/>
-                    <properties>
-                      <text value="DatosEquipo"/>
-                    </properties>
-                  </component>
-                  <component id="c1aa0" class="javax.swing.JMenuItem" binding="jmiPartidos">
+                  <component id="c1aa0" class="javax.swing.JMenuItem" binding="jmiGenerarPartidos">
                     <constraints/>
                     <properties>
                       <text value="GenerarPartidos"/>

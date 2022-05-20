@@ -1,16 +1,17 @@
 /*CUERPO PAQUETE GESTIONAR ENTRENADORES*/
 create or replace package body gestionarEntrenadores as
 /*declaro las funciones que son comunes a todos los procedimientos*/
-    function validar_equipo
+    function validar_equipo_entrenador
     (p_equipo in number)
     return boolean;
-function validar_entrenador
+    
+    function validar_entrenador
     (p_jugador in number)
     return boolean; 
     
 /*Programacion de las funciones*/    
 
-function validar_equipo
+function validar_equipo_entrenador
 (p_equipo in number)
 return boolean
 is
@@ -23,7 +24,7 @@ return true;
 exception
    when no_data_found then
      return false;
-end validar_equipo;
+end validar_equipo_entrenador;
 
     
 function validar_entrenador
@@ -42,6 +43,7 @@ exception
 end validar_entrenador;
 /*EMPIEZAN LOS PROCEDIMIENTOS***********************************************/
 /*PROCEDIMIENTO PARA AÑADIR ENTRENADORES*/
+
 procedure nuevo_entrenador
 (
 p_dni entrenador.dni%type,
@@ -49,9 +51,12 @@ p_nombre entrenador.nombre%type,
 p_telefono entrenador.telefono%type,
 p_direccion entrenador.direccion%type,
 p_id_equipo entrenador.id_equipo%type,
-p_sueldo entrenador.sueldo%type,
+p_sueldo entrenador.sueldo%type
 )
 is
+e_dueNoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
   if validar_entrenador(p_id_equipo)then
 
@@ -60,11 +65,21 @@ begin
         values(p_dni,p_nombre,p_telefono,p_direccion,p_id_equipo,
                p_sueldo);
   else
-    dbms_output.put_line ('El equipo no existe');
+     raise e_dueNoExiste;
   end if;
+
   exception
+  
+  when e_dueNoExiste then
+    v_error_mensaje:='El equipo no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20036,v_error);
+    
    when others then
-     dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20037,v_error);
+    
 END nuevo_entrenador;
 
 /*PROCEDIMIENTO PARA CAMBIAR DE EQUIPO A UN ENTRENADOR*/
@@ -74,21 +89,39 @@ p_idEntrenador entrenador.id_entrenador%type,
 p_idEquipoNuevo entrenador.id_equipo%type
 )
 is
+e_equipoNoExiste exception;
+e_dueNoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
  if validar_entrenador(p_idEntrenador) then
-    if validar_equipo(p_idEquipoNuevo)then
+    if validar_equipo_entrenador(p_idEquipoNuevo)then
       update entrenador
       set id_equipo = p_idEquipoNuevo
       where id_entrenador = p_idEntrenador;
     else
-      dbms_output.put_line ('El equipo no existe');
+      raise e_equipoNoExiste;
     end if;
  else
-  dbms_output.put_line ('El entrenador no existe');
+  raise e_dueNoExiste;
  end if;
+ 
  exception
+ when e_dueNoExiste then
+    v_error_mensaje:='El entrenador no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20038,v_error);
+    
+ when e_equipoNoExiste then 
+    v_error_mensaje:='El equipo no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20039,v_error);
+    
    when others then
-      dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20040,v_error);
+      
 end cambio_equipo_entrenador;   
 
 
@@ -98,17 +131,29 @@ procedure borrar_entrenador
 p_idEntrenador entrenador.id_entrenador%type
 )
 is
+e_dueNoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
   if validar_entrenador(p_idEntrenador) then
    delete from entrenador
    where id_entrenador = p_idEntrenador;
    
    else
-        dbms_output.put_line ('El entrenador no existe');
+        raise e_dueNoExiste;
   end if;
+  
   exception
+  when e_dueNoExiste then
+    v_error_mensaje:='El entrenador no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20041,v_error);
+    
    when others then
-     dbms_output.put_line('HA OCURRIDO UN ERROR');
+     v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20042,v_error);
+    
 END borrar_entrenador;  
 
 end gestionarEntrenadores;

@@ -28,7 +28,8 @@ public class VentanaAdmin {
     private JMenuItem DarAlta;
     private JMenuItem jmiJornadas;
     private JMenuItem jmiModificarPersonas;
-    private JMenuItem jmiPartidos;
+    private JMenuItem jmiModificarEquipo;
+    private JMenuItem jmiGenerarPartidos;
 
     private JButton equiposButton;
 
@@ -52,11 +53,26 @@ public class VentanaAdmin {
             }
         });
 
-        verEquipo.addActionListener(new ActionListener() {
+        PartidosJugados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Main.abrirUltimaJOrn();
+            }
+        });
+        jmiModificarPersonas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirModificarDatosPersona();
+            }
+        });
+
+
+        jmiModificarEquipo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Main.visualizarEquipo();
+                    Main.VentanaModificarEquipo();
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -70,51 +86,35 @@ public class VentanaAdmin {
             }
         });
 
-        DarBaja.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-        jmiPartidos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (Main.generarPatidos());
 
+        jornada.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e){
+                Main.abrirJornada();
             }
         });
 
-
-
-        }
-
-
-/*
-        bInscripcion.addActionListener(new ActionListener() {
+        jmiGenerarPartidos.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirBajasPersonas();
+            public void actionPerformed (ActionEvent e){
+                Main.generarJornadas();
             }
         });
 
-        DarAlta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.abrirAltasPersonas();
-            }
-        });
 
-    }*/
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("VentanaPrincipal");
+
+}
+
+public static void main(String[]args){
+        JFrame frame=new JFrame("VentanaAdmin");
         frame.setContentPane(new VentanaAdmin().Ventana1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public JPanel getVentana1() {return Ventana1;}
+        }
 
 
-}
+public JPanel getVentana1(){return Ventana1;}
+        }

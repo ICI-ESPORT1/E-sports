@@ -1,5 +1,6 @@
 package Views;
 
+import Modelo.BD.BaseDatos;
 import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
 import Modelo.UML.Jugador;
@@ -10,25 +11,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ModificarDatosPersona {
     private JLabel lTitulo;
-    private JComboBox comboBox1;
+    private JComboBox cbRol;
     private JTextField tfDNI;
-    private JLabel lDNI;
     private JLabel lNombre;
     private JTextField tfNombre;
     private JLabel lTelefono;
     private JTextField tfTelefono;
-    private JLabel lDireccion;
     private JTextField tfDireccion;
     private JTextField tfNickname;
     private JTextField tfSalarioJ;
     private JTextField tfRol;
     private JTextField tfEquipo;
-    private JLabel lEquipo;
     private JButton bCancelar;
     private JButton bInsertar;
     private JPanel jpModificarDatosPersona;
@@ -37,13 +37,19 @@ public class ModificarDatosPersona {
     private JPanel jpEntrAsis;
     private JLabel lSalario;
     private JTextField tfSalario;
-    private JLabel lNickname;
-    private JLabel lRol;
+    private JComboBox cbEquipos;
+    private JTextField tfDni;
 
     private float sueldo = 0;
     private Jugador jugador;
+    private ArrayList<String>listaNombresEquipo;
+    private String nombreViejo;
+    private String telfViejo;
+    private Float salarioViejo;
 
     public ModificarDatosPersona() {
+        llenarComboBox(); //Llena el combo de Equipos
+
         bCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,67 +60,75 @@ public class ModificarDatosPersona {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (validarDatosJugador("jugador"))
-                    Main.cambiarDatosJugador(tfDNI.getText(), tfNombre.getText(), tfTelefono.getText(), tfDireccion.getText(),tfNickname.getText(),Float.parseFloat(tfSalarioJ.getText()), tfRol.getText(), tfEquipo.getText());
-                    System.out.println("jugador modificado");
+                    if(cbRol.getSelectedIndex()==0){
+                        if(!tfNombre.getText().equalsIgnoreCase(nombreViejo)){
+                            boolean bdni = validarDni(tfDni.getText());
+                            if(bdni){
+                                boolean bNombre = validarNombre(tfNombre.getText(),"tipo");
+                                if(bNombre){
+                                    Main.cambiarNombreJugador(tfNombre.getText(),nombreViejo,tfDni.getText(),cbEquipos.getSelectedIndex());
+                                }
+                            }
+                        }
+
+                        if(!tfTelefono.getText().equalsIgnoreCase(telfViejo)){
+                            boolean bTelefono = validarTelefono(tfTelefono.getText());
+                            if(bTelefono){
+                                Main.cambiarTelefonoJugador(tfTelefono.getText(),tfDNI.getText(),cbEquipos.getSelectedIndex());
+                            }
+                        }
+                        if(!tfSalario.getText().equalsIgnoreCase(String.valueOf(salarioViejo))){
+                            boolean bSueldo = validarSueldo();
+                            if(bSueldo){
+                                Main.cambiarSalarioEquipo(tfSalario.getText(),tfDNI.getText() ,nombreViejo,cbEquipos.getSelectedIndex());
+                            }
+                        }
+                    }
+                    if(cbRol.getSelectedIndex()==1){
+                        Main.dameListaEntrenadores();
+                        if(!tfNombre.getText().equalsIgnoreCase(nombreViejo)){
+                            boolean bdni = validarDni(tfDni.getText());
+                            if(bdni){
+                                boolean bNombre = validarNombre(tfNombre.getText(),"tipo");
+                                if(bNombre){
+                                    Main.cambiarNombreEntrenador(tfNombre.getText(),tfDNI.getText());
+                                }
+                            }
+                        }
+                        if(!tfTelefono.getText().equalsIgnoreCase(telfViejo)){
+                            boolean bTelefono = validarTelefono(tfTelefono.getText());
+                            if(bTelefono){
+                                Main.cambiarTelefonoEntrenador(tfTelefono.getText(),tfDNI.getText());
+                            }
+                        }
+                        if(!tfSalario.getText().equalsIgnoreCase(String.valueOf(salarioViejo))){
+                            boolean bSueldo = validarSueldo();
+                            if(bSueldo){
+                               // Main.cambiarSalarioEntrenador(tfSalario.getText(),tfDNI.getText() ,nombreViejo,cbEquipos.getSelectedIndex());
+                            }
+                        }
+
+
+                    }
+
+
                 }
                 catch (Exception ex){
                     System.out.println(ex.getClass());
                 }
             }
         });
-        tfDNI.addFocusListener(new FocusAdapter() {
+
+
+        tfDni.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                try {
-                    if (validarDni(tfDNI.getText())) {
-                        String dni =tfDNI.getText();
-                        jugador = Main.consultarJugador(dni);
-
-                        tfDireccion.setText(jugador.getDireccion());
-                        tfNombre.setText(jugador.getNombre());
-                        tfTelefono.setText(jugador.getTelefono());
-                        tfNickname.setText(jugador.getNickname());
-                        tfRol.setText(jugador.getRol().getNombre());
-                        tfEquipo.setText(jugador.getEquipo().getNombre());
-                    }
-                    else{
-                        tfDNI.requestFocus(true);
-                        tfDNI.setText("Pon un DNI existente");
-                    }
-                }
-                catch (Exception ex){
-                    System.out.println(ex.getClass());
-                }
-            }
-        });
-        comboBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               int selecionado = comboBox1.getSelectedIndex();
-
-               if(selecionado==0){
-                   tfNickname.setEditable(true);
-                   tfRol.setEditable(true);
-                   tfSalario.setEditable(true);
-               }
-
-               if (selecionado==1||selecionado==2){
-                   tfNickname.setEditable(false);
-                   tfRol.setEditable(false);
-                   tfSalario.setEditable(true);
-               }
-
-               if (selecionado==3){
-                   tfNickname.setEditable(false);
-                   tfRol.setEditable(false);
-                   tfSalario.setEditable(false);
-               }
+                llenarFormulario();
             }
         });
     }
-
+/* **********************FUNCIONES PARA VALIDAR DATOS************************************/
     public boolean validarDatosJugador(String tipo){
         boolean bJugador = false;
         boolean bNombreJ = false;
@@ -157,7 +171,6 @@ public class ModificarDatosPersona {
         }catch (Exception e){System.out.println(e.getClass());}
         return bJugador;
     }
-
     /**
      * Metodo para validar el sueldo
      * @return
@@ -184,7 +197,6 @@ public class ModificarDatosPersona {
         }
         return bSueldo;
     }
-
     /**
      * Metodo para validar la localidad
      * @param loc
@@ -214,7 +226,6 @@ public class ModificarDatosPersona {
         }
         return bLoc;
     }
-
     /**
      * Metodo para validar el dni.
      * @param sdni
@@ -240,7 +251,6 @@ public class ModificarDatosPersona {
         }catch (Exception e){System.out.println(e.getClass());}
         return bDniValido;
     }
-
     /**
      * Este método me permite validar un teléfono, como se va a utilizar para validar
      * el telefono de los jugadores, le paso un parametro en lugar de usar la variable global
@@ -309,7 +319,39 @@ public class ModificarDatosPersona {
         return bNombre;
 
     }
+    private void llenarComboBox(){
+        try{
+            BaseDatos.abrirConexion();
+            Main.consultarEquipos();
+            listaNombresEquipo = new ArrayList<>();
+            listaNombresEquipo = Main.dameNombresEquipos();
+            for(int i=0;i<listaNombresEquipo.size();i++){
+                cbEquipos.addItem(listaNombresEquipo.get(i));
+            }
+            BaseDatos.cerrarConexion();
+            cbEquipos.setSelectedIndex(-1);
+        }catch (Exception e){System.out.println(e.getMessage());}
+    }
+    private void llenarFormulario(){
+        try{
+            int posEquipoSel = cbEquipos.getSelectedIndex();
+            String dniPersona = tfDni.getText();
+            if(cbRol.getSelectedIndex() ==0){
+                Main.sacaListaDeJugadores(posEquipoSel);
 
+                nombreViejo = tfNombre.getText();
+                tfNombre.setText(Main.dameNombreDelJugador(dniPersona));
+                telfViejo = tfTelefono.getText();
+                tfTelefono.setText(Main.dameTelefonoDelJugador(dniPersona));
+                salarioViejo =Float.parseFloat(tfSalario.getText());
+                tfSalario.setText(String.valueOf(Main.dameSalarioDelJugador(dniPersona)));
+            }
+
+
+
+
+        }catch (Exception e ){System.out.println(e.getMessage());}
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("ModificarDatosPersona");

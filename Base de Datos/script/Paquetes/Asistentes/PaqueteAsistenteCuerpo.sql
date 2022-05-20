@@ -1,16 +1,8 @@
 /*CUERPO PAQUETE GESTIONARASISTENTE*/
 create or replace package body gestionarAsistente as
-/*EXCEPCIONES PARA EL PAQUETE*/
-e_equipoNoExiste exception;
-pragma exception_init(e_equipoNoExiste,-20002);
-
-e_asisNoExiste exception;
-pragma exception_init(e_asisNoExiste,-20003);
-
-
 
 /*Declaro funciones*/
-function validar_equipo
+function validar_equipo_asistente
 (p_equipo in number)
 return boolean;
 
@@ -18,7 +10,7 @@ function validar_asistente
 (p_asistente in number)
 return boolean;
 /*Programacion funciones*/
-function validar_equipo
+function validar_equipo_asistente
 (p_equipo in number)
 return boolean
 is
@@ -31,7 +23,7 @@ return true;
 exception
    when no_data_found then
      return false;
-end validar_equipo;
+end validar_equipo_asistente;
 
 function validar_asistente
 (p_asistente in number)
@@ -55,56 +47,85 @@ p_dni asistente.dni%type,
 p_nombre asistente.nombre%type,
 p_telefono asistente.telefono%type,
 p_direccion asistente.direccion%type,
-p_id_equipo equipo.cod_equipo%type,
 p_sueldo asistente.sueldo%type
 )
 is
-
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
+e_valor_null exception;
+pragma exception_init(e_valor_null,-01400);
 begin
-  if validar_equipo(p_id_equipo)then
+
    insert into asistente
    (dni,nombre,telefono,direccion,sueldo) values
    (p_dni,p_nombre,p_telefono,p_direccion,p_sueldo);
-  else
-    raise e_equipoNoExiste;   
-  end if;
+
  exception
-    when e_equipoNoExiste then
-    dbms_output.put_line ('El equipo no existe');
+    when e_valor_null then
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20022,v_error);
+    
+    when dup_val_on_index then
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20023,v_error);
+    
    when others then
-     dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20024,v_error);
 END nuevo_asistente;  
 
-procedure cambio_equipo
+procedure cambio_equipo_asistente
 (
 p_idAsistente asistente.id_asistente%type,
 p_idEquipoNuevo equipo.cod_equipo%type
 )
 is
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
+e_asisNoExiste exception;
+e_equi_no_existe exception;
 begin
  if validar_asistente(p_idAsistente) then
-    if validar_equipo(p_idEquipoNuevo)then
+    if validar_equipo_asistente(p_idEquipoNuevo)then
       update equipo
       set id_asistente =  p_idAsistente
       where cod_equipo = p_idEquipoNuevo;
     else
-      dbms_output.put_line ('El equipo no existe');
+    raise e_equi_no_existe;
     end if;
  else
   raise e_asisNoExiste;
  end if;
+ 
  exception
+ when e_equi_no_existe then
+    v_error_mensaje:='El equipo no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20025,v_error);
+     
  when e_asisNoExiste then
-  dbms_output.put_line ('El asistente no existe');
+    v_error_mensaje:='El asistente no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20026,v_error);
+     
    when others then
-      dbms_output.put_line('HA OCURRIDO UN ERROR');
-end cambio_equipo;
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20027,v_error);
+     
+end cambio_equipo_asistente;
 
 procedure borrar_asistente
 (
 p_idAsistente asistente.id_asistente%type
 )
 is
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
+e_asisNoExiste exception;
 begin
   if validar_asistente(p_idAsistente) then
    delete from asistente
@@ -113,10 +134,17 @@ begin
    else
       raise e_asisNoExiste;
   end if;
+  
   exception
     when e_asisNoExiste then
-        dbms_output.put_line ('El asistente no existe');
+    v_error_mensaje:='El asistente no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20028,v_error);
+    
     when others then
-        dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20029,v_error);
+
 END borrar_asistente;
 end gestionarAsistente;

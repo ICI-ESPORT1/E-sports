@@ -34,18 +34,29 @@ p_escudo equipo.escudo%type,
 p_idAsistente equipo.id_asistente%type
 )
 is
+e_equipoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
 if validar_equipo_nombre(p_nombre)then
-dbms_output.put_line('El equipo no existe');
+raise e_equipoExiste;
 else
 insert into equipo
 (nombre,nacionalidad,fecha_creacion,telefono,mail,escudo,id_asistente)
 values(p_nombre,p_nacionalidad,p_fecha_creacion,
 p_telefono,p_mail,p_escudo,p_idAsistente);
 end if;
+
 exception
+when e_equipoExiste then
+    v_error_mensaje:='El equipo ya existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20043,v_error);
+    
 when others then
-dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20044,v_error);
 END nuevo_equipo;
 
 /*PROCEDIMIENTO PARA BORRAR EQUIPOS*/
@@ -54,17 +65,30 @@ procedure borrar_equipo
 p_nombre equipo.nombre%type --Utilizamos el nombre, ya que es unique y no se puede repetir
 )
 is
+e_equipoNoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
 if validar_equipo_nombre(p_nombre) then
 delete from equipo
 where nombre = p_nombre;
 
 else
-dbms_output.put_line ('El equipo no existe');
+raise e_equipoNoExiste;
 end if;
+
 exception
+
+when e_equipoNoExiste then
+    v_error_mensaje:='El equipo no existe';
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20045,v_error);
+    
 when others then
-dbms_output.put_line('HA OCURRIDO UN ERROR');
+    v_error_mensaje:=sqlerrm;
+    v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+    RAISE_APPLICATION_ERROR(-20046,v_error);
+    
 END borrar_equipo;
 
 /*PROCEDIMIENTO PARA CAMBIAR NOMBRE EQUIPO*/
@@ -74,19 +98,32 @@ p_nombre equipo.nombre%type,
 p_nombre_nuevo equipo.nombre%type
 )
 is
+e_equipoNoExiste exception;
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
 
-if validar_equipo_nombre(p_nombre) then
-update equipo
-set nombre=p_nombre_nuevo
-where nombre=p_nombre;
+    if validar_equipo_nombre(p_nombre) then
+        update equipo
+        set nombre=p_nombre_nuevo
+        where nombre=p_nombre;
+    
+    else
+        raise e_equipoNoExiste;
+    end if;
 
-else
-dbms_output.put_line('El equipo no existe');
-end if;
 exception
-when others then
-dbms_output.put_line('HA OCURRIDO UN ERROR');
+
+    when e_equipoNoExiste then
+        v_error_mensaje:='El equipo no existe';
+        v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+        RAISE_APPLICATION_ERROR(-20047,v_error);
+        
+    when others then
+        v_error_mensaje:=sqlerrm;
+        v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+        RAISE_APPLICATION_ERROR(-20048,v_error);
+    
 END cambiar_nombre_equipo;
 
 end gestionarEquipos;

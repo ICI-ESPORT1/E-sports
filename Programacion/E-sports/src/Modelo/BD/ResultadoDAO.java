@@ -68,19 +68,26 @@ public class ResultadoDAO {
 
         return res;
     }
+    public static boolean insertResultado(int eq,int res){
+        BaseDatos.abrirConexion();
+        boolean ok = false;
+        try{
+            plantilla="insert into resultado values ?,?";
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1,eq);
+            sentenciaPre.setInt(2,res);
 
-public static void altaResultado()throws Exception{
-    //Metodo para añadir un enfrentamineto sin resultado
+            ok = sentenciaPre.execute();
 
-    BaseDatos.abrirConexion();
+            BaseDatos.cerrarConexion();
+        }catch (Exception sqle){
+            System.out.println(sqle.getMessage());
+        }
+     return ok;
 
-    plantilla="insert into resultado values (?,?)";
+    }
 
-    sentenciaPre=BaseDatos.getConexion().prepareStatement(plantilla);
 
-    sentenciaPre.setInt();
-
-    BaseDatos.cerrarConexion();
 
 }
 

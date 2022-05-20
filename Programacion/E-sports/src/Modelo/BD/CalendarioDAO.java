@@ -1,14 +1,13 @@
 package Modelo.BD;
 
 import Modelo.UML.Calendario;
-import Modelo.UML.Jornada;
 
 import java.sql.*;
 
 public class CalendarioDAO {
     /* Clase que contiene los metodos necesarios para trabajar con la tabla calendario*/
 
-    private static Calendario calendario;
+    private static Calendario calendario = new Calendario();
 
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
@@ -18,36 +17,100 @@ public class CalendarioDAO {
 
     public static void altaCalendario(Calendario c)throws Exception{
         //Metodo para insertar un nuevo calendario en la tabla calendario
-        BaseDatos.abrirConexion();
 
-        plantilla="insert into calendario values (?,?)";
+
+        plantilla="insert into calendario (cerrado,temporada) values (?,?)";
 
         sentenciaPre=BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1, String.valueOf(c.getCerrado()));
+        sentenciaPre.setString(1, String.valueOf(calendario.getCerrado()));
         sentenciaPre.setString(2,c.getTemporada());
 
-        sentenciaPre.execute();
+        sentenciaPre.executeUpdate();
 
         sentenciaPre.close();
 
-        BaseDatos.cerrarConexion();
+
     }
 
 
-    public static void bajaJornada(Jornada j)throws Exception{
-        //metodo para borrar una jornada de la tabla jornada por num_jornada
-        //  BaseDatos.abrirConexion();
+    public static Calendario buscarCalendario(){
+        //metodo para consultar si ya existe un calendario
+        try {
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_jornada(?)}");
 
-        c.setInt(1,j.getNumJornada());
+            plantilla = "select * from calendario";
 
-        c.execute();
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
 
-        c.close();
+            resultado = sentenciaPre.executeQuery();
 
-        //    BaseDatos.cerrarConexion();
+            if (resultado.next()) {
+
+                crearObjeto();
+
+            }
+            else {
+                sentenciaPre.close();
+
+
+                return null;
+            }
+
+
+            sentenciaPre.close();
+
+
+            return calendario;
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        } catch (Exception e) {
+            e.getClass();
+            return null;
+        }
     }
 
+    private static void crearObjeto() throws Exception{
+        calendario.setIdCalendario(resultado.getInt("id_calendario"));
+        calendario.setCerrado(resultado.getString("cerrado").charAt(0));
+        calendario.setTemporada(resultado.getString("temporada"));
+    }
+
+    public static boolean buscarCalendarioBoolean(){
+        //metodo para consultar si ya existe un calendario
+        try {
+
+
+            plantilla = "select * from calendario";
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+
+            resultado = sentenciaPre.executeQuery();
+
+            if (resultado.next()) {
+                sentenciaPre.close();
+
+                BaseDatos.cerrarConexion();
+                return true;
+
+            }
+            else {
+                sentenciaPre.close();
+
+                BaseDatos.cerrarConexion();
+                return false;
+            }
+
+
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        } catch (Exception e) {
+            e.getClass();
+            return false;
+        }
+    }
 
 }

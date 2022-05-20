@@ -151,7 +151,7 @@ public class FormularioInscripcion {
 
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
-                      //  Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
+                       Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
                         System.out.println("AQUI SE INSERTARIA EL ENTRENADOR");
                     }
 
@@ -277,11 +277,11 @@ public class FormularioInscripcion {
               nick=tfNick.getText();
 
               listaJugadores.add(new String[]{dni,nombre,telf,loc,nick,sueldo}); //ok
-              for(String[] row : listaJugadores){
+            /*  for(String[] row : listaJugadores){
                   String [] fila = new String[6];
                   fila = row;
 
-              }
+              }*/
               tamanoLista = listaJugadores.size()+1;
 
               //limpiarCamposJugador();

@@ -1,11 +1,14 @@
 package Views;
 
+import Modelo.BD.BaseDatos;
+import Modelo.Encriptar.encriptacion;
 import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
 import Modelo.Excepciones.EquipoRepetido;
 import com.company.Main;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.util.regex.*;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -29,11 +32,6 @@ public class Login extends javax.swing.JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonCancel);
 
-        bAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                onOK();
-            }
-        });
 
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -64,18 +62,33 @@ public class Login extends javax.swing.JDialog {
         bInvitado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 Main.VentanaInvitado();
+
             }
         });
 
         bAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    BaseDatos.abrirConexion();
+                    String username = textField1.getText();
+                    String password = textField2.getText();
+                    Main.tomaDatosUsuario(username,password);
+                    encriptacion encr = new encriptacion();
+                    String encriptado = encr.encriptar(textField2.getText());
+                    //String desencr = encr.desencriptar(encriptado);
+                    //Main.abrirVentanaAdmin();
+                    // Main.abrirVentanaAdmin();
+                    BaseDatos.cerrarConexion();
 
-                Main.abrirVentanaPrincipal();
+                }catch (Exception E){
+                    System.out.println(E.getMessage());
+                }
+
             }
         });
+
     }
 
 

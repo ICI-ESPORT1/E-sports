@@ -20,7 +20,7 @@ public class PartidoDAO {
 
     public static void altaPartido(Partido p)throws Exception{
         //Metodo para insertar un nuevo partido en la tabla partido
-          BaseDatos.abrirConexion();
+        BaseDatos.abrirConexion();
 
         plantilla="insert into partido values (?,?)";
 

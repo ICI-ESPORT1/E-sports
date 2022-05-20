@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="684b89c9-dff7-4f7a-bbd5-45b266350841" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Views/AnadirResultado.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/AnadirResultado.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/ResultadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/ResultadoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,10 +145,18 @@
           </properties>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Views/FormularioInscripcion.java</url>
+          <line>395</line>
+          <properties class="Views.FormularioInscripcion" method="validarDatosEntrenador">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Views/Login.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/src/Views/FormularioInscripcion.java</url>
+          <line>153</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

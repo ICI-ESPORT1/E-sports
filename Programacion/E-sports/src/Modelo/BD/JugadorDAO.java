@@ -172,10 +172,11 @@ public class JugadorDAO {
         boolean cambiado = false;
         try{
             BaseDatos.abrirConexion();
+            nN = nN.toUpperCase();
             plantilla="update jugador set nombre = ? where dni = ?" ;
 
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-            sentenciaPre.setString(1,nN.toUpperCase());
+            sentenciaPre.setString(1,nN);
             sentenciaPre.setString(2,dniJug);
             ok = sentenciaPre.executeUpdate();
 

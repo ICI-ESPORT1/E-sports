@@ -23,8 +23,6 @@ import java.util.*;
 import java.awt.*;
 import java.time.LocalDate;
 
-import static com.sun.tools.attach.VirtualMachine.list;
-
 public class Main {
     static JFrame frame;
     static JDialog dialog;
@@ -710,7 +708,14 @@ public class Main {
 
         return nacCambiada;
     }
-
+    /**
+     * Método que cambia la fecha de creación de un equipo. Recibe la fecha nueva, la vieja y el nombre del equipo
+     * @param fechaNuevo Para actualizar la fecha
+     * @param fechaViejo Para mostrar el cambio
+     * @param nombreViejo El nombre es unique, por lo que se usa para localizar el equipo al que se le va a modificar
+     *                    la fecha de creacion
+     * @throws Exception
+     */
     public static void cambiarFechaEquipo(LocalDate fechaNuevo,LocalDate fechaViejo,String nombreViejo)throws Exception{
         boolean fechaCambiada =false;
         int posicionNacVieja =0;
@@ -723,6 +728,14 @@ public class Main {
             JOptionPane.showMessageDialog(null, "La fecha de creacion se ha cambiado");
         }
     }
+    /**
+     * Método que cambia el telefono de un equipo. Recibe el telefono nuevo, el viejo y el nombre del equipo
+     * @param telfNuevo Para actualizar el telefono
+     * @param telfViejo Para mostrar el cambio
+     * @param nombreViejo El nombre es unique, por lo que se usa para localizar el equipo al que se le va a modificar
+     *                    el telefono
+     * @throws Exception
+     */
     public static void cambiarTelefonoEquipo(String telfNuevo,String telfViejo,String nombreViejo)throws Exception{
         boolean telfCambiada =false;
         int posicionNacVieja =0;
@@ -736,6 +749,15 @@ public class Main {
 
         }
     }
+
+    /**
+     * Método que cambia el mail de un equipo. Recibe el mail nuevo, el viejo y el nombre del equipo
+     * @param mailNuevo Para actualizar el mail
+     * @param mailViejo Para mostrar el cambio
+     * @param nombreViejo El nombre es unique, por lo que se usa para localizar el equipo al que se le va a modificar
+     *                    el mail
+     * @throws Exception
+     */
     public static void cambiarMailEquipo(String mailNuevo, String mailViejo, String nombreViejo)throws Exception{
         boolean telfCambiada =false;
         int posicionNacVieja =0;
@@ -762,11 +784,20 @@ public class Main {
 
     }
 
+    /**
+     * Método que obtiene un array con los equipos tras una consulta a la BD
+     * @throws Exception
+     */
     public static void consultarEquipos() throws Exception {
         System.out.println("CONSULTAR EQUIPOS**********");
         listaEquipos = new ArrayList<>();
         listaEquipos = EquipoDAO.selectTodosLosEquipos();
     }
+
+    /**
+     * Método que devuelve un Array con los nombres de los equipos
+     * @return
+     */
     public static ArrayList<String> dameNombresEquipos(){
         ArrayList<String> listaNombreEquipos = new ArrayList<>();
         try{
@@ -778,6 +809,12 @@ public class Main {
 
         return listaNombreEquipos;
     }
+
+    /**
+     * Método que devuelve el nombre del equipo recibiendo la posicion del equipo en el array de equipos
+     * @param pos
+     * @return
+     */
     public static String dameNombreDelEquipo(int pos){
         String nombreEq ="";
         try{
@@ -786,6 +823,11 @@ public class Main {
         }catch (Exception e){System.out.println(e.getMessage());}
         return nombreEq;
     }
+    /***
+     * Método que devuelve la nacionalidad del equipo recibiendo la posicion del equipo en el arrray de equipos
+     * @param pos Es la posicion del equipo en el array lista de equipos
+     * @return
+     */
     public static String dameNacionalidadDelEquipo(int pos){
         String nacionalidadEq ="";
         try{
@@ -794,6 +836,12 @@ public class Main {
         }catch (Exception e){System.out.println(e.getMessage());}
         return nacionalidadEq;
     }
+
+    /**
+     * Método que devuelve la fecha de creaccion del equipo recibiendo la posicion del equipo en el array de equipos
+     * @param pos
+     * @return
+     */
     public static String dameFechaDelEquipo(int pos){
         String fechaEq = "";
         try{
@@ -803,6 +851,11 @@ public class Main {
         }catch (Exception e){System.out.println(e.getMessage());}
         return fechaEq;
     }
+    /***
+     * Método que devuelve el telefono del equipo recibiendo la posicion del equipo en el arrray de equipos
+     * @param pos Es la posicion del equipo en el array lista de equipos
+     * @return
+     */
     public static String dameTelefonoDelEquipo(int pos){
         String telefonoEq ="";
         try{
@@ -811,6 +864,12 @@ public class Main {
         }catch (Exception e){System.out.println(e.getMessage());}
         return telefonoEq;
     }
+
+    /***
+     * Método que devuelve el mail del equipo recibiendo la posicion del equipo en el arrray de equipos
+     * @param pos Es la posicion del equipo en el array lista de equipos
+     * @return
+     */
     public static String dameMailDelEquipo(int pos){
         String mailEq ="";
         try{
@@ -819,6 +878,12 @@ public class Main {
         }catch (Exception e){System.out.println(e.getMessage());}
         return mailEq;
     }
+
+    /**
+     * Método que devuelve un String para mostrar informacion de los equipos
+     * @return
+     * @throws Exception
+     */
     public static String dameStringEquipos() throws Exception {
 
         System.out.println("DAME STRING EQUIPOS***************");
@@ -891,13 +956,6 @@ public class Main {
      *
      * @throws Exception
      */
-  /*  public static void tenDatosJugador()throws Exception{
-        float sueldo = Float.parseFloat(su);
-        jugador = new Jugador(dni,nombre,telefono,localidad,nick,rol,sueldo,equipo);
-        listaJugadores.add(jugador);
-        altaJugador(jugador);
-
-    }*/
     public static void tenDatosJugador(String d, String n, String t, String di, String z, String su) throws Exception {
         System.out.println("TEN DATOS JUGADOR*************");
         float sueldo = Float.parseFloat(su);
@@ -918,15 +976,6 @@ public class Main {
      */
     public static void altaJugador(Jugador jugador) throws Exception {
         System.out.println("ALTA JUGADOR************");
-       /* jugador.setDni(d);
-        jugador.setNombre(n);
-        jugador.setTelefono(t);
-        jugador.setLocalidad(l);
-        jugador.setEquipo(e);
-        jugador.setNickname(ni);
-        jugador.setSalario(s);
-        jugador.setRol(r); */
-
 
         JugadorDAO.altaJugador(jugador);
 
@@ -1003,11 +1052,9 @@ public class Main {
         return listaJugadores = JugadorDAO.consultarJugadoresEquipo(idE);
 
     }
-
     /**
      * Metodo que llama a consultarJugador para hacer una select en la base de datos
-     *
-     * @param dni
+     * @param dni String que se utiliza para identificar al jugador
      * @return jugador
      * @throws Exception
      */
@@ -1028,34 +1075,39 @@ public class Main {
 
     }
 
-    public static void cambiarDatosJugador(String dni, String n, String t, String d, String nn, Float s, String r, String e) throws Exception {
-        rol = RolDAO.obtenerRol(r);
-        equipo = EquipoDAO.consultarEquipoID(e);
-        jugador = new Jugador(dni, n, t, d, nn, rol, s, equipo);
-
-        JugadorDAO.cambiarDatosJugador(jugador);
-    }
-
-
-    public static void cambiarNombreJugador(String nNuevo, String nViejo,String dni, int posEq){
+    /**
+     * Método que recibe los datos del jugador para cambiarle el nombre
+     * @param nNuevo Nombre nuevo que va a recibir
+     * @param nViejo nombre viejo que se usa para mostrar el nombre anterior
+     * @param dni String que se usa para identificar al jugador al que se le va a cambiar el nombre
+     * @param posEq posicion del equipo en el array de equipos para poder actualizar los datos del jugador
+     * @return
+     */
+    public static boolean cambiarNombreJugador(String nNuevo, String nViejo, String dni, int posEq){
         boolean nombreCambiado = false;
         int posicionNombreV =0;
 
-        //busco al jugador en la posicion de la lista
-        int i = 0;
-
-            nombreCambiado = JugadorDAO.cambiarNombreJugador(nNuevo,nViejo);
+        int i=0;
+            nombreCambiado = JugadorDAO.cambiarNombreJugador(nNuevo,dni);
             if(nombreCambiado){
 
-                for(i = 0; i<listaJugadores.size()&& !listaJugadores.get(i).getNombre().equalsIgnoreCase(nViejo); i++){}
-                posicionNombreV = i;
-                listaJugadores.get(posicionNombreV).setNombre(nNuevo);
+                for(i = 0; i<listaJugadores.size()&& !listaJugadores.get(i).getDni().equalsIgnoreCase(dni); i++){}
+                  int posicionJug = i;
+                listaJugadores.get(posicionJug).setNombre(nNuevo);
                 listaEquipos.get(posEq).setlistaJugadores(listaJugadores);
             }
             JOptionPane.showMessageDialog(null, "El nombre "+ nViejo + " se ha cambiado por: "+ nNuevo );
-        }
+        return nombreCambiado;
+    }
 
-    public static void cambiarTelefonoJugador(String telfNuevo,String dni, int posEq){
+    /**
+     * Método que reciber los datos para cambiar el telefono a un Jugador
+     * @param telfNuevo String del teléfono nuevo del jugador
+     * @param dni String del dni del jugador para identificar al jugador
+     * @param posEq int. Posicion del equipo en la lista de equipos para actualizar los datos del jugador
+     * @return
+     */
+    public static boolean cambiarTelefonoJugador(String telfNuevo,String dni, int posEq){
         boolean nombreCambiado = false;
         int posicionNombreV = 0;
 
@@ -1072,8 +1124,17 @@ public class Main {
             listaEquipos.get(posEq).setlistaJugadores(listaJugadores);
         }
         JOptionPane.showMessageDialog(null, "El telefono se ha cambiado por: " + telfNuevo );
+        return nombreCambiado;
     }
-    public static void cambiarSalarioEquipo(String salarioNuevo,String dniJug ,String nombreViejo, int posEq){
+
+    /**
+     * Método que recibe los datos para cambiarle el salario a un jugador
+     * @param salarioNuevo
+     * @param dniJug
+     * @param posEq
+     * @return
+     */
+    public static boolean cambiarSalarioJug(String salarioNuevo, String dniJug, int posEq){
         boolean salarioCambiado = false;
         int posicionNombreV =0;
         float fSalNuevo = Float.parseFloat(salarioNuevo);
@@ -1083,15 +1144,20 @@ public class Main {
         salarioCambiado = JugadorDAO.cambiarSalarioJugador(fSalNuevo,dniJug);
         if(salarioCambiado){
             //busco al jugador en la posicion de la lista
-            for(i = 0; i<listaJugadores.size()&& !listaJugadores.get(i).getNombre().equalsIgnoreCase(nombreViejo); i++){}
+            for(i = 0; i<listaJugadores.size()&& !listaJugadores.get(i).getDni().equalsIgnoreCase(dniJug); i++){}
             posicionNombreV = i;
             listaJugadores.get(posicionNombreV).setSalario(fSalNuevo);
             listaEquipos.get(posEq).setlistaJugadores(listaJugadores);
         }
         JOptionPane.showMessageDialog(null, "El salario es ahora de: "+ salarioNuevo);
+        return salarioCambiado;
     }
 
-
+    /**
+     * Método que obtiene una lista de jugadores en funcion del indice seleccionado de un comboBox
+     * @param pos Para buscar el jugador
+     * @return devuelve un String
+     */
     public static void sacaListaDeJugadores(int pos){
         try{
             String nombreEquipo ="";
@@ -1102,6 +1168,11 @@ public class Main {
 
         }catch (Exception e){System.out.println(e.getMessage());}
     }
+    /**
+     * Método que devuelve el nombre de un jugador.
+     * @param dniPersona Para buscar el jugador
+     * @return devuelve un String
+     */
     public static String dameNombreDelJugador(String dniPersona){
         String nombreJugador="";
         int i=0;
@@ -1118,6 +1189,11 @@ public class Main {
         }
         return nombreJugador;
     }
+    /**
+     * Método que devuelve el telefono de un jugador.
+     * @param dniPersona Para buscar el jugador
+     * @return devuelve un String
+     */
     public static String dameTelefonoDelJugador(String dniPersona){
         String telefono ="";
         int i=0;
@@ -1134,6 +1210,12 @@ public class Main {
         }catch (Exception e){System.out.println(e.getMessage());}
         return telefono;
     }
+
+    /**
+     * Método que devuelve el dni Salario de un jugador.
+     * @param dniPersona Para buscar el jugador
+     * @return devuelve un String
+     */
     public static String dameSalarioDelJugador(String dniPersona){
         String salario ="";
         int i=0;
@@ -1154,6 +1236,10 @@ public class Main {
 
     ////////////////////////////////////// Metodos para la tabla Resultado ////////////////////////////////////
 
+    /**
+     * Método para leer el xml y extraer un string para mostrar informacion de las jornadas
+     * @return String para mostrar
+     */
     public static String consultarJornadas(){
 
         String sResultados = "";
@@ -1214,6 +1300,10 @@ public class Main {
         return sResultados;
     }
 
+    /**
+     * Método para leer el xml y extraer un string para mostrar informacion de la ultima jornada jugada
+     * @return
+     */
     public static String consultarUltimaJonr(){
 
         String sUltimaJornada = "";
@@ -1281,7 +1371,7 @@ public class Main {
     /**
      * Metodo que llama a obtenerClasificacion para que nos devuelva la clasificacion actual
      *
-     * @return resultado
+     * @return resultado Contiene el equipo y el resultado de un partido
      * @throws Exception
      */
     public static Resultado obtenerClasificacion() throws Exception {
@@ -1293,7 +1383,7 @@ public class Main {
     /**
      * Metodo que llama a obtenerPartidosJornadas para que nos los partidos y sus resultados
      *
-     * @return resultado
+     * @return resultado Contiene el equipo y el resultado de un partido
      * @throws Exception
      */
     public static Resultado obtenerPartidosJornadas() throws Exception {
@@ -1302,17 +1392,35 @@ public class Main {
 
     }
 
+    /**
+     * Método que obtiene los partidos de la tabla resultados
+     * @return Resultado. Contiene el equipo y el resultado de un partido
+     * @throws Exception
+     */
     public static Resultado obtenerPartidos() throws Exception {
         return resultado = ResultadoDAO.obtenerPartidos();
     }
 
 
     ////////////////////////////////////// Metodos para la tabla Partidos ////////////////////////////////////
+
+    /**
+     * Este método recibe el resultado de un partido y llama a otro método para hacer el insert en resultado
+     * @param idEq1
+     * @param res1
+     * @param idEq2
+     * @param res2
+     * @param part
+     */
     public static void tomaResultado(int idEq1,int res1,int idEq2,int res2,int part){
         ResultadoDAO.insertResultado(idEq1,res1,part);
         ResultadoDAO.insertResultado(idEq2,res2,part);
     }
 
+    /**
+     * Método para generar jornadas de forma aleatoria
+     * @return
+     */
     public static boolean generarJornadas(){
         Integer semana=1;
         BaseDatos.abrirConexion();
@@ -1367,6 +1475,9 @@ public class Main {
 
     }
 
+    /**
+     * Método para generar enfrentamientos de forma aleatoria
+     */
     public static void generarEnfrentamientos() {
         try {
             listaEquipos = EquipoDAO.selectTodosLosEquipos();
@@ -1386,6 +1497,11 @@ public class Main {
         }
     }
 
+    /**
+     * Metodo para generar partidos de forma aleatoria.
+     * @param cantPartidos
+     * @return
+     */
     public static HashMap<Integer, Integer> generarPartidos (int cantPartidos) {
         HashMap<Integer, Integer> retorno = new HashMap<Integer, Integer>();
         Random randNum = new Random();

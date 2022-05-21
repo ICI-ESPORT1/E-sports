@@ -182,7 +182,7 @@ public class EquipoDAO {
 
     public static Equipo consultarEquipo(String n)throws Exception{
         //Metodo para consultar un Equipo por nombre a la base de datos
-      //  BaseDatos.abrirConexion();
+        //  BaseDatos.abrirConexion();
         String nombreMayus = n.toUpperCase();
         plantilla="select * from equipo where upper(nombre) = ?";
 

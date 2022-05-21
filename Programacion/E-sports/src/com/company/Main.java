@@ -122,6 +122,7 @@ public class Main {
     public static void ventanaLogin() {
         dialogLogin = new Login();
         dialogLogin.pack();
+        dialogLogin.setLocationRelativeTo(null);
         dialogLogin.setVisible(true);
 
     }
@@ -141,6 +142,7 @@ public class Main {
         frame.setContentPane(new VentanaInvitado().getVentanaInvitado());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        dialogLogin.setLocationRelativeTo(null);
         frame.setVisible(true);
         dialogLogin.dispose();
 
@@ -156,6 +158,7 @@ public class Main {
         System.out.println("VISUALIZAR EQUIPO****");
         dialog = new VisualizarEquipos();
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 
@@ -168,6 +171,7 @@ public class Main {
     public static void abrirVentanaEscudos() throws Exception {
         dialog = new VentanaEscudos();
         dialog.pack();
+        dialogLogin.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 
@@ -179,6 +183,7 @@ public class Main {
         frame.setContentPane(new VentanaAdmin().getVentana1());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -213,11 +218,13 @@ public class Main {
         frame.setContentPane(new FormularioInscripcion().getJpPrincipal());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
     public static void VentanaModificarEquipo(){
         VentanaModificarEquipo dialog = new VentanaModificarEquipo();
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         System.exit(0);
     }
@@ -249,12 +256,14 @@ public class Main {
         frame.setContentPane(new Clasificacion().getpClasificacion());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     public static void abrirJornada() {
         VentanaJornadas dialog = new VentanaJornadas();
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         System.exit(0);
     }
@@ -264,6 +273,7 @@ public class Main {
         frame.setContentPane(new ultimaJorn().getJpPartidos());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -274,6 +284,7 @@ public class Main {
         frame.setContentPane(new BajasPersonas().getBajas());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -282,6 +293,7 @@ public class Main {
         frame.setContentPane(new AltaPersonas().getAltas());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -290,11 +302,13 @@ public class Main {
         frame.setContentPane(new ModificarDatosPersona().getJpModificarDatosPersona());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
     public static void abrirAnadirResultadoss(){
         AnadirResultados dialog = new AnadirResultados();
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         System.exit(0);
     }
@@ -659,7 +673,7 @@ public class Main {
      * @param nNuevo
      * @throws Exception
      */
-    public static void cambiarNombreEquipo(String nNuevo, String nViejo) throws Exception {
+    public static boolean cambiarNombreEquipo(String nNuevo, String nViejo) throws Exception {
         boolean nombreCambiado = false;
         int posicionNombreV =0;
 
@@ -680,13 +694,13 @@ public class Main {
                }
                 JOptionPane.showMessageDialog(null, "El nombre "+ nViejo + " se ha cambiado por: "+ nNuevo );
             }
-
+       return nombreCambiado;
     }
-    public static void cambiarNacionalidadEquipo(String naNuevo,String naViejo,String nombreViejo)throws Exception{
+    public static boolean cambiarNacionalidadEquipo(String naNuevo,String naViejo,String nombreViejo)throws Exception{
         boolean nacCambiada =false;
         int posicionNacVieja =0;
         int i=0;
-        nacCambiada = EquipoDAO.cambiarNacionalidadEquipo(naNuevo, naViejo);
+        nacCambiada = EquipoDAO.cambiarNacionalidadEquipo(naNuevo, nombreViejo);
         if(nacCambiada) {
             for (i = 0; i < listaEquipos.size() && !listaEquipos.get(i).getNombre().equalsIgnoreCase(nombreViejo); i++) {}
             posicionNacVieja = i;
@@ -694,7 +708,7 @@ public class Main {
             JOptionPane.showMessageDialog(null, "La nacionalidad "+ naViejo + " se ha cambiado por: "+ naNuevo );
         }
 
-
+        return nacCambiada;
     }
 
     public static void cambiarFechaEquipo(LocalDate fechaNuevo,LocalDate fechaViejo,String nombreViejo)throws Exception{
@@ -780,10 +794,11 @@ public class Main {
         }catch (Exception e){System.out.println(e.getMessage());}
         return nacionalidadEq;
     }
-    public static LocalDate dameFechaDelEquipo(int pos){
-        LocalDate fechaEq = null;
+    public static String dameFechaDelEquipo(int pos){
+        String fechaEq = "";
         try{
-            fechaEq = listaEquipos.get(pos).getFechaCreacion();
+            LocalDate ldFecha = listaEquipos.get(pos).getFechaCreacion();
+            fechaEq = ldFecha.toString();
 
         }catch (Exception e){System.out.println(e.getMessage());}
         return fechaEq;

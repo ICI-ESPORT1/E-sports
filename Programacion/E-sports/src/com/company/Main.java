@@ -9,7 +9,7 @@ import Views.Clasificacion;
 import Views.FormularioInscripcion;
 import Views.VentanaEscudos;
 import Views.VisualizarEquipos;
-import com.sun.codemodel.internal.util.UnicodeEscapeWriter;
+//import com.sun.codemodel.internal.util.UnicodeEscapeWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -291,6 +291,12 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+    public static void abrirAnadirResultadoss(){
+        AnadirResultados dialog = new AnadirResultados();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
 
 
@@ -1285,7 +1291,12 @@ public class Main {
         return resultado = ResultadoDAO.obtenerPartidos();
     }
 
+
     ////////////////////////////////////// Metodos para la tabla Partidos ////////////////////////////////////
+    public static void tomaResultado(int idEq1,int res1,int idEq2,int res2,int part){
+        ResultadoDAO.insertResultado(idEq1,res1,part);
+        ResultadoDAO.insertResultado(idEq2,res2,part);
+    }
 
     public static boolean generarJornadas(){
         Integer semana=1;

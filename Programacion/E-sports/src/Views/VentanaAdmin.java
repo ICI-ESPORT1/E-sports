@@ -30,6 +30,7 @@ public class VentanaAdmin {
     private JMenuItem jmiModificarPersonas;
     private JMenuItem jmiModificarEquipo;
     private JMenuItem jmiGenerarPartidos;
+    private JMenuItem jmiAnadirResultado;
 
     private JButton equiposButton;
 
@@ -95,7 +96,12 @@ public class VentanaAdmin {
                 Main.generarJornadas();
             }
         });
-
+        jmiAnadirResultado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e){
+                //Aqui la funcion anadir resultados
+            }
+        });
 
 
         

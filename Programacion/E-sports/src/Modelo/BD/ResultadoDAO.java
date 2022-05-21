@@ -69,6 +69,24 @@ public class ResultadoDAO {
         return res;
     }
 
+    public static boolean insertResultado(int eq,int res,int part){
+        BaseDatos.abrirConexion();
+        boolean ok = false;
+        try{
+            plantilla="insert into resultado values ?,?,?";
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1,part);
+            sentenciaPre.setInt(2,eq);
+            sentenciaPre.setInt(3,res);
 
+            ok = sentenciaPre.execute();
+
+            BaseDatos.cerrarConexion();
+        }catch (Exception sqle){
+            System.out.println(sqle.getMessage());
+        }
+        return ok;
+
+    }
 
 }

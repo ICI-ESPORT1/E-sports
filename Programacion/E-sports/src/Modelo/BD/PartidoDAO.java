@@ -2,7 +2,7 @@ package Modelo.BD;
 
 import Modelo.UML.Jornada;
 import Modelo.UML.Partido;
-import com.sun.xml.internal.ws.wsdl.writer.document.Part;
+//import com.sun.xml.internal.ws.wsdl.writer.document.Part;
 
 import java.sql.*;
 

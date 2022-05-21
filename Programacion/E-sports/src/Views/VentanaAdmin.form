@@ -70,6 +70,12 @@
                       <text value="GenerarPartidos"/>
                     </properties>
                   </component>
+                  <component id="a4d23" class="javax.swing.JMenuItem" binding="jmiAnadirResultado">
+                    <constraints/>
+                    <properties>
+                      <label value="Añadir resultados"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
             </children>

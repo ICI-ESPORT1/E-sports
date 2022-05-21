@@ -7,7 +7,9 @@ import javax.swing.*;
 import java.net.PortUnreachableException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class EquipoDAO {
 
@@ -74,8 +76,8 @@ public class EquipoDAO {
 
             c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.cambiar_nombre_equipo(?,?)}");
 
-            c.setString(1,nombreNuevo);
-            c.setString(2,nombreViejo );
+            c.setString(1,nombreViejo);
+            c.setString(2,nombreNuevo );
 
             nombreCambiado = c.execute();
 
@@ -84,28 +86,30 @@ public class EquipoDAO {
             BaseDatos.cerrarConexion();
 
         }catch (SQLException sqle){System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");}
+            JOptionPane.showMessageDialog(null, sqle.getErrorCode() +sqle.getMessage() + " Consulte el error");}
 
 
        return nombreCambiado;
     }
 
-    public static boolean cambiarNacionalidadEquipo(String naNuevo,String naViejo){
+    public static boolean cambiarNacionalidadEquipo(String naNuevo,String nombre){
         boolean cambiado=false;
         int ok =0;
         try{
             BaseDatos.abrirConexion();
-            plantilla="update equipo set nacionalidad= ? where upper(nacionalidad)= ?" ;
-
+            plantilla="update equipo set nacionalidad= ? where upper(nombre)= ?" ;
+            naNuevo = naNuevo.toUpperCase();
+            nombre = nombre.toUpperCase();
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
             sentenciaPre.setString(1,naNuevo);
-            sentenciaPre.setString(2, naViejo);
+            sentenciaPre.setString(2, nombre);
             ok = sentenciaPre.executeUpdate();
 
-            if(ok ==1){
+            sentenciaPre.close();
+
+            if(ok == 1){
                 cambiado = true;
             }
-
             BaseDatos.cerrarConexion();
         }catch (SQLException sqle){System.out.println(sqle.getMessage());
             JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");}
@@ -218,16 +222,23 @@ public class EquipoDAO {
      //   BaseDatos.abrirConexion();
         try{
             listaEquipos = new ArrayList<>();
-            plantilla= "select * from equipo";
+            plantilla= "select * from equipo ";
             sentenciaPre= BaseDatos.getConexion().prepareStatement(plantilla);
 
             resultado = sentenciaPre.executeQuery();
 
-            while(resultado.next()){
-                System.out.println("CREANDO OBJETO*******");
-                System.out.println(resultado.getInt("cod_equipo"));
-                crearObjeto();
-                listaEquipos.add(equipo);
+            if(!resultado.next()){
+                System.out.println("No se ha recuperado ningun equipo");
+            }else {
+
+
+                do {
+                    System.out.println("CREANDO OBJETO*******");
+                    System.out.println(resultado.toString());
+                    System.out.println(resultado.getInt("cod_equipo"));
+                    crearObjeto();
+                    listaEquipos.add(equipo);
+                } while (resultado.next());
             }
 
 
@@ -242,13 +253,23 @@ public class EquipoDAO {
     try{
         equipo = new Equipo(); //Hay que iniciar aqui el objeto para que no se sobre escriba
         equipo.setId_equipo(resultado.getInt("cod_equipo"));
+        System.out.println(equipo.getId_equipo());
+
         equipo.setNombre(resultado.getString("nombre"));
+        System.out.println(equipo.getNombre());
+
         equipo.setNacionalidad(resultado.getString("nacionalidad"));
-        String sFecha = String.valueOf(resultado.getDate("fecha_creacion"));
-        LocalDate ldFecha= LocalDate.parse(sFecha);
-        equipo.setFechaCreacion(ldFecha);
+        System.out.println(equipo.getNacionalidad());
+
+       Date dFecha = resultado.getDate("fecha_creacion");
+        LocalDate ld = dFecha.toLocalDate();
+        equipo.setFechaCreacion(ld);
+
         equipo.setTelefono(resultado.getString("telefono"));
+        System.out.println(equipo.getTelefono());
+
         equipo.setMail(resultado.getString("mail"));
+        System.out.println(equipo.getMail());
 
         // equipo.setFechaCreacion(resultado.getDate("fecha_creacion"));
         equipo.setEscudo(resultado.getString("escudo"));

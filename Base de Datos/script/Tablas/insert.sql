@@ -29,7 +29,7 @@ values('stacks', 'inglesa', to_date('14/03/2021', 'DD/MM/YYYY'),632598145,
 insert into equipo (nombre, nacionalidad, fecha_creacion, telefono, mail, escudo,id_asistente)
 values('players', 'alemana', to_date('01/04/2020', 'DD/MM/YYYY'),648211557, 
         'players@gmail.com', 'tiene',3);
-select * from equipo;
+
 
 
 /*INSERT ENTRENADOR*/
@@ -127,7 +127,7 @@ VALUES ('72670608S','Jeffrey Ortiz','890652188','75 Grange Valley- Haydock',4);
 insert into calendario (cerrado, temporada) values ('n','uno');
 
 /*INSERT JORNADA*/
-DESC JORNADA;
+
 insert into jornada(fecha,num_semana,id_calendario) 
 values (to_date('07/05/2022','DD/MM/YYYY'),'18',1);
 

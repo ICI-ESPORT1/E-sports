@@ -13,7 +13,7 @@ public class BaseDatos {
     private static String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
 
     private static Connection conexion;
-    private static boolean casa = false;
+    private static boolean casa = true;
 
     public BaseDatos() {
     }
@@ -31,6 +31,9 @@ public class BaseDatos {
      */
     public static void abrirConexion(){
         try{
+            if(conexion!=null){
+                conexion.close();
+            }
             if(!casa){
                 Class.forName("oracle.jdbc.OracleDriver");
                 conexion = DriverManager.getConnection(url,usuario, pass);
@@ -51,9 +54,9 @@ public class BaseDatos {
     public static void cerrarConexion(){
         try{
             conexion.close();
-            if(conexion != null){
+            if(conexion == null){
                 throw new Exception("No se ha cerrado la conexion");
             }else{ System.out.println("Cierro la conexion");}
-        }catch (Exception e){System.out.println(e.getClass());}
+        }catch (Exception e){System.out.println(e.getMessage()+ "Error al cerrar la conexion");}
     }
 }

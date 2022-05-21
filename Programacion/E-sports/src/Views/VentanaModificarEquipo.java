@@ -35,11 +35,7 @@ public class VentanaModificarEquipo extends JDialog {
     private JTextField tfTelf;
     private JLabel lMail;
     private JTextField tfEmail;
-    private JRadioButton rbNacio;
-    private JRadioButton rbFecha;
-    private JRadioButton rbTelf;
-    private JRadioButton rbMail;
-    private JRadioButton rbNombre;
+
     private ArrayList<String>listaNombresEquipo;
     private String nombreViejo ="";
     private String nacionalidadVieja ="";
@@ -89,6 +85,10 @@ public class VentanaModificarEquipo extends JDialog {
         });
     }
 
+    /**
+     * Este metodo llena el combobox de la ventana. Realiza una consulta a la base de datos para obtener los nombres
+     * de los equipos y los muestra.
+     */
     private void llenarComboBox(){
         try{
             BaseDatos.abrirConexion();
@@ -102,6 +102,11 @@ public class VentanaModificarEquipo extends JDialog {
             cbEquipos.setSelectedIndex(-1);
         }catch (Exception e){System.out.println(e.getMessage());}
     }
+
+    /**
+     * Este método llena el formulario con los datos del equipo seleccionado en la combobox y guarda en variables
+     * los datos originales de equipo
+     */
     private void llenarFormulario(){
         try{
             int posEquipoSel = cbEquipos.getSelectedIndex();
@@ -110,7 +115,7 @@ public class VentanaModificarEquipo extends JDialog {
             nombreViejo = tfNombre.getText();
             tfNacionalidad.setText(Main.dameNacionalidadDelEquipo(posEquipoSel));
             nacionalidadVieja = tfNacionalidad.getText();
-            tfFecha.setText(String.valueOf(Main.dameFechaDelEquipo(posEquipoSel)));
+            tfFecha.setText(Main.dameFechaDelEquipo(posEquipoSel));
             fechaVieja = tfFecha.getText();
             tfTelf.setText(Main.dameTelefonoDelEquipo(posEquipoSel));
             telfViejo = tfTelf.getText();
@@ -119,20 +124,45 @@ public class VentanaModificarEquipo extends JDialog {
         }catch (Exception e ){System.out.println(e.getMessage());}
     }
 
+    /**
+     * Una vez que se ha confirmado el cambio de un dato limpia los campos
+     */
+    private void limpiarFormulario(){
+        tfNombre.setText("");
+        nombreViejo = "";
+        tfNacionalidad.setText("");
+        nacionalidadVieja = "";
+        tfFecha.setText("");
+        fechaVieja = "";
+        tfTelf.setText("");
+        telfViejo = "";
+        tfEmail.setText("");
+        mailViejo = "";
+    }
 
+    /**
+     * Al pulsar el boton Ok se comparan los campos originales con los datos que hay en el momento de pulsar el boton
+     * de manera que solo actualiza aquellos que son distintos.
+     */
     private void onOK() {
         // Una vez modificados los datos. Le doy los datos al Main
             try{
                 if(!tfNombre.getText().equalsIgnoreCase(nombreViejo)){
                     boolean bNombre = validarNombre(tfNombre.getText(),"tipo");
                     if(bNombre){
-                        Main.cambiarNombreEquipo(tfNombre.getText(),nombreViejo);
+                       boolean cambiado = Main.cambiarNombreEquipo(tfNombre.getText(),nombreViejo);
+                       if(cambiado) {
+                           limpiarFormulario();
+                       }
                     }
                 }
                 if(!tfNacionalidad.getText().equalsIgnoreCase(nacionalidadVieja)){
-                    boolean bNacionalidad = validarNombre(rbNacio.getText(),"nacionalidad");//valida el nombre de la nacionalidad
+                    boolean bNacionalidad = validarNombre(tfNacionalidad.getText(),"nacionalidad");//valida el nombre de la nacionalidad
                     if(bNacionalidad){
-                        Main.cambiarNacionalidadEquipo(tfNacionalidad.getText(),nacionalidadVieja,nombreViejo);
+                       boolean cambiado = Main.cambiarNacionalidadEquipo(tfNacionalidad.getText(),nacionalidadVieja,nombreViejo);
+                       if(cambiado){
+                           limpiarFormulario();
+                       }
                     }
                 }
                 if(!tfFecha.getText().equalsIgnoreCase(fechaVieja)){
@@ -171,6 +201,13 @@ public class VentanaModificarEquipo extends JDialog {
         dialog.setVisible(true);
         System.exit(0);
     }
+
+    /**
+     * Metodo para validar el nombre del equipo
+     * @param snombre String
+     * @param tipo valida nombre de equipo o nacionalidad dependiendo del tipo que se le pase
+     * @return true o false
+     */
     public boolean validarNombre(String snombre, String tipo){
         boolean bNombre = false;
         Pattern patron = null;
@@ -203,6 +240,12 @@ public class VentanaModificarEquipo extends JDialog {
             System.out.println(e.getClass());}
         return bNombre;
     }
+
+    /**
+     * Metodo para convertir un String a LocalDate
+     * @param fecha String
+     * @return LocalDate
+     */
     public LocalDate convertirAlocalDate(String fecha){
         LocalDate ldFecha = null;
         try{
@@ -212,6 +255,11 @@ public class VentanaModificarEquipo extends JDialog {
         }catch (Exception e){System.out.println(e.getClass());}
         return ldFecha;
     }
+
+    /***
+     * Valida el nuevo telefono
+     * @return true o false
+     */
     public boolean validarTelefono(){
         boolean bTelefono = false;
         try{
@@ -239,6 +287,10 @@ public class VentanaModificarEquipo extends JDialog {
             System.out.println(e.getClass());}
         return bTelefono;
     }
+    /***
+     * Valida el nuevo mail
+     * @return true o false
+     */
     public boolean validarEmail(){
         boolean mailValido=false;
         try{
@@ -249,18 +301,19 @@ public class VentanaModificarEquipo extends JDialog {
                     throw new CampoVacio();
                 }
                 else {
-                    Pattern patron = Pattern.compile("^[a-z][a-zA-Z0-9]+[@][a-z][a-zA-Z0-9]+$");
-                    Matcher mat = patron.matcher(tfEmail.getText());
+                    bMail =true;
+                   // Pattern patron = Pattern.compile("");
+                   // Matcher mat = patron.matcher(tfEmail.getText());
 
-                    if(mat.matches()){
-                        bMail = true;
-                        System.out.println("EL PATRON DEL MAIL  COINCIDE");
+                   // if(mat.matches()){
+                     //   bMail = true;
+                       // System.out.println("EL PATRON DEL MAIL  COINCIDE");
                     }
-                    else{
-                        System.out.println("EL PATRON DEL Mail NO COINCIDE");
-                        throw new Exception("El telefono no es valido");
-                    }
-                }
+                 //   else{
+                      //  System.out.println("EL PATRON DEL Mail NO COINCIDE");
+                       // throw new Exception("El telefono no es valido");
+                   // }
+               // }
             }catch (Exception e){
                 tfEmail.setText(mailViejo);
                 JOptionPane.showMessageDialog(null,"EL MAIL NO ES VALIDO");

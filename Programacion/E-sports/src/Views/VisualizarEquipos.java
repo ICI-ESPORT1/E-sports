@@ -16,6 +16,7 @@ public class VisualizarEquipos extends JDialog {
     private JTextArea taInforEqui;
 
     public VisualizarEquipos() throws Exception {
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);

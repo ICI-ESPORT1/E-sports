@@ -88,7 +88,7 @@
                   <text value="Nombre del equipo"/>
                 </properties>
               </component>
-              <grid id="b8074" binding="tfRellenar" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="b8074" binding="tfRellenar" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -191,7 +191,9 @@
                             <preferred-size width="150" height="-1"/>
                           </grid>
                         </constraints>
-                        <properties/>
+                        <properties>
+                          <text value="dd/MM/yyyy"/>
+                        </properties>
                       </component>
                     </children>
                   </grid>
@@ -231,46 +233,6 @@
                       </component>
                     </children>
                   </grid>
-                  <component id="16aff" class="javax.swing.JRadioButton" binding="rbNacio">
-                    <constraints>
-                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Cambiar Nacional"/>
-                    </properties>
-                  </component>
-                  <component id="7f65" class="javax.swing.JRadioButton" binding="rbFecha">
-                    <constraints>
-                      <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Cambiar Fecha"/>
-                    </properties>
-                  </component>
-                  <component id="c1004" class="javax.swing.JRadioButton" binding="rbTelf">
-                    <constraints>
-                      <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Cambiar Telefono"/>
-                    </properties>
-                  </component>
-                  <component id="49684" class="javax.swing.JRadioButton" binding="rbMail">
-                    <constraints>
-                      <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Cambiar eMail"/>
-                    </properties>
-                  </component>
-                  <component id="91f3" class="javax.swing.JRadioButton" binding="rbNombre">
-                    <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Cambiar Nombre"/>
-                    </properties>
-                  </component>
                 </children>
               </grid>
               <component id="44a2e" class="javax.swing.JLabel">

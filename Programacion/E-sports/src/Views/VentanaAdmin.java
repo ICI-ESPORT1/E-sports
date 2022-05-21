@@ -102,7 +102,16 @@ public class VentanaAdmin {
                 //Aqui la funcion anadir resultados
             }
         });
-
+        verEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e){
+                try {
+                    Main.visualizarEquipo();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         
 }

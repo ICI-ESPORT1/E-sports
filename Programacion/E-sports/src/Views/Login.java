@@ -28,6 +28,8 @@ public class Login extends javax.swing.JDialog {
 
 
     public Login() {
+        paraProbar();
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonCancel);
@@ -100,6 +102,10 @@ public class Login extends javax.swing.JDialog {
     private void onCancel() {
 
         dispose();
+    }
+    public void paraProbar(){
+        textField1.setText("admin");
+        textField2.setText("admin");
     }
 
     public static void main(String[] args) {

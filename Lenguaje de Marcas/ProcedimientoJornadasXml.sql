@@ -27,7 +27,7 @@ begin
 
     
     resultado := dbms_xmlgen.getxml(contexto);
-    insert into fichero (resultado,fecha) values (resultado,sysdate+7);
+    insert into fichero (num_doc ,resultado,fecha) values (1,resultado,sysdate+7);
     dbms_xmlgen.closeContext(contexto);
 end;
 

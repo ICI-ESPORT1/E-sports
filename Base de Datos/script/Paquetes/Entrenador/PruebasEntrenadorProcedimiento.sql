@@ -89,9 +89,9 @@ Procedimiento PL/SQL terminado correctamente.
 
 /*Procedimiento borrar_asistente*/
 
---LLamamos al procedimineto borrar_asistente con un id_asistente que no existe
+--LLamamos al procedimineto borrar_asistente con un dni que no existe
 begin
-gestionarEntrenadores.borrar_entrenador(11);
+gestionarEntrenadores.borrar_entrenador('12312312H');
 end;
 /*
 Error que empieza en la línea: 93 del comando :
@@ -106,7 +106,7 @@ ORA-06512: en línea 2
 
 --LLamamos al procedimineto borrar_asistente 
 begin
-gestionarEntrenadores.borrar_entrenador(21);
+gestionarEntrenadores.borrar_entrenador('12345678H');
 end;
 /*
 Procedimiento PL/SQL terminado correctamente.

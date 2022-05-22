@@ -18,7 +18,7 @@ p_idEquipoNuevo entrenador.id_equipo%type
 
 procedure borrar_entrenador
 (
-p_idEntrenador entrenador.id_entrenador%type
+p_dniEntrenador entrenador.dni%type
 );
 
 end gestionarEntrenadores;

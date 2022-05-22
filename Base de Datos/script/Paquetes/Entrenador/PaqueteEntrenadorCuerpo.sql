@@ -34,7 +34,23 @@ return true;
 exception
   when no_data_found then 
     return false;
-end validar_entrenador;
+ end validar_entrenador;   
+    
+    function validar_entrenador_dni
+(p_entrenador in number)
+return boolean
+is
+  v_idEntrenador number;
+begin
+  select id_entrenador into v_idEntrenador
+  from entrenador
+  where entrenador.id_entrenador = p_entrenador;
+return true;
+exception
+  when no_data_found then 
+    return false;
+  end validar_entrenador_dni;  
+
 /*EMPIEZAN LOS PROCEDIMIENTOS***********************************************/
 /*PROCEDIMIENTO PARA AÑADIR ENTRENADORES*/
 
@@ -122,16 +138,16 @@ end cambio_equipo_entrenador;
 /*PROCEDIMIENTO PARA BORRAR ENTRENADOR*/
 procedure borrar_entrenador
 (
-p_idEntrenador entrenador.id_entrenador%type
+p_dniEntrenador entrenador.dni%type
 )
 is
 e_dueNoExiste exception;
 v_error varchar2(300);
 v_error_mensaje varchar2(300);
 begin
-  if validar_entrenador(p_idEntrenador) then
+  if validar_entrenador_dni(p_dniEntrenador) then
    delete from entrenador
-   where id_entrenador = p_idEntrenador;
+   where dni = p_dniEntrenador;
    
    else
         raise e_dueNoExiste;

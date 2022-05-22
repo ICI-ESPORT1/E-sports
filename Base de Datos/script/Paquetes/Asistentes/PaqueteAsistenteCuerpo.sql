@@ -39,6 +39,23 @@ exception
   when no_data_found then 
     return false;
 end validar_asistente;
+
+function validar_asistente_dni
+(p_asistente in varchar2)
+return boolean
+is
+  v_dniAsistente varchar2(9);
+begin
+  select dni into v_dniAsistente
+  from asistente
+  where asistente.dni = p_asistente;
+return true;
+exception
+  when no_data_found then 
+    return false;
+end validar_asistente_dni;
+
+
 /*EMPIEZAN LOS PROCEDIMIENTOS ************************************************/
 /*A�ADIR NUEVO ASISTENTE*/
 procedure nuevo_asistente
@@ -118,18 +135,19 @@ begin
      
 end cambio_equipo_asistente;
 
+/**************************PROCEDIMINETO PARA BORRAR UN ASISTENTE*********************************/
 procedure borrar_asistente
 (
-p_idAsistente asistente.id_asistente%type
+p_dniAsistente asistente.dni%type
 )
 is
 v_error varchar2(300);
 v_error_mensaje varchar2(300);
 e_asisNoExiste exception;
 begin
-  if validar_asistente(p_idAsistente) then
+  if validar_asistente_dni(p_dniAsistente) then
    delete from asistente
-   where id_asistente = p_idAsistente;
+   where dni = p_dniAsistente;
    
    else
       raise e_asisNoExiste;

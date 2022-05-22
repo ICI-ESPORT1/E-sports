@@ -128,9 +128,10 @@ resultado varchar2 (5),
 
 
 CREATE TABLE fichero (
-num_doc number(3) CONSTRAINT fic_num_pk PRIMARY KEY,
+num_doc number(3) GENERATED ALWAYS AS IDENTITY CONSTRAINT fic_num_pk PRIMARY KEY,
 resultado clob,
 fecha date,
+nombre varchar2(20),	
 id_calendario number(3),
 CONSTRAINT fic_num_fk FOREIGN KEY (id_calendario)
         REFERENCES calendario(id_calendario) ON DELETE SET NULL

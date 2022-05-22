@@ -37,7 +37,7 @@ public class Main {
     private static Partido partido= new Partido();
     private static Calendario calendario= new Calendario();
     private static Asistente asistente;
-    private static Entrenador entrenador;
+    private static Entrenador entrenador = new Entrenador();
     private static Dueno dueno;
     private static Equipo equipo = new Equipo();
     private static Jornada jornada = new Jornada();
@@ -354,19 +354,6 @@ public class Main {
 
     }
 
-
-  /*  public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo, String m)throws Exception{
-        asistente = new Asistente(dni,n,l,t,m, equipo,s);
-        listaEquipos.add(equipo);}
-
-  /*  public static void cambioEquipoAsistente(String dni, String n, String l, Equipo e,String t, Float s, int idNuevoEquipo, String m)throws Exception{
-        asistente = new Asistente(dni,n,l,t,m, equipo,s);
-        listaEquipos.add(equipo);
-
-        AsistenteDAO.cambioEquipoAsistente(asistente,idNuevoEquipo);
-
-    }*//*ESTO ESTA COMENTADO PORQUE EL ASISTENTE NO TIENE ID EQUIPO*/
-
     /**
      * Metodo que llama a consultarAsistente para hacer una select en la base de datos
      *
@@ -378,10 +365,85 @@ public class Main {
         System.out.println("CONSULTAR ASISTENTE DNI");
 
         return asistente = AsistenteDAO.consultarAsistente(dni);
+    }
+    public static String dameNombreDelAsistente(){
+        String nombre="";
+        try{
+            nombre= asistente.getNombre();
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return nombre;
+    }
+    public static String dameTelefonoDelAsistente(){
+        String telefono="";
+        try{
+            telefono= asistente.getTelefono();
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return telefono;
+    }
+    public static String dameSalarioDelAsistente(){
+        String salario="";
+        Float fsalario;
+        try{
+            fsalario= asistente.getSueldo();
+            salario = String.valueOf(fsalario);
+        }catch (Exception e){System.out.println(e.getMessage());}
+        return salario;
+    }
+    public static boolean cambiarNombreAsistente(String nombreN,String dni){
+        boolean nombreCambiado = false;
+        int posicionentre =0;
+        int i = 0;
+        // Necesito el objeto entrenador
+        entrenador =new Entrenador();
+        nombreCambiado = AsistenteDAO.cambiarNombreAsistente(nombreN,dni);
+        if(nombreCambiado){
+            asistente.setNombre(nombreN);
+            JOptionPane.showMessageDialog(null, "El nombre del asistente se ha cambiado por: "+ nombreN );
+        }
+
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha realizado el cambio");
+        }
+
+        return nombreCambiado;
 
     }
+    public static boolean cambiarTelefonoAsistente(String telefN,String dni){
+        boolean telfCambiado = false;
+        int posicionentre =0;
+        int i = 0;
+        // Necesito el objeto entrenador
+        entrenador =new Entrenador();
+        telfCambiado = AsistenteDAO.cambiarTelefonoAsistente(telefN,dni);
+        if(telfCambiado){
+            asistente.setTelefono(telefN);
+            JOptionPane.showMessageDialog(null, "El telefono del asistente se ha cambiado por: "+ telefN );
+        }
 
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el dni");
+        }
+        return telfCambiado;
+    }
+    public static boolean cambiarSalarioAsistente(String salario,String dni){
+        boolean salarioCambiado = false;
+        int posicionentre =0;
+        int i = 0;
+        Float fsalario = Float.parseFloat(salario);
+        // Necesito el objeto entrenador
+        entrenador =new Entrenador();
+        salarioCambiado = AsistenteDAO.cambiarSalarioEntrenador(fsalario,dni);
+        if(salarioCambiado){
+            asistente.setSueldo(fsalario);
+            JOptionPane.showMessageDialog(null, "El salario del entrenador se ha cambiado por: "+ salario);
+        }
 
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha podido cambiar el salario");
+        }
+
+        return salarioCambiado;
+    }
 
 
 
@@ -471,29 +533,60 @@ public class Main {
     public static void dameListaEntrenadores(){
         listaEntrenadores = EntrenadorDAO.selectTodos();
     }
-    public static void cambiarNombreEntrenador(String nNuevo,String dni){
+    public static boolean cambiarNombreEntrenador(String nNuevo, String dni){
         boolean nombreCambiado = false;
         int posicionentre =0;
         int i = 0;
-        // Necesito un arraylist de entrenadores
-
-        for(i=0; i<listaEntrenadores.size()&& !listaEntrenadores.get(i).getDni().equalsIgnoreCase(dni);i++){}
-        posicionentre = i;
-            if(i<listaEntrenadores.size()){
-                //el entrenador existe
-                nombreCambiado = EntrenadorDAO.cambiarNombreEntrenador(nNuevo,dni);
+        // Necesito el objeto entrenador
+        entrenador =new Entrenador();
+        nombreCambiado = EntrenadorDAO.cambiarNombreEntrenador(nNuevo,dni);
                 if(nombreCambiado){
-                    listaEntrenadores.get(posicionentre).setNombre(nNuevo);
+                    entrenador.setNombre(nNuevo);
                     JOptionPane.showMessageDialog(null, "El nombre del entrenador se ha cambiado por: "+ nNuevo );
                 }
-            }
+
             else{
                 JOptionPane.showMessageDialog(null, "No se ha encontrado el dni");
             }
 
+        return nombreCambiado;
     }
-    public static void cambiarTelefonoEntrenador(String nTelf,String dni){
+    public static boolean cambiarTelefonoEntrenador(String nTelf,String dni){
+        boolean telfCambiado = false;
+        int posicionentre =0;
+        int i = 0;
+        // Necesito el objeto entrenador
+        entrenador =new Entrenador();
+        telfCambiado = EntrenadorDAO.cambiarTelefonoEntrenador(nTelf,dni);
+        if(telfCambiado){
+            entrenador.setTelefono(nTelf);
+            JOptionPane.showMessageDialog(null, "El telefono del entrenador se ha cambiado por: "+ nTelf );
+        }
 
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el dni");
+        }
+
+        return telfCambiado;
+    }
+    public static boolean cambiarSalarioEntrenador(String sN, String dni){
+        boolean salarioCambiado = false;
+        int posicionentre =0;
+        int i = 0;
+        Float salario = Float.parseFloat(sN);
+        // Necesito el objeto entrenador
+        entrenador =new Entrenador();
+        salarioCambiado = EntrenadorDAO.cambiarSalarioEntrenador(salario,dni);
+        if(salarioCambiado){
+            entrenador.setSueldo(salario);
+            JOptionPane.showMessageDialog(null, "El salario del entrenador se ha cambiado por: "+ sN);
+        }
+
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha podido cambiar el salario");
+        }
+
+        return salarioCambiado;
     }
     /**
      * Metodo que llama a consultarEntrenador para hacer una select en la base de datos
@@ -507,6 +600,45 @@ public class Main {
 
         return entrenador = EntrenadorDAO.consultarEntrenador(dni);
 
+    }
+    public static void sacaEntrenador(int pos, String dni){
+        try{
+            listaEntrenadores = new ArrayList<>();
+            entrenador = new Entrenador();
+            entrenador = EntrenadorDAO.consultarEntrenador(dni); /*Obtengo el entrenador que necesito para llenar los datos del
+            formulario*/
+            listaEntrenadores.add(entrenador);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public static String dameNombreDelEntrenador(){
+        String nombre="";
+        try{
+            nombre= entrenador.getNombre();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return nombre;
+    }
+    public static String dameTelefonoDelEntrenador(){
+        String telefono="";
+        try{
+            telefono = entrenador.getTelefono();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return telefono;
+    }
+    public static String dameSalarioDelEntrenador(){
+        String salario="";
+        try{
+            float fsalario= entrenador.getSueldo();
+            salario = String.valueOf(fsalario);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return salario;
     }
 
     ////////////////////////////////////// Metodos para la tabla Dueno ////////////////////////////////////
@@ -1160,14 +1292,15 @@ public class Main {
      */
     public static void sacaListaDeJugadores(int pos){
         try{
-            String nombreEquipo ="";
+
             listaJugadores = new ArrayList<>();
-            nombreEquipo = listaEquipos.get(pos).getNombre();
+            String nombreEquipo = listaEquipos.get(pos).getNombre();
             int idEq = listaEquipos.get(pos).getId_equipo();
             listaJugadores = JugadorDAO.consultarJugadoresEquipo(idEq);  //La lista de jugadores del equipo seleccionado
 
         }catch (Exception e){System.out.println(e.getMessage());}
     }
+
     /**
      * Método que devuelve el nombre de un jugador.
      * @param dniPersona Para buscar el jugador

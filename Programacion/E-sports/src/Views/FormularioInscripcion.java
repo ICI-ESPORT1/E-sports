@@ -152,7 +152,7 @@ public class FormularioInscripcion {
                     bEntrenadorValido = validarDatosEntrenador();
                     if(bEntrenadorValido){
                         Main.tenDatosEntrenador(tfDniEn.getText(),tfNombreEntre.getText(),tfTelfEnt.getText(),tfDirEnt.getText(),sueldo);
-                        System.out.println("AQUI SE INSERTARIA EL ENTRENADOR");
+                        System.out.println("AQUI SE INSERTA EL ENTRENADOR");
                     }
 
                     bDuenoValido = validarDatosDueno("dueno");

@@ -217,6 +217,26 @@ public class EquipoDAO {
         return equipo;
 
     }
+ public static Equipo consultarEquipoPorId(int idEq){
+        try{
+            BaseDatos.abrirConexion();
+
+            plantilla="select * from equipo where cod_equipo = ?";
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1,idEq);
+
+            resultado = sentenciaPre.executeQuery();
+            while (resultado.next()){
+                crearObjeto();
+            }
+
+            BaseDatos.cerrarConexion();
+            return equipo;
+        }catch (SQLException sqle){
+            System.out.println(sqle.getMessage()); }
+        return equipo;
+ }
 
     public static ArrayList<Equipo> selectTodosLosEquipos(){
      //   BaseDatos.abrirConexion();

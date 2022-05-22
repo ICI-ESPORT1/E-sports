@@ -72,6 +72,7 @@ public class ModificarDatosPersona {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    /* ***************************TIPO DE PERSONA JUGADOR ***********************************/
                     if(cbRol.getSelectedIndex()==0){ //ES JUGADOR. YA SE HAN CARGADO LOS DATOS
                         if(!tfNombre.getText().equalsIgnoreCase(nombreViejo)){
                                 boolean bNombre = validarNombre(tfNombre.getText(),"tipo"); //Si se ha cambiado el nombre lo valido
@@ -82,7 +83,7 @@ public class ModificarDatosPersona {
                                    }
                                 }
                         }
-                /* ****************************************Cambiar telefono*********************************************/
+                                    /* ***********************Cambiar telefono*******************************/
                         if(!tfTelefono.getText().equalsIgnoreCase(telfViejo)){
                             boolean bTelefono = validarTelefono(tfTelefono.getText());
                             String pruebaDni =tfDni.getText();
@@ -93,7 +94,7 @@ public class ModificarDatosPersona {
                               }
                             }
                         }
-                        /* *****************************************Cambiar SALARIO *****************************/
+                                /* ***************************Cambiar SALARIO *****************************/
                         String sSalario = String.valueOf(salarioViejo);
                         if(!tfSalario.getText().equalsIgnoreCase(sSalario)){
                             boolean bSueldo = validarSueldo(tfSalario.getText());
@@ -106,28 +107,73 @@ public class ModificarDatosPersona {
                             }
                         }
                     }
-/* ******************************************HASTA AQUI FUNCIONA*******************************************************/
+/* ******************************************TIPO DE PERSONA ENTRENADOR*******************************************************/
                     if(cbRol.getSelectedIndex()==1){
-                        Main.dameListaEntrenadores();
                         if(!tfNombre.getText().equalsIgnoreCase(nombreViejo)){
                             boolean bdni = validarDni(tfDni.getText());
-                            if(bdni){
                                 boolean bNombre = validarNombre(tfNombre.getText(),"tipo");
                                 if(bNombre){
-                                    Main.cambiarNombreEntrenador(tfNombre.getText(),tfDNI.getText());
-                                }
+                                    String dni = tfDni.getText();
+                                   boolean cambiado = Main.cambiarNombreEntrenador(tfNombre.getText(),dni);
+                                   if(cambiado){
+                                       limpiarFormulario();
+                                   }
                             }
                         }
                         if(!tfTelefono.getText().equalsIgnoreCase(telfViejo)){
                             boolean bTelefono = validarTelefono(tfTelefono.getText());
                             if(bTelefono){
-                                Main.cambiarTelefonoEntrenador(tfTelefono.getText(),tfDNI.getText());
+                                String dni=tfDni.getText();
+                              boolean cambiado =  Main.cambiarTelefonoEntrenador(tfTelefono.getText(),dni);
+                                if(cambiado){
+                                    limpiarFormulario();
+                                }
                             }
                         }
                         if(!tfSalario.getText().equalsIgnoreCase(String.valueOf(salarioViejo))){
                             boolean bSueldo = validarSueldo(tfSalario.getText());
                             if(bSueldo){
-                               // Main.cambiarSalarioEntrenador(tfSalario.getText(),tfDNI.getText() ,nombreViejo,cbEquipos.getSelectedIndex());
+                                String dni = tfDni.getText();
+                               boolean cambiado= Main.cambiarSalarioEntrenador(tfSalario.getText(),dni);
+                                if(cambiado){
+                                    limpiarFormulario();
+                                }
+                            }
+                        }
+                    }
+       /* ******************************************TIPO DE PERSONA ASISTENTE***************************************/
+                    if(cbRol.getSelectedIndex()==2){
+                        if(!tfNombre.getText().equalsIgnoreCase(nombreViejo)){
+                            boolean bdni = validarDni(tfDni.getText());
+                            boolean bNombre = validarNombre(tfNombre.getText(),"tipo");
+                            if(bNombre){
+                                String dni = tfDni.getText();
+                                boolean cambiado = Main.cambiarNombreAsistente(tfNombre.getText(),dni);
+                                if(cambiado){
+                                    limpiarFormulario();
+                                }
+                            }
+                        }
+                        /* **********************cambiar telefono asistente**************************************/
+                        if(!tfTelefono.getText().equalsIgnoreCase(telfViejo)){
+                            boolean bTelefono = validarTelefono(tfTelefono.getText());
+                            if(bTelefono){
+                                String dni=tfDni.getText();
+                                boolean cambiado =  Main.cambiarTelefonoAsistente(tfTelefono.getText(),dni);
+                                if(cambiado){
+                                    limpiarFormulario();
+                                }
+                            }
+                        }
+                        /* **********************cambiar salario asistente**************************************/
+                        if(!tfSalario.getText().equalsIgnoreCase(String.valueOf(salarioViejo))){
+                            boolean bSueldo = validarSueldo(tfSalario.getText());
+                            if(bSueldo){
+                                String dni = tfDni.getText();
+                                boolean cambiado= Main.cambiarSalarioAsistente(tfSalario.getText(),dni);
+                                if(cambiado){
+                                    limpiarFormulario();
+                                }
                             }
                         }
                     }
@@ -135,6 +181,8 @@ public class ModificarDatosPersona {
                 catch (Exception ex){
                     System.out.println(ex.getClass());
                 }
+
+
             }
         });
 
@@ -256,6 +304,7 @@ public class ModificarDatosPersona {
             int dni = Integer.parseInt(sdni.substring(0,8));
             int resto = dni%23;
             if (letras[resto] != sdni.charAt(8)){
+                System.out.println("LA VALIDACION ES FALSA");
                 throw new Exception("Letra incorrecta");
             }else{
                 bDniValido =true;
@@ -352,6 +401,7 @@ public class ModificarDatosPersona {
         try{
             int posEquipoSel = cbEquipos.getSelectedIndex();
             String dniPersona = tfDni.getText();
+            /* *******************LLENA DATOS DE LA OPCION JUGADOR******************************************/
             if(cbRol.getSelectedIndex() ==0){
                 Main.sacaListaDeJugadores(posEquipoSel);
 
@@ -365,18 +415,46 @@ public class ModificarDatosPersona {
                 String sSalario = tfSalario.getText();
                 Float fSalario = Float.parseFloat(sSalario);
                 salarioViejo = fSalario;
+            }
+            /* *******************LLENA DATOS DE LA OPCION ENTRENADOR******************************************/
+            if(cbRol.getSelectedIndex()==1){
+                String dniEn = tfDni.getText();
+                Main.sacaEntrenador(posEquipoSel,dniEn); /*En el main se ha creado un objeto Entrenador*/
+                tfNombre.setText(Main.dameNombreDelEntrenador());
+                nombreViejo = tfNombre.getText();
 
-                /*FALTA AÑADIR
-                * ROL SEL=1
-                * ROL = 2*/
+                tfTelefono.setText(Main.dameTelefonoDelEntrenador());
+                telfViejo = tfTelefono.getText();
+
+                tfSalario.setText(Main.dameSalarioDelEntrenador());
+                String sSalario = tfSalario.getText();
+                Float fSalario = Float.parseFloat(sSalario);
+                salarioViejo = fSalario;
+            }
+            /* *******************LLENA DATOS DE LA OPCION ASISTENTE******************************************/
+            if(cbRol.getSelectedIndex()==2){
+                String dniAs = tfDni.getText();
+                Main.consultarAsistente(dniAs); /*En el main se ha creado un objeto Entrenador*/
+                tfNombre.setText(Main.dameNombreDelAsistente());
+                nombreViejo = tfNombre.getText();
+
+                tfTelefono.setText(Main.dameTelefonoDelAsistente());
+                telfViejo = tfTelefono.getText();
+
+                tfSalario.setText(Main.dameSalarioDelAsistente());
+                String sSalario = tfSalario.getText();
+                salarioViejo = Float.parseFloat(sSalario);
             }
 
         }catch (Exception e ){System.out.println(e.getMessage());}
     }
     private void limpiarFormulario(){
+        tfDni.setText("");
         tfNombre.setText("");
         tfTelefono.setText("");
         tfSalario.setText("");
+        cbRol.setSelectedIndex(-1);
+        cbEquipos.setSelectedIndex(-1);
     }
 
     public static void main(String[] args) {

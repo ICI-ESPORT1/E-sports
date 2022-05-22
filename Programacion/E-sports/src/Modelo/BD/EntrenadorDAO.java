@@ -1,6 +1,7 @@
 package Modelo.BD;
 
 import Modelo.UML.Entrenador;
+import Modelo.UML.Equipo;
 
 
 import java.sql.*;
@@ -18,6 +19,9 @@ public class EntrenadorDAO {
     private  static ResultSet resultado;
     private static CallableStatement c;
     private static ArrayList<Entrenador>listaEntrenadores = new ArrayList();
+
+    public EntrenadorDAO() {
+    }
 
     public static void altaEntrenador(Entrenador e)throws Exception{
         int n = 0;
@@ -71,18 +75,21 @@ public class EntrenadorDAO {
 
     public static Entrenador consultarEntrenador(String dni)throws Exception{
         //Metodo para consultar un entrenador por dni a la base de datos
-      //  BaseDatos.abrirConexion();
+       BaseDatos.abrirConexion();
 
         plantilla="select * from entrenador where dni = ?";
 
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,dni);
+        sentenciaPre.setString(1,dni.toUpperCase());
 
         resultado = sentenciaPre.executeQuery();
 
-        crearObjeto();
-      //  BaseDatos.cerrarConexion();
-        return entrenador;
+        if(resultado.next()){
+             crearObjeto();
+        }
+        Entrenador coach = entrenador;
+        BaseDatos.cerrarConexion();
+        return coach;
 
     }
     public static ArrayList<Entrenador> selectTodos(){
@@ -147,18 +154,54 @@ public class EntrenadorDAO {
         }catch (SQLException sqle){System.out.println(sqle.getMessage());}
         return cambiado;
     }
+    public static boolean cambiarSalarioEntrenador(float sN,String dni){
+        boolean cambiado=false;
+        int ok =0;
 
-        public static void crearObjeto(){
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update entrenador set sueldo= ? where dni= ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setFloat(1,sN);
+            sentenciaPre.setString(2, dni);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        return cambiado;
+
+    }
+
+    public static void crearObjeto(){
       try{
-
+        entrenador = new Entrenador();
         entrenador.setCodPersona(resultado.getInt("id_entrenador"));
+          System.out.println(entrenador.getCodPersona());
         entrenador.setDni(resultado.getString("dni"));
+          System.out.println(entrenador.getDni());
         entrenador.setNombre(resultado.getString("nombre"));
+          System.out.println(entrenador.getNombre());
         entrenador.setTelefono(resultado.getString("telefono"));
+          System.out.println(entrenador.getTelefono());
         entrenador.setLocalidad(resultado.getString("direccion"));
-        entrenador.setSueldo(resultado.getFloat("sueldo"));
-    }catch (Exception e){System.out.println(e.getMessage());}
+          System.out.println(entrenador.getDireccion());
 
+
+          System.out.println(resultado.getInt("SUELDO"));
+          entrenador.setSueldo(resultado.getInt("sueldo"));
+          System.out.println(entrenador.getSueldo());
+
+          /*Necesito el id del equipo del entrenador*/
+          int idEquipo = resultado.getInt("id_equipo");
+          Equipo equipo = new Equipo();
+          equipo = EquipoDAO.consultarEquipoPorId(idEquipo);
+          entrenador.setEquipo(equipo);
+          System.out.println(entrenador.getEquipo().getId_equipo());
+    }catch (Exception e){System.out.println(e.getMessage());}
 
     }
 }

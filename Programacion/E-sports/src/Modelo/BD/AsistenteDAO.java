@@ -57,27 +57,11 @@ public class AsistenteDAO {
 
         //  BaseDatos.cerrarConexion();
     }
-/*
-    public static void cambioEquipoAsistente(Asistente a, int idEquipoNuevo)throws Exception{
-        //metodo para cambiar a un asistente de equipo
-        BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call cambio_equipo(?,?)}");
-
-        c.setInt(1,a.getCodPersona());
-        c.setInt(2,idEquipoNuevo);
-
-        c.execute();
-
-        c.close();
-
-        BaseDatos.cerrarConexion();
-
-    }*/ //Esto esta comentado porque no tiene email
 
     public static Asistente consultarAsistente(String dni) throws Exception {
         //Metodo para consultar un asistente por dni a la base de datos
-        //  BaseDatos.abrirConexion();
+        BaseDatos.abrirConexion();
 
         plantilla = "select * from asistente where dni = ?";
 
@@ -89,9 +73,69 @@ public class AsistenteDAO {
             crearObjeto();
         }
 
-        //  BaseDatos.cerrarConexion();
+       BaseDatos.cerrarConexion();
         return asistente;
 
+    }
+    public static boolean cambiarNombreAsistente(String nombreN,String dni){
+        boolean cambiado=false;
+        int ok =0;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update asistente set nombre= ? where dni= ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1,nombreN);
+            sentenciaPre.setString(2, dni);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        return cambiado;
+    }
+    public static boolean cambiarTelefonoAsistente(String telefN,String dni){
+        boolean cambiado=false;
+        int ok =0;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update asistente set telefono= ? where dni= ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1,telefN);
+            sentenciaPre.setString(2, dni);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        return cambiado;
+    }
+    public static boolean cambiarSalarioEntrenador(Float fsalario,String dni){
+        boolean cambiado=false;
+        int ok =0;
+
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="update asistente set sueldo= ? where dni= ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setFloat(1,fsalario);
+            sentenciaPre.setString(2, dni);
+            ok = sentenciaPre.executeUpdate();
+
+            if(ok ==1){
+                cambiado = true;
+            }
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        return cambiado;
     }
 
     public static void crearObjeto() throws Exception {

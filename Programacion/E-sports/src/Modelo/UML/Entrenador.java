@@ -43,6 +43,9 @@ public class Entrenador extends Persona {
         this.sueldo = sueldo;
     }
 
+    public Entrenador() {
+    }
+
     /**
      * @retun equipo
      */

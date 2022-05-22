@@ -17,7 +17,7 @@ p_idEquipoNuevo dueno.id_equipo%type
 
 procedure borrar_dueno
 (
-p_idDueno dueno.id_dueno%type
+p_dniDueno dueno.dni%type
 );
 
 

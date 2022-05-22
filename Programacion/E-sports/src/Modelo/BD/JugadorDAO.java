@@ -2,6 +2,7 @@ package Modelo.BD;
 
 import Modelo.UML.Jugador;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class JugadorDAO {
 
     public static void altaJugador(Jugador j)throws Exception{
         //Metodo para insertar un nuevo jugador en la tabla jugador
-       // BaseDatos.abrirConexion();
+        BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call nuevo_jugador(?,?,?,?,?,?,?,?)}");
 
@@ -38,23 +39,28 @@ public class JugadorDAO {
 
         c.close();
 
-     //   BaseDatos.cerrarConexion();
+     BaseDatos.cerrarConexion();
     }
 
 
-    public static void bajaJugador(Jugador j)throws Exception{
+    public static boolean bajaJugador(String dni)throws Exception{
         //metodo para borrar un jugador de la tabla jugador por id_jugador
-      //  BaseDatos.abrirConexion();
+        boolean b=true;
+        try{
+            BaseDatos.abrirConexion();
+            c=BaseDatos.getConexion().prepareCall("{call gestionarJugadores.borrar_jugador(?)}");
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_jugador(?)}");
+            c.setString(1,dni);
+            b = c.execute();
 
-        c.setInt(1,j.getCodPersona());
+            c.close();
 
-        c.execute();
+            BaseDatos.cerrarConexion();
 
-        c.close();
+        }catch (SQLException sqle){
+            System.out.println(sqle.getMessage() ); }
 
-     //   BaseDatos.cerrarConexion();
+        return b;
     }
 
     public static void cambiarEquipoJugador(Jugador j, int idEquipoNuevo)throws Exception{
@@ -114,41 +120,27 @@ public class JugadorDAO {
 
     }
     public static Jugador jugadorConId(String dni)throws Exception{
-      //  BaseDatos.abrirConexion();
+      BaseDatos.abrirConexion();
         String dniMayus = dni.toUpperCase();
         plantilla ="select * from jugador where upper(dni)=?";
 
         sentenciaPre =BaseDatos.getConexion().prepareStatement(plantilla);
         sentenciaPre.setString(1,dniMayus);
         resultado = sentenciaPre.executeQuery();
-        while(resultado.next()){
+        if(resultado.next()) {
             crearObjeto();
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"El dni no corresponde con ningun jugador");
+            return null;
         }
         return jugador;
     }
-    public static ArrayList<Jugador> consultarJugador()throws Exception{
-        //Metodo para consultar todos los jugadores
-      //  BaseDatos.abrirConexion();
 
-        plantilla="select * from jugador where nombre = ";
-
-        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,"Celia");
-
-        resultado = sentenciaPre.executeQuery();
-
-        listaJugadores= new ArrayList<>();
-        while(resultado.next()) {
-            crearObjeto();
-            listaJugadores.add(jugador);
-        }
-
-        return listaJugadores;
-    }
 
     public static void cambiarDatosJugador(Jugador jugador)throws Exception{
         //Metodo para modificar los datos de un jugador
-       // BaseDatos.abrirConexion();
+    BaseDatos.abrirConexion();
 
         plantilla="update jugador nombre = ?, telefono = ?, direccion = ?, id_equipo = ?, nickname = ?, sueldo = ?, id_rol = ? where dni = ?";
 
@@ -164,7 +156,7 @@ public class JugadorDAO {
 
         resultado = sentenciaPre.executeQuery();
 
-      //  BaseDatos.cerrarConexion();
+      BaseDatos.cerrarConexion();
     }
     /* *****************************************************************************************/
     public static boolean cambiarNombreJugador(String nN, String dniJug){

@@ -17,6 +17,6 @@ p_idEquipoNuevo equipo.cod_equipo%type
 
 procedure borrar_asistente
 (
-p_idAsistente asistente.id_asistente%type
+p_dniAsistente asistente.dni%type
 );
 end gestionarAsistente;

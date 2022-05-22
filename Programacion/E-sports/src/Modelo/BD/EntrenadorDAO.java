@@ -24,6 +24,7 @@ public class EntrenadorDAO {
     }
 
     public static void altaEntrenador(Entrenador e)throws Exception{
+        BaseDatos.abrirConexion();
         int n = 0;
         plantilla = "INSERT INTO entrenador (dni,nombre,telefono,direccion,id_equipo,sueldo) VALUES (?,?,?,?,?,?)";
         sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
@@ -37,28 +38,28 @@ public class EntrenadorDAO {
         n = sentenciaPre.executeUpdate();
 
         System.out.println("filas "+ n);
-      //  BaseDatos.cerrarConexion();
+        BaseDatos.cerrarConexion();
     }
 
 
-    public static void bajaEntrenador(Entrenador e)throws Exception{
+    public static void bajaEntrenador(String dni)throws Exception{
         //metodo para borrar un entrenador de la tabla entrenador por id_entrenador
-      //  BaseDatos.abrirConexion();
+        BaseDatos.abrirConexion();
 
-        c =BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
+        c =BaseDatos.getConexion().prepareCall("{call gestionarEntrenadores.borrar_entrenador(?)}");
 
-        c.setInt(1,e.getCodPersona());
+        c.setString(1,dni);
 
         c.execute();
 
         c.close();
 
-      //  BaseDatos.cerrarConexion();
+       BaseDatos.cerrarConexion();
     }
 
     public static void cambioEquipoEntrenador(Entrenador e, int idEquipoNuevo)throws Exception{
         //metodo para cambiar a un entrenador de equipo
-       // BaseDatos.abrirConexion();
+       BaseDatos.abrirConexion();
 
         c =BaseDatos.getConexion().prepareCall("{call cambio_equipo_entrenador(?,?)}");
 
@@ -69,7 +70,7 @@ public class EntrenadorDAO {
 
         c.close();
 
-      //  BaseDatos.cerrarConexion();
+        BaseDatos.cerrarConexion();
 
     }
 
@@ -93,6 +94,7 @@ public class EntrenadorDAO {
 
     }
     public static ArrayList<Entrenador> selectTodos(){
+        BaseDatos.abrirConexion();
         try{
             listaEntrenadores = new ArrayList<>();
                     //Metodo para consultar un entrenador por dni a la base de datos
@@ -108,13 +110,14 @@ public class EntrenadorDAO {
             }
 
 
-            //  BaseDatos.cerrarConexion();
+              BaseDatos.cerrarConexion();
         }catch (SQLException sqle){System.out.println(sqle.getMessage());}
 
         return listaEntrenadores;
 
     }
     public static boolean cambiarNombreEntrenador(String nNuevo,String dni){
+        BaseDatos.abrirConexion();
         boolean cambiado=false;
         int ok =0;
         try{
@@ -135,6 +138,7 @@ public class EntrenadorDAO {
         return cambiado;
     }
     public static boolean cambiarTelefonoEntrenador(String nTelf, String dni){
+        BaseDatos.abrirConexion();
         boolean cambiado=false;
         int ok =0;
         try{

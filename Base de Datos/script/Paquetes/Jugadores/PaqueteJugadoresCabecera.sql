@@ -20,7 +20,7 @@ p_idEquipoNuevo jugador.id_equipo%type
 
 procedure borrar_jugador
 (
-p_idJugador jugador.id_jugador%type
+p_dniJugador jugador.dni%type
 );
 
 end gestionarJugadores;

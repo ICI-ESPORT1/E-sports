@@ -26,7 +26,7 @@ public class EquipoDAO {
 
     public static void altaEquipo(Equipo e, Asistente a)throws Exception{
         //Metodo para insertar un nuevo equipo en la tabla equipo
-       // BaseDatos.abrirConexion();
+       BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.nuevo_equipo(?,?,?,?,?,?,?)}");
 
@@ -45,18 +45,18 @@ public class EquipoDAO {
 
         c.close();
 
-      //  BaseDatos.cerrarConexion();
+      BaseDatos.cerrarConexion();
     }
 
 
-    public static boolean bajaEquipo(Equipo e)throws Exception{
+    public static boolean bajaEquipo(String nombre)throws Exception{
         boolean borrado= false;
         //metodo para borrar un equipo de la tabla equipo por nombre
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_equipo(?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.borrar_equipo(?)}");
 
-        c.setString(1,e.getNombre());
+        c.setString(1,nombre);
 
        borrado = c.execute();
 
@@ -182,7 +182,7 @@ public class EquipoDAO {
 
     public static Equipo consultarEquipo(String n)throws Exception{
         //Metodo para consultar un Equipo por nombre a la base de datos
-        //  BaseDatos.abrirConexion();
+        BaseDatos.abrirConexion();
         String nombreMayus = n.toUpperCase();
         plantilla="select * from equipo where upper(nombre) = ?";
 
@@ -190,6 +190,7 @@ public class EquipoDAO {
         sentenciaPre.setString(1,nombreMayus);
 
         resultado = sentenciaPre.executeQuery();
+        BaseDatos.cerrarConexion();
     while(resultado.next()){
         crearObjeto();
     }
@@ -198,6 +199,7 @@ public class EquipoDAO {
         return equipo;
 
     }
+
 
     public static Equipo consultarEquipoID(String n)throws Exception{
         //Metodo para consultar un Equipo por nombre a la base de datos
@@ -239,7 +241,7 @@ public class EquipoDAO {
  }
 
     public static ArrayList<Equipo> selectTodosLosEquipos(){
-     //   BaseDatos.abrirConexion();
+     BaseDatos.abrirConexion();
         try{
             listaEquipos = new ArrayList<>();
             plantilla= "select * from equipo ";
@@ -261,7 +263,7 @@ public class EquipoDAO {
                 } while (resultado.next());
             }
 
-
+BaseDatos.cerrarConexion();
         }catch (SQLException sqle){
             System.out.println(sqle.getMessage());
         }catch (Exception e){System.out.println(e.getMessage());}

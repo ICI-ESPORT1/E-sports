@@ -1,43 +1,98 @@
-public class BorrarEquipo extends javax.swing.JDialog {
-private javax.swing.JPanel contentPane;
-private javax.swing.JButton buttonOK;
-private javax.swing.JButton buttonCancel;
+package Views;
 
-public BorrarEquipo(){
-setContentPane(contentPane);
-setModal(true);
-getRootPane().setDefaultButton(buttonOK);
+import Modelo.BD.BaseDatos;
+import com.company.Main;
 
-buttonOK.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onOK();}});
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 
-buttonCancel.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onCancel();}});
+public class BorrarEquipo extends JDialog {
+    private JPanel contentPane;
+    private JButton buttonOK;
+    private JButton buttonCancel;
+    private JComboBox cbEquipos;
+    private JTextArea taInfEquipo;
+    private ArrayList<String>listaNombresEquipo;
 
- // call onCancel() when cross is clicked
-setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-addWindowListener(new java.awt.event.WindowAdapter() {
-  public void windowClosing(java.awt.event.WindowEvent e) {
-   onCancel();
-  }
-});
+    public BorrarEquipo() {
+        setContentPane(contentPane);
+        setModal(true);
+        getRootPane().setDefaultButton(buttonOK);
 
- // call onCancel() on ESCAPE
-contentPane.registerKeyboardAction(  new java.awt.event.ActionListener() {    public void actionPerformed(java.awt.event.ActionEvent e) {      onCancel();
-    }  },  javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),  javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);}
+        llenarComboBox();
 
-private void onOK(){
- // add your code here
-dispose();
-}
+        buttonOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    onOK();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
-private void onCancel(){
- // add your code here if necessary
-dispose();
-}
+        buttonCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        });
 
-public static void main(String[] args){
-BorrarEquipo dialog = new BorrarEquipo();
-dialog.pack();
-dialog.setVisible(true);
-System.exit(0);
-}
+        // call onCancel() when cross is clicked
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
+
+        // call onCancel() on ESCAPE
+        contentPane.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        cbEquipos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int pos= cbEquipos.getSelectedIndex();
+                String infor= Main.dameDatosDelEquipo(pos);
+                taInfEquipo.setText(infor);
+
+            }
+        });
+    }
+
+    private void onOK() throws Exception {
+        int pos= cbEquipos.getSelectedIndex();
+
+        Main.bajaEquipo(pos);
+        // add your code here
+        dispose();
+    }
+
+    private void onCancel() {
+        // add your code here if necessary
+        dispose();
+    }
+    private void llenarComboBox(){
+        try{
+            BaseDatos.abrirConexion();
+            Main.consultarEquipos();
+            listaNombresEquipo = new ArrayList<>();
+            listaNombresEquipo = Main.dameNombresEquipos();
+            for(int i=0;i<listaNombresEquipo.size();i++){
+                cbEquipos.addItem(listaNombresEquipo.get(i));
+            }
+            BaseDatos.cerrarConexion();
+            cbEquipos.setSelectedIndex(-1);
+        }catch (Exception e){System.out.println(e.getMessage());}
+    }
+
+    public static void main(String[] args) {
+        BorrarEquipo dialog = new BorrarEquipo();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
+    }
 }

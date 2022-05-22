@@ -25,7 +25,7 @@ begin
 
     
     resultado := dbms_xmlgen.getxml(contexto);
-    insert into fichero (resultado,fecha) values (resultado,sysdate+7);
+    insert into fichero (resultado,fecha,nombre) values (resultado,sysdate+7,'ULTIMAJORN');
     dbms_xmlgen.closeContext(contexto);
 end generarUltimaJorn; 
 

@@ -14,6 +14,7 @@ public class ultimaJorn {
     private static String resultado;
 
     public ultimaJorn() {
+        Main.comprobarFechaUltimaJornada();
         llenarTexto();
         taPartidos.setText(resultado);
         bVolver.addActionListener(new ActionListener() {
@@ -34,7 +35,6 @@ public class ultimaJorn {
         }
 
     }
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("partidosJugados");

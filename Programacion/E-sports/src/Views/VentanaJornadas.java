@@ -14,10 +14,12 @@ public class VentanaJornadas extends JDialog {
     private JTextArea taJornadas;
 
     public VentanaJornadas() {
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        Main.comprobarFechaJornadas();
         String jornadas = Main.consultarJornadas();
         taJornadas.setText(jornadas);
 

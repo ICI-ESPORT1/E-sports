@@ -3,6 +3,7 @@ package Modelo.BD;
 import Modelo.UML.Dueno;
 import Modelo.UML.Rol;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class RolDAO {
@@ -27,8 +28,12 @@ public class RolDAO {
             while(resultado.next()){
                 crearObjeto();
             }
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        catch (SQLException x){System.out.println(x.getMessage());}
       //  BaseDatos.abrirConexion();
 
 

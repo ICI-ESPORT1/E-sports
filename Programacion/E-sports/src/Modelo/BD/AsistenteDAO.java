@@ -2,6 +2,7 @@ package Modelo.BD;
 
 import Modelo.UML.*;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class AsistenteDAO {
@@ -18,8 +19,9 @@ public class AsistenteDAO {
 
     public static void altaAsistente(Asistente a) {
         //Metodo para insertar un nuevo asistente en la tabla asistente
-        //  BaseDatos.abrirConexion();
+
         try {
+            //  BaseDatos.abrirConexion();
             calla = BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?,?)}");
 
 
@@ -37,45 +39,67 @@ public class AsistenteDAO {
             //  BaseDatos.cerrarConexion();
 
         } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
             System.out.println(sqle.getMessage());
         }
-
-    }
-
-
-    public static void bajaAsistente(Asistente a) throws Exception {
-        //metodo para borrar un asistente de la tabla asistente por id_asistente
-        // BaseDatos.abrirConexion();
-
-        calla = BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
-
-        calla.setInt(1, a.getCodPersona());
-
-        calla.execute();
-
-        calla.close();
-
-        //  BaseDatos.cerrarConexion();
-    }
-
-
-    public static Asistente consultarAsistente(String dni) throws Exception {
-        //Metodo para consultar un asistente por dni a la base de datos
-        BaseDatos.abrirConexion();
-
-        plantilla = "select * from asistente where dni = ?";
-
-        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1, dni);
-
-        resultado = sentenciaPre.executeQuery();
-        if (resultado.next()) {
-            crearObjeto();
+        catch (Exception e){
+            System.out.println(e.getMessage());
         }
 
-       BaseDatos.cerrarConexion();
-        return asistente;
+    }
 
+
+    public static void bajaAsistente(Asistente a) {
+        //metodo para borrar un asistente de la tabla asistente por id_asistente
+
+        try {
+            // BaseDatos.abrirConexion();
+            calla = BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
+
+            calla.setInt(1, a.getCodPersona());
+
+            calla.execute();
+
+            calla.close();
+
+            //  BaseDatos.cerrarConexion();
+        }
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    public static Asistente consultarAsistente(String dni) {
+        //Metodo para consultar un asistente por dni a la base de datos
+        try {
+            BaseDatos.abrirConexion();
+
+            plantilla = "select * from asistente where dni = ?";
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1, dni);
+
+            resultado = sentenciaPre.executeQuery();
+            if (resultado.next()) {
+                crearObjeto();
+            }
+
+            BaseDatos.cerrarConexion();
+            return asistente;
+
+        }
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
+            return asistente;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return asistente;
+        }
     }
     public static boolean cambiarNombreAsistente(String nombreN,String dni){
         boolean cambiado=false;
@@ -94,7 +118,15 @@ public class AsistenteDAO {
             }
 
             BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        }
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
+           return cambiado;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+           return cambiado;
+        }
         return cambiado;
     }
     public static boolean cambiarTelefonoAsistente(String telefN,String dni){
@@ -114,7 +146,15 @@ public class AsistenteDAO {
             }
 
             BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        }
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
+            return cambiado;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return cambiado;
+        }
         return cambiado;
     }
     public static boolean cambiarSalarioEntrenador(Float fsalario,String dni){
@@ -134,7 +174,15 @@ public class AsistenteDAO {
                 cambiado = true;
             }
             BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        }
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
+            return cambiado;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return cambiado;
+        }
         return cambiado;
     }
 

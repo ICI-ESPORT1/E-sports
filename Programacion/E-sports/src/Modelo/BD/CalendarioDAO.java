@@ -2,6 +2,7 @@ package Modelo.BD;
 
 import Modelo.UML.Calendario;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class CalendarioDAO {
@@ -15,22 +16,28 @@ public class CalendarioDAO {
     private  static ResultSet resultado;
     private static CallableStatement c;
 
-    public static void altaCalendario(Calendario c)throws Exception{
+    public static void altaCalendario(Calendario c){
         //Metodo para insertar un nuevo calendario en la tabla calendario
+        try {
+
+            plantilla = "insert into calendario (cerrado,temporada) values (?,?)";
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1, String.valueOf(calendario.getCerrado()));
+            sentenciaPre.setString(2, c.getTemporada());
+
+            sentenciaPre.executeUpdate();
+
+            sentenciaPre.close();
 
 
-        plantilla="insert into calendario (cerrado,temporada) values (?,?)";
-
-        sentenciaPre=BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1, String.valueOf(calendario.getCerrado()));
-        sentenciaPre.setString(2,c.getTemporada());
-
-        sentenciaPre.executeUpdate();
-
-        sentenciaPre.close();
-
-
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
+
 
 
     public static Calendario buscarCalendario(){
@@ -62,11 +69,12 @@ public class CalendarioDAO {
 
             return calendario;
         }
-        catch (SQLException e){
-            System.out.println(e.getMessage());
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
             return null;
-        } catch (Exception e) {
-            e.getClass();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -104,11 +112,12 @@ public class CalendarioDAO {
 
 
         }
-        catch (SQLException e){
-            System.out.println(e.getMessage());
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
             return false;
-        } catch (Exception e) {
-            e.getClass();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
             return false;
         }
     }

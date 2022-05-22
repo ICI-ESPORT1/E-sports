@@ -134,4 +134,12 @@ public class Jugador extends Persona {
         this.salario = salario;
 
     }
+
+    @Override
+    public String toString() {
+        return "Jugador{" +
+                "nickname='" + nickname + '\'' +
+                '}';
+    }
+
 }

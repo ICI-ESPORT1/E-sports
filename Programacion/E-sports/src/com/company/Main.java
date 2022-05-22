@@ -52,64 +52,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-      /*  String sResultados = "";
-        try {
-
-            File file = new File("resultados.xml");
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document document = db.parse(file);
-            document.getDocumentElement().normalize();
-            // GET DOCUMENT COGE AUTOMÁTICAMENTE EL nodo "ROOT" (RESUMEN RESULTADOS)
-            System.out.println(document.getDocumentElement().getNodeName());
-            sResultados = sResultados + (document.getDocumentElement().getNodeName() + "\n");
-            // Primer nodo "JORNADAS"
-            NodeList nListJornadas = document.getElementsByTagName("JORNADA");
-            System.out.println("----------------------------");
-            for (int temp = 0; temp < nListJornadas.getLength(); temp++) {
-                Node nJornada = nListJornadas.item(temp);
-                Element eJornada = (Element) nJornada;
-                System.out.println("Jornada : " + eJornada.getAttribute("num_jornada")); // Esto se pone porque tiene atributo
-                sResultados = sResultados + "Jornada : " + (eJornada.getAttribute("num_jornada") + "\n");
-
-                NodeList nListLista_Partidos = eJornada.getElementsByTagName("LISTA_PARTIDOS");
-                for (int temp1 = 0; temp1 < nListLista_Partidos.getLength(); temp1++) {
-                    Node nLista_Partidos = nListLista_Partidos.item(temp1);
-                    Element eLista_Partidos = (Element) nLista_Partidos;
-
-                    NodeList nListT_Partido = eLista_Partidos.getElementsByTagName("T_PARTIDO");
-                    for (int temp2 = 0; temp2 < nListT_Partido.getLength(); temp2++) {
-                        Node nT_Partido = nListT_Partido.item(temp2);
-                        Element eT_Partido = (Element) nT_Partido;
-                        System.out.println("Partido : " + eT_Partido.getAttribute("id_partido"));// Esto se pone porque tiene atributo
-                        sResultados = sResultados + "Partido : " + (eT_Partido.getAttribute("id_partido") + "\n");
-
-                        NodeList nListEquipos = eT_Partido.getElementsByTagName("EQUIPOS");
-                        for (int temp3 = 0; temp3 < nListEquipos.getLength(); temp3++) {
-                            Node nEquipos = nListEquipos.item(temp3);
-                            Element eEquipos = (Element) nEquipos;
-
-                            NodeList nListT_EQUIPO = eEquipos.getElementsByTagName("T_EQUIPO");
-                            for(int temp4 = 0; temp4 < nListT_EQUIPO.getLength(); temp4++) {
-                                Node nT_EQUIPO = nListT_EQUIPO.item(temp4);
-                                Element eT_EQUIPO = (Element) nT_EQUIPO;
-                                System.out.println("Equipo : " + eT_EQUIPO.getElementsByTagName("NOMBRE").item(0).getTextContent());// Esto se pone porque tiene atributo
-                                sResultados = sResultados + (eT_EQUIPO.getElementsByTagName("NOMBRE").item(0).getTextContent() + "\n");
-                                System.out.println("Resultado : " + eT_EQUIPO.getElementsByTagName("RESULTADO").item(0).getTextContent());// Esto se pone porque tiene atributo
-                                sResultados = sResultados + (eT_EQUIPO.getElementsByTagName("RESULTADO").item(0).getTextContent() + "\n");
-                            }
-                        }
-                    }
-                }
-                System.out.println("*****************************");
-                sResultados = sResultados + ("*****************************\n");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }*/
 
         bd = new BaseDatos();
-
 
         ventanaLogin();
 
@@ -123,6 +67,13 @@ public class Main {
         dialogLogin.setLocationRelativeTo(null);
         dialogLogin.setVisible(true);
 
+    }
+    public static void vBorrarEquipo(){
+        BorrarEquipo dialog = new BorrarEquipo();
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+        System.exit(0);
     }
 
     //funcion cerrar ventana con frame
@@ -160,7 +111,6 @@ public class Main {
         dialog.setVisible(true);
     }
 
-
     /**
      * Este método contiene el Main de la ventana ElegirEscudos
      *
@@ -169,7 +119,7 @@ public class Main {
     public static void abrirVentanaEscudos() throws Exception {
         dialog = new VentanaEscudos();
         dialog.pack();
-        dialogLogin.setLocationRelativeTo(null);
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 
@@ -337,21 +287,22 @@ public class Main {
         AsistenteDAO.altaAsistente(asistente);
     }
 
-    /**
-     * Metodo que llama a bajaAsistente para hacer un delete en la base de datos
-     *
-     * @param dni
-     * @param n
-     * @param e
-     * @param t
-     * @param s
-     * @throws Exception
-     */
-    public static void bajaAsistente(String dni, String n, Equipo e, String t, String d, Float s) throws Exception {
-        asistente = new Asistente(dni, n, t, d, s);
-        listaEquipos.add(equipo);
-        AsistenteDAO.bajaAsistente(asistente);
 
+    public static boolean bajaAsistente(String dni) throws Exception {
+        boolean borrado=false;
+        try{
+            asistente = new Asistente();
+            AsistenteDAO.bajaAsistente(dni);
+            equipo.getAsistente().getDni();
+            for(int i=0; i< listaEquipos.size();i++){
+                if(listaEquipos.get(i).getAsistente().getCodPersona()== asistente.getCodPersona()){
+                    listaEquipos.get(i).borrarAsistente();
+                    System.out.println(listaEquipos.get(i).getAsistente());
+                }
+            }
+        }catch (Exception e){System.out.println(e.getMessage());}
+
+    return borrado;
     }
 
     /**
@@ -361,11 +312,35 @@ public class Main {
      * @return
      * @throws Exception
      */
-    public static Asistente consultarAsistente(String dni) throws Exception {
+    public static boolean consultarAsistente(String dni) throws Exception {
         System.out.println("CONSULTAR ASISTENTE DNI");
-
-        return asistente = AsistenteDAO.consultarAsistente(dni);
+        boolean encontrado=false;
+        int x;
+        asistente =new Asistente();
+        asistente = AsistenteDAO.consultarAsistente(dni);
+        if(asistente != null){
+            encontrado = true;
+        }else{
+            encontrado = false;
+        }
+        return encontrado;
     }
+    public static int muestraDatosDelAsistente(){
+        int confirmacion = 0;
+        try{
+           int confir = JOptionPane.showConfirmDialog(null,"Nombre: "+ asistente.getNombre()+
+                                                                                    " ¿Está seguro de que quiere borrarlo?");
+            if (JOptionPane.OK_OPTION == confir){
+                confirmacion =1;
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return confirmacion;
+    }
+
+
     public static String dameNombreDelAsistente(){
         String nombre="";
         try{
@@ -413,7 +388,7 @@ public class Main {
         int posicionentre =0;
         int i = 0;
         // Necesito el objeto entrenador
-        entrenador =new Entrenador();
+        asistente =new Asistente();
         telfCambiado = AsistenteDAO.cambiarTelefonoAsistente(telefN,dni);
         if(telfCambiado){
             asistente.setTelefono(telefN);
@@ -431,11 +406,11 @@ public class Main {
         int i = 0;
         Float fsalario = Float.parseFloat(salario);
         // Necesito el objeto entrenador
-        entrenador =new Entrenador();
-        salarioCambiado = AsistenteDAO.cambiarSalarioEntrenador(fsalario,dni);
+        asistente =new Asistente();
+        salarioCambiado = AsistenteDAO.cambiarSalarioAsistente(fsalario,dni);
         if(salarioCambiado){
             asistente.setSueldo(fsalario);
-            JOptionPane.showMessageDialog(null, "El salario del entrenador se ha cambiado por: "+ salario);
+            JOptionPane.showMessageDialog(null, "El salario del asistente se ha cambiado por: "+ salario);
         }
 
         else{
@@ -492,23 +467,19 @@ public class Main {
 
     }
 
-    /**
-     * Metodo que llama a bajaEntrenador para hacer un delete en la base de datos
-     *
-     * @param dni
-     * @param n
-     * @param d
-     * @param e
-     * @param t
-     * @param s
-     * @throws Exception
-     */
-    public static void bajaEntrenador(String dni, String n, String d, Equipo e, String t, Float s) throws Exception {
-        entrenador = new Entrenador(dni, n, t, d, equipo, s);
+
+    public static boolean bajaEntrenador(String dni) throws Exception {
+        boolean borrado = false;
+        Entrenador entrenador = new Entrenador();
+        EntrenadorDAO.bajaEntrenador(dni);
+        for(int i = 0; i<listaEntrenadores.size() ;i++){
+            if(listaEntrenadores.get(i).getDni().equalsIgnoreCase(dni)){
+                listaEntrenadores.remove(i);
+            }
+        }
+        entrenador = new Entrenador();
         listaEquipos.add(equipo);
-
-        EntrenadorDAO.bajaEntrenador(entrenador);
-
+        return borrado;
     }
 
     /**
@@ -595,11 +566,30 @@ public class Main {
      * @return
      * @throws Exception
      */
-    public static Entrenador consultarEntrenador(String dni) throws Exception {
+    public static boolean consultarEntrenador(String dni) throws Exception {
+        boolean encontrado= false;
+        int x;
+        entrenador = new Entrenador();
+        entrenador = EntrenadorDAO.consultarEntrenador(dni);
+        if(entrenador != null){
+            encontrado = true;
+        }else{encontrado = false;}
 
+        return encontrado ;
 
-        return entrenador = EntrenadorDAO.consultarEntrenador(dni);
+    }
+    public static int muestraDatosDelEntrenador(){
+        int confirmacion=0;
+        try{
+            int confir = JOptionPane.showConfirmDialog(null,"Nombre: "+ entrenador.getNombre()+ "Va a ser eliminado");
 
+            if (JOptionPane.OK_OPTION == confir){
+                confirmacion =1;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return confirmacion;
     }
     public static void sacaEntrenador(int pos, String dni){
         try{
@@ -663,21 +653,15 @@ public class Main {
 
     }
 
-    /**
-     * Metodo que llama a bajaDueno para hacer un delete en la base de datos
-     *
-     * @param dni
-     * @param n
-     * @param d
-     * @param e
-     * @param t
-     * @throws Exception
-     */
-    public static void bajaDueno(String dni, String n, String d, Equipo e, String t) throws Exception {
-        dueno = new Dueno(dni, n, t, d, equipo);
-        listaEquipos.add(equipo);
 
-        DuenoDAO.bajaDueno(dueno);
+    public static boolean bajaDueno(String dni) throws Exception {
+        boolean borrado = false;
+        Dueno dueno = new Dueno();
+        DuenoDAO.bajaDueno(dni);
+
+        entrenador = new Entrenador();
+        listaEquipos.add(equipo);
+        return borrado;
 
     }
 
@@ -710,11 +694,30 @@ public class Main {
      * @return
      * @throws Exception
      */
-    public static Dueno consultarDueno(String dni) throws Exception {
+    public static boolean consultarDueno(String dni) throws Exception {
         System.out.println("CONSULTAR DUENO **********");
+        boolean encontrado= false;
+        int x;
+        dueno = new Dueno();
+        dueno = DuenoDAO.consultarDueno(dni);
+        if(dueno != null){
+            encontrado = true;
+        }else{encontrado = false;}
 
-        return dueno = DuenoDAO.consultarDueno(dni);
+        return encontrado ;
+    }
+    public static int muestraDatosDelDueno(){
+        int confirmacion=0;
+        try{
+            int confir = JOptionPane.showConfirmDialog(null,"Nombre: "+ dueno.getNombre()+ "Va a ser eliminado");
 
+            if (JOptionPane.OK_OPTION == confir){
+                confirmacion =1;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return confirmacion;
     }
 
     ////////////////////////////////////// Metodos para la tabla Equipo ////////////////////////////////////
@@ -771,29 +774,11 @@ public class Main {
 
     }
 
-    /**
-     * Metodo que llama a bajaEquipo para hacer un delete en la base de datos
-     *
-     * @param n
-     * @param na
-     * @param f
-     * @param t
-     * @param m
-     * @param e
-     * @param a
-     * @throws Exception
-     */
-    public static void bajaEquipo(String n, String na, LocalDate f, String t, String m, String e, Asistente a) throws Exception {
-        equipo = new Equipo();
-        equipo.setNombre(n);
-        equipo.setNacionalidad(na);
-        equipo.setFechaCreacion(f);
-        equipo.setTelefono(t);
-        equipo.setMail(m);
-        equipo.setEscudo(e);
-        equipo.setAsistente(a);
 
-        boolean borrado = EquipoDAO.bajaEquipo(equipo);
+    public static void bajaEquipo(int pos) throws Exception {
+        String nom = listaEquipos.get(pos).getNombre();
+
+        boolean borrado = EquipoDAO.bajaEquipo(nom);
 
     }
 
@@ -1025,6 +1010,18 @@ public class Main {
         }
         return infoEquipos;
     }
+    public static String dameDatosDelEquipo(int pos){
+        String equipo="";
+        try{
+            String nombre= listaEquipos.get(pos).getNombre();
+            int iCod = listaEquipos.get(pos).getId_equipo();
+            String cod = String.valueOf(iCod);
+            equipo = "CODIGO DEL EQUIPO: "+ cod + "\n NOMBRE DEL EQUIPO: " + nombre + "\n DESEA ELIMINAR ESTE EQUIPO?";
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return equipo;
+    }
 
     ////////////////////////////////////// Metodos para la tabla Jornada ////////////////////////////////////
     public static String dameStringJornadas(){
@@ -1114,34 +1111,6 @@ public class Main {
     }
 
     /**
-     * Metodo que llama a bajaJugador para hacer un delete en la base de datos
-     *
-     * @param d
-     * @param n
-     * @param t
-     * @param l
-     * @param e
-     * @param ni
-     * @param s
-     * @param r
-     * @throws Exception
-     */
-    public static void bajaJugador(String d, String n, String t, String l, Equipo e, String ni, Float s, Rol r) throws Exception {
-        jugador.setDni(d);
-        jugador.setNombre(n);
-        jugador.setTelefono(t);
-        jugador.setLocalidad(l);
-        jugador.setEquipo(e);
-        jugador.setNickname(ni);
-        jugador.setSalario(s);
-        jugador.setRol(r);
-
-
-        JugadorDAO.bajaJugador(jugador);
-
-    }
-
-    /**
      * Metodo que llama a cambiarEquipoJugador para hacer un update en la base de datos
      *
      * @param d
@@ -1190,22 +1159,46 @@ public class Main {
      * @return jugador
      * @throws Exception
      */
-    public static Jugador consultarJugador(String dni) throws Exception {
+    public static boolean consultarJugador(String dni) throws Exception {
         System.out.println("CONSULTAR JUGADOR**************");
-        boolean salir = false;
+        boolean encontrado = false;
         int x;
-        listaJugadores = JugadorDAO.consultarJugador();
-
-
-        for (x = 0; x < listaJugadores.size() || salir; x++) {
-
-            if (listaJugadores.get(x).getDni().equalsIgnoreCase(dni))
-                salir = true;
+        jugador = new Jugador();
+        jugador = JugadorDAO.jugadorConId(dni);
+        if(jugador != null){
+            encontrado = true;
         }
+        else{
+            encontrado = false;
+        }
+        return  encontrado;
+      }
+      public static int muestraDatosDelJugador(){
+        int confirmacion = 0;
+        try{
+           int confir = JOptionPane.showConfirmDialog(null,"Nombre: "+ jugador.getNombre()+"\n"+
+                                                                      "Nickname: "+ jugador.getNickname()+"\n"+ "Se va a borrar");
+          if (JOptionPane.OK_OPTION == confir){
+              confirmacion =1;
+          }
 
-        return jugador = new Jugador(listaJugadores.get(x).getDni(), listaJugadores.get(x).getNombre(), listaJugadores.get(x).getTelefono(), listaJugadores.get(x).getDireccion(), listaJugadores.get(x).getNickname(), listaJugadores.get(x).getRol(), listaJugadores.get(x).getSalario(), listaJugadores.get(x).getEquipo());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return confirmacion;
+      }
+      public static boolean bajaJugador(String dni){
+        boolean borrado=false;
+        try{
+           borrado = JugadorDAO.bajaJugador(dni);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return  borrado;
+      }
 
-    }
+
+
 
     /**
      * Método que recibe los datos del jugador para cambiarle el nombre

@@ -38,13 +38,13 @@ public class DuenoDAO {
     }
 
 
-    public static void bajaDueno(Dueno d)throws Exception{
+    public static void bajaDueno(String dni)throws Exception{
         //metodo para borrar un dueno de la tabla dueno por id_dueno
      //   BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call borrar_dueno(?)}");
 
-        c.setInt(1,d.getCodPersona());
+        c.setString(1,dni);
 
         c.execute();
 

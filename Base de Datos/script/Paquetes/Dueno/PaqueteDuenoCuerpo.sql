@@ -41,6 +41,22 @@ function validar_dueno
     end validar_dueno;
     
     
+      function validar_dueno_dni
+    (p_dueno in varchar2)
+    return boolean
+    is
+        v_dniDueno varchar2(9);
+    begin
+        select dni into v_dniDueno
+        from dueno
+        where dueno.dni = p_dueno;
+        return true;
+    exception
+        when no_data_found then 
+        return false;
+    end validar_dueno_dni;
+    
+    
     
 /*EMPIEZAN LOS PROCEDIMIENTOS***********************************************/
 /*PROCEDIMIENTO PARA ANADIR DUENO*/
@@ -108,7 +124,7 @@ begin
     RAISE_APPLICATION_ERROR(-20033,v_error);
     
     when e_dueNoExiste then
-    v_error_mensaje:='El dueño no existe';
+    v_error_mensaje:='El duenoo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
     RAISE_APPLICATION_ERROR(-20034,v_error);
     
@@ -122,16 +138,16 @@ end cambio_equipo_dueno;
 /*PROCEDIMIENTO PARA BORRAR DE EQUIPO AL DUENO******************************/
 procedure borrar_dueno
 (
-p_idDueno dueno.id_dueno%type
+p_dniDueno dueno.dni%type
 )
 is
 e_dueNoExiste exception;
 v_error varchar2(300);
 v_error_mensaje varchar2(300);
 begin
-  if validar_dueno(p_idDueno) then
+  if validar_dueno_dni(p_dniDueno) then
    delete from dueno
-   where id_dueno = p_idDueno;
+   where dni = p_dniDueno;
    
    else
       raise e_dueNoExiste;
@@ -139,7 +155,7 @@ begin
   
   exception
     when e_dueNoExiste then
-    v_error_mensaje:='El dueño no existe';
+    v_error_mensaje:='El duenoo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
     RAISE_APPLICATION_ERROR(-20034,v_error);
     

@@ -31,6 +31,8 @@ public class VentanaAdmin {
     private JMenuItem jmiModificarEquipo;
     private JMenuItem jmiGenerarPartidos;
     private JMenuItem jmiAnadirResultado;
+    private JMenuItem jmiBajaPersonas;
+    private JMenuItem jmiBorrarEquipo;
 
     private JButton equiposButton;
 
@@ -80,7 +82,18 @@ public class VentanaAdmin {
                 Main.abrirModificarDatosPersona();
             }
         });
-
+        jmiBajaPersonas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirBajasPersonas();
+            }
+        });
+        jmiBorrarEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.vBorrarEquipo();
+            }
+        });
 
 
         jornada.addActionListener(new ActionListener() {

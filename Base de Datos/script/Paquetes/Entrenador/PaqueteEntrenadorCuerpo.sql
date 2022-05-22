@@ -1,13 +1,7 @@
 /*CUERPO PAQUETE GESTIONAR ENTRENADORES*/
 create or replace package body gestionarEntrenadores as
 /*declaro las funciones que son comunes a todos los procedimientos*/
-    function validar_equipo_entrenador
-    (p_equipo in number)
-    return boolean;
-    
-    function validar_entrenador
-    (p_jugador in number)
-    return boolean; 
+
     
 /*Programacion de las funciones*/    
 
@@ -150,7 +144,7 @@ begin
     RAISE_APPLICATION_ERROR(-20041,v_error);
     
    when others then
-     v_error_mensaje:=sqlerrm;
+    v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
     RAISE_APPLICATION_ERROR(-20042,v_error);
     

@@ -2,6 +2,7 @@ package Modelo.BD;
 
 import Modelo.UML.Resultado;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class ResultadoDAO {
@@ -15,57 +16,81 @@ public class ResultadoDAO {
     private  static ResultSet resultado;
     private static CallableStatement c;
 
-    public static Resultado obtenerClasificacion()throws Exception{
+    public static Resultado obtenerClasificacion() {
         //Metodo para mostrar la clasificacion actual
+        try {
 
-        System.out.println("bien");
-        c=BaseDatos.getConexion().prepareCall("{call gestionResultados.obtenerClasificacion(?)}");
+            System.out.println("bien");
+            c = BaseDatos.getConexion().prepareCall("{call gestionResultados.obtenerClasificacion(?)}");
 
-        c.registerOutParameter(1, (SQLType) res);
+            c.registerOutParameter(1, (SQLType) res);
 
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-        BaseDatos.cerrarConexion();
+            BaseDatos.cerrarConexion();
 
+            return res;
+
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return res;
-
     }
 
-    public static Resultado obtenerPartidosJornadas()throws Exception{
+    public static Resultado obtenerPartidosJornadas() {
         //Metodo para mostrar todos los partidos de las jornadas
-      //  BaseDatos.abrirConexion();
+        try {
+            //  BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call gestionResultados.partidosJornada(?)}");
+            c = BaseDatos.getConexion().prepareCall("{call gestionResultados.partidosJornada(?)}");
 
-        c.registerOutParameter(1, (SQLType) res);
+            c.registerOutParameter(1, (SQLType) res);
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-      //  BaseDatos.cerrarConexion();
+            //  BaseDatos.cerrarConexion();
 
+            return res;
+
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return res;
-
     }
 
-    public static Resultado obtenerPartidos()throws Exception{
+    public static Resultado obtenerPartidos() {
         //Metodo para mostrar todos los partidos que se han jugado
-      //  BaseDatos.abrirConexion();
+        try {
+            //  BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call gestionResultados.partidos(?)}");
+            c = BaseDatos.getConexion().prepareCall("{call gestionResultados.partidos(?)}");
 
-        c.registerOutParameter(1,(SQLType) res);
+            c.registerOutParameter(1, (SQLType) res);
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-     //   BaseDatos.cerrarConexion();
+            //   BaseDatos.cerrarConexion();
 
+            return res;
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return res;
     }
 
@@ -82,8 +107,11 @@ public class ResultadoDAO {
             ok = sentenciaPre.execute();
 
             BaseDatos.cerrarConexion();
-        }catch (Exception sqle){
-            System.out.println(sqle.getMessage());
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return ok;
 

@@ -4,30 +4,30 @@ procedure obtenerClasificacion
 c_resultado out tcursor
 )
 as
-v_codError number;
-v_mensError varchar2(300);
 e_quipoNoExiste exception;
-pragma exception_init(e_quipoNoExiste, -20010);
-
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
 
 
-open c_resultado for 
-select equipo,count(resultado) as ganados
-      from resultados_temporada 
-      where upper(resultado)='G' 
-      group by equipo
-      order by count(resultado) desc;
+    open c_resultado for 
+    select equipo,count(resultado) as ganados
+          from resultados_temporada 
+          where upper(resultado)='G' 
+          group by equipo
+          order by count(resultado) desc;
       
-exception
-when no_data_found then
- raise e_quipoNoExiste ;
-when e_quipoNoExiste then
-v_codError := sqlcode;
-v_mensError := 'El equipo no existe';
-
-dbms_output.put_line('ERROR: '||v_codError || v_mensError );
-END;
+    exception
+    
+        when no_data_found then
+         raise e_quipoNoExiste ;
+         
+        when e_quipoNoExiste then
+            v_error_mensaje:='El equipo no existe';
+            v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+            RAISE_APPLICATION_ERROR(-20049,v_error);
+            
+END obtenerClasificacion;
 
 /*Metodo para mostrar todos los partidos de las jornadas*/
 procedure partidosJornada
@@ -35,73 +35,55 @@ procedure partidosJornada
 c_partidos out tcursor
 )
 as
-v_codError number;
-v_mensError varchar2(300);
 e_quipoNoExiste exception;
-pragma exception_init(e_quipoNoExiste, -20010);
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin 
 
-open c_partidos for
-select equipo, resultado, partido
-from resultados_temporada
-order by partido;
+    open c_partidos for
+    select equipo, resultado, partido
+    from resultados_temporada
+    order by partido;
 
-exception
-when no_data_found then
- raise e_quipoNoExiste ;
-when e_quipoNoExiste then
-v_codError := sqlcode;
-v_mensError := 'El equipo no existe';
+    exception
+    
+        when no_data_found then
+         raise e_quipoNoExiste ;
+         
+        when e_quipoNoExiste then
+            v_error_mensaje:='El equipo no existe';
+            v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+            RAISE_APPLICATION_ERROR(-20050,v_error);
 
 
-end;
+end partidosJornada;
 
 procedure partidos
 (
 c_partidos out tcursor
 )
 as
-v_codError number;
-v_mensError varchar2(300);
 e_quipoNoExiste exception;
-pragma exception_init(e_quipoNoExiste, -20010);
+v_error varchar2(300);
+v_error_mensaje varchar2(300);
 begin
 
-open c_partidos for
-select equipo, resultado, partido
-from resultados_temporada
-where fecha<sysdate
-order by partido;
+    open c_partidos for
+    select equipo, resultado, partido
+    from resultados_temporada
+    where fecha<sysdate
+    order by partido;
 
-exception
-when no_data_found then
- raise e_quipoNoExiste ;
-when e_quipoNoExiste then
-v_codError := sqlcode;
-v_mensError := 'El equipo no existe';
+    exception
+    
+        when no_data_found then
+         raise e_quipoNoExiste ;
+         
+        when e_quipoNoExiste then
+            v_error_mensaje:='El equipo no existe';
+            v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
+            RAISE_APPLICATION_ERROR(-20051,v_error);
 
-end;
+end partidos;
 
 end gestionResultados;
-/*
-declare
-sc_cursor  gestionResultados.tcursor;
---reg_c sc_cursor%rowtype;
-v_eq varchar2(89);
-v_con number(7);
-begin
-gestionResultados.obtenerClasificacion(sc_cursor);
-
-/*for reg in sc_cursor loop
- dbms_output.put_line ('EQUIPO: '||reg.equipo || 'GANADOS: '|| reg.ganados);
-end loop;*/
-/*
-
- loop
- fetch sc_cursor into v_eq,v_con;
-dbms_output.put_line ('resultado: '|| v_eq ||' '|| v_con);
-exit when sc_cursor%notfound;
-end loop;
-
-end;*/
-

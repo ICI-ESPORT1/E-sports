@@ -3,6 +3,7 @@ package Modelo.BD;
 import Modelo.UML.Entrenador;
 import Modelo.UML.Jornada;
 
+import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,37 +22,51 @@ public class JornadaDAO {
 
     private static ArrayList<Jornada>listaJornada = new ArrayList();
 
-    public static void altaJornada(Jornada j)throws Exception{
+    public static void altaJornada(Jornada j) {
         //Metodo para insertar una nueva jornada en la tabla jornada
-        BaseDatos.abrirConexion();
+        try {
+            BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call gestionarJornada.nuevo_jornada(?,?,?)}");
+            c = BaseDatos.getConexion().prepareCall("{call gestionarJornada.nuevo_jornada(?,?,?)}");
 
-        c.setDate(1, Date.valueOf(j.getFecha()));
-        c.setString(2,j.getNumSemana());
-        c.setInt(3,j.getCalendario().getIdCalendario());
+            c.setDate(1, Date.valueOf(j.getFecha()));
+            c.setString(2, j.getNumSemana());
+            c.setInt(3, j.getCalendario().getIdCalendario());
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-      //  BaseDatos.cerrarConexion();
+            //  BaseDatos.cerrarConexion();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
-    public static void bajaJornada(Jornada j)throws Exception{
+    public static void bajaJornada(Jornada j) {
         //metodo para borrar una jornada de la tabla jornada por num_jornada
-      //  BaseDatos.abrirConexion();
+        try {
+            //  BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call gestionarJornada.borrar_jornada(?)}");
+            c = BaseDatos.getConexion().prepareCall("{call gestionarJornada.borrar_jornada(?)}");
 
-        c.setInt(1,j.getNumJornada());
+            c.setInt(1, j.getNumJornada());
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-    //    BaseDatos.cerrarConexion();
+            //    BaseDatos.cerrarConexion();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -72,7 +87,12 @@ public class JornadaDAO {
 
 
             //  BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         return listaJornada;
 

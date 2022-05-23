@@ -1657,4 +1657,17 @@ public class Main {
     }
 
 
+    public static void comprobarFechaJornadas(){
+
+        FicheroDAO.FechaJornadas();
+
+    }
+    public static void comprobarFechaUltimaJornada(){
+
+        FicheroDAO.FechaUltimaJornada();
+
+    }
+
+
+
 }

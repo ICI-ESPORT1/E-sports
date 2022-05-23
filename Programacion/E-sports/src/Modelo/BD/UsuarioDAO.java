@@ -2,6 +2,7 @@ package Modelo.BD;
 
 import Modelo.UML.Usuario;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,9 +38,10 @@ public class UsuarioDAO {
 
 
 
-        }catch (SQLException sqle){
-            System.out.println(sqle.getMessage());
-        }catch (Exception e){
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

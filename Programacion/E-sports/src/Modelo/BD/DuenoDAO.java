@@ -2,6 +2,7 @@ package Modelo.BD;
 
 import Modelo.UML.Dueno;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class DuenoDAO {
@@ -18,8 +19,9 @@ public class DuenoDAO {
 
     public static void altaDueno(Dueno d){
         //Metodo para insertar un nuevo dueno en la tabla dueno
-     //   BaseDatos.abrirConexion();
+
         try{
+            //   BaseDatos.abrirConexion();
             c=BaseDatos.getConexion().prepareCall("{call gestionarDueno.nuevo_dueno(?,?,?,?,?)}");
 
             c.setString(1,d.getDni());
@@ -32,59 +34,96 @@ public class DuenoDAO {
 
             c.close();
 
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());}
+        }
+        catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
+
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+
+        }
 
      //   BaseDatos.cerrarConexion();
     }
 
 
-    public static void bajaDueno(String dni)throws Exception{
+    public static void bajaDueno(Dueno d){
         //metodo para borrar un dueno de la tabla dueno por id_dueno
-     //   BaseDatos.abrirConexion();
+        try {
+            //   BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_dueno(?)}");
+            c = BaseDatos.getConexion().prepareCall("{call borrar_dueno(?)}");
 
         c.setString(1,dni);
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-      //  BaseDatos.cerrarConexion();
+            //  BaseDatos.cerrarConexion();
+
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
     }
 
-    public static void cambioEquipoDueno(Dueno d, int idEquipoNuevo)throws Exception{
+    public static void cambioEquipoDueno(Dueno d, int idEquipoNuevo){
         //metodo para cambiar a un dueño de equipo
-      //  BaseDatos.abrirConexion();
+        try {
+            //  BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call cambio_equipo_dueno(?,?)}");
+            c = BaseDatos.getConexion().prepareCall("{call cambio_equipo_dueno(?,?)}");
 
-        c.setInt(1,d.getCodPersona());
-        c.setInt(2,idEquipoNuevo);
+            c.setInt(1, d.getCodPersona());
+            c.setInt(2, idEquipoNuevo);
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-       // BaseDatos.cerrarConexion();
+            // BaseDatos.cerrarConexion();
+
+        }
+
+        catch (SQLException sqle){
+        JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
 
     }
+        catch (Exception e){
+        System.out.println(e.getMessage());
 
-    public static Dueno consultarDueno(String d)throws Exception{
+    }
+    }
+
+    public static Dueno consultarDueno(String d){
         //Metodo para consultar un Dueno por dni a la base de datos
-      //  BaseDatos.abrirConexion();
+        try {
+            //  BaseDatos.abrirConexion();
 
-        plantilla="select * from dueno where dni = ?";
+            plantilla = "select * from dueno where dni = ?";
 
-        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1,d);
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1, d);
 
-        resultado = sentenciaPre.executeQuery();
-        while(resultado.next()){
-        crearObjeto();}
-      //  BaseDatos.cerrarConexion();
-        return dueno;
+            resultado = sentenciaPre.executeQuery();
+            while (resultado.next()) {
+                crearObjeto();
+            }
+            //  BaseDatos.cerrarConexion();
+            return dueno;
 
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+            return dueno;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return dueno;
+        }
     }
 
 

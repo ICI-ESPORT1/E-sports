@@ -18,40 +18,49 @@ public class EquipoDAO {
     private static Equipo equipo = new Equipo();
     private static ArrayList<Equipo> listaEquipos = new ArrayList<>();
 
-    private  static PreparedStatement sentenciaPre;
-    private  static String plantilla;
-    private  static Statement sentencia;
-    private  static ResultSet resultado;
+    private static PreparedStatement sentenciaPre;
+    private static String plantilla;
+    private static Statement sentencia;
+    private static ResultSet resultado;
     private static CallableStatement c;
 
-    public static void altaEquipo(Equipo e, Asistente a)throws Exception{
+    public static void altaEquipo(Equipo e, Asistente a){
         //Metodo para insertar un nuevo equipo en la tabla equipo
        BaseDatos.abrirConexion();
+        try {
 
-        c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.nuevo_equipo(?,?,?,?,?,?,?)}");
+            c = BaseDatos.getConexion().prepareCall("{call gestionarEquipos.nuevo_equipo(?,?,?,?,?,?,?)}");
 
-        c.setString(1,e.getNombre());
-        c.setString(2,e.getNacionalidad());
-        c.setDate(3, Date.valueOf(e.getFechaCreacion()));
-        c.setString(4,e.getTelefono());
-        c.setString(5, e.getMail());
-        c.setString(6, e.getEscudo());
-        c.setInt(7,a.getCodPersona());
-        /*Antes de añadir el asistente necesitamos el id del asistente que acabamos de insertar*/
+            c.setString(1, e.getNombre());
+            c.setString(2, e.getNacionalidad());
+            c.setDate(3, Date.valueOf(e.getFechaCreacion()));
+            c.setString(4, e.getTelefono());
+            c.setString(5, e.getMail());
+            c.setString(6, e.getEscudo());
+            c.setInt(7, a.getCodPersona());
+            /*Antes de añadir el asistente necesitamos el id del asistente que acabamos de insertar*/
 
-        c.setInt(7, e.getAsistente().getCodPersona());
+            c.setInt(7, e.getAsistente().getCodPersona());
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
       BaseDatos.cerrarConexion();
     }
 
 
-    public static boolean bajaEquipo(String nombre)throws Exception{
+    public static boolean bajaEquipo(String nombre){
         boolean borrado= false;
         //metodo para borrar un equipo de la tabla equipo por nombre
+        try{
         BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.borrar_equipo(?)}");
@@ -65,7 +74,16 @@ public class EquipoDAO {
         BaseDatos.cerrarConexion();
 
         return borrado;
+
+    } catch (SQLException sqle) {
+        JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+    } catch (Exception ex) {
+        System.out.println(ex.getMessage());
+
     }
+        return borrado;
+}
 
     public static boolean cambiarNombreEquipo(String nombreNuevo, String nombreViejo){
         boolean nombreCambiado = false;
@@ -85,9 +103,13 @@ public class EquipoDAO {
 
             BaseDatos.cerrarConexion();
 
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null, sqle.getErrorCode() +sqle.getMessage() + " Consulte el error");}
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
 
        return nombreCambiado;
     }
@@ -111,8 +133,13 @@ public class EquipoDAO {
                 cambiado = true;
             }
             BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");}
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         return cambiado;
     }
     public static boolean cambiarTelefonoEquipo(String telNuevo,String telViejo){
@@ -132,11 +159,15 @@ public class EquipoDAO {
             }
 
             BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");}
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return cambiado;
     }
-    public static boolean cambiarFechaEquipo(LocalDate ldNuevo, LocalDate ldViejo)throws Exception{
+    public static boolean cambiarFechaEquipo(LocalDate ldNuevo, LocalDate ldViejo){
         boolean cambiado=false;
         int ok =0;
         try{
@@ -153,8 +184,12 @@ public class EquipoDAO {
             }
 
             BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null, sqle.getMessage());}
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return cambiado;
     }
     public static boolean cambiarMailEquipo(String mailNuevo,String mailViejo){
@@ -174,14 +209,18 @@ public class EquipoDAO {
             }
 
             BaseDatos.cerrarConexion();
-        }catch (SQLException sqle){System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null, sqle.getErrorCode()+ "Consulte el error");
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return cambiado;
     }
 
-    public static Equipo consultarEquipo(String n)throws Exception{
+    public static Equipo consultarEquipo(String n){
         //Metodo para consultar un Equipo por nombre a la base de datos
+        try{
         BaseDatos.abrirConexion();
         String nombreMayus = n.toUpperCase();
         plantilla="select * from equipo where upper(nombre) = ?";
@@ -198,27 +237,43 @@ public class EquipoDAO {
 
         return equipo;
 
+
+    } catch (SQLException sqle) {
+        JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
     }
-
-
-    public static Equipo consultarEquipoID(String n)throws Exception{
-        //Metodo para consultar un Equipo por nombre a la base de datos
-        BaseDatos.abrirConexion();
-
-        plantilla="select * from equipo where cod_equipo = ?";
-
-        sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setInt(1,Integer.parseInt(n));
-
-        resultado = sentenciaPre.executeQuery();
-        while (resultado.next()){
-            crearObjeto();
-        }
-
-        BaseDatos.cerrarConexion();
         return equipo;
-
     }
+
+    public static Equipo consultarEquipoID(String n) {
+        //Metodo para consultar un Equipo por nombre a la base de datos
+        try {
+            BaseDatos.abrirConexion();
+
+            plantilla = "select * from equipo where cod_equipo = ?";
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1, Integer.parseInt(n));
+
+            resultado = sentenciaPre.executeQuery();
+            while (resultado.next()) {
+                crearObjeto();
+            }
+
+            BaseDatos.cerrarConexion();
+            return equipo;
+
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return equipo;
+    }
+
  public static Equipo consultarEquipoPorId(int idEq){
         try{
             BaseDatos.abrirConexion();

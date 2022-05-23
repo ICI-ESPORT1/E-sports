@@ -4,6 +4,7 @@ import Modelo.UML.Jornada;
 import Modelo.UML.Partido;
 //import com.sun.xml.internal.ws.wsdl.writer.document.Part;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class PartidoDAO {
@@ -18,37 +19,51 @@ public class PartidoDAO {
     private  static ResultSet resultado;
     private static CallableStatement c;
 
-    public static void altaPartido(Partido p)throws Exception{
+    public static void altaPartido(Partido p) {
         //Metodo para insertar un nuevo partido en la tabla partido
-        BaseDatos.abrirConexion();
+        try {
+            BaseDatos.abrirConexion();
 
-        plantilla="insert into partido values (?,?)";
+            plantilla = "insert into partido values (?,?)";
 
-        sentenciaPre=BaseDatos.getConexion().prepareStatement(plantilla);
-        sentenciaPre.setString(1, String.valueOf(p.getTurno()));
-        sentenciaPre.setInt(2,p.getJornada().getNumJornada());
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setString(1, String.valueOf(p.getTurno()));
+            sentenciaPre.setInt(2, p.getJornada().getNumJornada());
 
-        sentenciaPre.execute();
+            sentenciaPre.execute();
 
-        sentenciaPre.close();
+            sentenciaPre.close();
 
-        BaseDatos.cerrarConexion();
+            BaseDatos.cerrarConexion();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
-    public static void bajaJornada(Jornada j)throws Exception{
+    public static void bajaJornada(Jornada j) {
         //metodo para borrar una jornada de la tabla jornada por num_jornada
-        //  BaseDatos.abrirConexion();
+        try {
+            //  BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call borrar_jornada(?)}");
+            c = BaseDatos.getConexion().prepareCall("{call borrar_jornada(?)}");
 
-        c.setInt(1,j.getNumJornada());
+            c.setInt(1, j.getNumJornada());
 
-        c.execute();
+            c.execute();
 
-        c.close();
+            c.close();
 
-        //    BaseDatos.cerrarConexion();
+            //    BaseDatos.cerrarConexion();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

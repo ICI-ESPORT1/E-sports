@@ -90,9 +90,9 @@ Procedimiento PL/SQL terminado correctamente.
 
 /*Procedimiento borrar_dueno*/
 
---LLamamos al procedimineto borrar_dueno con un id_dueno que no existe
+--LLamamos al procedimineto borrar_dueno con un dni que no existe
 begin
-gestionarDueno.borrar_dueno(11);
+gestionarDueno.borrar_dueno('12312312H');
 end;
 /*
 Error que empieza en la línea: 94 del comando :
@@ -107,7 +107,7 @@ ORA-06512: en línea 2
 
 --LLamamos al procedimineto borrar_dueno 
 begin
-gestionarDueno.borrar_dueno(4);
+gestionarDueno.borrar_dueno('12345678H');
 end;
 /*
 Procedimiento PL/SQL terminado correctamente.

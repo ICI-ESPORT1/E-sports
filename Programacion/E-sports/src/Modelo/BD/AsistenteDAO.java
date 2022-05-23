@@ -49,13 +49,12 @@ public class AsistenteDAO {
     }
 
 
-    public static void bajaAsistente(Asistente a) {
+    public static void bajaAsistente(String dni) {
         //metodo para borrar un asistente de la tabla asistente por id_asistente
          BaseDatos.abrirConexion();
 
         try {
             // BaseDatos.abrirConexion();
-            calla = BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
         calla = BaseDatos.getConexion().prepareCall("{call gestionarAsistente.borrar_asistente(?)}");
 
         calla.setString(1, dni);
@@ -64,7 +63,7 @@ public class AsistenteDAO {
 
             calla.close();
 
-            //  BaseDatos.cerrarConexion();
+              BaseDatos.cerrarConexion();
         }
         catch (SQLException sqle){
             JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
@@ -72,7 +71,6 @@ public class AsistenteDAO {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-          BaseDatos.cerrarConexion();
     }
 
 

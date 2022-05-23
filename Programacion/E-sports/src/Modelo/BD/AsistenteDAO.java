@@ -19,7 +19,7 @@ public class AsistenteDAO {
 
     public static void altaAsistente(Asistente a) {
         //Metodo para insertar un nuevo asistente en la tabla asistente
-
+         BaseDatos.abrirConexion();
         try {
             //  BaseDatos.abrirConexion();
             calla = BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?,?)}");
@@ -36,7 +36,7 @@ public class AsistenteDAO {
             System.out.println(a.getSueldo());
             calla.execute();
             calla.close();
-            //  BaseDatos.cerrarConexion();
+             BaseDatos.cerrarConexion();
 
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null,sqle.getMessage()+" ,"+sqle.getErrorCode(),"Error Oracle",JOptionPane.ERROR_MESSAGE);
@@ -49,14 +49,15 @@ public class AsistenteDAO {
     }
 
 
-    public static void bajaAsistente(Asistente a) {
+    public static void bajaAsistente(String dni) {
         //metodo para borrar un asistente de la tabla asistente por id_asistente
+         BaseDatos.abrirConexion();
 
         try {
             // BaseDatos.abrirConexion();
-            calla = BaseDatos.getConexion().prepareCall("{call borrar_asistente(?)}");
+        calla = BaseDatos.getConexion().prepareCall("{call gestionarAsistente.borrar_asistente(?)}");
 
-            calla.setInt(1, a.getCodPersona());
+        calla.setString(1, dni);
 
             calla.execute();
 
@@ -70,6 +71,7 @@ public class AsistenteDAO {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+          BaseDatos.cerrarConexion();
     }
 
 
@@ -157,7 +159,7 @@ public class AsistenteDAO {
         }
         return cambiado;
     }
-    public static boolean cambiarSalarioEntrenador(Float fsalario,String dni){
+    public static boolean cambiarSalarioAsistente(Float fsalario,String dni){
         boolean cambiado=false;
         int ok =0;
 

@@ -41,7 +41,6 @@ public class EntrenadorDAO {
             n = sentenciaPre.executeUpdate();
 
             System.out.println("filas " + n);
-            //  BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 
@@ -49,23 +48,23 @@ public class EntrenadorDAO {
             System.out.println(ex.getMessage());
 
         }
+        BaseDatos.cerrarConexion();
     }
 
 
-    public static void bajaEntrenador(Entrenador e) {
+    public static void bajaEntrenador(String dni){
         //metodo para borrar un entrenador de la tabla entrenador por id_entrenador
+        BaseDatos.abrirConexion();
         try {
-            //  BaseDatos.abrirConexion();
 
-            c = BaseDatos.getConexion().prepareCall("{call borrar_entrenador(?)}");
+        c =BaseDatos.getConexion().prepareCall("{call gestionarEntrenadores.borrar_entrenador(?)}");
 
-            c.setInt(1, e.getCodPersona());
+        c.setString(1,dni);
 
             c.execute();
 
             c.close();
 
-            //  BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 
@@ -73,10 +72,12 @@ public class EntrenadorDAO {
             System.out.println(ex.getMessage());
 
         }
+       BaseDatos.cerrarConexion();
     }
 
     public static void cambioEquipoEntrenador(Entrenador e, int idEquipoNuevo) {
         //metodo para cambiar a un entrenador de equipo
+       BaseDatos.abrirConexion();
         try {
             // BaseDatos.abrirConexion();
 
@@ -89,7 +90,7 @@ public class EntrenadorDAO {
 
             c.close();
 
-            //  BaseDatos.cerrarConexion();
+        BaseDatos.cerrarConexion();
 
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
@@ -129,6 +130,7 @@ public class EntrenadorDAO {
         }
     }
     public static ArrayList<Entrenador> selectTodos(){
+        BaseDatos.abrirConexion();
         try{
             listaEntrenadores = new ArrayList<>();
                     //Metodo para consultar un entrenador por dni a la base de datos
@@ -144,17 +146,18 @@ public class EntrenadorDAO {
             }
 
 
-            //  BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+              BaseDatos.cerrarConexion();
 
         return listaEntrenadores;
 
     }
     public static boolean cambiarNombreEntrenador(String nNuevo,String dni){
+        BaseDatos.abrirConexion();
         boolean cambiado=false;
         int ok =0;
         try{
@@ -182,6 +185,7 @@ public class EntrenadorDAO {
         return cambiado;
     }
     public static boolean cambiarTelefonoEntrenador(String nTelf, String dni){
+        BaseDatos.abrirConexion();
         boolean cambiado=false;
         int ok =0;
         try{

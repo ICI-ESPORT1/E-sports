@@ -43,7 +43,7 @@ public class CalendarioDAO {
     public static Calendario buscarCalendario(){
         //metodo para consultar si ya existe un calendario
         try {
-
+            BaseDatos.abrirConexion();
 
             plantilla = "select * from calendario";
 

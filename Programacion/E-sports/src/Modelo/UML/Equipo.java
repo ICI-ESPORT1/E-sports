@@ -238,6 +238,10 @@ public class Equipo {
         this.asistente = asistente;
     }
 
+    public void borrarAsistente(){
+        this.asistente = null;
+    }
+
     public Equipo() {
     }
 

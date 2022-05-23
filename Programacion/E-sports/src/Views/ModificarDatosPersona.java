@@ -182,11 +182,8 @@ public class ModificarDatosPersona {
                     System.out.println(ex.getClass());
                 }
 
-
             }
         });
-
-
 
     }
 /* **********************FUNCIONES PARA VALIDAR DATOS************************************/

@@ -28,13 +28,9 @@ public class UsuarioDAO {
 
             resultado = sentenciaPre.executeQuery();
             if (resultado.next()){
-                //crearObjeto();
-                //System.out.println(resultado.getString(2));
-            }else{
-                usuario.setId_rol(2);
-                usuario.setUsername("admin");
-                usuario.setPassword("admin");
-                usuario.setCodusuario("ADM");}
+                crearObjeto();
+                System.out.println(resultado.getString(2));
+            }
 
 
 

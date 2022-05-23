@@ -24,7 +24,7 @@ public class PartidoDAO {
         try {
             BaseDatos.abrirConexion();
 
-            plantilla = "insert into partido values (?,?)";
+            plantilla = "insert into partido (turno,num_jornada) values (?,?)";
 
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
             sentenciaPre.setString(1, String.valueOf(p.getTurno()));

@@ -76,6 +76,12 @@
                       <label value="Añadir resultados"/>
                     </properties>
                   </component>
+                  <component id="a0fdc" class="javax.swing.JMenuItem" binding="jmiBajaPersonas">
+                    <constraints/>
+                    <properties>
+                      <text value="Baja personas"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
             </children>
@@ -139,6 +145,12 @@
                     <constraints/>
                     <properties>
                       <text value="VerEquipo"/>
+                    </properties>
+                  </component>
+                  <component id="c7d5d" class="javax.swing.JMenuItem" binding="jmiBorrarEquipo">
+                    <constraints/>
+                    <properties>
+                      <text value="Borrar equipo"/>
                     </properties>
                   </component>
                 </children>

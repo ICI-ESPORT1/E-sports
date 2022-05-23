@@ -76,4 +76,5 @@ public class Entrenador extends Persona {
     public void setSueldo(float sueldo) {
         this.sueldo = sueldo;
     }
+
 }

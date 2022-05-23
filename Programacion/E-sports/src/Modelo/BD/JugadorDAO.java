@@ -20,9 +20,9 @@ public class JugadorDAO {
 
     public static void altaJugador(Jugador j)throws Exception{
         //Metodo para insertar un nuevo jugador en la tabla jugador
-       // BaseDatos.abrirConexion();
+        BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_jugador(?,?,?,?,?,?,?,?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarJugadores.nuevo_jugador(?,?,?,?,?,?,?,?)}");
 
         c.setString(1,j.getDni());
         c.setString(2,j.getNombre());
@@ -39,30 +39,32 @@ public class JugadorDAO {
 
         c.close();
 
-     //   BaseDatos.cerrarConexion();
+     BaseDatos.cerrarConexion();
     }
 
 
-    public static void bajaJugador(Jugador j) {
+    public static boolean bajaJugador(String dni){
         //metodo para borrar un jugador de la tabla jugador por id_jugador
-        try {
-            //  BaseDatos.abrirConexion();
+        boolean b=true;
+        try{
+            BaseDatos.abrirConexion();
+            c=BaseDatos.getConexion().prepareCall("{call gestionarJugadores.borrar_jugador(?)}");
 
-            c = BaseDatos.getConexion().prepareCall("{call borrar_jugador(?)}");
-
-            c.setInt(1, j.getCodPersona());
-
-            c.execute();
+            c.setString(1,dni);
+            b = c.execute();
 
             c.close();
 
-            //   BaseDatos.cerrarConexion();
+            BaseDatos.cerrarConexion();
+
+          BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return b;
     }
 
     public static void cambiarEquipoJugador(Jugador j, int idEquipoNuevo) {
@@ -148,58 +150,34 @@ public class JugadorDAO {
 
     public static Jugador jugadorConId(String dni) {
         try {
-            //  BaseDatos.abrirConexion();
+            BaseDatos.abrirConexion();
             String dniMayus = dni.toUpperCase();
             plantilla = "select * from jugador where upper(dni)=?";
 
-            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-            sentenciaPre.setString(1, dniMayus);
-            resultado = sentenciaPre.executeQuery();
-            while (resultado.next()) {
-                crearObjeto();
-            }
-            return jugador;
+        sentenciaPre =BaseDatos.getConexion().prepareStatement(plantilla);
+        sentenciaPre.setString(1,dniMayus);
+        resultado = sentenciaPre.executeQuery();
+        if(resultado.next()) {
+            crearObjeto();
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"El dni no corresponde con ningun jugador");
+            return null;
+        }
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+
+    }
         return jugador;
-    }
+}
 
-    public static ArrayList<Jugador> consultarJugador() {
-        //Metodo para consultar todos los jugadores
-        try {
-            //  BaseDatos.abrirConexion();
-
-            plantilla = "select * from jugador where nombre = ";
-
-            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
-            sentenciaPre.setString(1, "Celia");
-
-            resultado = sentenciaPre.executeQuery();
-
-            listaJugadores = new ArrayList<>();
-            while (resultado.next()) {
-                crearObjeto();
-                listaJugadores.add(jugador);
-            }
-
-            return listaJugadores;
-        } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return listaJugadores;
-    }
-
-    public static void cambiarDatosJugador(Jugador jugador) {
+    public static void cambiarDatosJugador(Jugador jugador){
         //Metodo para modificar los datos de un jugador
-        try {
-            // BaseDatos.abrirConexion();
+        try{
+            BaseDatos.abrirConexion();
 
             plantilla = "update jugador nombre = ?, telefono = ?, direccion = ?, id_equipo = ?, nickname = ?, sueldo = ?, id_rol = ? where dni = ?";
 
@@ -214,8 +192,9 @@ public class JugadorDAO {
             sentenciaPre.setString(8, jugador.getDni());
 
             resultado = sentenciaPre.executeQuery();
+       
 
-            //  BaseDatos.cerrarConexion();
+              BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 

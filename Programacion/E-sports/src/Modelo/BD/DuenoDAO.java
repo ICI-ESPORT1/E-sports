@@ -48,12 +48,12 @@ public class DuenoDAO {
     }
 
 
-    public static void bajaDueno(Dueno d){
+    public static void bajaDueno(String dni){
         //metodo para borrar un dueno de la tabla dueno por id_dueno
         try {
             //   BaseDatos.abrirConexion();
 
-            c = BaseDatos.getConexion().prepareCall("{call borrar_dueno(?)}");
+            c = BaseDatos.getConexion().prepareCall("{call gestionarDueno.borrar_dueno(?)}");
 
         c.setString(1,dni);
 

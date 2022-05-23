@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
 * @author Iker Gomez
+ * @Version 1.0
  */
 public class Equipo {
 

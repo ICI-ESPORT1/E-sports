@@ -4,7 +4,10 @@ import Modelo.UML.*;
 
 import javax.swing.*;
 import java.sql.*;
-
+/**
+ * @Author celia Garcia
+ * @Version 1.0
+ */
 public class AsistenteDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla asistente*/

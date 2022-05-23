@@ -2,13 +2,11 @@ package Modelo.UML;
 
 public class Asistente extends Persona {
     /**
-     @author Inigo Bruk
+     * @Author Inigo Bruk
+     * @Version 1.0
      */
 
     private float sueldo;
-
-
-
 
     public Asistente() {
     }

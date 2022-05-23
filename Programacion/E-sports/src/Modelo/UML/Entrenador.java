@@ -3,7 +3,8 @@ package Modelo.UML;
 public class Entrenador extends Persona {
 
     /**
-     @author Inigo Bruk
+     * @Author Inigo Bruk
+     * @Version 1.0
      */
     private Equipo equipo;
     private float sueldo;

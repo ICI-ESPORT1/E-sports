@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * @author Iker Gomez
+ * @version 1.0
+ *
  */
 public class Partido {
 

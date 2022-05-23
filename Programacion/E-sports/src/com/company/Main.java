@@ -431,7 +431,6 @@ public class Main {
 
         if (usuario.getPassword().equals(bd.getPassword())){
             Main.abrirVentanaAdmin();
-            dialogLogin.dispose();
         }else {
             JOptionPane.showMessageDialog(null,"El Usuario o contraseña es incurrecto");
         }

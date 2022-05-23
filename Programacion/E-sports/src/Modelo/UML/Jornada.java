@@ -3,9 +3,11 @@ package Modelo.UML;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**@author Celia Garcia
- * version 1
- * */
+/**
+ * @author Celia Garcia
+ * @version 1.0
+ *
+ */
 public class Jornada {
     private int numJornada;
     private LocalDate fecha;

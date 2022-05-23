@@ -7,7 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @Author Iñigo
+ * @Version 1.0
+ */
 public class VentanaInvitado extends JFrame {
     private JPanel VentanaInvitado;
     private JButton Logo;

@@ -2,10 +2,13 @@ package Views;
 
 import Modelo.BD.BaseDatos;
 import com.company.Main;
-
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * @Author Iñigo
+ * @Version 1.0
+ */
 public class VisualizarEquipos extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -15,6 +18,10 @@ public class VisualizarEquipos extends JDialog {
     private JPanel jpEquipos;
     private JTextArea taInforEqui;
 
+    /**
+     *
+     * @throws Exception
+     */
     public VisualizarEquipos() throws Exception {
 
         setContentPane(contentPane);
@@ -60,16 +67,16 @@ public class VisualizarEquipos extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
-    }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
+    private void onOK() {dispose();}
 
+    private void onCancel() {dispose();}
+
+    /**
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         VisualizarEquipos dialog = new VisualizarEquipos();
         dialog.pack();

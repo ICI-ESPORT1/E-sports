@@ -171,7 +171,8 @@ public class JugadorDAO {
             System.out.println(e.getMessage());
         return jugador;
     }
-}
+        return null;
+    }
 
     public static void cambiarDatosJugador(Jugador jugador){
         //Metodo para modificar los datos de un jugador

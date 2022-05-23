@@ -14,7 +14,10 @@ import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * @Author Iñigo
+ * @Version 1.0
+ */
 public class ModificarDatosPersona {
     private JLabel lTitulo;
     private JComboBox cbRol;

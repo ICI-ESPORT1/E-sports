@@ -2,7 +2,8 @@ package Modelo.UML;
 
 public class Jugador extends Persona {
     /**
-     @author Inigo Bruk
+     * @author Inigo Bruk
+     * @Version 1.0
      */
     private String nickname;
     private Rol rol;

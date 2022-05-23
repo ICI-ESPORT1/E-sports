@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39584dd0-f9be-45df-9771-9c38026414cb" name="Changes" comment="" />
+    <list default="true" id="39584dd0-f9be-45df-9771-9c38026414cb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc6__1_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E-sports.iml" beforeDir="false" afterPath="$PROJECT_DIR$/E-sports.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/AsistenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/AsistenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/BaseDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/CalendarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/CalendarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/DuenoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/DuenoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/EntrenadorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/EntrenadorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/EquipoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/FicheroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/FicheroDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/JornadaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/JornadaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/JugadorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/JugadorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/PartidoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/PartidoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/ResultadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/ResultadoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/RolDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/RolDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/UsuarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Encriptar/encriptacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/Encriptar/encriptacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Excepciones/CampoIncorrecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/Excepciones/CampoIncorrecto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Excepciones/CampoVacio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/Excepciones/CampoVacio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/Excepciones/EquipoRepetido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/Excepciones/EquipoRepetido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Asistente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Asistente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Calendario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Dueno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Dueno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Entrenador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Entrenador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Equipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Jornada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Jornada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Jugador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Partido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Partido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Persona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Resultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Resultado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Rol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/UML/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/UML/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/AltaPersonas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/AltaPersonas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/AnadirResultados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/AnadirResultados.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/BajasPersonas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/BajasPersonas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/BorrarEquipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/BorrarEquipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Clasificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Clasificacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/FormularioInscripcion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/ModificarDatosPersona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ModificarDatosPersona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaEscudos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaEscudos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaInvitado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaInvitado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaJornadas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaJornadas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentanaModificarEquipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentanaModificarEquipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VisualizarEquipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VisualizarEquipos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/ultimaJorn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ultimaJorn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +74,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -57,5 +110,16 @@
       <updated>1653228973736</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

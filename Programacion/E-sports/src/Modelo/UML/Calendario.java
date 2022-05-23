@@ -3,8 +3,8 @@ package Modelo.UML;
 import java.util.ArrayList;
 
 /**
- * @Author Celia García
- * version 1
+ * @Author Celia Garcia
+ * @Version 1.0
  */
 public class Calendario {
     private int idCalendario;

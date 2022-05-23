@@ -5,7 +5,10 @@ import Modelo.UML.Calendario;
 import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
-
+/**
+ * @Author celia Garcia
+ * @Version 1.0
+ */
 public class FicheroDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla fichero*/

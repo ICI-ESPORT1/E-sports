@@ -1,5 +1,8 @@
 package Modelo.Encriptar;
-
+/**
+ * @Author Inigo Bruk
+ * @Version 1.0
+ */
 public class encriptacion {
     public encriptacion() {
 

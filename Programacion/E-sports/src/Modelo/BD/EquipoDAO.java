@@ -10,7 +10,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-
+/**
+ * @Author celia Garcia
+ * @Version 1.0
+ */
 public class EquipoDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla equipo*/

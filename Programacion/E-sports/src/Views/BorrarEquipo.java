@@ -6,7 +6,11 @@ import com.company.Main;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
+/**
+ * @author Celia Garcia
+ * @version 1
+ *
+ */
 public class BorrarEquipo extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -34,7 +38,8 @@ public class BorrarEquipo extends JDialog {
 
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+
+                Main.cerrarVentana();
             }
         });
 

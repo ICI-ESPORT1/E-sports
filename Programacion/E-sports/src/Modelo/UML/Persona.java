@@ -2,8 +2,9 @@ package Modelo.UML;
 
 public class Persona {
     /**
-    @author Inigo Bruk
-    */
+     * @Author Inigo Bruk
+     * @Version 1.0
+     */
     private Integer codPersona;
     private String dni;
     private String nombre;

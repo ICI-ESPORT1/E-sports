@@ -5,7 +5,10 @@ import com.company.Main;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @Author Iñigo
+ * @Version 1.0
+ */
 public class VentanaAdmin {
     private JMenuBar MenuOpcion;
     private JMenu Menu1_1;

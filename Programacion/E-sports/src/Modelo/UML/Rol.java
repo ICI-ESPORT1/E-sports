@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Rol {
     /**
-     @author Inigo Bruk
+     * @Author Inigo Bruk
+     * @Version 1.0
      */
     private Integer codRol;
     private String nombre;

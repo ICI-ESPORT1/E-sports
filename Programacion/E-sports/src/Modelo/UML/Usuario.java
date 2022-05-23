@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 /**
  * @Author Iker Gomez
- * version 1
+ * @version 1.0
+ *
  */
 public class Usuario{
 

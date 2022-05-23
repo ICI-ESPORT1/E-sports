@@ -4,7 +4,11 @@ import com.company.Main;
 
 import javax.swing.*;
 import java.awt.event.*;
-
+/**
+ * @author Celia Garcia
+ * @version 1
+ *
+ */
 public class AnadirResultados extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;

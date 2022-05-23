@@ -6,7 +6,10 @@ import Modelo.UML.Partido;
 
 import javax.swing.*;
 import java.sql.*;
-
+/**
+ * @Author celia Garcia
+ * @Version 1.0
+ */
 public class PartidoDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla partido*/

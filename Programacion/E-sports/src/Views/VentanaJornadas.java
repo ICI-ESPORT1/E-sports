@@ -4,7 +4,11 @@ import com.company.Main;
 
 import javax.swing.*;
 import java.awt.event.*;
-
+/**
+ * @Author Iñigo
+ * @Version 1.0
+ * Ventana que contiene el formulario de la Inscripcion.
+ */
 public class VentanaJornadas extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;

@@ -7,7 +7,10 @@ import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+/**
+ * @Author celia Garcia
+ * @Version 1.0
+ */
 public class JornadaDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla jornada*/

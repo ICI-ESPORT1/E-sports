@@ -3,7 +3,8 @@ package Modelo.UML;
 import java.time.LocalDate;
 
 /**
- * @author Iker Gomez
+ * @Author Iker Gomez
+ * @Version 1.0
  */
 public class Resultado {
 

@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @Author Iñigo BRUK
+ */
 public class VentanaModificarEquipo extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -43,6 +46,10 @@ public class VentanaModificarEquipo extends JDialog {
     private String telfViejo ="";
     private String mailViejo="";
 
+    /**
+     * @Author
+     * @Version 1.0
+     */
     public VentanaModificarEquipo() {
         setContentPane(contentPane);
         setModal(true);
@@ -195,6 +202,11 @@ public class VentanaModificarEquipo extends JDialog {
         // add your code here if necessary
         dispose();
     }
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         VentanaModificarEquipo dialog = new VentanaModificarEquipo();
         dialog.pack();

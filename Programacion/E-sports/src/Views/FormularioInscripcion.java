@@ -1,10 +1,4 @@
 package Views;
-/**
- * @author Celia Garcia
- * @version 1
- * Esta clase es una vista en la que se van a recoger y validar los datos de los equipos y sus integrantes.
- */
-
 import Modelo.BD.BaseDatos;
 import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
@@ -24,7 +18,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * @author Celia Garcia
+ * @version 1
+ * Esta clase es una vista en la que se van a recoger y validar los datos de los equipos y sus integrantes.
+ */
 public class FormularioInscripcion {
     private JPanel jpPrincipal;
     private JPanel jpDatosEquipo;

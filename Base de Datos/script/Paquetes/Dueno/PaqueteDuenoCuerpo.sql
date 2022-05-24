@@ -85,11 +85,11 @@ begin
   when e_equipoNoExiste then
     v_error_mensaje:='El equipo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20031,v_error);
+    RAISE_APPLICATION_ERROR(-20029,v_error);
    when others then
      v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20032,v_error);
+    RAISE_APPLICATION_ERROR(-20030,v_error);
 END nuevo_dueno;
 
 
@@ -121,17 +121,17 @@ begin
     when e_equipoNoExiste then
     v_error_mensaje:='El equipo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20033,v_error);
+    RAISE_APPLICATION_ERROR(-20031,v_error);
     
     when e_dueNoExiste then
     v_error_mensaje:='El duenoo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20034,v_error);
+    RAISE_APPLICATION_ERROR(-20032,v_error);
     
     when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20035,v_error);
+    RAISE_APPLICATION_ERROR(-20033,v_error);
     
 end cambio_equipo_dueno; 
 
@@ -157,12 +157,12 @@ begin
     when e_dueNoExiste then
     v_error_mensaje:='El duenoo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20036,v_error);
+    RAISE_APPLICATION_ERROR(-20034,v_error);
     
     when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20037,v_error);
+    RAISE_APPLICATION_ERROR(-20035,v_error);
     
 END borrar_dueno;
 

@@ -57,7 +57,7 @@ end validar_asistente_dni;
 
 
 /*EMPIEZAN LOS PROCEDIMIENTOS ************************************************/
-/*A�ADIR NUEVO ASISTENTE*/
+/*A?ADIR NUEVO ASISTENTE*/
 procedure nuevo_asistente
 (
 p_dni asistente.dni%type,

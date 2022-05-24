@@ -3,8 +3,8 @@ package Modelo.UML;
 import java.util.ArrayList;
 
 /**
- * @Author Celia García
- * version 1
+ * @Author Celia Garcia
+ * @Version 1.0
  */
 public class Calendario {
     private int idCalendario;
@@ -14,10 +14,10 @@ public class Calendario {
 
     /**
      * Constructor completo de Calendario
-     * @param idCalendario
-     * @param cerrado
-     * @param temporada
-     * @param listaJornada
+     * @param idCalendario idcalendario
+     * @param cerrado cerrado
+     * @param temporada temporada
+     * @param listaJornada listarJornada
      */
     public Calendario(int idCalendario, char cerrado, String temporada, ArrayList<Jornada> listaJornada) {
         this.idCalendario = idCalendario;
@@ -34,9 +34,9 @@ public class Calendario {
 
     /**
      * Constructor sin el arraylist de Jornada
-     * @param idCalendario
-     * @param cerrado
-     * @param temporada
+     * @param idCalendario calendario
+     * @param cerrado cerrado
+     * @param temporada temporada
      */
     public Calendario(int idCalendario, char cerrado, String temporada) {
         this.idCalendario = idCalendario;
@@ -54,7 +54,7 @@ public class Calendario {
 
     /**
      *
-     * @param idCalendario
+     * @param idCalendario id calendario
      */
     public void setIdCalendario(int idCalendario) {
         this.idCalendario = idCalendario;
@@ -70,7 +70,7 @@ public class Calendario {
 
     /**
      *
-     * @param cerrado
+     * @param cerrado cerrado
      */
     public void setCerrado(char cerrado) {
         this.cerrado = cerrado;
@@ -86,7 +86,7 @@ public class Calendario {
 
     /**
      *
-     * @param temporada
+     * @param temporada temporada
      */
     public void setTemporada(String temporada) {
         this.temporada = temporada;
@@ -102,7 +102,7 @@ public class Calendario {
 
     /**
      *
-     * @param listaJornada
+     * @param listaJornada lista Jornada
      */
     public void setListaJornada(ArrayList<Jornada> listaJornada) {
         this.listaJornada = listaJornada;

@@ -58,7 +58,7 @@ function validar_jugador_dni
         return false;
     end validar_jugador_dni;
 /*EMPIEZAN LOS PROCEDIMIENTOS***********************************************/
-/*PROCEDIMIENTO PARA AÃ‘ADIR JUGADORES*/
+/*PROCEDIMIENTO PARA AÑADIR JUGADORES*/
 procedure nuevo_jugador
 (
 p_dni jugador.dni%type,

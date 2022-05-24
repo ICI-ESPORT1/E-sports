@@ -1,10 +1,17 @@
 package Modelo.Encriptar;
-
+/**
+ * Funcion para el encriptado de contraseña
+ */
 public class encriptacion {
     public encriptacion() {
 
     }
 
+    /**
+     * Funcion para encriptar la contraseña.
+     * @param arg
+     * @return
+     */
     public String encriptar(String arg) {
 
         String mensaje = arg;

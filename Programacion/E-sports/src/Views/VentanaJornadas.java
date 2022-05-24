@@ -65,6 +65,6 @@ public class VentanaJornadas extends JDialog {
         VentanaJornadas dialog = new VentanaJornadas();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
+
     }
 }

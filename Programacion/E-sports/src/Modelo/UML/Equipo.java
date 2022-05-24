@@ -1,5 +1,7 @@
 package Modelo.UML;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,11 +18,13 @@ public class Equipo {
     private String telefono;
     private String mail;
     private String escudo;
+    private int ganados;
 
     //ATRIBUTO DE LA RELACION CON ENTRENADOR, ASISTENTE Y DUENO
     /*private Entrenador entrenador;*/
     private Asistente asistente;
   /*  private Dueno dueno;*/
+
 
     @Override
     public String toString() {
@@ -32,6 +36,18 @@ public class Equipo {
                 "TELEFONO DE CONTACTO: " + telefono + "\n" +
                 "e-Mail: " + mail + "\n" +
                 "*******************************************"+ "\n";
+    }
+
+    public String toStringClasificacion() {
+        return
+                        "NOMBRE: " + nombre  +"\n" +
+                        "PUNTOS: " + ganados +"\n" +
+                         "*******************************************"+ "\n";
+    }
+
+    public Equipo(String nombre, int ganados) {
+        this.nombre = nombre;
+        this.ganados = ganados;
     }
 
     //ATRIBUTO DE LA RELACION CON JUGADOR Y PARTIDO
@@ -242,6 +258,22 @@ public class Equipo {
         this.asistente = null;
     }
 
+    /**
+     *
+     * @return
+     */
+    public int getGanados() {
+        return ganados;
+    }
+
+    /**
+     *
+     * @param ganados
+     */
+    public void setGanados(int ganados) {
+        this.ganados = ganados;
+    }
+
     public Equipo() {
     }
 
@@ -277,4 +309,6 @@ public class Equipo {
     public void setlistaPartidos(ArrayList<Partido> listaPartidos) {
         this.listaPartidos = listaPartidos;
     }
+
+
 }

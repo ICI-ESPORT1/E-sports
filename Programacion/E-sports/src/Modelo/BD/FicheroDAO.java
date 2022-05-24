@@ -21,7 +21,6 @@ public class FicheroDAO {
     public static void FechaJornadas(){
         //Metodo para comprobar la fecha del fichero xml
         try {
-            BaseDatos.abrirConexion();
 
             plantilla = "select fecha from fichero where nombre = JORNADAS ";
 
@@ -34,7 +33,7 @@ public class FicheroDAO {
 
             sentenciaPre.close();
 
-            BaseDatos.cerrarConexion();
+
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
@@ -47,6 +46,7 @@ public class FicheroDAO {
     public static void FechaUltimaJornada(){
         //Metodo para comprobar la fecha del fichero xml
         try {
+            BaseDatos.abrirConexion();
 
             plantilla = "select fecha from fichero where nombre = ULTIMAJORN ";
 

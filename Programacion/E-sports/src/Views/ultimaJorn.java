@@ -11,16 +11,17 @@ public class ultimaJorn {
     private JTextArea taPartidos;
     private JPanel jpPartidos;
 
+    private static JFrame frame=new JFrame();
     private static String resultado;
 
     public ultimaJorn() {
-        Main.comprobarFechaUltimaJornada();
+      //  Main.comprobarFechaUltimaJornada();
         llenarTexto();
         taPartidos.setText(resultado);
         bVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaAdmin();
+                Main.cerrarVentanaUJ();
             }
         });
     }
@@ -37,9 +38,8 @@ public class ultimaJorn {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("partidosJugados");
+        frame = new JFrame("partidosJugados");
         frame.setContentPane(new ultimaJorn().getJpPartidos());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

@@ -25,11 +25,7 @@ public class BorrarEquipo extends JDialog {
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(taInfEquipo.getText().isEmpty()){
-                        onOK();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "El equipo se ha borrado");
-                    }
+                    onOK();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

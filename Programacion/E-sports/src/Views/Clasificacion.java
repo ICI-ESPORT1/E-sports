@@ -9,28 +9,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class Clasificacion extends JFrame {
+    private static ArrayList<String> listaEquipo = new ArrayList<>();
+
     private JLabel lTitulo;
     private JTextArea taClasificacion;
     private JButton bCancelar;
     private JPanel pClasificacion;
     private static Resultado resultado;
 
-    public void llenarTextArea(){
-        try {
-            resultado = Main.obtenerClasificacion();
-            taClasificacion.setText(String.valueOf(resultado));
-        }
-        catch (Exception e) {
-            System.out.println(e.getClass());
-        }
-    }
+
 
 
 
     public Clasificacion() {
         llenarTexto();
+
 
         bCancelar.addActionListener(new ActionListener() {
             @Override
@@ -52,8 +48,8 @@ public class Clasificacion extends JFrame {
 
     public void llenarTexto(){
         try {
-            resultado= Main.obtenerClasificacion();
-            System.out.println(resultado);
+            String clasificacion = Main.obtenerClasificacion();
+            taClasificacion.setText(clasificacion);
         }
         catch (Exception e) {
             System.out.println(e.getClass());
@@ -64,5 +60,6 @@ public class Clasificacion extends JFrame {
 
         return pClasificacion;
     }
+
 
 }

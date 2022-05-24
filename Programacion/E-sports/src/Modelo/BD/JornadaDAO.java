@@ -76,7 +76,7 @@ public class JornadaDAO {
             //Metodo para consultar todas las jornadas
              BaseDatos.abrirConexion();
 
-            plantilla="select * from jornada";
+            plantilla="select * from jornada order by num_jornada";
 
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
             resultado = sentenciaPre.executeQuery();

@@ -2,10 +2,12 @@ package Modelo.BD;
 
 import Modelo.UML.Asistente;
 import Modelo.UML.Equipo;
+import Modelo.UML.Resultado;
 
 import javax.swing.*;
 import java.net.PortUnreachableException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -326,6 +328,47 @@ BaseDatos.cerrarConexion();
         return listaEquipos;
     }
 
+    public static ArrayList<Equipo> obtenerClasificacion() {
+        //Metodo para mostrar la clasificacion actual
+        try {
+            BaseDatos.abrirConexion();
+            listaEquipos=new ArrayList<>();
+            System.out.println("bien");
+            sentenciaPre = BaseDatos.getConexion().prepareCall("select nombre, ganados from equipo");
+
+            resultado=sentenciaPre.executeQuery();
+
+            while (resultado.next()) {
+               crearObjetoCla();
+               listaEquipos.add(equipo);
+
+            }
+            sentenciaPre.close();
+
+            BaseDatos.cerrarConexion();
+
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return listaEquipos;
+    }
+
+    public static void crearObjetoCla()throws Exception{
+
+        equipo= new Equipo();
+
+        equipo.setNombre(resultado.getString("nombre"));
+        System.out.println(equipo.getNombre());
+
+        equipo.setGanados(resultado.getInt("ganados"));
+        System.out.println(equipo.getGanados());
+
+
+    }
+
     public static void crearObjeto(){
     try{
         equipo = new Equipo(); //Hay que iniciar aqui el objeto para que no se sobre escriba
@@ -338,9 +381,11 @@ BaseDatos.cerrarConexion();
         equipo.setNacionalidad(resultado.getString("nacionalidad"));
         System.out.println(equipo.getNacionalidad());
 
-       Date dFecha = resultado.getDate("fecha_creacion");
-        LocalDate ld = dFecha.toLocalDate();
+        Date dFecha = resultado.getDate("fecha_creacion");
+        LocalDate ld = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dFecha));
+        System.out.println(ld);
         equipo.setFechaCreacion(ld);
+
 
         equipo.setTelefono(resultado.getString("telefono"));
         System.out.println(equipo.getTelefono());

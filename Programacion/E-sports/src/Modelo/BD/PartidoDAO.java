@@ -6,12 +6,16 @@ import Modelo.UML.Partido;
 
 import javax.swing.*;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class PartidoDAO {
 
     /* Clase que contiene los metodos necesarios para trabajar con la tabla partido*/
 
     private static Partido partido;
+    private static Jornada jornada;
+    private static ArrayList<Partido> listaPartido = new ArrayList<>();
 
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
@@ -64,6 +68,47 @@ public class PartidoDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static ArrayList<Partido> conseguirIDJorn(Jornada j){
+
+        try {
+            BaseDatos.abrirConexion();
+
+            plantilla = "select * from partido where num_jornada = ? ";
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1, j.getNumJornada());
+
+         resultado=   sentenciaPre.executeQuery();
+            resultado.next();
+            do{
+                crearObjeto();
+                listaPartido.add(partido);
+            }while(resultado.next());
+
+            sentenciaPre.close();
+
+            BaseDatos.cerrarConexion();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaPartido;
+    }
+
+    public static void crearObjeto(){
+        try{
+            partido = new Partido();
+            partido.setIdPartido(resultado.getInt("id_partido"));
+            partido.setTurno(resultado.getString("turno"));
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+
+
     }
 
 }

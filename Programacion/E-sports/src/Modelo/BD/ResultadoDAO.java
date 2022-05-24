@@ -5,6 +5,8 @@ import Modelo.UML.Resultado;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
+
 /**
  * Clase que contiene los metodos necesarios para trabajar con la tabla resultado.
  */

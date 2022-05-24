@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="39584dd0-f9be-45df-9771-9c38026414cb" name="Changes" comment="" />
+    <list default="true" id="39584dd0-f9be-45df-9771-9c38026414cb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modelo/BD/FicheroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/BD/FicheroDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/BorrarEquipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/BorrarEquipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Clasificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Clasificacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VisualizarEquipos.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VisualizarEquipos.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,5 +67,26 @@
       <updated>1653228973736</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>1090</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Views/VisualizarEquipos.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>1550</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -19,7 +19,7 @@ public class Clasificacion extends JFrame {
 
     public void llenarTextArea(){
         try {
-            resultado= Main.obtenerClasificacion();
+            resultado = Main.obtenerClasificacion();
             taClasificacion.setText(String.valueOf(resultado));
         }
         catch (Exception e) {

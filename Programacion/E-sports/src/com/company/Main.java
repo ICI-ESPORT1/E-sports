@@ -1090,7 +1090,7 @@ public class Main {
         float sueldo = Float.parseFloat(su);
         jugador = new Jugador(d, n, t, di, z, rol, sueldo, equipo);
 
-        altaJugador(jugador);
+        altaJugador();
         /*Necesito el id del jugador*/
         jugador = JugadorDAO.jugadorConId(jugador.getDni());
         listaJugadores.add(jugador);
@@ -1103,7 +1103,7 @@ public class Main {
      *
      * @throws Exception
      */
-    public static void altaJugador(Jugador jugador) throws Exception {
+    public static void altaJugador() throws Exception {
         System.out.println("ALTA JUGADOR************");
 
         JugadorDAO.altaJugador(jugador);
@@ -1557,7 +1557,6 @@ public class Main {
                 System.out.println("no existe el calendario");
             }
             LocalDate ldFecha = LocalDate.now().plusDays(7);
-
             for (int i = 0; i < listaEquipos.size()-1 ; i++) {
                 jornada = new Jornada();
                 jornada.setFecha(ldFecha);
@@ -1570,9 +1569,7 @@ public class Main {
                 semana=semana+1;
             }
             listaJornadas=new ArrayList<>();
-
             listaJornadas=JornadaDAO.selectTodos();
-
             for (int j = 1; j < listaJornadas.size(); j++) {
                 HashMap<Integer, Integer> retorno = generarPartidos(listaEquipos.size());
                 jornada=listaJornadas.get(j);

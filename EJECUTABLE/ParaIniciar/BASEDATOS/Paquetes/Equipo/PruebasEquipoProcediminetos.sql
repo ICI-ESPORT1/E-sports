@@ -1,0 +1,85 @@
+/*PRUEBAS PROCEDIMIENTO NUEVO-EQUIPO*/
+/*PRUEBA CORRECTA*/
+begin
+gestionarEquipos.nuevo_equipo('Equipo1','Español',to_date('01/01/20','DD/MM/YY'), 123098456,'Mail@mail.com','tiene',2);
+end;
+/*
+Procedimiento PL/SQL terminado correctamente.
+
+
+COD_EQUIPO NOMBRE               NACIONALIDAD                                       FECHA_CR   TELEFONO MAIL                                                                                                                                                   ESCUDO                                                                                                                                                 ID_ASISTENTE
+---------- -------------------- -------------------------------------------------- -------- ---------- ------------------------------------------------------------------------------------------------------------------------------------------------------ ------------------------------------------------------------------------------------------------------------------------------------------------------ ------------
+         1 force                espanola                                           01/01/22  654987321 force@gmail.com                                                                                                                                        tiene                                                                                                                                                             2
+         2 alliance             francesa                                           23/04/22  698745125 alliance@gmail.com                                                                                                                                     no_tiene                                                                                                                                                          2
+         3 stacks               inglesa                                            14/03/21  632598145 stacks@gmail.com                                                                                                                                       tiene                                                                                                                                                              
+         4 players              alemana                                            01/04/20  648211557 players@gmail.com                                                                                                                                      tiene                                                                                                                                                             3
+         6 alliadsgance         francesa                                           23/04/22     695125 alnce@gmail.com                                                                                                                                        no_tiene                                                                                                                                                          2
+         7 allifaadsgance       francesa                                           23/04/22    6925125 alnfasce@gmail.com                                                                                                                                     no_tiene                                                                                                                                                          2
+         8 Equipo1              Español                                            01/01/20  123098456 Mail@mail.com                                                                                                                                          tiene                                                                                                                                                             2
+
+7 filas seleccionadas. 
+*/
+/*PRUEBA INCORRECTA*/
+begin
+gestionarEquipos.nuevo_equipo('Equipo1','Español',to_date('01/01/20','DD/MM/YY'), 123098456,'Mail@mail.com','tiene',2);
+end;
+select * from equipo;
+/*
+Error que empieza en la línea: 23 del comando :
+begin
+gestionarEquipos.nuevo_equipo('Equipo1','Español',to_date('01/01/20','DD/MM/YY'), 123098456,'Mail@mail.com','tiene',2);
+end;
+Informe de error -
+ORA-20043: Error Oracle 1,El equipo ya existe
+ORA-06512: en "EQDAW02.GESTIONAREQUIPOS", línea 54
+ORA-06512: en línea 2 */
+
+/*PROCEDIMIENTO PARA CAMBIAR NOMBRE EQUIPO*/
+begin 
+gestionarEquipos.cambiar_nombre_equipo('Equipo1','NuevoNombre');
+end;
+
+/*
+Procedimiento PL/SQL terminado correctamente.
+*/
+
+/*Prueba incorrecta el equipo no existe*/
+begin 
+gestionarEquipos.cambiar_nombre_equipo('Equipo1','NuevoNombre');
+end;
+/*
+Error que empieza en la l�nea: 38 del comando :
+begin 
+gestionarEquipos.cambiar_nombre_equipo('Equipo1','NuevoNombre');
+end;
+Informe de error -
+ORA-20047: Error Oracle 1,El equipo no existe
+ORA-06512: en "SYSTEM.GESTIONAREQUIPOS", l�nea 120
+ORA-06512: en l�nea 2
+*/
+
+/*PROCEDIMIENTO PARA BORRAR EQUIPO*/
+/*Prueba incorrecta el equipo no existe*/
+begin 
+gestionarEquipos.borrar_equipo('Equipo1');
+end;
+
+/*
+Error que empieza en la l�nea: 63 del comando :
+begin 
+gestionarEquipos.borrar_equipo('Equipo1');
+end;
+Informe de error -
+ORA-20045: Error Oracle 1,El equipo no existe
+ORA-06512: en "SYSTEM.GESTIONAREQUIPOS", l�nea 85
+ORA-06512: en l�nea 2
+*/
+
+/*Prueba correcta*/
+begin 
+gestionarEquipos.borrar_equipo('Equipo1');
+end;
+
+/*Procedimiento PL/SQL terminado correctamente.*/
+
+

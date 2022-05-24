@@ -1,15 +1,20 @@
 package Modelo.BD;
 
+import Modelo.UML.Equipo;
 import Modelo.UML.Resultado;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
+
 /**
  * Clase que contiene los metodos necesarios para trabajar con la tabla resultado.
  */
 public class ResultadoDAO {
 
     private static Resultado res;
+    private static ArrayList<Equipo> listaEquipo = new ArrayList<>();
+
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
@@ -118,6 +123,29 @@ public class ResultadoDAO {
             sentenciaPre.setInt(3,res);
 
             ok = sentenciaPre.execute();
+
+            BaseDatos.cerrarConexion();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ok;
+
+    }
+
+    public static boolean insertResultadoSinResultado(int eq,int part){
+        BaseDatos.abrirConexion();
+        boolean ok = false;
+        try{
+
+            plantilla="insert into resultado (id_equipo,id_partido) values ?,?";
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1,eq);
+            sentenciaPre.setInt(2,part);
+
+            ok= sentenciaPre.execute();
 
             BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {

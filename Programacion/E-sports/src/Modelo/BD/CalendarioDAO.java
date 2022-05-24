@@ -50,7 +50,7 @@ public class CalendarioDAO {
     public static Calendario buscarCalendario(){
 
         try {
-
+            BaseDatos.abrirConexion();
 
             plantilla = "select * from calendario";
 

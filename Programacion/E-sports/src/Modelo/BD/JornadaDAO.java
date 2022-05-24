@@ -87,10 +87,11 @@ public class JornadaDAO {
 
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
             resultado = sentenciaPre.executeQuery();
-            while(resultado.next()){
+            resultado.next();
+            do{
                 crearObjeto();
                 listaJornada.add(jornada);
-            }
+            }while(resultado.next());
 
 
             //  BaseDatos.cerrarConexion();
@@ -110,6 +111,7 @@ public class JornadaDAO {
      */
     public static void crearObjeto(){
         try{
+            jornada = new Jornada();
             jornada.setNumJornada(resultado.getInt("num_jornada"));
             jornada.setNumSemana(resultado.getString("num_semana"));
             Date dfecha;

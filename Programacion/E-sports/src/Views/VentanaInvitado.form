@@ -75,6 +75,12 @@
                           <text value="Clasificacion"/>
                         </properties>
                       </component>
+                      <component id="6950" class="javax.swing.JMenuItem" binding="jmiUltimaJorn">
+                        <constraints/>
+                        <properties>
+                          <text value="Ultima Jornada"/>
+                        </properties>
+                      </component>
                     </children>
                   </grid>
                 </children>

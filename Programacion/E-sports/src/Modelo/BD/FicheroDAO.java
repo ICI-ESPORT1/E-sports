@@ -48,6 +48,7 @@ public class FicheroDAO {
     public static void FechaUltimaJornada(){
 
         try {
+            BaseDatos.abrirConexion();
 
             plantilla = "select fecha from fichero where nombre = ULTIMAJORN ";
 

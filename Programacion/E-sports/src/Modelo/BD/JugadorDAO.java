@@ -27,7 +27,7 @@ public class JugadorDAO {
     public static void altaJugador(Jugador j)throws Exception{
         BaseDatos.abrirConexion();
 
-        c=BaseDatos.getConexion().prepareCall("{call nuevo_jugador(?,?,?,?,?,?,?,?)}");
+        c=BaseDatos.getConexion().prepareCall("{call gestionarJugadores.nuevo_jugador(?,?,?,?,?,?,?,?)}");
 
         c.setString(1,j.getDni());
         c.setString(2,j.getNombre());
@@ -198,10 +198,10 @@ public class JugadorDAO {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+
+    }
         return jugador;
-    }
-        return null;
-    }
+}
 
     /**
      * Metodo para modificar los datos de un jugador

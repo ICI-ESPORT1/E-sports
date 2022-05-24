@@ -115,7 +115,7 @@ public class VentanaAdmin {
         jmiAnadirResultado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e){
-                //Aqui la funcion anadir resultados
+                Main.abrirAnadirResultadoss();
             }
         });
         verEquipo.addActionListener(new ActionListener() {

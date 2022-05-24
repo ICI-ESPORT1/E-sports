@@ -19,6 +19,7 @@ public class VentanaInvitado extends JFrame {
     private JMenuItem jornadas;
     private JMenuItem clasificacion;
     private JButton bLogin;
+    private JMenuItem jmiUltimaJorn;
 
     public VentanaInvitado() {
         bLogin.addActionListener(new ActionListener() {
@@ -40,9 +41,17 @@ public class VentanaInvitado extends JFrame {
         jornadas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Main.abrirJornada();
             }
         });
+
+        jmiUltimaJorn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirUltimaJOrn();
+            }
+        });
+
 
     }
 

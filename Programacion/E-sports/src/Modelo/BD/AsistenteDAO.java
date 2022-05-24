@@ -61,7 +61,7 @@ public class AsistenteDAO {
      * Metodo para borrar un asistente de la tabla asistente por id_asistente
      */
     public static void bajaAsistente(String dni) {
-        //Metodo para borrar un asistente de la tabla asistente por id_asistente
+     
          BaseDatos.abrirConexion();
 
         try {
@@ -82,6 +82,7 @@ public class AsistenteDAO {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+          BaseDatos.cerrarConexion();
     }
 
     /**

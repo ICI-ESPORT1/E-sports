@@ -24,7 +24,7 @@ public class DuenoDAO {
     public static void altaDueno(Dueno d){
 
         try{
-            //   BaseDatos.abrirConexion();
+            BaseDatos.abrirConexion();
             c=BaseDatos.getConexion().prepareCall("{call gestionarDueno.nuevo_dueno(?,?,?,?,?)}");
 
             c.setString(1,d.getDni());

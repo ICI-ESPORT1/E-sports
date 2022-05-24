@@ -168,7 +168,11 @@ public class FormularioInscripcion {
                         Main.tenDatosJugador(fila[0],fila[1],fila[2],fila[3],fila[4],fila[5]);
 
                         System.out.println(row);
+
                     }
+                    JOptionPane.showMessageDialog(null,"El equipo y sus miembros se han añadido correctamente");
+
+                    Main.cerrarVentana();
                     /*AQUI CIERRA CONEXION CON BASE DE DATOS*/
                     BaseDatos.cerrarConexion();
                 }

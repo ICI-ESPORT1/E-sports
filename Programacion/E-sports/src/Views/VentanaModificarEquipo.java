@@ -123,6 +123,7 @@ public class VentanaModificarEquipo extends JDialog {
             tfNacionalidad.setText(Main.dameNacionalidadDelEquipo(posEquipoSel));
             nacionalidadVieja = tfNacionalidad.getText();
             tfFecha.setText(Main.dameFechaDelEquipo(posEquipoSel));
+            System.out.println(tfFecha);
             fechaVieja = tfFecha.getText();
             tfTelf.setText(Main.dameTelefonoDelEquipo(posEquipoSel));
             telfViejo = tfTelf.getText();

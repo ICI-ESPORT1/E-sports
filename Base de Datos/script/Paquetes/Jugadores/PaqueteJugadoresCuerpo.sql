@@ -58,7 +58,7 @@ function validar_jugador_dni
         return false;
     end validar_jugador_dni;
 /*EMPIEZAN LOS PROCEDIMIENTOS***********************************************/
-/*PROCEDIMIENTO PARA AÑADIR JUGADORES*/
+/*PROCEDIMIENTO PARA AÃ‘ADIR JUGADORES*/
 procedure nuevo_jugador
 (
 p_dni jugador.dni%type,
@@ -90,12 +90,12 @@ begin
   when e_jugNoExiste then
     v_error_mensaje:='El equipo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20043,v_error);
+    RAISE_APPLICATION_ERROR(-20051,v_error);
     
    when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20044,v_error);
+    RAISE_APPLICATION_ERROR(-20052,v_error);
     
 END nuevo_jugador;
 /*PROCEDIMIENTO PARA CAMBIAR EQUIPO*******************************************/
@@ -127,17 +127,17 @@ begin
    when e_jugNoExiste then
     v_error_mensaje:='El jugador no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20045,v_error);
+    RAISE_APPLICATION_ERROR(-20053,v_error);
     
    when e_equNoExiste then
     v_error_mensaje:='El equipo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20045,v_error);
+    RAISE_APPLICATION_ERROR(-20054,v_error);
     
    when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20046,v_error);
+    RAISE_APPLICATION_ERROR(-20055,v_error);
     
 end cambio_equipo_jugador;  
 /*PROCEDIMIENTO PARA BORRAR JUGADOR*******************************************/
@@ -163,12 +163,12 @@ begin
    when e_jugNoExiste then
     v_error_mensaje:='El jugador no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20047,v_error);
+    RAISE_APPLICATION_ERROR(-20056,v_error);
     
    when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20048,v_error);
+    RAISE_APPLICATION_ERROR(-20057,v_error);
     
 END borrar_jugador;  
 

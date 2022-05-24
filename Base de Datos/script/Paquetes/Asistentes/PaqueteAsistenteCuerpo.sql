@@ -81,17 +81,17 @@ begin
     when e_valor_null then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20022,v_error);
+    RAISE_APPLICATION_ERROR(-20019,v_error);
     
     when dup_val_on_index then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20023,v_error);
+    RAISE_APPLICATION_ERROR(-20020,v_error);
     
    when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20024,v_error);
+    RAISE_APPLICATION_ERROR(-20021,v_error);
 END nuevo_asistente;  
 
 procedure cambio_equipo_asistente
@@ -121,17 +121,17 @@ begin
  when e_equi_no_existe then
     v_error_mensaje:='El equipo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20025,v_error);
+    RAISE_APPLICATION_ERROR(-20022,v_error);
      
  when e_asisNoExiste then
     v_error_mensaje:='El asistente no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20026,v_error);
+    RAISE_APPLICATION_ERROR(-20023,v_error);
      
    when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20027,v_error);
+    RAISE_APPLICATION_ERROR(-20024,v_error);
      
 end cambio_equipo_asistente;
 
@@ -157,12 +157,12 @@ begin
     when e_asisNoExiste then
     v_error_mensaje:='El asistente no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20028,v_error);
+    RAISE_APPLICATION_ERROR(-20025,v_error);
     
     when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20029,v_error);
+    RAISE_APPLICATION_ERROR(-20026,v_error);
 
 END borrar_asistente;
 end gestionarAsistente;

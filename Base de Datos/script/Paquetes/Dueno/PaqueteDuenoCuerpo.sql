@@ -157,12 +157,12 @@ begin
     when e_dueNoExiste then
     v_error_mensaje:='El duenoo no existe';
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20034,v_error);
+    RAISE_APPLICATION_ERROR(-20036,v_error);
     
     when others then
     v_error_mensaje:=sqlerrm;
     v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-    RAISE_APPLICATION_ERROR(-20035,v_error);
+    RAISE_APPLICATION_ERROR(-20037,v_error);
     
 END borrar_dueno;
 

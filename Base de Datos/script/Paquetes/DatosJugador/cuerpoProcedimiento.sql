@@ -47,7 +47,7 @@ end if;
     when e_jugadorNoExiste then
         v_error_mensaje:='El jugador no existe';
         v_error:= 'Error Oracle '||to_char(sqlcode)||','||v_error_mensaje;
-      RAISE_APPLICATION_ERROR(-20030,v_error);
+      RAISE_APPLICATION_ERROR(-20028,v_error);
       
 end;
 end visualizarDatos;

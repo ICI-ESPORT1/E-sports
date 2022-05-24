@@ -4,10 +4,12 @@ import Modelo.UML.*;
 
 import javax.swing.*;
 import java.sql.*;
+/**
 
+ * Clase que contiene los metodos necesarios para trabajar con la tabla asistente
+ */
 public class AsistenteDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla asistente*/
 
     private static Asistente asistente = new Asistente();
 
@@ -17,11 +19,16 @@ public class AsistenteDAO {
     private static ResultSet resultado;
     private static CallableStatement calla;
 
+    /**
+     *
+     * @param a
+     * Metodo para insertar un nuevo asistente en la tabla asistente
+     */
     public static void altaAsistente(Asistente a) {
         //Metodo para insertar un nuevo asistente en la tabla asistente
          BaseDatos.abrirConexion();
         try {
-            //  BaseDatos.abrirConexion();
+            // BaseDatos.abrirConexion();
             calla = BaseDatos.getConexion().prepareCall("{call gestionarAsistente.nuevo_asistente(?,?,?,?,?)}");
 
 
@@ -48,9 +55,13 @@ public class AsistenteDAO {
 
     }
 
-
+    /**
+     *
+     * @param dni
+     * Metodo para borrar un asistente de la tabla asistente por id_asistente
+     */
     public static void bajaAsistente(String dni) {
-        //metodo para borrar un asistente de la tabla asistente por id_asistente
+     
          BaseDatos.abrirConexion();
 
         try {
@@ -71,9 +82,15 @@ public class AsistenteDAO {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+          BaseDatos.cerrarConexion();
     }
 
-
+    /**
+     *
+     * @param dni
+     * @return
+     * Metodo para consultar un asistente por dni a la base de datos
+     */
     public static Asistente consultarAsistente(String dni) {
         //Metodo para consultar un asistente por dni a la base de datos
         try {
@@ -102,6 +119,15 @@ public class AsistenteDAO {
             return asistente;
         }
     }
+
+    /**
+     *
+     * @param nombreN
+     * @param dni
+     * @return
+     * Metodo para Cambiar nombre al asistente desde la base de datos
+     *
+     */
     public static boolean cambiarNombreAsistente(String nombreN,String dni){
         boolean cambiado=false;
         int ok =0;
@@ -130,6 +156,14 @@ public class AsistenteDAO {
         }
         return cambiado;
     }
+
+    /**
+     *
+     * @param telefN
+     * @param dni
+     * @return
+     * Metodo para cambiar telefono al asistente desde la base de datos
+     */
     public static boolean cambiarTelefonoAsistente(String telefN,String dni){
         boolean cambiado=false;
         int ok =0;
@@ -158,6 +192,14 @@ public class AsistenteDAO {
         }
         return cambiado;
     }
+
+    /**
+     *
+     * @param fsalario
+     * @param dni
+     * @return
+     * Metodo para cambiar el salario del asistente desde la base de datos
+     */
     public static boolean cambiarSalarioAsistente(Float fsalario,String dni){
         boolean cambiado=false;
         int ok =0;
@@ -187,6 +229,11 @@ public class AsistenteDAO {
         return cambiado;
     }
 
+    /**
+     *
+     * @throws Exception
+     * Funcion donde se crea el objeto
+     */
     public static void crearObjeto() throws Exception {
 
         asistente.setCodPersona(resultado.getInt("id_asistente"));

@@ -5,22 +5,26 @@ import com.company.Main;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @Author Iñigo
+ * @Version 1.0
+ */
 public class ultimaJorn {
     private JButton bVolver;
     private JTextArea taPartidos;
     private JPanel jpPartidos;
 
+    private static JFrame frame=new JFrame();
     private static String resultado;
 
     public ultimaJorn() {
-        Main.comprobarFechaUltimaJornada();
+      //  Main.comprobarFechaUltimaJornada();
         llenarTexto();
         taPartidos.setText(resultado);
         bVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaAdmin();
+                Main.cerrarVentanaUJ();
             }
         });
     }
@@ -37,9 +41,8 @@ public class ultimaJorn {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("partidosJugados");
+        frame = new JFrame("partidosJugados");
         frame.setContentPane(new ultimaJorn().getJpPartidos());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

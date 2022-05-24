@@ -1,11 +1,14 @@
 package Modelo.UML;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
 /**
 * @author Iker Gomez
+ * @Version 1.0
  */
 public class Equipo {
 
@@ -16,11 +19,13 @@ public class Equipo {
     private String telefono;
     private String mail;
     private String escudo;
+    private int ganados;
 
     //ATRIBUTO DE LA RELACION CON ENTRENADOR, ASISTENTE Y DUENO
     /*private Entrenador entrenador;*/
     private Asistente asistente;
   /*  private Dueno dueno;*/
+
 
     @Override
     public String toString() {
@@ -34,22 +39,34 @@ public class Equipo {
                 "*******************************************"+ "\n";
     }
 
+    public String toStringClasificacion() {
+        return
+                        "NOMBRE: " + nombre  +"\n" +
+                        "PUNTOS: " + ganados +"\n" +
+                         "*******************************************"+ "\n";
+    }
+
+    public Equipo(String nombre, int ganados) {
+        this.nombre = nombre;
+        this.ganados = ganados;
+    }
+
     //ATRIBUTO DE LA RELACION CON JUGADOR Y PARTIDO
     private ArrayList<Jugador> listaJugadores;
     private ArrayList<Partido> listaPartidos;
 
     /**
      *
-     * @param idEquipo
-     * @param nombre
-     * @param nacionalidad
-     * @param fechaCreacion
-     * @param telefono
-     * @param mail
-     * @param escudo
-     * @param entrenador
-     * @param asistente
-     * @param dueno
+     * @param idEquipo id equipo
+     * @param nombre nombre equipo
+     * @param nacionalidad nacionalidad equipo
+     * @param fechaCreacion fecha de crecion del equipo
+     * @param telefono telefono del equipo
+     * @param mail mail del equipo
+     * @param escudo escudo del equipo
+     * @param entrenador entrenador del equipo
+     * @param asistente asistemte del equipo
+     * @param dueno dueno del equipo
      * @param listaJugadores
      * @param listaPartidos
      */
@@ -88,11 +105,11 @@ public class Equipo {
 
     /**
      * CONSTRUCTOR VACIO
-     * @param n
-     * @param na
-     * @param f
-     * @param t
-     * @param m
+     * @param n nombre
+     * @param na nacionalidad
+     * @param f fecha crecion
+     * @param t telefono
+     * @param m mail
 
      */
 
@@ -242,6 +259,22 @@ public class Equipo {
         this.asistente = null;
     }
 
+    /**
+     *
+     * @return
+     */
+    public int getGanados() {
+        return ganados;
+    }
+
+    /**
+     *
+     * @param ganados
+     */
+    public void setGanados(int ganados) {
+        this.ganados = ganados;
+    }
+
     public Equipo() {
     }
 
@@ -277,4 +310,6 @@ public class Equipo {
     public void setlistaPartidos(ArrayList<Partido> listaPartidos) {
         this.listaPartidos = listaPartidos;
     }
+
+
 }

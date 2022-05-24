@@ -5,6 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.company.Main;
 
+/**
+ * @author Iñigo Bruk
+ * @param
+ *
+ */
 public class AltaPersonas {
     private JPanel altas;
     private JLabel titulo;
@@ -67,6 +72,10 @@ public class AltaPersonas {
         });
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("VentanaBajas");
         frame.setContentPane(new AltaPersonas().altas);

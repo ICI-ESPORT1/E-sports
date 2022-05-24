@@ -8,12 +8,12 @@ import java.sql.DriverManager;
  * @version 1
  */
 public class BaseDatos {
+
     private static String usuario = "eqdaw02";
     private static String pass = "eqdaw02";
     private static String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
-
     private static Connection conexion;
-    private static boolean casa = true;
+    private static boolean casa = false;
 
     public BaseDatos() {
     }
@@ -28,6 +28,7 @@ public class BaseDatos {
 
     /**
      * Metodo para establecer la conexion con la base de datos
+     *
      */
     public static void abrirConexion(){
         try{

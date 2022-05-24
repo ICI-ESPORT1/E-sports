@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * @author Iker Gomez
+ * @version 1.0
+ *
  */
 public class Partido {
 
@@ -31,15 +33,23 @@ public class Partido {
     }
 
     /**
-     * CONSTRUCTOR VACIO
+     * CONSTRUCTOR VACIO de partido
      */
     public Partido() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Jornada getJornada() {
         return jornada;
     }
 
+    /**
+     *
+     * @param jornada
+     */
     public void setJornada(Jornada jornada) {
         this.jornada = jornada;
     }

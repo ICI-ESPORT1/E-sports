@@ -6,12 +6,17 @@ import Modelo.UML.Partido;
 
 import javax.swing.*;
 import java.sql.*;
+/**
+ * Clase que contiene los metodos necesarios para trabajar con la tabla partido
+ */
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class PartidoDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla partido*/
-
     private static Partido partido;
+    private static Jornada jornada;
+    private static ArrayList<Partido> listaPartido = new ArrayList<>();
 
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
@@ -19,12 +24,17 @@ public class PartidoDAO {
     private  static ResultSet resultado;
     private static CallableStatement c;
 
+    /**
+     * Metodo para insertar un nuevo partido en la tabla partido
+     * @param p
+     *
+     */
     public static void altaPartido(Partido p) {
-        //Metodo para insertar un nuevo partido en la tabla partido
+        //
         try {
             BaseDatos.abrirConexion();
 
-            plantilla = "insert into partido values (?,?)";
+            plantilla = "insert into partido (turno,num_jornada) values (?,?)";
 
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
             sentenciaPre.setString(1, String.valueOf(p.getTurno()));
@@ -44,26 +54,48 @@ public class PartidoDAO {
     }
 
 
-    public static void bajaJornada(Jornada j) {
-        //metodo para borrar una jornada de la tabla jornada por num_jornada
+   /**
+   *Metodo para obtener los partidos de una jornada
+   */
+    public static ArrayList<Partido> conseguirIDJorn(Jornada j){
+
         try {
-            //  BaseDatos.abrirConexion();
+            BaseDatos.abrirConexion();
 
-            c = BaseDatos.getConexion().prepareCall("{call borrar_jornada(?)}");
+            plantilla = "select * from partido where num_jornada = ? ";
 
-            c.setInt(1, j.getNumJornada());
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1, j.getNumJornada());
 
-            c.execute();
+         resultado=   sentenciaPre.executeQuery();
+            resultado.next();
+            do{
+                crearObjeto();
+                listaPartido.add(partido);
+            }while(resultado.next());
 
-            c.close();
+            sentenciaPre.close();
 
-            //    BaseDatos.cerrarConexion();
+            BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        return listaPartido;
+    }
+
+    public static void crearObjeto(){
+        try{
+            partido = new Partido();
+            partido.setIdPartido(resultado.getInt("id_partido"));
+            partido.setTurno(resultado.getString("turno"));
+
+        }catch (Exception e){System.out.println(e.getMessage());}
+
+
     }
 
 }

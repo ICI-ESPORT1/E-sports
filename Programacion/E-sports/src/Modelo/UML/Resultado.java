@@ -3,7 +3,6 @@ package Modelo.UML;
 import java.time.LocalDate;
 
 /**
- * @author Iker Gomez
  */
 public class Resultado {
 
@@ -34,7 +33,7 @@ public class Resultado {
     }
 
     /**
-     * CONSTRUCTOR VACIO
+     * CONSTRUCTOR VACIO de resultado
      */
     public Resultado() {
     }

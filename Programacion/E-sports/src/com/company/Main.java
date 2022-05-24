@@ -14,6 +14,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import sun.nio.cs.ext.JIS_X_0201;
+import sun.tools.jconsole.Tab;
 
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
@@ -25,6 +27,7 @@ import java.time.LocalDate;
 
 public class Main {
     static JFrame frame;
+    static JFrame frameUJ;
     static JDialog dialog;
     static JDialog dialogLogin;
     private static BaseDatos bd;
@@ -33,7 +36,9 @@ public class Main {
     private static ArrayList<HashMap> listaEnfrentaminetos= new ArrayList<>();
     private static ArrayList<Equipo> enfrentamientos= new ArrayList<>();
     private static ArrayList<Jornada> listaJornadas= new ArrayList<>();
+    private static ArrayList<Partido> listaNumJorn= new ArrayList<>();
 
+    private static HashMap<Integer, Integer> retorno= new HashMap<>();
     private static Partido partido= new Partido();
     private static Calendario calendario= new Calendario();
     private static Asistente asistente;
@@ -42,7 +47,7 @@ public class Main {
     private static Equipo equipo = new Equipo();
     private static Jornada jornada = new Jornada();
     private static Jugador jugador = new Jugador();
-    private static Resultado resultado;
+    private static Resultado resultado = new Resultado();
     private static Rol rol = new Rol();
     private static String escudoEquipo;
     private static Frame Form;
@@ -73,12 +78,16 @@ public class Main {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        System.exit(0);
+
     }
 
     //funcion cerrar ventana con frame
     public static void cerrarVentana() {
         frame.dispose();
+    }
+
+    public static void cerrarVentanaUJ() {
+        frameUJ.dispose();
     }
 
     //funcion cerrar ventana con dialog
@@ -149,14 +158,6 @@ public class Main {
 
     }
 
-    /**
-     * Este método contiene el Main de la ventana para inscribir jugadores
-     */
-    public static ArrayList<Jugador> crearListaJugadores() {
-        return null;
-        /*Recibe los datos de un jugador y los mete en un arrayList*/
-    }
-
 
     /**
      * Este método contiene el Main de la ventana Formulario Incripcion para poder abrirla
@@ -174,7 +175,7 @@ public class Main {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        System.exit(0);
+
     }
 
     /**
@@ -213,16 +214,15 @@ public class Main {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        System.exit(0);
+
     }
 
     public static void abrirUltimaJOrn() {
-        JFrame frame = new JFrame("partidosJugados");
-        frame.setContentPane(new ultimaJorn().getJpPartidos());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        frameUJ = new JFrame("partidosJugados");
+        frameUJ.setContentPane(new ultimaJorn().getJpPartidos());
+        frameUJ.pack();
+        frameUJ.setLocationRelativeTo(null);
+        frameUJ.setVisible(true);
     }
 
 
@@ -230,15 +230,6 @@ public class Main {
     public static void abrirBajasPersonas() {
         frame = new JFrame("VentanaBajas");
         frame.setContentPane(new BajasPersonas().getBajas());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-
-    public static void abrirAltasPersonas() {
-        frame = new JFrame("VentanaAltas");
-        frame.setContentPane(new AltaPersonas().getAltas());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -253,6 +244,7 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
     public static void abrirAnadirResultadoss(){
         AnadirResultados dialog = new AnadirResultados();
         dialog.pack();
@@ -276,8 +268,7 @@ public class Main {
     /**
      * Metodo que llama a altaAsistente para hacer un insert en la base de datos
      *
-     * @param asistente
-     * @param
+     * @param asistente asistente
      * @throws Exception
      */
     public static void altaAsistente(Asistente asistente) throws Exception {
@@ -431,9 +422,8 @@ public class Main {
 
         if (usuario.getPassword().equals(bd.getPassword())){
             Main.abrirVentanaAdmin();
-            dialogLogin.dispose();
         }else {
-            JOptionPane.showMessageDialog(null,"El Usuario o contraseña es incurrecto");
+            JOptionPane.showMessageDialog(null,"El Usuario o contraseña es incorrecto");
         }
 
     }
@@ -1281,7 +1271,7 @@ public class Main {
     /**
      * Método que obtiene una lista de jugadores en funcion del indice seleccionado de un comboBox
      * @param pos Para buscar el jugador
-     * @return devuelve un String
+     * @return
      */
     public static void sacaListaDeJugadores(int pos){
         try{
@@ -1500,10 +1490,15 @@ public class Main {
      * @return resultado Contiene el equipo y el resultado de un partido
      * @throws Exception
      */
-    public static Resultado obtenerClasificacion() throws Exception {
+    public static String obtenerClasificacion() throws Exception {
+        String clasificacion="";
+        listaEquipos = EquipoDAO.obtenerClasificacion();
+        for(int i=0; i<listaEquipos.size();i++){
+            clasificacion += listaEquipos.get(i).toStringClasificacion();
+        }
 
-        return resultado = ResultadoDAO.obtenerClasificacion();
 
+        return clasificacion;
     }
 
     /**
@@ -1557,6 +1552,7 @@ public class Main {
                 System.out.println("no existe el calendario");
             }
             LocalDate ldFecha = LocalDate.now().plusDays(7);
+
             for (int i = 0; i < listaEquipos.size()-1 ; i++) {
                 jornada = new Jornada();
                 jornada.setFecha(ldFecha);
@@ -1572,10 +1568,14 @@ public class Main {
 
             listaJornadas=JornadaDAO.selectTodos();
 
-            for (int j = 1; j < listaJornadas.size(); j++) {
-                jornada=listaJornadas.get(j);
-                for (int p = 0; p < listaEquipos.size()/2 ; p++) {
+            for (int j = 0; j < listaJornadas.size(); j++) {
 
+                for (int x = 0; x < listaEquipos.size()/2; x++) {
+                    retorno = generarPartidos(listaEquipos.size());
+                    System.out.println(retorno.keySet().hashCode());
+                    System.out.println(retorno.get(retorno.keySet().hashCode()));
+
+                    jornada = listaJornadas.get(j);
                     Random randNum = new Random();
                     int turno = randNum.nextInt(2) + 1;
                     if (turno == 1)
@@ -1583,17 +1583,27 @@ public class Main {
                     if (turno == 2)
                         partido.setTurno("Tarde");
                     partido.setJornada(jornada);
-                    generarEnfrentamientos();
                     partido.setListaEquipos(enfrentamientos);
-                    System.out.println(partido.getListaEquipos());
-                    PartidoDAO.altaPartido(partido);
-                }
-            }
+                    System.out.println();
 
+                    PartidoDAO.altaPartido(partido);
+
+
+                    listaNumJorn= PartidoDAO.conseguirIDJorn(jornada);
+                    for (int t = 0; t < 2; t++) {
+                            if (t==0)
+                        ResultadoDAO.insertResultadoSinResultado(retorno.keySet().hashCode(), listaNumJorn.get(x).getIdPartido());
+                            else{
+                                ResultadoDAO.insertResultadoSinResultado(retorno.get(retorno.keySet().hashCode()), listaNumJorn.get(x).getIdPartido());
+                            }
+                    }
+                }
+
+            }
 
             BaseDatos.cerrarConexion();
         }
-        catch (Exception e){
+            catch (Exception e){
             System.out.println(e.getClass());
         }
 
@@ -1602,38 +1612,14 @@ public class Main {
     }
 
     /**
-     * Método para generar enfrentamientos de forma aleatoria
-     */
-    public static void generarEnfrentamientos() {
-        try {
-            listaEquipos = EquipoDAO.selectTodosLosEquipos();
-            int nPartidos = listaEquipos.size() / 2;
-
-            for (int i = 0; i < listaEquipos.size()-1; i++) {
-                HashMap<Integer, Integer> retorno =   generarPartidos(listaEquipos.size());
-                System.out.println(retorno.toString().indexOf(1));
-                System.out.println("");
-            }
-
-
-            //     ResultadoDAO.altaResultado(equipo1, numPartido);
-
-        } catch (Exception e) {
-            System.out.println(e.getClass());
-        }
-    }
-
-    /**
      * Metodo para generar partidos de forma aleatoria.
      * @param cantPartidos
-     * @return
+     * @return retorno
      */
     public static HashMap<Integer, Integer> generarPartidos (int cantPartidos) {
         HashMap<Integer, Integer> retorno = new HashMap<Integer, Integer>();
         Random randNum = new Random();
         int eq1 = 0;
-
-
 
         Set<Integer> set = new LinkedHashSet<Integer>();
         Set<Integer> set1 = new LinkedHashSet<Integer>();
@@ -1647,9 +1633,9 @@ public class Main {
         Iterator<Integer> it = set.iterator();
         Iterator<Integer> it1 = set1.iterator();
 
-        for (int i = 0; i < cantPartidos / 2; i++) {
+
             retorno.put(it.next(), it1.next());
-        }
+
         System.out.println(retorno.toString());
 
 
@@ -1657,17 +1643,22 @@ public class Main {
     }
 
 
+    /**
+     *
+     */
     public static void comprobarFechaJornadas(){
 
         FicheroDAO.FechaJornadas();
 
     }
+
+    /**
+     *
+     */
     public static void comprobarFechaUltimaJornada(){
 
         FicheroDAO.FechaUltimaJornada();
 
     }
-
-
 
 }

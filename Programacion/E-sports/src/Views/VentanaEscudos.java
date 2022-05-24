@@ -12,6 +12,7 @@ import java.util.Locale;
 /**
  * @author Celia
  * Clase que muestra un formulario para inscribir equipos
+ * @version 1.0
  */
 public class VentanaEscudos extends JDialog {
     private JPanel contentPane;

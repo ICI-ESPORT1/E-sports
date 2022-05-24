@@ -276,8 +276,7 @@ public class Main {
     /**
      * Metodo que llama a altaAsistente para hacer un insert en la base de datos
      *
-     * @param asistente
-     * @param
+     * @param asistente asistente
      * @throws Exception
      */
     public static void altaAsistente(Asistente asistente) throws Exception {
@@ -1280,7 +1279,7 @@ public class Main {
     /**
      * Método que obtiene una lista de jugadores en funcion del indice seleccionado de un comboBox
      * @param pos Para buscar el jugador
-     * @return devuelve un String
+     * @return
      */
     public static void sacaListaDeJugadores(int pos){
         try{
@@ -1656,17 +1655,22 @@ public class Main {
     }
 
 
+    /**
+     *
+     */
     public static void comprobarFechaJornadas(){
 
         FicheroDAO.FechaJornadas();
 
     }
+
+    /**
+     *
+     */
     public static void comprobarFechaUltimaJornada(){
 
         FicheroDAO.FechaUltimaJornada();
 
     }
-
-
 
 }

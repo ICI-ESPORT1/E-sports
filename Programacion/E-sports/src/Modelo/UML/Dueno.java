@@ -9,21 +9,41 @@ public class Dueno extends Persona {
      */
     private Equipo equipo;
 
-
+    /**
+     *
+     * @param dni dni
+     * @param nombre nombre
+     * @param telefono telefono
+     * @param direccion direccion
+     * @param equipo equipo
+     */
     public Dueno(String dni, String nombre, String telefono, String direccion, Equipo equipo) {
         super(dni, nombre, telefono, direccion);
         this.equipo = equipo;
     }
 
+    /**
+     *
+     * @param equipo equipo
+     */
     public Dueno(Equipo equipo) {
         this.equipo = equipo;
     }
 
+    /**
+     *
+     * @param dni dni
+     * @param nombre nombre
+     * @param telefono telefono
+     * @param direccion direccion
+     */
     public Dueno(String dni, String nombre, String telefono, String direccion) {
         super(dni, nombre, telefono, direccion);
     }
 
-
+    /**
+     * Constructor vacio de dueno
+     */
     public Dueno() {
     }
 
@@ -36,12 +56,16 @@ public class Dueno extends Persona {
         
     }
     /**
-     * @param equipo
+     * @param equipo equipo
      */
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Jugador> consultarJugador(){
     return null;
     }

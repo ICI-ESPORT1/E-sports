@@ -33,15 +33,23 @@ public class Partido {
     }
 
     /**
-     * CONSTRUCTOR VACIO
+     * CONSTRUCTOR VACIO de partido
      */
     public Partido() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Jornada getJornada() {
         return jornada;
     }
 
+    /**
+     *
+     * @param jornada
+     */
     public void setJornada(Jornada jornada) {
         this.jornada = jornada;
     }

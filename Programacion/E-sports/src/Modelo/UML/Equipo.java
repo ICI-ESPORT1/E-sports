@@ -41,16 +41,16 @@ public class Equipo {
 
     /**
      *
-     * @param idEquipo
-     * @param nombre
-     * @param nacionalidad
-     * @param fechaCreacion
-     * @param telefono
-     * @param mail
-     * @param escudo
-     * @param entrenador
-     * @param asistente
-     * @param dueno
+     * @param idEquipo id equipo
+     * @param nombre nombre equipo
+     * @param nacionalidad nacionalidad equipo
+     * @param fechaCreacion fecha de crecion del equipo
+     * @param telefono telefono del equipo
+     * @param mail mail del equipo
+     * @param escudo escudo del equipo
+     * @param entrenador entrenador del equipo
+     * @param asistente asistemte del equipo
+     * @param dueno dueno del equipo
      * @param listaJugadores
      * @param listaPartidos
      */
@@ -89,11 +89,11 @@ public class Equipo {
 
     /**
      * CONSTRUCTOR VACIO
-     * @param n
-     * @param na
-     * @param f
-     * @param t
-     * @param m
+     * @param n nombre
+     * @param na nacionalidad
+     * @param f fecha crecion
+     * @param t telefono
+     * @param m mail
 
      */
 

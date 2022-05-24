@@ -5,10 +5,7 @@ import Modelo.UML.Rol;
 
 import javax.swing.*;
 import java.sql.*;
-/**
- * @Author celia Garcia
- * @Version 1.0
- */
+
 public class RolDAO {
     private static Rol rol= new Rol();
 
@@ -22,6 +19,7 @@ public class RolDAO {
      *
      * @param r
      * @return
+     * Metodo para OBTENER EL ROL DESDE la base de datos
      */
     public static Rol obtenerRol(String r){
         try{
@@ -51,7 +49,7 @@ public class RolDAO {
     }
 
     /**
-     * @param
+     * Funcion para crear el objeto de rol
      */
     public static void crearObjeto(){
         try{

@@ -10,10 +10,10 @@ public class Entrenador extends Persona {
     private float sueldo;
     /**
      *
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param sueldo
+     * @param dni dni entrenador
+     * @param nombre nombre entrenador
+     * @param telefono telefono entrenador
+     * @param sueldo sueldo entrenador
      */
     public Entrenador(String dni, String nombre, String telefono, String direccion, float sueldo) {
         super(dni, nombre, telefono, direccion);
@@ -26,12 +26,11 @@ public class Entrenador extends Persona {
 
     /**
      *
-     * @param dni
-     * @param nombre
-     * @param telefono
-
-     * @param equipo
-     * @param sueldo
+     * @param dni dni entrenador
+     * @param nombre nombre entrenador
+     * @param telefono telefono entrenador
+     * @param equipo equipo entrenador
+     * @param sueldo sueldo entrenador
      */
     public Entrenador(String dni, String nombre, String telefono, String direccion, Equipo equipo, float sueldo) {
         super(dni, nombre, telefono, direccion);
@@ -39,6 +38,11 @@ public class Entrenador extends Persona {
         this.sueldo = sueldo;
     }
 
+    /**
+     *
+     * @param equipo equipo entrenador
+     * @param sueldo sueldo entrenador
+     */
     public Entrenador(Equipo equipo, float sueldo) {
         this.equipo = equipo;
         this.sueldo = sueldo;
@@ -56,7 +60,7 @@ public class Entrenador extends Persona {
 
     /**
      *
-     * @param equipo
+     * @param equipo setEquipo
      */
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
@@ -71,8 +75,7 @@ public class Entrenador extends Persona {
     }
 
     /**
-     *
-     * @param sueldo
+     * @param sueldo setSueldo
      */
     public void setSueldo(float sueldo) {
         this.sueldo = sueldo;

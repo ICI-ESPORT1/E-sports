@@ -6,23 +6,21 @@ import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
 /**
- * @Author celia Garcia
- * @Version 1.0
+ * Clase que contiene los metodos necesarios para trabajar con la tabla fichero
  */
 public class FicheroDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla fichero*/
-
     private static Calendario calendario = new Calendario();
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
     private static CallableStatement c;
 
+    /**
+     * Metodo para comprobar la fecha del fichero xml
+     */
     public static void FechaJornadas(){
-        //Metodo para comprobar la fecha del fichero xml
         try {
 
             plantilla = "select fecha from fichero where nombre = JORNADAS ";
@@ -36,7 +34,6 @@ public class FicheroDAO {
 
             sentenciaPre.close();
 
-
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
@@ -45,9 +42,11 @@ public class FicheroDAO {
     }
 
 
-
+    /**
+     * Metodo para comprobar la fecha del fichero xml
+     */
     public static void FechaUltimaJornada(){
-        //Metodo para comprobar la fecha del fichero xml
+
         try {
 
             plantilla = "select fecha from fichero where nombre = ULTIMAJORN ";

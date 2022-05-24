@@ -5,36 +5,32 @@ import Modelo.UML.Resultado;
 import javax.swing.*;
 import java.sql.*;
 /**
- * @Author celia Garcia
- * @Version 1.0
+ * Clase que contiene los metodos necesarios para trabajar con la tabla resultado.
  */
 public class ResultadoDAO {
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla resultado*/
 
     private static Resultado res;
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
     private static CallableStatement c;
 
+
+    /**
+     * Metodo para mostrar la clasificacion actual
+     * @return
+     */
     public static Resultado obtenerClasificacion() {
-        //Metodo para mostrar la clasificacion actual
         try {
 
             System.out.println("bien");
             c = BaseDatos.getConexion().prepareCall("{call gestionResultados.obtenerClasificacion(?)}");
-
             c.registerOutParameter(1, (SQLType) res);
-
-
             c.execute();
-
             c.close();
 
             BaseDatos.cerrarConexion();
-
             return res;
 
         } catch (SQLException sqle) {
@@ -46,8 +42,11 @@ public class ResultadoDAO {
         return res;
     }
 
+    /**
+     * Metodo para mostrar todos los partidos de las jornadas
+     * @return
+     */
     public static Resultado obtenerPartidosJornadas() {
-        //Metodo para mostrar todos los partidos de las jornadas
         try {
             //  BaseDatos.abrirConexion();
 
@@ -72,8 +71,11 @@ public class ResultadoDAO {
         return res;
     }
 
+    /**
+     * Metodo para mostrar todos los partidos que se han jugado
+     * @return
+     */
     public static Resultado obtenerPartidos() {
-        //Metodo para mostrar todos los partidos que se han jugado
         try {
             //  BaseDatos.abrirConexion();
 
@@ -97,6 +99,14 @@ public class ResultadoDAO {
         return res;
     }
 
+    /**
+     *
+     * @param eq
+     * @param res
+     * @param part
+     * Metodo para insertar el resultado
+     * @return
+     */
     public static boolean insertResultado(int eq,int res,int part){
         BaseDatos.abrirConexion();
         boolean ok = false;

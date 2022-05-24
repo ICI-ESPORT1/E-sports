@@ -5,22 +5,23 @@ import Modelo.UML.Calendario;
 import javax.swing.*;
 import java.sql.*;
 /**
- * @Author celia Garcia
- * @Version 1.0
+ * Clase que contiene los metodos necesarios para trabajar con la tabla calendario
  */
 public class CalendarioDAO {
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla calendario*/
 
     private static Calendario calendario = new Calendario();
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
     private static CallableStatement c;
 
+    /**
+     * Metodo para insertar un nuevo calendario en la tabla calendario
+     * @param c
+     */
     public static void altaCalendario(Calendario c){
-        //Metodo para insertar un nuevo calendario en la tabla calendario
+
         try {
 
             plantilla = "insert into calendario (cerrado,temporada) values (?,?)";
@@ -42,9 +43,12 @@ public class CalendarioDAO {
     }
 
 
-
+    /**
+     * metodo para consultar si ya existe un calendario
+     * @return
+     */
     public static Calendario buscarCalendario(){
-        //metodo para consultar si ya existe un calendario
+
         try {
 
 
@@ -82,15 +86,12 @@ public class CalendarioDAO {
         }
     }
 
-    private static void crearObjeto() throws Exception{
-        calendario.setIdCalendario(resultado.getInt("id_calendario"));
-        calendario.setCerrado(resultado.getString("cerrado").charAt(0));
-        calendario.setTemporada(resultado.getString("temporada"));
-    }
-
+    /**
+     * metodo para consultar si ya existe un calendario
+     * @return
+     */
     public static boolean buscarCalendarioBoolean(){
-        //metodo para consultar si ya existe un calendario
-        try {
+                try {
 
 
             plantilla = "select * from calendario";
@@ -123,6 +124,15 @@ public class CalendarioDAO {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+    /**
+     *Funcion que crea el objeto calendario
+     * @throws Exception
+     */
+    private static void crearObjeto() throws Exception{
+        calendario.setIdCalendario(resultado.getInt("id_calendario"));
+        calendario.setCerrado(resultado.getString("cerrado").charAt(0));
+        calendario.setTemporada(resultado.getString("temporada"));
     }
 
 }

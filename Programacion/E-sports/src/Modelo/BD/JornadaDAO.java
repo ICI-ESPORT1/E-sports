@@ -8,15 +8,11 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 /**
- * @Author celia Garcia
- * @Version 1.0
+ *  Clase que contiene los metodos necesarios para trabajar con la tabla jornada
  */
 public class JornadaDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla jornada*/
-
     private static Jornada jornada;
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
@@ -25,8 +21,11 @@ public class JornadaDAO {
 
     private static ArrayList<Jornada>listaJornada = new ArrayList();
 
+    /**
+     * Metodo para insertar una nueva jornada en la tabla jornada
+     * @param j
+     */
     public static void altaJornada(Jornada j) {
-        //Metodo para insertar una nueva jornada en la tabla jornada
         try {
             BaseDatos.abrirConexion();
 
@@ -49,9 +48,12 @@ public class JornadaDAO {
         }
     }
 
-
+    /**
+     * metodo para borrar una jornada de la tabla jornada por num_jornada
+     * @param j
+     */
     public static void bajaJornada(Jornada j) {
-        //metodo para borrar una jornada de la tabla jornada por num_jornada
+        //
         try {
             //  BaseDatos.abrirConexion();
 
@@ -72,11 +74,13 @@ public class JornadaDAO {
         }
     }
 
-
+    /**
+     * Metodo para consultar todas las jornadas
+     * @return
+     */
     public static ArrayList<Jornada> selectTodos(){
         try{
             listaJornada = new ArrayList<>();
-            //Metodo para consultar todas las jornadas
              BaseDatos.abrirConexion();
 
             plantilla="select * from jornada order by num_jornada";
@@ -101,10 +105,11 @@ public class JornadaDAO {
 
     }
 
+    /**
+     * Funcion para crear el objeto de rol
+     */
     public static void crearObjeto(){
         try{
-
-
             jornada.setNumJornada(resultado.getInt("num_jornada"));
             jornada.setNumSemana(resultado.getString("num_semana"));
             Date dfecha;

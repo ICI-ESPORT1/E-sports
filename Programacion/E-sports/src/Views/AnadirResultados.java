@@ -74,6 +74,10 @@ public class AnadirResultados extends JDialog {
         dispose();
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         AnadirResultados dialog = new AnadirResultados();
         dialog.pack();

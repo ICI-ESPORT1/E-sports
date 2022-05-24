@@ -8,16 +8,12 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 /**
- * @Author celia Garcia
- * @Version 1.0
+ * Clase que contiene los metodos necesarios para trabajar con la tabla entrenador
  */
 public class EntrenadorDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla entrenador*/
-
     private static Entrenador entrenador;
     private static Entrenador coach = entrenador;
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
@@ -29,6 +25,10 @@ public class EntrenadorDAO {
     public EntrenadorDAO() {
     }
 
+    /**
+     * Metodo para dar de alta al entrenador
+     * @param e
+     */
     public static void altaEntrenador(Entrenador e) {
         try {
             int n = 0;
@@ -54,9 +54,11 @@ public class EntrenadorDAO {
         BaseDatos.cerrarConexion();
     }
 
-
+    /**
+     * metodo para borrar un entrenador de la tabla entrenador por id_entrenador
+     * @param dni
+     */
     public static void bajaEntrenador(String dni){
-        //metodo para borrar un entrenador de la tabla entrenador por id_entrenador
         BaseDatos.abrirConexion();
         try {
 
@@ -78,8 +80,13 @@ public class EntrenadorDAO {
        BaseDatos.cerrarConexion();
     }
 
+    /**
+     * metodo para cambiar a un entrenador de equipo
+     * @param e
+     * @param idEquipoNuevo
+     */
     public static void cambioEquipoEntrenador(Entrenador e, int idEquipoNuevo) {
-        //metodo para cambiar a un entrenador de equipo
+
        BaseDatos.abrirConexion();
         try {
             // BaseDatos.abrirConexion();
@@ -104,9 +111,13 @@ public class EntrenadorDAO {
         }
     }
 
-
+    /**
+     * Metodo para consultar un entrenador por dni a la base de datos
+     * @param dni
+     * @return
+     */
     public static Entrenador consultarEntrenador(String dni) {
-        //Metodo para consultar un entrenador por dni a la base de datos
+
         try {
             BaseDatos.abrirConexion();
 
@@ -132,11 +143,16 @@ public class EntrenadorDAO {
             return coach;
         }
     }
+
+    /**
+     * Metodo para consultar un entrenador por dni a la base de datos
+     * @return
+     */
     public static ArrayList<Entrenador> selectTodos(){
         BaseDatos.abrirConexion();
         try{
             listaEntrenadores = new ArrayList<>();
-                    //Metodo para consultar un entrenador por dni a la base de datos
+
             //  BaseDatos.abrirConexion();
 
             plantilla="select * from entrenador";
@@ -159,6 +175,13 @@ public class EntrenadorDAO {
         return listaEntrenadores;
 
     }
+
+    /**
+     * Metodo Para cambiar el nombre del entrenador
+     * @param nNuevo
+     * @param dni
+     * @return
+     */
     public static boolean cambiarNombreEntrenador(String nNuevo,String dni){
         BaseDatos.abrirConexion();
         boolean cambiado=false;
@@ -187,6 +210,13 @@ public class EntrenadorDAO {
 
         return cambiado;
     }
+
+    /**
+     * Metodo Para cambiar el telefono del entrenador.
+     * @param nTelf
+     * @param dni
+     * @return
+     */
     public static boolean cambiarTelefonoEntrenador(String nTelf, String dni){
         BaseDatos.abrirConexion();
         boolean cambiado=false;
@@ -215,6 +245,13 @@ public class EntrenadorDAO {
 
         return cambiado;
     }
+
+    /**
+     * Metodo Para cambiar el salario del entrenador.
+     * @param sN
+     * @param dni
+     * @return
+     */
     public static boolean cambiarSalarioEntrenador(float sN,String dni){
         boolean cambiado=false;
         int ok =0;
@@ -244,6 +281,9 @@ public class EntrenadorDAO {
 
     }
 
+    /**
+     * Funcion para crear el objeto de entrenador
+     */
     public static void crearObjeto(){
       try{
         entrenador = new Entrenador();

@@ -9,10 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Locale;
 
-/**
- * @Author Iñigo Bruk
- * @Version 1.0
- */
+
 public class UsuarioDAO {
 
     private static Usuario usuario = new Usuario();
@@ -21,9 +18,9 @@ public class UsuarioDAO {
     private static ResultSet resultado;
 
     /**
-     *
+     *Metodo para tomar Datos Usuario desde la base de datos.
      * @param u
-     * @return
+     * @return usuario
      * @throws Exception
      */
     public static Usuario tomaDatosUsuario(Usuario u)throws Exception{
@@ -56,7 +53,7 @@ public class UsuarioDAO {
     }
 
     /**
-     *
+     * Funcion donde se crea el objeto usuario.
      * @throws Exception
      */
     public static void crearObjeto()throws Exception{

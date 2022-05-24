@@ -1,10 +1,7 @@
 package Modelo.UML;
 
 public class Jugador extends Persona {
-    /**
-     * @author Inigo Bruk
-     * @Version 1.0
-     */
+
     private String nickname;
     private Rol rol;
     private float salario;
@@ -12,7 +9,7 @@ public class Jugador extends Persona {
     private Equipo equipo;
 
     /**
-     *
+     * Constructor con super de persona
      * @param dni
      * @param nombre
      * @param telefono
@@ -30,6 +27,14 @@ public class Jugador extends Persona {
         this.equipo = equipo;
     }
 
+    /**
+     * Constructor sin super de persona
+     * @param nickname
+     * @param rol
+     * @param salario
+     * @param equipo
+     */
+
     public Jugador(String nickname, Rol rol, float salario, Equipo equipo) {
         this.nickname = nickname;
         this.rol = rol;
@@ -38,7 +43,7 @@ public class Jugador extends Persona {
     }
 
     /**
-     *
+     *Constructor con nickname
      * @param dni
      * @param nombre
      * @param telefono
@@ -51,7 +56,7 @@ public class Jugador extends Persona {
     }
 
     /**
-     *
+     * Constructor con nickname y salario
      * @param dni
      * @param nombre
      * @param telefono
@@ -66,7 +71,7 @@ public class Jugador extends Persona {
     }
 
     /**
-     *
+     * Constructor solo con nickname y salario
      * @param nickname
      * @param salario
      */
@@ -75,15 +80,30 @@ public class Jugador extends Persona {
         this.salario = salario;
     }
 
+    /**
+     * Constructor vacio de jugador
+     */
     public Jugador() {
     }
 
+    /**
+     * Constructor de jugador
+     * @param dni
+     * @param nombre
+     * @param telefono
+     * @param mail
+     * @param localidad
+     * @param nick
+     * @param sueldo
+     * @param rol
+     * @param equipo
+     */
     public Jugador(String dni, String nombre, String telefono, String mail, String localidad, String nick, float sueldo, Rol rol,Equipo equipo) {
 
     }
 
     /**
-     * @retun equipo
+     * @retun
      */
     public Equipo getEquipo() {
         return equipo;
@@ -96,7 +116,7 @@ public class Jugador extends Persona {
         this.equipo = equipo;
     }
     /**
-     * @retun nickname
+     * @retun
      */
     public String getNickname() {
         return nickname;
@@ -109,7 +129,7 @@ public class Jugador extends Persona {
         this.nickname = nickname;
     }
     /**
-     * @retun rol
+     * @retun
      */
     public Rol getRol() {
         return rol;
@@ -122,7 +142,7 @@ public class Jugador extends Persona {
         this.rol = rol;
     }
     /**
-     * @retun salario
+     * @retun
      */
     public float getSalario() {
         return salario;

@@ -7,23 +7,24 @@ import Modelo.UML.Partido;
 import javax.swing.*;
 import java.sql.*;
 /**
- * @Author celia Garcia
- * @Version 1.0
+ * Clase que contiene los metodos necesarios para trabajar con la tabla partido
  */
 public class PartidoDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla partido*/
-
     private static Partido partido;
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
     private static CallableStatement c;
 
+    /**
+     * Metodo para insertar un nuevo partido en la tabla partido
+     * @param p
+     *
+     */
     public static void altaPartido(Partido p) {
-        //Metodo para insertar un nuevo partido en la tabla partido
+        //
         try {
             BaseDatos.abrirConexion();
 
@@ -38,29 +39,6 @@ public class PartidoDAO {
             sentenciaPre.close();
 
             BaseDatos.cerrarConexion();
-        } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-
-    public static void bajaJornada(Jornada j) {
-        //metodo para borrar una jornada de la tabla jornada por num_jornada
-        try {
-            //  BaseDatos.abrirConexion();
-
-            c = BaseDatos.getConexion().prepareCall("{call borrar_jornada(?)}");
-
-            c.setInt(1, j.getNumJornada());
-
-            c.execute();
-
-            c.close();
-
-            //    BaseDatos.cerrarConexion();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
 

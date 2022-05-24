@@ -6,20 +6,25 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Clase que contiene los metodos necesarios para trabajar con la tabla jugador
+ */
 public class JugadorDAO {
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla jugador*/
 
     private static Jugador jugador = new Jugador();
     private static ArrayList<Jugador> listaJugadores;
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
     private static CallableStatement c;
 
+    /**
+     * Metodo para insertar un nuevo jugador en la tabla jugador
+     * @param j
+     * @throws Exception
+     */
     public static void altaJugador(Jugador j)throws Exception{
-        //Metodo para insertar un nuevo jugador en la tabla jugador
         BaseDatos.abrirConexion();
 
         c=BaseDatos.getConexion().prepareCall("{call nuevo_jugador(?,?,?,?,?,?,?,?)}");
@@ -43,8 +48,12 @@ public class JugadorDAO {
     }
 
 
+    /**
+     * metodo para borrar un jugador de la tabla jugador por id_jugador
+     * @param dni
+     * @return
+     */
     public static boolean bajaJugador(String dni){
-        //metodo para borrar un jugador de la tabla jugador por id_jugador
         boolean b=true;
         try{
             BaseDatos.abrirConexion();
@@ -67,8 +76,12 @@ public class JugadorDAO {
         return b;
     }
 
+    /**
+     * metodo para cambiar un jugador de equipo
+     * @param j
+     * @param idEquipoNuevo
+     */
     public static void cambiarEquipoJugador(Jugador j, int idEquipoNuevo) {
-        //metodo para cambiar un jugador de equipo
         try {
             //  BaseDatos.abrirConexion();
 
@@ -90,8 +103,14 @@ public class JugadorDAO {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Metodo para consultar todos los jugadores de un equipo
+     * @param nombre
+     * @return
+     */
     public static ArrayList<Jugador> consultarJugadoresEquipoN(String nombre) {
-        //Metodo para consultar todos los jugadores de un equipo
+
         try {
             //  BaseDatos.abrirConexion();
 
@@ -119,8 +138,13 @@ public class JugadorDAO {
         return listaJugadores;
     }
 
+    /**
+     * Metodo para consultar todos los jugadores de un equipo
+     * @param idEquipo
+     * @return
+     */
+
     public static ArrayList<Jugador> consultarJugadoresEquipo(int idEquipo) {
-        //Metodo para consultar todos los jugadores de un equipo
         try {
             BaseDatos.abrirConexion();
 
@@ -148,6 +172,11 @@ public class JugadorDAO {
         return listaJugadores;
     }
 
+    /**
+     * Mostrar jugador por su id
+     * @param dni
+     * @return
+     */
     public static Jugador jugadorConId(String dni) {
         try {
             BaseDatos.abrirConexion();
@@ -174,8 +203,11 @@ public class JugadorDAO {
         return null;
     }
 
+    /**
+     * Metodo para modificar los datos de un jugador
+     * @param jugador
+     */
     public static void cambiarDatosJugador(Jugador jugador){
-        //Metodo para modificar los datos de un jugador
         try{
             BaseDatos.abrirConexion();
 
@@ -203,6 +235,13 @@ public class JugadorDAO {
         }
     }
     /* *****************************************************************************************/
+
+    /**
+     * Metodo para cambiar el nombre del jugador
+     * @param nN
+     * @param dniJug
+     * @return
+     */
     public static boolean cambiarNombreJugador(String nN, String dniJug){
         int ok=0;
         boolean cambiado = false;
@@ -229,6 +268,13 @@ public class JugadorDAO {
         BaseDatos.cerrarConexion();
         return cambiado;
     }
+
+    /**
+     * Metodo para cambiar telefono del jugador
+     * @param telfNuevo
+     * @param dniJug
+     * @return
+     */
     public static boolean cambiarTelefonoJugador(String telfNuevo,String dniJug){
         int ok=0;
         boolean cambiado = false;
@@ -254,6 +300,13 @@ public class JugadorDAO {
         BaseDatos.cerrarConexion();
         return cambiado;
     }
+
+    /**
+     * Metodo para cambiar salario del jugador
+     * @param fSalNuevo
+     * @param dniJug
+     * @return
+     */
     public static boolean cambiarSalarioJugador(Float fSalNuevo, String dniJug){
         int ok=0;
         boolean cambiado = false;
@@ -280,6 +333,10 @@ public class JugadorDAO {
         return cambiado;
     }
 
+    /**
+     * Funcion que crea el objeto jugador
+     * @throws Exception
+     */
     public static void crearObjeto()throws Exception{
 
         jugador.setCodPersona(resultado.getInt("id_jugador"));

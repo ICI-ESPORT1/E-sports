@@ -2,8 +2,6 @@ package Modelo.UML;
 
 public class Persona {
     /**
-     * @Author Inigo Bruk
-     * @Version 1.0
      */
     private Integer codPersona;
     private String dni;
@@ -36,33 +34,47 @@ public class Persona {
         this.direccion = direccion;
     }
 
+    /**
+     * constructor vacio de persona
+     */
     public Persona() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCodPersona() {
         return codPersona;
-        /**
-         * @retun codPersona
-         */
     }
 
+    /**
+     *
+     * @param codPersona
+     */
     public void setCodPersona(Integer codPersona) {
         this.codPersona = codPersona;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDni() {
         return dni;
-        /**
-         * @retun dni
-         */
+
     }
 
+    /**
+     *
+     * @param dni
+     */
     public void setDni(String dni) {
         this.dni = dni;
     }
 
     /**
-     * @retun nombre
+     * @retun
      */
     public String getNombre() {
         return nombre;
@@ -90,12 +102,12 @@ public class Persona {
     }
 
 
-
+    /**
+     *
+     * @return
+     */
     public String getDireccion() {
         return direccion;
-        /**
-         * @retun localidad
-         */
     }
     /**
      * @param localidad

@@ -11,24 +11,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 /**
- * @Author celia Garcia
- * @Version 1.0
+ * Clase que contiene los metodos necesarios para trabajar con la tabla equipo
  */
 public class EquipoDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla equipo*/
-
     private static Equipo equipo = new Equipo();
     private static ArrayList<Equipo> listaEquipos = new ArrayList<>();
-
     private static PreparedStatement sentenciaPre;
     private static String plantilla;
     private static Statement sentencia;
     private static ResultSet resultado;
     private static CallableStatement c;
 
+    /**
+     * Metodo para insertar un nuevo equipo en la tabla equipo
+     * @param e
+     * @param a
+     */
     public static void altaEquipo(Equipo e, Asistente a){
-        //Metodo para insertar un nuevo equipo en la tabla equipo
+
        BaseDatos.abrirConexion();
         try {
 
@@ -59,10 +60,13 @@ public class EquipoDAO {
       BaseDatos.cerrarConexion();
     }
 
-
+    /**
+     * metodo para borrar un equipo de la tabla equipo por nombre
+     * @param nombre
+     * @return
+     */
     public static boolean bajaEquipo(String nombre){
         boolean borrado= false;
-        //metodo para borrar un equipo de la tabla equipo por nombre
         try{
         BaseDatos.abrirConexion();
 
@@ -88,12 +92,17 @@ public class EquipoDAO {
         return borrado;
 }
 
+    /**
+     * metodo para cambiar el nombre de un equipo
+     * @param nombreNuevo
+     * @param nombreViejo
+     * @return
+     */
     public static boolean cambiarNombreEquipo(String nombreNuevo, String nombreViejo){
         boolean nombreCambiado = false;
         try{
 
-            //metodo para cambiar el nombre de un equipo
-            BaseDatos.abrirConexion();
+         BaseDatos.abrirConexion();
 
             c=BaseDatos.getConexion().prepareCall("{call gestionarEquipos.cambiar_nombre_equipo(?,?)}");
 
@@ -111,12 +120,16 @@ public class EquipoDAO {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-
         }
-
        return nombreCambiado;
     }
 
+    /**
+     * metodo para cambiar la nacionalidad del equipo.
+     * @param naNuevo
+     * @param nombre
+     * @return
+     */
     public static boolean cambiarNacionalidadEquipo(String naNuevo,String nombre){
         boolean cambiado=false;
         int ok =0;
@@ -145,6 +158,13 @@ public class EquipoDAO {
 
         return cambiado;
     }
+
+    /**
+     * metodo para cambiar el telefono del equipo
+     * @param telNuevo
+     * @param telViejo
+     * @return
+     */
     public static boolean cambiarTelefonoEquipo(String telNuevo,String telViejo){
         boolean cambiado=false;
         int ok =0;
@@ -170,6 +190,13 @@ public class EquipoDAO {
         }
         return cambiado;
     }
+
+    /**
+     * metodo para cambiar la fecha del equipo
+     * @param ldNuevo
+     * @param ldViejo
+     * @return
+     */
     public static boolean cambiarFechaEquipo(LocalDate ldNuevo, LocalDate ldViejo){
         boolean cambiado=false;
         int ok =0;
@@ -195,6 +222,13 @@ public class EquipoDAO {
         }
         return cambiado;
     }
+
+    /**
+     * metodo para cambiar el mail del equipo
+     * @param mailNuevo
+     * @param mailViejo
+     * @return
+     */
     public static boolean cambiarMailEquipo(String mailNuevo,String mailViejo){
         boolean cambiado=false;
         int ok =0;
@@ -221,8 +255,13 @@ public class EquipoDAO {
         return cambiado;
     }
 
+    /**
+     * Metodo para consultar un Equipo por nombre a la base de datos
+     * @param n
+     * @return
+     */
     public static Equipo consultarEquipo(String n){
-        //Metodo para consultar un Equipo por nombre a la base de datos
+
         try{
         BaseDatos.abrirConexion();
         String nombreMayus = n.toUpperCase();
@@ -236,10 +275,7 @@ public class EquipoDAO {
     while(resultado.next()){
         crearObjeto();
     }
-
-
         return equipo;
-
 
     } catch (SQLException sqle) {
         JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
@@ -277,6 +313,11 @@ public class EquipoDAO {
         return equipo;
     }
 
+    /**
+     * Metodo para consultar el equipo por id
+     * @param idEq
+     * @return
+     */
  public static Equipo consultarEquipoPorId(int idEq){
         try{
             BaseDatos.abrirConexion();
@@ -298,6 +339,10 @@ public class EquipoDAO {
         return equipo;
  }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<Equipo> selectTodosLosEquipos(){
      BaseDatos.abrirConexion();
         try{
@@ -329,6 +374,9 @@ BaseDatos.cerrarConexion();
         return listaEquipos;
     }
 
+    /**
+     *
+     */
     public static void crearObjeto(){
     try{
         equipo = new Equipo(); //Hay que iniciar aqui el objeto para que no se sobre escriba
@@ -353,8 +401,6 @@ BaseDatos.cerrarConexion();
 
         // equipo.setFechaCreacion(resultado.getDate("fecha_creacion"));
         equipo.setEscudo(resultado.getString("escudo"));
-
-
 
 
     }catch (Exception e){

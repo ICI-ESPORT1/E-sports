@@ -15,7 +15,12 @@ public class RolDAO {
     private  static ResultSet resultado;
     private static CallableStatement c;
 
-
+    /**
+     *
+     * @param r
+     * @return
+     * Metodo para OBTENER EL ROL DESDE la base de datos
+     */
     public static Rol obtenerRol(String r){
         try{
             String rM = r.toUpperCase();
@@ -42,6 +47,10 @@ public class RolDAO {
         return rol;
 
     }
+
+    /**
+     * Funcion para crear el objeto de rol
+     */
     public static void crearObjeto(){
         try{
             rol.setCodRol(resultado.getInt("id_rol"));

@@ -4,21 +4,24 @@ import Modelo.UML.Dueno;
 
 import javax.swing.*;
 import java.sql.*;
-
+/**
+ * Clase que contiene los metodos necesarios para trabajar con la tabla dueño
+ */
 public class DuenoDAO {
 
-    /* Clase que contiene los metodos necesarios para trabajar con la tabla dueño*/
-
     private static Dueno dueno= new Dueno();
-
     private  static PreparedStatement sentenciaPre;
     private  static String plantilla;
     private  static Statement sentencia;
     private  static ResultSet resultado;
     private static CallableStatement c;
 
+
+    /**
+     * Metodo para insertar un nuevo dueno en la tabla dueno
+     * @param d
+     */
     public static void altaDueno(Dueno d){
-        //Metodo para insertar un nuevo dueno en la tabla dueno
 
         try{
             BaseDatos.abrirConexion();
@@ -48,8 +51,11 @@ public class DuenoDAO {
     }
 
 
+    /**
+     * metodo para borrar un dueno de la tabla dueno por id_dueno
+     * @param dni
+     */
     public static void bajaDueno(String dni){
-        //metodo para borrar un dueno de la tabla dueno por id_dueno
         try {
             //   BaseDatos.abrirConexion();
 
@@ -72,8 +78,12 @@ public class DuenoDAO {
         }
     }
 
+    /**
+     * metodo para cambiar a un dueño de equipo
+     * @param d
+     * @param idEquipoNuevo
+     */
     public static void cambioEquipoDueno(Dueno d, int idEquipoNuevo){
-        //metodo para cambiar a un dueño de equipo
         try {
             //  BaseDatos.abrirConexion();
 
@@ -100,8 +110,13 @@ public class DuenoDAO {
     }
     }
 
+    /**
+     * Metodo para consultar un Dueno por dni a la base de datos
+     * @param d
+     * @return
+     */
     public static Dueno consultarDueno(String d){
-        //Metodo para consultar un Dueno por dni a la base de datos
+
         try {
             //  BaseDatos.abrirConexion();
 
@@ -126,7 +141,10 @@ public class DuenoDAO {
         }
     }
 
-
+    /**
+     * Funcion que crea el objeto de dueno.
+     * @throws Exception
+     */
     public static void crearObjeto()throws Exception{
         System.out.println(resultado.getInt(1));
         dueno.setCodPersona(resultado.getInt("id_dueno"));

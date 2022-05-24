@@ -6,7 +6,6 @@ import Modelo.Excepciones.CampoIncorrecto;
 import Modelo.Excepciones.CampoVacio;
 import Modelo.Excepciones.EquipoRepetido;
 import com.company.Main;
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.util.regex.*;
@@ -18,6 +17,10 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @param
+ */
+
 public class Login extends javax.swing.JDialog {
     private javax.swing.JPanel contentPane;
     private javax.swing.JButton bAceptar;
@@ -28,7 +31,7 @@ public class Login extends javax.swing.JDialog {
 
 
     public Login() {
-        paraProbar();
+        //paraProbar();
 
         setContentPane(contentPane);
         setModal(true);
@@ -61,6 +64,9 @@ public class Login extends javax.swing.JDialog {
 
         }, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0), javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+        /**
+         * @param
+         */
         bInvitado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,6 +74,10 @@ public class Login extends javax.swing.JDialog {
 
             }
         });
+
+        /**
+         * @param
+         */
 
         bAceptar.addActionListener(new ActionListener() {
             @Override
@@ -93,21 +103,19 @@ public class Login extends javax.swing.JDialog {
 
     }
 
-
-    private void onOK() {
-
-        dispose();
-    }
-
     private void onCancel() {
-
         dispose();
     }
+
     public void paraProbar(){
-        textField1.setText("admin");
+        textField1.setText("");
         textField2.setText("admin");
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Login dialog = new Login();
         dialog.pack();

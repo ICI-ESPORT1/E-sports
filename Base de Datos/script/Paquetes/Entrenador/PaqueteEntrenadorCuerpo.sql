@@ -1,4 +1,3 @@
-/*CUERPO PAQUETE GESTIONAR ENTRENADORES*/
 create or replace package body gestionarEntrenadores as
 /*declaro las funciones que son comunes a todos los procedimientos*/
 
@@ -52,7 +51,7 @@ exception
   end validar_entrenador_dni;  
 
 /*EMPIEZAN LOS PROCEDIMIENTOS***********************************************/
-/*PROCEDIMIENTO PARA AÃ‘ADIR ENTRENADORES*/
+/*PROCEDIMIENTO PARA AÑADIR ENTRENADORES*/
 
 procedure nuevo_entrenador
 (

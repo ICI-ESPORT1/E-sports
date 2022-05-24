@@ -7,7 +7,11 @@ import com.company.Main;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @author Celia Garcia
+ * @version 1
+ *
+ */
 public class BajasPersonas extends JFrame {
     private JButton bCancelar;
     private JButton bDarbaja;

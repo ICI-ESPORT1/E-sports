@@ -35,7 +35,7 @@ public class FicheroDAO {
             sentenciaPre.close();
 
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
+           // JOptionPane.showMessageDialog(null, sqle.getMessage() + " ," + sqle.getErrorCode(), "Error Oracle", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

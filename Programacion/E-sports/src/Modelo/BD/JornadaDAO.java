@@ -5,7 +5,9 @@ import Modelo.UML.Jornada;
 
 import javax.swing.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 /**
  *  Clase que contiene los metodos necesarios para trabajar con la tabla jornada
@@ -115,9 +117,10 @@ public class JornadaDAO {
             jornada.setNumJornada(resultado.getInt("num_jornada"));
             jornada.setNumSemana(resultado.getString("num_semana"));
             Date dfecha;
-            jornada.setFecha(LocalDate.parse((CharSequence) (dfecha = resultado.getDate("fecha"))));
-
-
+            String fecha = new SimpleDateFormat("dd/MM/yyyy").format(resultado.getDate("fecha"));
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate ldFecha = LocalDate.parse(fecha,formato);
+            jornada.setFecha(ldFecha);
         }catch (Exception e){System.out.println(e.getMessage());}
 
 

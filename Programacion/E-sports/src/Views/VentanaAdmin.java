@@ -109,7 +109,11 @@ public class VentanaAdmin {
         jmiGenerarPartidos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e){
-                Main.generarJornadas();
+
+               boolean generadas = Main.generarJornadas();
+               if(generadas){
+                   JOptionPane.showMessageDialog(null,"Los partidos y jornadas se han generado");
+               }
             }
         });
         jmiAnadirResultado.addActionListener(new ActionListener() {

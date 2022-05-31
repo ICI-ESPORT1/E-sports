@@ -140,7 +140,7 @@ public class ResultadoDAO {
         boolean ok = false;
         try{
 
-            plantilla="insert into resultado (id_equipo,id_partido) values ?,?";
+            plantilla="insert into resultado (id_equipo,id_partido) values (?,?)";
             sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
             sentenciaPre.setInt(1,eq);
             sentenciaPre.setInt(2,part);
@@ -156,6 +156,29 @@ public class ResultadoDAO {
         }
         return ok;
 
+    }
+
+    public static boolean borrarResultado (int id){
+        boolean borrado = false;
+        try{
+            BaseDatos.abrirConexion();
+            plantilla="delete from resultado where id_equipo = ?" ;
+
+            sentenciaPre = BaseDatos.getConexion().prepareStatement(plantilla);
+            sentenciaPre.setInt(1,id);
+
+           int ok = sentenciaPre.executeUpdate();
+
+            sentenciaPre.close();
+
+            if(ok != 0){
+                borrado = true;
+            }
+            BaseDatos.cerrarConexion();
+        }catch (SQLException sqle){
+            System.out.println(sqle.getMessage());
+        }
+        return borrado;
     }
 
 }

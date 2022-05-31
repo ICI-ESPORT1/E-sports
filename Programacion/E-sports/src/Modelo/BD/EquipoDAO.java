@@ -76,8 +76,10 @@ public class EquipoDAO {
 
         c.setString(1,nombre);
 
-       borrado = c.execute();
-
+        c.execute();
+        if(c.execute()){
+            borrado = true;
+        }
         c.close();
 
         BaseDatos.cerrarConexion();

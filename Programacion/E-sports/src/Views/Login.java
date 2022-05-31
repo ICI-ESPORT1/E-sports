@@ -31,7 +31,7 @@ public class Login extends javax.swing.JDialog {
 
 
     public Login() {
-        //paraProbar();
+        paraProbar();
 
         setContentPane(contentPane);
         setModal(true);
@@ -108,8 +108,8 @@ public class Login extends javax.swing.JDialog {
     }
 
     public void paraProbar(){
-        textField1.setText("");
-        textField2.setText("admin");
+        textField1.setText("ADMIN");
+        textField2.setText("ADMIN");
     }
 
     /**

@@ -3,6 +3,7 @@ package Modelo.BD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
 /**
  * @author Celia Garcia
  * @version 1
@@ -13,7 +14,7 @@ public class BaseDatos {
     private static String pass = "eqdaw02";
     private static String url = "jdbc:oracle:thin:@172.20.225.114:1521:orcl";
     private static Connection conexion;
-    private static boolean casa = false;
+    private static boolean casa = true;
 
     public BaseDatos() {
     }

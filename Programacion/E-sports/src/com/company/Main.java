@@ -14,8 +14,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import sun.nio.cs.ext.JIS_X_0201;
-import sun.tools.jconsole.Tab;
+//import sun.nio.cs.ext.JIS_X_0201;
+//import sun.tools.jconsole.Tab;
 
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
@@ -61,8 +61,6 @@ public class Main {
         bd = new BaseDatos();
 
         ventanaLogin();
-
-        // BaseDatos.cerrarConexion();
 
     }
 
@@ -767,8 +765,9 @@ public class Main {
 
     public static void bajaEquipo(int pos) throws Exception {
         String nom = listaEquipos.get(pos).getNombre();
-
-        boolean borrado = EquipoDAO.bajaEquipo(nom);
+        int id = listaEquipos.get(pos).getId_equipo();
+        boolean borrado = ResultadoDAO.borrarResultado(id);
+         borrado = EquipoDAO.bajaEquipo(nom);
 
     }
 
@@ -781,7 +780,6 @@ public class Main {
     public static boolean cambiarNombreEquipo(String nNuevo, String nViejo) throws Exception {
         boolean nombreCambiado = false;
         int posicionNombreV =0;
-
 
         //busco el equipo en la posicion de la lista
         int i = 0;
@@ -1544,7 +1542,7 @@ public class Main {
      */
     public static boolean generarJornadas(){
         Integer semana=1;
-        BaseDatos.abrirConexion();
+
         listaEquipos=EquipoDAO.selectTodosLosEquipos();
         calendario=CalendarioDAO.buscarCalendario();
         try {
@@ -1588,27 +1586,24 @@ public class Main {
 
                     PartidoDAO.altaPartido(partido);
 
-
                     listaNumJorn= PartidoDAO.conseguirIDJorn(jornada);
                     for (int t = 0; t < 2; t++) {
-                            if (t==0)
-                        ResultadoDAO.insertResultadoSinResultado(retorno.keySet().hashCode(), listaNumJorn.get(x).getIdPartido());
-                            else{
-                                ResultadoDAO.insertResultadoSinResultado(retorno.get(retorno.keySet().hashCode()), listaNumJorn.get(x).getIdPartido());
-                            }
+                        if (t==0)
+                            ResultadoDAO.insertResultadoSinResultado(retorno.keySet().hashCode(), listaNumJorn.get(x).getIdPartido());
+                        else{
+                            ResultadoDAO.insertResultadoSinResultado(retorno.get(retorno.keySet().hashCode()), listaNumJorn.get(x).getIdPartido());
+                        }
                     }
                 }
 
             }
 
-            BaseDatos.cerrarConexion();
         }
             catch (Exception e){
             System.out.println(e.getClass());
         }
 
         return true;
-
     }
 
     /**

@@ -4,6 +4,8 @@ import com.company.Main;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 /**
  * @author Celia Garcia
  * @version 1
@@ -62,6 +64,26 @@ public class AnadirResultados extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        tfIdPart.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                try {
+                    ArrayList<String> listaEquiposID = new ArrayList<>();
+                    listaEquiposID=   Main.idEquipos(tfIdPart.getText());
+
+                    for (int i = 0; i < listaEquiposID.size(); i++) {
+                        if (i==0)
+                            iIdEq1.setText(listaEquiposID.get(i));
+                        else
+                            iIdEq2.setText(listaEquiposID.get(i));
+                    }
+                }
+                catch (Exception ex){
+                    System.out.println(ex.getCause());
+                }
+            }
+        });
     }
 
     private void onOK() {
